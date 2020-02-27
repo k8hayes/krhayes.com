@@ -1,48 +1,46 @@
 ---
 authors:
 - admin
-bio: My research interests include distributed robotics, mobile computing and programmable
-  matter.
+bio: 
 education:
   courses:
-  - course: PhD in Artificial Intelligence
-    institution: Stanford University
-    year: 2012
-  - course: MEng in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2009
-  - course: BSc in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
+  - course: PhD in Integrated and Systems Biology
+    institution: University of Colorado Denver
+    year: 
+  - course: MS in Geography
+    institution: University of Oregon
+    year: 2016
+  - course: BS in Geography, Environmental Studies and Spanish
+    institution: University of Wisconsin Madison
     year: 2008
 email: ""
 interests:
-- Artificial Intelligence
-- Computational Linguistics
-- Information Retrieval
+- Ecological impacts of disturbance
+- Long-term ecological change
 name: Katherine Hayes
 organizations:
-- name: Stanford University
+- name: University of Colorado
   url: ""
-role: Professor of Artificial Intelligence
+role: PhD Student
 social:
 - icon: envelope
   icon_pack: fas
   link: '#contact'
 - icon: twitter
   icon_pack: fab
-  link: https://twitter.com/GeorgeCushen
+  link: https://twitter.com/katerosehayes
 - icon: google-scholar
   icon_pack: ai
-  link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
+  link: https://scholar.google.com/citations?user=7cDtSBAAAAAJ&hl=en
 - icon: github
   icon_pack: fab
-  link: https://github.com/gcushen
+  link: https://github.com/katerosehayes
 superuser: true
 user_groups:
 - Researchers
 - Visitors
 ---
 
-Nelson Bighetti is a professor of artificial intelligence at the Stanford AI Lab. His research interests include distributed robotics, mobile computing and programmable matter. He leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
+Hi! I'm Kate. I'm a PhD student in the Biology department at the University of Colorado Denver. I work in the intersection of paleoecology, landscape and disturbance ecology, studying how ecosystems change over time and space. 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate. 
+Right now, I'm interested in how increasing forest fires are changing Alaska's boreal forests, and what that means for the rest of us. 
