@@ -9,10 +9,10 @@ education:
     year: 
   - course: MS in Geography
     institution: University of Oregon
-    year: 2016
+    year: 2018
   - course: BS in Geography, Environmental Studies and Spanish
     institution: University of Wisconsin Madison
-    year: 2008
+    year: 2016
 email: ""
 interests:
 - Ecological impacts of disturbance
@@ -23,9 +23,6 @@ organizations:
   url: ""
 role: PhD Student
 social:
-- icon: envelope
-  icon_pack: fas
-  link: '#contact'
 - icon: twitter
   icon_pack: fab
   link: https://twitter.com/katerosehayes

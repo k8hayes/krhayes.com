@@ -1,19 +1,15 @@
 ---
-abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus
-  ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed
-  ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis
-  sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida
-  egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id
-  dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.
-  Vestibulum sit amet erat at nulla eleifend gravida.
+abstract: Wildfires are a significant agent of disturbance in forests and highly sensitive to climate change. Short-interval fires and high severity (mortality-causing) fires in particular, may catalyze rapid and substantial ecosystem shifts by eliminating woody species and triggering conversions from forest to shrub or grassland ecosystems. Modeling and fine-scale observations suggest negative feedbacks between fire and fuels should limit reburn prevalence as overall fire frequency rises. However, while we have good information on reburning patterns for individual fires or small regions, the validity of scaling these conclusions to broad regions like the US West remains unknown. Both the prevalence of reburning and the strength of feedbacks on likelihood of reburning over differing timescales have not been documented at the regional scale. Here we show that while there is a strong negative feedback for very short reburning intervals throughout wildland forests of the Western US, that feedback weakens after 10–20 years. The relationship between reburning intervals and drought diverges depending on location, with coastal systems reburning quicker (e.g. shorter interval between fires) in wetter conditions and interior forests in drier. This supports the idea that vegetation productivity—primarily fine fuels that accumulate rapidly (<10 years)—is of primary importance in determining reburn intervals. Our results demonstrate that while over short time intervals increasing fires inhibits reburning at broad scales, that breaks down after a decade. This provides important insights about patterns at very broad scales and agrees with finer scale work, suggesting that lessons from those scales apply across the entire western US.
 authors:
+- Brian Buma
+- Shelby Weiss
 - admin
-- Robert Ford
-date: "2015-09-01T00:00:00Z"
-doi: ""
+- Melissa Lucash
+date: "2020-02-01T00:00:00Z"
+doi: "https://doi.org/10.1088/1748-9326/ab6c70"
 featured: false
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/jdD8gXaTZsc)'
+  caption: 'I'
   focal_point: ""
   preview_only: false
 projects: []
@@ -21,21 +17,13 @@ publication: '*Journal of Source Themes, 1*(1)'
 publication_short: ""
 publication_types:
 - "2"
-publishDate: "2017-01-01T00:00:00Z"
+publishDate: "2020-02-26T00:00:00Z"
 slides: example
-summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus
-  ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
+summary: Environmental Research Letters
 tags:
-- Source Themes
-title: An example journal article
-url_code: ""
-url_dataset: ""
-url_pdf: http://arxiv.org/pdf/1512.04133v1
-url_poster: ""
-url_project: ""
-url_slides: ""
-url_source: ""
-url_video: ""
+- Reburns Alaska
+title: Wildland fire reburning trends across the US West suggest only short-term negative feedback and differing climatic effects
+url_pdf: https://iopscience.iop.org/article/10.1088/1748-9326/ab6c70/pdf
 ---
 
 {{% alert note %}}
@@ -45,5 +33,3 @@ Click the *Cite* button above to demo the feature to enable visitors to import p
 {{% alert note %}}
 Click the *Slides* button above to demo Academic's Markdown slides feature.
 {{% /alert %}}
-
-Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
