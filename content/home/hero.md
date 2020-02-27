@@ -5,7 +5,7 @@ headless = true  # This file represents a page section.
 active = true  # Activate this widget? true/false
 weight = 10  # Order that this section will appear.
 
-title = "Welcome!"
+title = "Hi! I'm Kate."
 
 # Hero image (optional). Enter filename of an image in the `static/img/` folder.
 hero_media = "title.jpg"
@@ -35,7 +35,7 @@ hero_media = "title.jpg"
 #   Remove a link/note by deleting a cta/note block.
 [cta]
   url = "https://krhayes.com/authors/admin/"
-  label = "Start here!"
+  label = "Bio"
   icon_pack = "fas"
   icon = "leaf"
   
@@ -47,6 +47,5 @@ hero_media = "title.jpg"
 
 +++
 
-
-
+I'm an ecologist interested in how and why ecosystems change over time and space. 
 
