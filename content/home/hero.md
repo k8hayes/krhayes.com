@@ -8,7 +8,7 @@ weight = 10  # Order that this section will appear.
 title = "Welcome!"
 
 # Hero image (optional). Enter filename of an image in the `static/img/` folder.
-hero_media = "horst/bakers_3.png"
+hero_media = "title.jpg"
 
 [design.background]
   # Apply a background color, gradient, or image.
@@ -34,20 +34,19 @@ hero_media = "horst/bakers_3.png"
 #   Display link(s) by specifying a URL and label below. Icon is optional for `[cta]`.
 #   Remove a link/note by deleting a cta/note block.
 [cta]
-  url = "https://sourcethemes.com/academic/docs/install/"
+  url = "https://krhayes.com/authors/admin/"
   label = "Start here!"
   icon_pack = "fas"
-  icon = "rocket"
+  icon = "leaf"
   
 [cta_alt]
   url = ""
   label = ""
 
 # Note. An optional note to show underneath the links.
-[cta_note]
-  label = 'All [art](https://github.com/hadley/joy-of-fp) by [@allisonhorst](https://github.com/allisonhorst/stats-illustrations) [(CC-BY-SA)](https://creativecommons.org/licenses/by-sa/4.0/)'
+
 +++
 
-This is my knowledge repository for the YSC 2019 R Markdown workshop.
+
 
 
