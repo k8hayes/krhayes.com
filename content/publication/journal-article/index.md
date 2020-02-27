@@ -13,10 +13,7 @@ image:
   focal_point: ""
   preview_only: false
 projects: []
-publication: '*Journal of Source Themes, 1*(1)'
 publication_short: ""
-publication_types:
-- "2"
 publishDate: "2020-02-26T00:00:00Z"
 summary: Environmental Research Letters
 tags:
