@@ -9,7 +9,7 @@ date: "2020-02-01T00:00:00Z"
 doi: "https://doi.org/10.1088/1748-9326/ab6c70"
 featured: false
 image:
-  caption: 'I'
+  caption: ''
   focal_point: ""
   preview_only: false
 projects: []
@@ -18,7 +18,6 @@ publication_short: ""
 publication_types:
 - "2"
 publishDate: "2020-02-26T00:00:00Z"
-slides: example
 summary: Environmental Research Letters
 tags:
 - Reburns Alaska
