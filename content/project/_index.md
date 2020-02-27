@@ -2,6 +2,6 @@
 header:
   caption: ""
   image: ""
-title: Recent Updates
+title: Projects
 view: 2
 ---
