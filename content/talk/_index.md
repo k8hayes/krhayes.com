@@ -3,5 +3,11 @@ header:
   caption: ""
   image: ""
 title: Presentations
-view: 1
+subtitle: Featured
+view: 2
 ---
+Oral Presentations
+
+Poster Presentations
+
+Invited Talks

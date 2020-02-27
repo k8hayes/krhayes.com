@@ -1,7 +1,7 @@
 ---
 header:
   caption: ""
-  image: ""
+  image: "project_header.jpg"
 title: Projects
-view: 2
+view: 1
 ---
