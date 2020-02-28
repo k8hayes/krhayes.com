@@ -5,7 +5,7 @@ address:
   region: CA
 all_day: false
 authors: [Katherine Hayes, Brian Buma]
-date: "2019-12"
+date: "2019-04-10"
 event: IALE
 event_url: https://agu.org
 featured: false
@@ -21,7 +21,7 @@ location: AGU
 math: true
 projects:
 - Reburns Alaska
-publishDate: "2019-12"
+publishDate: "2019-04-10"
 slides: example
 summary: IALE North America
 tags: [Reburns Alaska]

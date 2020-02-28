@@ -5,7 +5,7 @@ address:
   region: CA
 all_day: false
 authors: [Katherine Hayes, Brian Buma]
-date: "2019-12"
+date: "2020-05-11"
 event: IALE
 event_url: http://www.ialena.org/
 featured: false
@@ -20,7 +20,7 @@ links:
 math: true
 projects:
 - Reburns Alaska
-publishDate: "2020-5"
+publishDate: "2020-5-11"
 slides: example
 summary: IALE North America
 tags: [Reburns Alaska]

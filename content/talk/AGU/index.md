@@ -5,7 +5,7 @@ address:
   region: CA
 all_day: true
 authors: [Katherine Hayes, Brian Buma]
-date: "2019-12"
+date: "2019-12-10"
 event: AGU
 event_url: https://agu.org
 featured: false
@@ -20,7 +20,7 @@ links:
 math: true
 projects:
 - Reburns Alaska
-publishDate: "2019-12"
+publishDate: "2019-12-10"
 summary: American Geophysical Union
 tags: [Reburns Alaska]
 title: Continued short-interval fires overwhelm serotinous resilience regardless of topographic variatrion
