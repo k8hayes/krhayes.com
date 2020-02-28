@@ -17,18 +17,17 @@ links:
   icon_pack: fab
   name: Follow
   url: https://twitter.com/katerosehayes
-location: AGU
 math: true
 projects:
 - Reburns Alaska
 publishDate: "2019-12"
-slides: example
 summary: American Geophysical Union
 tags: [Reburns Alaska]
 title: Continued short-interval fires overwhelm serotinous resilience regardless of topographic variatrion
 url_code: ""
 url_pdf: ""
 url_link: "https://agu.confex.com/agu/fm19/meetingapp.cgi/Paper/531026"
+url_slides: "static/talk/agu/featured.pdf"
 ---
 
 {{% alert note %}}
