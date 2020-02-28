@@ -3,7 +3,7 @@ abstract: Warming temperatures in the boreal have been linked to increased frequ
 address:
   city: San Francisco
   region: CA
-all_day: false
+all_day: true
 authors: [Katherine Hayes, Brian Buma]
 date: "2019-12"
 event: AGU
@@ -27,16 +27,11 @@ title: Continued short-interval fires overwhelm serotinous resilience regardless
 url_code: ""
 url_pdf: ""
 url_link: "https://agu.confex.com/agu/fm19/meetingapp.cgi/Paper/531026"
-url_slides: "static/talk/agu/featured.pdf"
+url_poster: "/talk/agu/featured.pdf"
 ---
 
 {{% alert note %}}
 Click on the **Slides** button above to view the built-in slides feature.
 {{% /alert %}}
 
-Slides can be added in a few ways:
-
-- **Create** slides using Academic's [*Slides*](https://sourcethemes.com/academic/docs/managing-content/#create-slides) feature and link using `slides` parameter in the front matter of the talk file
-- **Upload** an existing slide deck to `static/` and link using `url_slides` parameter in the front matter of the talk file
-- **Embed** your slides (e.g. Google Slides) or presentation video on this page using [shortcodes](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
 
