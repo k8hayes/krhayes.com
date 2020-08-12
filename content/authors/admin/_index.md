@@ -38,6 +38,6 @@ user_groups:
 - Visitors
 ---
 
-Hi! I'm Kate. I'm a PhD student in the Biology department at the University of Colorado Denver. I work in the intersection of paleoecology, landscape and disturbance ecology, studying how ecosystems change over time and space. 
+Hi! I'm Kate. I'm a PhD candidate in the Biology department at the University of Colorado Denver. I work in the intersection of paleoecology, landscape and disturbance ecology, studying how ecosystems change over time and space. 
 
-Right now, I'm interested in how increasing forest fires are changing Alaska's boreal forests, and what that means for the rest of us. 
+I'm interested in how changing disturbance regimes alter ecosystems, how climate change alters our most northern environments and how we can make science more open and accessible. 
