@@ -21,7 +21,7 @@ name: Katherine Hayes
 organizations:
 - name: University of Colorado
   url: ""
-role: PhD Student
+role: PhD Candidate
 social:
 - icon: twitter
   icon_pack: fab
@@ -40,4 +40,4 @@ user_groups:
 
 Hi! I'm Kate. I'm a PhD candidate in the Biology department at the University of Colorado Denver. I work in the intersection of paleoecology, landscape and disturbance ecology, studying how ecosystems change over time and space. 
 
-I'm interested in how changing disturbance regimes alter ecosystems, how climate change alters our most northern environments and how we can make science more open and accessible. 
+I'm interested in how changing disturbance regimes alter ecosystems and how we can make science more open and accessible. 
