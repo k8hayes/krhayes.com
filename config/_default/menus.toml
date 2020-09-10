@@ -9,12 +9,12 @@
 
 [[main]]  
   name = "Publications"
-  url = "publication"
+  url = "/publications"
   weight = 20
 
 [[main]]
   name = "Presentations"
-  url = "talk"
+  url = "/talks"
   weight = 30
 [[main]]
   name = "News"
