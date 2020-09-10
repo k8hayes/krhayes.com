@@ -9,7 +9,7 @@ summary: Evaluating Flammability of Reburns in the Boreal Forests of Interior Al
 tags:
 - Boreal Flammability
 - Boreal
-title: FLammability of Boreal Landscapes
+title: Flammability of Boreal Landscapes
 url_code: ""
 url_pdf: ""
 url_slides: ""

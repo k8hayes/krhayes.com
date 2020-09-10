@@ -12,7 +12,6 @@ tags:
 title: Fire in the Redwoods
 url_code: ""
 url_pdf: ""
-url_slides: ""
 url_video: ""
 ---
 
