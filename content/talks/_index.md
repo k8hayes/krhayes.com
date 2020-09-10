@@ -2,15 +2,33 @@
 header:
   caption: ""
   image: ""
-title: Presentations
+title: 
 ---
 
-# Talks
+# Presentations
 
 ### 2020
 - **Hayes K**, Buma B. *“Interacting Effects of Herbivory and Short-Interval Reburns on Successional trajectories in Boreal Interior Alaska”*, International Association of Landscape Ecology: North American Chapter. Remote. May 2020. 
-- Buma B, **Hayes K**, Weiss S, Lucash M. *“Overlapping and interacting fires, a double whammy: Short-interval burns are becoming more frequent across the US West but pace suggests negative feedbacks and spatial patterning”*, AGU. San Francisco, CA. December 2019.
 
 ### 2019
+- Buma B, **Hayes K**, Weiss S, Lucash M. *“Overlapping and interacting fires, a double whammy: Short-interval burns are becoming more frequent across the US West but pace suggests negative feedbacks and spatial patterning”*, AGU. San Francisco, CA. December 2019.
+- **Hayes K**, Buma B. *“Continued short-interval fires overwhelm serotinous resilience regardless of topographic variation”*, Association for Fire Ecology Annual Meeting. Tucson, AZ. November 2019. 
+- Buma B, **Hayes K**, Weiss S, Lucash M. *“Rates of short-interval fires increasing across the US West”*, Association for Fire Ecology Annual Meeting. Tucson, AZ. November 2019
+- **Hayes K**. *“Repeat short-interval fires in boreal cause continued ecosystem change”*, UC Denver Integrative Biology Graduate Student Seminar Series. Denver, CO. October 2019.
+- **Hayes K**. *“Using NEON data to identify ecological tipping points across spatial/temporal scales”*, NEON Science Summit. Boulder, CO. October 2019. 
+- **Hayes K**, Buma B. *“Landscape Context mediates the effect of shortening fire intervals in boreal systems”*, International Association of Landscape Ecology – North American Chapter. Fort Collins, CO. April 2019.
+- Buma B, Lucash M, **Hayes K**, Weiss S. *“The Predictable, and not so Predictable, Spatial distribution of Short Interval Fires across the US West”*, International Association of Landscape Ecology – North American Chapter. Fort Collins, CO. April 2019.
+- **Hayes K**, Buma B. *“Landscape Context mediates the effect of shortening fire intervals in boreal systems”*, UC Denver Integrative Biology Graduate Student Seminar Series. Denver, CO. April 2019.
+
+### 2017
+- **Hayes K**, Gavin D. *“Reconstructing Paleofire in Old Growth Coast Redwood Forests in Northern California Using Pyrogenic Charcoal and Soil Carbon”*. Association of Pacific Coast Geographers. Chico, California. October 2017. **[Christopherson Award Winner]**
+- **Hayes K**, Gavin D. *“Reconstructing a fire history in the Coast Redwood (Sequoia Sempervirens) forests of Northern California”*. Ecological Society of America. Portland, OR. August 2017. 
+- **Hayes K**, Saban C, Reis S, Johnson G, Hendricks L.*“A synthesis of Coastal Systems Hydrology in the Pacific Northwest”*. University of Oregon Graduate Research Forum: Symposia on Hydrology of the Pacific Northwest. Eugene, OR. April 2017. **[Panel Session Award Winner]**
+- **Hayes K**, Gavin D. *“Marine Fog, Climate Change and Coast Redwood Forests: Past, Present and Future”*. UO Climate Change Research Symposium, Eugene, OR. April 2017.
+
+### 2016
+- **Hayes K**, Williams J. *“Fire History of Bonnett Lake, Ohio since the Last Glacial Maximum”*. Midwest Undergraduate Geography Symposium, Minneapolis, MN. April 2016.
+- **Hayes K**, Williams J. *“Compiling a continuous charcoal record of Bonnett Lake, Ohio since the Last Glacial Maximum”*. University of Wisconsin Undergraduate Symposium, Madison, WI. April 2016.
+
 
 # Posters
