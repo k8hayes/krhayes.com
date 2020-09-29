@@ -8,8 +8,9 @@ title:
 # Presentations
 
 ### 2020
-- **Hayes K**, Buma B. *“Interacting Effects of Herbivory and Short-Interval Reburns on Successional trajectories in Boreal Interior Alaska”*, International Association of Landscape Ecology: North American Chapter. Remote. May 2020. 
+- **Hayes K**, Buma B. *“Interacting Effects of Herbivory and Short-Interval Reburns on Successional trajectories in Boreal Interior Alaska”*, International Association of Landscape Ecology: North American Chapter. Virtual. May 2020. 
 - **Hayes K**, Buma B. *"Evaluating flammability of reburns in the boreal forests of Interior Alaska"*, Alaska Fire Science Consortium. Webinar. April 2020. 
+- Lucash M, Buma B, Link T, Romanovsky R, Vogel J, Nicolsky D, Scheller R, Bracho R, Marchall A, Shabaga S, **Hayes K**, Weiss S. *"You've got me going in circles: Feebacks in the boreal forests of Alaska"*. Ecological Society of America. Virtual. August 2020.
 
 ### 2019
 - Buma B, **Hayes K**, Weiss S, Lucash M. *“Overlapping and interacting fires, a double whammy: Short-interval burns are becoming more frequent across the US West but pace suggests negative feedbacks and spatial patterning”*, AGU. San Francisco, CA. December 2019.
@@ -45,6 +46,7 @@ title:
 
 -	**Hayes K**, Buma B. *“The Future of the Boreal Forest”*, University of Colorado Denver Applied Spatial Statistics Poster Presentation. Denver, CO. December 2018. 
 -	**Hayes K**, Gavin D. *“Fire and Carbon Cycling in Old Growth Coast Redwood”*. University of Oregon Graduate Research Forum. Eugene, OR. May 2018. 
+- Jensen A, Rubbelke C, **Hayes K**, Bevington B, Fastovich D, Watson B, Jackson S, Russel J, Williams J. *"The role of fire in the Late-Glacial decline of Spruce forests across the Midwestern US"*. AGU. Washington DC. December 2018. 
 
 
 ### 2017
