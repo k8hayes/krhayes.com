@@ -28,11 +28,3 @@ tags:
 title: More than one way to kill a spruce forest - the role of fire and climate in the late-glacial termination of spruce woodlands across the southern Great Lakes
 url_pdf: https://iopscience.iop.org/article/10.1088/1748-9326/ab6c70/pdf
 ---
-
-{{% alert note %}}
-Click the *Cite* button above to demo the feature to enable visitors to import publication metadata into their reference management software.
-{{% /alert %}}
-
-{{% alert note %}}
-Click the *Slides* button above to demo Academic's Markdown slides feature.
-{{% /alert %}}
