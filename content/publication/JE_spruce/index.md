@@ -5,7 +5,7 @@ authors:
 - Shelby Weiss
 - admin
 - Melissa Lucash
-date: "2020-02-01T00:00:00Z"
+date: "2020-10-08T00:00:00Z"
 doi: "https://doi.org/10.1088/1748-9326/ab6c70"
 featured: false
 image:
@@ -14,11 +14,10 @@ image:
   preview_only: false
 projects: []
 publication_short: ""
-publishDate: "2020-02-26T00:00:00Z"
+publishDate: "2020-10-08T00:00:00Z"
 summary: Journal of Ecology
 tags:
-- Reburns Alaska
-title: Wildland fire reburning trends across the US West suggest only short-term negative feedback and differing climatic effects
+title: More than one way to kill a spruce forest - the role of fire and climate in the late-glacial termination of spruce woodlands across the southern Great Lakes
 url_pdf: https://iopscience.iop.org/article/10.1088/1748-9326/ab6c70/pdf
 ---
 
