@@ -26,5 +26,5 @@ publishDate: "2020-10-08T00:00:00Z"
 summary: Journal of Ecology
 tags:
 title: More than one way to kill a spruce forest - the role of fire and climate in the late-glacial termination of spruce woodlands across the southern Great Lakes
-url_pdf: https://iopscience.iop.org/article/10.1088/1748-9326/ab6c70/pdf
+url_pdf: https://besjournals.onlinelibrary.wiley.com/doi/epdf/10.1111/1365-2745.13517
 ---
