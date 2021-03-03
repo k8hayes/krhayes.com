@@ -7,8 +7,12 @@ title:
 
 # Presentations
 
+### 2021
+- **Hayes K**, Buma B. *“Repeat short-interval fires drive changes in forest structure, composition and carbon in Interior Alaska”*, Front Range Student Ecology Symposium. Virtual. March 2021. 
+
 ### 2020
 - **Hayes K**, Buma B. *“Interacting Effects of Herbivory and Short-Interval Reburns on Successional trajectories in Boreal Interior Alaska”*, International Association of Landscape Ecology: North American Chapter. Virtual. May 2020. 
+- **Hayes K**, Buma B. *“The role of spatial heterogeneity in mediating the effect of shortening fire intervals in boreal systems”*, American Association of Geographers. Denver, CO. April 2020. [Cancelled due to COVID-19]
 - **Hayes K**, Buma B. *"Evaluating flammability of reburns in the boreal forests of Interior Alaska"*, Alaska Fire Science Consortium. Webinar. April 2020. 
 - Lucash M, Buma B, Link T, Romanovsky R, Vogel J, Nicolsky D, Scheller R, Bracho R, Marchall A, Shabaga S, **Hayes K**, Weiss S. *"You've got me going in circles: Feebacks in the boreal forests of Alaska"*. Ecological Society of America. Virtual. August 2020.
 
@@ -34,6 +38,9 @@ title:
 
 
 # Posters
+
+### 2021
+- **Hayes K**, Buma B. *“Recovery of aboveground biomass and soil carbon after multiple short-interval disturbances in boreal Interior Alaska”*, North American Carbon Program Open Science Meeting. Virtual. March 2021. 
 
 ### 2019
 - **Hayes K**, Buma B. *“Effects of Spatial Heterogeneity on successional trajectories following repeat disturbances in Boreal Interior Alaska”*, AGU. San Francisco, CA. December 2019. 
