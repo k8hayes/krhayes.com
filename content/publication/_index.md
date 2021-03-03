@@ -3,12 +3,10 @@ header:
   caption: ""
   image: ""
 title: Publications
-view: 2
+view: 3
 ---
-### Publications in press
-
-- **Hayes K**, B Buma. *“Effects of short-interval disturbances continue to accumulate, overwhelming variability in local resilience”*. Ecosphere. **[In Press]**
 
 ### Publications in preperation
-- Muthukrishnan R, **Hayes K**, Bartowitz K, Cattau M, Harvey B, Lin Y, Lunch C. *"Utilizing NEON to evaluate tipping points across ecosystems in space and time"*. Ecosphere. **[In Prep]**
+- Nagy, C, .... **Hayes K**, et al. *"Harnessing the NEON Data Revolution to Advance Open Environmental Science with a Diverse, Inclusive and Data-Capable Community"*. Ecosphere. **[In Prep]**
+- Muthukrishnan R, **Hayes K**, Bartowitz K, Cattau M, Harvey B, Lin Y, Lunch C. *"Harnessing NEON to evaluate ecological tipping points: opportunities, challenges, and approaches"*. Ecosphere. **[In Prep]**
 
