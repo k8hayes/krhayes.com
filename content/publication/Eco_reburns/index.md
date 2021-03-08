@@ -4,7 +4,7 @@ authors:
 - admin
 - Brian Buma
 date: "2021-03-03T00:00:00Z"
-doi: "hhttps://doi.org/10.1002/ecs2.3379"
+doi: "https://doi.org/10.1002/ecs2.3379"
 featured: false
 image:
   caption: ''
