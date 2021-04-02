@@ -8,7 +8,9 @@ title:
 # Presentations
 
 ### 2021
-- **Hayes K**, Buma B. *“Repeat short-interval fires drive changes in forest structure, composition and carbon in Interior Alaska”*, Front Range Student Ecology Symposium. Virtual. March 2021. 
+- **Hayes K**, Buma B. *"Repeat short-interval fires drive changes in biomass and soil carbon in Interior Alaska"*, International Association of Landscape Ecology: North American Chapter. Virtual. April 2021.
+- **Hayes K**, Buma B. *"The effects of multiple short-interval fires on community and functional trait-based regeneration in boreal Alaska"*, American Association of Geographers. Virtual. April 2021. 
+- **Hayes K**, Buma B. *“Repeat short-interval fires drive changes in forest structure, composition and carbon in Interior Alaska”*, Front Range Student Ecology Symposium. Virtual. March 2021. **[Oral Presentation Award Winner]**
 
 ### 2020
 - **Hayes K**, Buma B. *“Interacting Effects of Herbivory and Short-Interval Reburns on Successional trajectories in Boreal Interior Alaska”*, International Association of Landscape Ecology: North American Chapter. Virtual. May 2020. 
