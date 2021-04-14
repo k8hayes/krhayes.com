@@ -4,7 +4,7 @@ authors:
 bio: 
 education:
   courses:
-  - course: PhD in Integrated and Systems Biology
+  - course: PhD in Integrative and Systems Biology
     institution: University of Colorado Denver
     year: 
   - course: MS in Geography
