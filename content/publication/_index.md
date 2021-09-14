@@ -13,7 +13,7 @@ view: 2
 - Muthukrishnan R, **Hayes K**, Bartowitz K, Cattau M, Harvey B, Lin Y, Lunch C. *Harnessing NEON to evaluate ecological tipping points: opportunities, challenges, and approaches*. Ecosphere. **[In Review]**
 
 ### Publications in preperation
-- Buma, B, Weiss S, **Hayes K**, Lucash, M. 2021. *Trends in short-interval reburning in Interior Alaska*. 
+- Buma, B, **Hayes K**, Weiss S, , Lucash, M. 2021. *Trends in short-interval reburning in Interior Alaska*. 
 - **Hayes K**, Buma B. 2021. *Short-interval reburning changes fuel structures in Boreal forests*.
 - **Hayes K**, Buma B. 2021. *Reburning drives shifts in biomass and soil carbon in Boreal Interior Alaska*.
 
