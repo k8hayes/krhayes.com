@@ -1,7 +1,7 @@
 ---
 header:
   caption: ""
-  image: ""
+  image: "about_header.jpg"
 title: About Me
 view: 2
 ---
