@@ -15,6 +15,7 @@ view: 2
 - **Hayes K**. *Acid-digestion recovers more pyrogenic carbon and reduces variability compared to traditional manual counting, particularly where pyrogenic carbon is scarce*. Geoderma. **[In Review]**
 
 ### Publications in preperation
-- **Hayes K**, Buma B. 2021. *Short-interval reburning changes fuel structures in Boreal forests*.
-- **Hayes K**, Buma B. 2021. *Reburning drives shifts in aboveground biomass and soil carbon in Boreal Interior Alaska*.
+- **Hayes K**, Hoffman C, Buma B. *Short-interval reburning changes fuel structures in Boreal forests*.
+- **Hayes K**, Buma B. *Reburning drives shifts in aboveground biomass and soil carbon in Boreal Interior Alaska*.
+- **Hayes K**, Carter T, Twaddell E, Buma B. *Strategies for leading fieldwork successfully as a graduate student*.
 
