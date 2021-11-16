@@ -4,13 +4,12 @@ external_link: ""
 image:
   caption: 
   focal_point: Smart
-summary: Regional Impacts of Increasing Fire Frequency and Climate Change on Carbon Dynamics and Species Composition
+summary: Strategies for managing and leading fieldwork successfully as a graduate student
 tags:
-- Reburns Alaska
-- Boreal
-title: Reburns Alaska 
+- Fieldwork
+title: Graduate Fieldwork
 url_code: ""
 url_pdf: ""
 url_slides: ""
 ---
-[Project Website](http://reburnsak.com)
+
