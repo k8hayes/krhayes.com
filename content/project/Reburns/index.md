@@ -21,6 +21,6 @@ Using GIS and historical aerial photography, we located two sites in Interior Al
 
 **More information**
 
-Our full project website is [Project Website](http://reburnsak.com) and our grant information is [here](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1737166&HistoricalAwards=false).
+Our full project website is [here](http://reburnsak.com) and our grant information is [here](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1737166&HistoricalAwards=false).
 
 My first paper from the project, detailing tree regeneration at the sites is available [here](https://esajournals.onlinelibrary.wiley.com/doi/full/10.1002/ecs2.3379).
