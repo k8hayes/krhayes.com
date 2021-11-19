@@ -20,10 +20,12 @@ Increasing short-interval fires are leading to shifts in post-fire regeneration 
 
 Our work, funded by the Joint Fire Science Program, examines an aspect of this puzzle: one, how does the fuel landscape (or fuel-scape) of post-fire stands change with additional reburning? and two, do those fuel-scapes lead to any trends in subsequent fire behavior?
 
-*Methods*
+**Methods**
+
 To answer those two questions, we're working with a combination of novel field and modeling tools. We've measured fuel abundance, dispersion, density, composition and connectivity using both traditional transect lines and newer 3D sampling frames. Our data on the fuel-scapes in reburned stands will inform scenarios built for the physics-based combustion model HIGRAD/FIRETEC.
 
-*More information*
+**More information** 
+
 Grant details are [here.](https://www.firescience.gov/JFSP_advanced_search_results_detail.cfm?jdbid=%24%27%3A%2B%3FV%20%20%20%0A).
 
 Results from this project have been shared at the annual meetings of the [Association of Fire Ecology](https://secureservercdn.net/198.71.233.202/ejo.e63.myftpupload.com/wp-content/uploads/2021/11/Full-Schedule_11-4.pdf), the [Great Plains and Rocky Mountain Geographers]() and the [Alaska Fire Science Consortium](https://www.frames.gov/event/561725).
