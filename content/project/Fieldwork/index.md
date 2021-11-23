@@ -17,4 +17,4 @@ Fieldwork in ecology and other field-based natural sciences is critical to compl
 
 I'm leading a project that starts to fill that gap. We've compiled a survey to collect generalized advice, strategies and resources, aimed particularly at supporting graduate students with the interpersonal and leadership skills required to complete fieldwork successfully.
 
-Our larger project website is linked here. Our survey, if you're interested, is here.
+Our project website is [here](https://gradfieldwork.com/). Our survey, if you're interested, is [here](https://docs.google.com/forms/d/e/1FAIpQLSfK_a9pzVJugJG6WBuc5BNwW1gxLOW6ENKdG2oAT0KSLgR8fw/viewform).
