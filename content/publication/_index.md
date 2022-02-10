@@ -8,7 +8,6 @@ view: 2
 
 ### Publications in press
 - Muthukrishnan R, **Hayes K**, Bartowitz K, Cattau M, Harvey B, Lin Y, Lunch C. *Harnessing NEON to evaluate ecological tipping points: opportunities, challenges, and approaches*. Ecosphere. **[In Press]**
-- Nagy, C, .... **Hayes K**, et al. *Harnessing the NEON Data Revolution to Advance Open Environmental Science with a Diverse, Inclusive and Data-Capable Community*. Ecosphere. **[In Press]**
 
 ### Publications in review
 - Buma, B, **Hayes K**, Weiss S, , Lucash, M. *Short interval fires increasing in the boreal forest as fire self-regulation decays, especially in drier coniferous forest landscapes*. Scientific Reports. **[In Review]**
