@@ -16,6 +16,6 @@ view: 2
 
 ### Publications in preperation
 - **Hayes K**, Hoffman C, Buma B. *Short-interval reburning changes fuel structures in Boreal forests*.
-- **Hayes K**, Buma B. *Reburning drives shifts in aboveground biomass and soil carbon in Boreal Interior Alaska*.
-- **Hayes K**, Carter T, Twaddell E, Buma B. *Strategies for leading fieldwork successfully as a graduate student*.
+- **Hayes K**, Lucash, M, Buma B. *Reburning drives shifts in aboveground biomass and soil carbon in Boreal Interior Alaska*.
+- **Hayes K**, Carter T, Cook, P, Twaddell E, Buma B. *Strategies for leading fieldwork successfully as a graduate student*.
 
