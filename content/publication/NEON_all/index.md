@@ -7,6 +7,8 @@ authors:
 - Megan Cattau
 - Nancy Glenn
 - Benjamin Halpern
+- Nayani Ilangakoon
+- Brian Johnson
 - ...
 - admin
 - et al.
