@@ -25,6 +25,6 @@ publication_short: ""
 publishDate: "2020-10-08T00:00:00Z"
 summary: Journal of Ecology
 tags:
-title: More than one way to kill a spruce forest - the role of fire and climate in the late-glacial termination of spruce woodlands across the southern Great Lakes
+title: Harnessing the NEON data revolution to advance open environmental science with a diverse and data-capable community
 url_pdf: https://besjournals.onlinelibrary.wiley.com/doi/epdf/10.1111/1365-2745.13517
 ---
