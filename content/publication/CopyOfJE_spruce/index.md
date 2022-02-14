@@ -10,7 +10,7 @@ authors:
 - ...
 - admin
 - et al.
-date: "2021-12-09T00:00:00Z"
+date: "2020-10-08T00:00:00Z"
 doi: "https://doi.org/10.1002/ecs2.3833"
 featured: false
 image:
@@ -19,7 +19,7 @@ image:
   preview_only: false
 projects: []
 publication_short: ""
-publishDate: "2021-12-09T00:00:00Z"
+publishDate: "2020-10-08T00:00:00Z"
 summary: Ecosphere
 tags:
 title: Harnessing the NEON data revolution to advance open environmental science with a diverse and data-capable community
