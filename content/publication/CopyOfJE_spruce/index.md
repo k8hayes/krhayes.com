@@ -1,18 +1,13 @@
 ---
-abstract: test
+abstract: It is a critical time to reflect on the National Ecological Observatory Network (NEON) science to date as well as envision what research can be done right now with NEON (and other) data and what training is needed to enable a diverse user community. 
 authors:
-- Allison Jensen
-- David Fastovich
-- Ben Watson
-- Jacquelyn Gill
-- Stephen Jackson
-- James Russell
-- Joe Bevington
+- Chelsea Nagy
+- Jennifer Balch
+- Erin Bissell
+- Megan Cattau
+- ...
 - admin
-- Katherine Lininger
-- Claire Rubbelke
-- Grace Schellinger
-- John Williams
+- et al.
 date: "2020-10-08T00:00:00Z"
 doi: "https://doi.org/10.1002/ecs2.3833"
 featured: false
