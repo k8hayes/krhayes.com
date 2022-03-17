@@ -7,7 +7,13 @@ title:
 
 # Presentations
 
+### 2022
+- **Hayes K**, Gavin D. *"Establishing baseline patterns of fire in old-growth coast redwood forests using soil carbon and charcoal”*, Northwest Scientific Association. Remote. March 2022. 
+- **Hayes K**, Carter T, Cook P, Twaddell E, Buma B. *"Graduate Field Leadership: Challenges, Successes, and Strategies”*, Front Range Student Ecology Symposium. Fort Collins, CO. February 2022. 
+
 ### 2021
+- **Hayes K**, Buma B. *"Repeat short-interval fires drive changes in biomass and soil carbon in Interior Alaska, regardless of local site conditions or resilience”*, American Geophysical Union. New Orleans, LA. December 2021. 
+- **Hayes K**, Buma B. *"Continued short-interval reburning drives changes in fuel-scapes across boreal forest landscapes”*, Great Plains Rocky Mountains Applied Geography. Remote. October 2021.
 - **Hayes K**, Buma B. *"Biomass and soil carbon in reburned stands burnt in short-intervals in Interior Alaska”*, International Boreal Forest Research Association. Remote. August 2021. **[Oral Presentation Award Winner]**
 - **Hayes K**, Buma B. *"Repeat short-interval fires drive changes in biomass and soil carbon in Interior Alaska"*, International Association of Landscape Ecology: North American Chapter. Virtual. April 2021.
 - **Hayes K**, Buma B. *"The effects of multiple short-interval fires on community and functional trait-based regeneration in boreal Alaska"*, American Association of Geographers. Virtual. April 2021. 
