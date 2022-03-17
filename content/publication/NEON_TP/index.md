@@ -17,9 +17,9 @@ image:
   preview_only: false
 projects: []
 publication_short: ""
-publishDate: "2022-03-04T00:00:00Z"
+publishDate: "2022-03-16T00:00:00Z"
 summary: Ecosphere
 tags:
-title: Harnessing NEON to evaluate ecological tipping points: Opportunities, challenges, and approaches
+title: Harnessing NEON to evaluate ecological tipping points - Opportunities, challenges, and approaches
 url_pdf: https://esajournals.onlinelibrary.wiley.com/doi/epdf/10.1002/ecs2.3989
 ---
