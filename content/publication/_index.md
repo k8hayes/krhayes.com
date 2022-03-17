@@ -7,7 +7,7 @@ view: 2
 ---
 
 ### Publications in press
-- Buma, B, **Hayes K**, Weiss S, , Lucash, M. *Short interval fires increasing in the boreal forest as fire self-regulation decays, especially in drier coniferous forest landscapes*. Scientific Reports. **[In Press]**
+- Buma, B, **Hayes K**, Weiss S, Lucash, M. *Short interval fires increasing in the boreal forest as fire self-regulation decays, especially in drier coniferous forest landscapes*. Scientific Reports. **[In Press]**
 
 ### Publications in review
 - **Hayes K**. *Acid-digestion recovers more pyrogenic carbon and reduces variability compared to traditional manual counting, particularly where pyrogenic carbon is scarce*. Geoderma. **[In Revision]**
