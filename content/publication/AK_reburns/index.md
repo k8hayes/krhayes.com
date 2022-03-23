@@ -5,7 +5,7 @@ authors:
 - admin
 - Shelby Weiss
 - Melissa Lucash
-date: "2022-22-03T00:00:00Z"
+date: "2022-03-22T00:00:00Z"
 doi: "https://doi.org/10.1038/s41598-022-08912-8"
 featured: false
 image:
@@ -14,7 +14,7 @@ image:
   preview_only: false
 projects: []
 publication_short: ""
-publishDate: "2022-22-03T00:00:00Z"
+publishDate: "2022-03-22T00:00:00Z"
 summary: Scientific Reports
 tags:
 - Reburns Alaska
