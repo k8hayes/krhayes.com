@@ -8,6 +8,7 @@ title:
 # Presentations
 
 ### 2022
+- **Hayes K**, Lucash M, Buma B. *Repeat short-interval fires put carbon storage in Interior Alaska at risk*, International Association of Landscape Ecology: North America. Remote. April 2022. 
 - **Hayes K**, Gavin D. *"Establishing baseline patterns of fire in old-growth coast redwood forests using soil carbon and charcoal”*, Northwest Scientific Association. Remote. March 2022. 
 - **Hayes K**, Carter T, Cook P, Twaddell E, Buma B. *"Graduate Field Leadership: Challenges, Successes, and Strategies”*, Front Range Student Ecology Symposium. Fort Collins, CO. February 2022. 
 
