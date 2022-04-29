@@ -17,10 +17,10 @@
   url = "/publication"
   weight = 20
 
-[[main]]
-  name = "Presentations"
-  url = "/talks"
-  weight = 30
+#[[main]]
+  #name = "Presentations"
+  #url = "/talks"
+  #weight = 30
 
 
 # Link to a PDF of your resume/CV from the menu.
