@@ -20,12 +20,14 @@ summary: Ecosphere
 tags:
 title: Supporting graduate field leadership through community-sourced advice, action, and policy
 url_pdf: https://esajournals.onlinelibrary.wiley.com/doi/epdf/10.1002/ecs2.4247
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
-{{% alert note %}}
-Click the *Cite* button above to demo the feature to enable visitors to import publication metadata into their reference management software.
-{{% /alert %}}
+{{% alert note %}} Click the *Cite* button above to demo the feature to
+enable visitors to import publication metadata into their reference
+management software. {{% /alert %}}
 
-{{% alert note %}}
-Click the *Slides* button above to demo Academic's Markdown slides feature.
-{{% /alert %}}
+{{% alert note %}} Click the *Slides* button above to demo Academic's
+Markdown slides feature. {{% /alert %}}
