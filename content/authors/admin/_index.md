@@ -5,7 +5,7 @@ bio:
 education:
   courses:
   - course: PhD in Integrative and Systems Biology
-    institution: Cary Institute of Ecosystem Studies
+    institution: University of Colorado Denver
     year: 2022
   - course: MS in Geography
     institution: University of Oregon
@@ -19,7 +19,7 @@ interests:
 - Long-term ecological change
 name: Katherine Hayes
 organizations:
-- name: University of Colorado
+- name: Cary Institute
   url: ""
 role: Postdoctoral Fellow 
 social:
