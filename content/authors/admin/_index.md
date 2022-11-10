@@ -5,8 +5,8 @@ bio:
 education:
   courses:
   - course: PhD in Integrative and Systems Biology
-    institution: University of Colorado Denver
-    year: 
+    institution: Cary Institute of Ecosystem Studies
+    year: 2022
   - course: MS in Geography
     institution: University of Oregon
     year: 2018
@@ -21,7 +21,7 @@ name: Katherine Hayes
 organizations:
 - name: University of Colorado
   url: ""
-role: PhD Candidate
+role: Postdoctoral Fellow 
 social:
 - icon: twitter
   icon_pack: fab
@@ -38,6 +38,6 @@ user_groups:
 - Visitors
 ---
 
-Hi! I'm Kate. I'm a PhD candidate in the Biology department at the University of Colorado Denver. I work in the intersection of paleoecology, landscape and disturbance ecology, studying how ecosystems change over time and space. 
+Hi! I'm Kate. I'm a Postdoctoral Fellow at the Cary Institute of Ecosystem Studies. I work in the intersection of paleoecology, landscape and disturbance ecology, studying how ecosystems change over time and space. 
 
 I'm interested in how changing disturbance regimes alter ecosystems and how we can make science more open and accessible. 
