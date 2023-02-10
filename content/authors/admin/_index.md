@@ -21,7 +21,7 @@ name: Katherine Hayes
 organizations:
 - name: Cary Institute
   url: ""
-role: Postdoctoral Fellow 
+role: Postdoctoral Scientist
 social:
 - icon: twitter
   icon_pack: fab
@@ -38,6 +38,6 @@ user_groups:
 - Visitors
 ---
 
-Hi! I'm Kate. I'm a Postdoctoral Fellow at the Cary Institute of Ecosystem Studies. I work in the intersection of paleoecology, landscape and disturbance ecology, studying how ecosystems change over time and space. 
+Hi! I'm Kate. I'm a Postdoctoral Scientist at the Cary Institute of Ecosystem Studies. I work in the intersection of paleoecology, landscape and disturbance ecology, studying how ecosystems change over time and space. 
 
 I'm interested in how changing disturbance regimes alter ecosystems and how we can make science more open and accessible. 
