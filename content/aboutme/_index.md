@@ -6,7 +6,7 @@ title: About Me
 view: 2
 ---
 
-I'm a landscape and spatial ecologist and currently a NSF postdoc fellow in the Future Forest Lab at the Cary Institute of Ecosystem Studies. I work in the intersection of paleoecology, landscape ecology and disturbance ecology, using field, lab, and modeling tools to study how ecosystems change over space and time.
+I'm a landscape and spatial ecologist and currently a NSF Postdoctoral Fellow in the [Forest Futures Lab](http://forestfutureslab.org/) at the [Cary Institute of Ecosystem Studies](http://caryinstitute.org). I work in the intersection of paleoecology, landscape ecology and disturbance ecology, using field, lab, and modeling tools to study how ecosystems change over space and time.
 
 My interest in fire sparked from working on charcoal records in a paleoecology lab as an undergraduate at the University of Wisconsin Madison. Prior to my Ph.D., I reconstructed long-term patterns of fire in coast redwood forests as part of my master's research at the University of Oregon. My doctoral research at the University of Colorado Denver explored how increasing fires in Alaska drive shifts in forest communities, forest carbon storage and future landscape flammability. 
 
