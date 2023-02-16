@@ -19,8 +19,8 @@ interests:
 - Long-term ecological change
 name: Katherine Hayes
 organizations:
-- name: Cary Institute
-  url: ""
+- name: Cary Institute of Ecosystem Studies
+  url: "https://www.caryinstitute.org/"
 role: Postdoctoral Scientist
 social:
 - icon: twitter
