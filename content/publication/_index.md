@@ -7,7 +7,6 @@ view: 2
 ---
 
 ### Publications in review
--	Weiss S, Marshall A, **Hayes K**, Nicolsky D, Buma B, Lucash M. *Future transitions from a conifer to a deciduous-dominated landscape are accelerated by greater wildfire activity and climate change in interior Alaska*. Landscape Ecology. 
 - **Hayes K**, Lucash M, Olson K, Buma B. *Repeat short-interval fires put carbon storage at risk in Interior Alaska via cumulative combustion of soil carbon*. Global Change Biology.
 
 ### Publications in preperation (Manuscript available upon request)
