@@ -12,7 +12,7 @@ image:
   caption: ''
   focal_point: ""
   preview_only: false
-projects: []
+projects: [Reburns Alaska]
 publication_short: ""
 publishDate: "2020-02-26T00:00:00Z"
 summary: Environmental Research Letters
