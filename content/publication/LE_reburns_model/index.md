@@ -19,6 +19,7 @@ publication_short: ""
 publishDate: "2023-07-26T00:00:00Z"
 summary: Landscape Ecology
 tags:
+- Reburns Alaska
 title: Future transitions from a conifer to a deciduous-dominated landscape are accelerated by greater wildfire activity and climate change in interior Alaska
 url_pdf: https://esajournals.onlinelibrary.wiley.com/doi/epdf/10.1002/ecs2.4247
 editor_options: 
