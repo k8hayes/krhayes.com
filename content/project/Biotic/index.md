@@ -4,7 +4,7 @@ external_link: ""
 image:
   caption: 
   focal_point: Smart
-summary: Investigating Fire-Biotic Disturbance Interactions and Their Sensitivity to Climate in the North American Boreal Biome
+summary: Investigating fire-biotic disturbance interactions and their sensitivity to climate in the North American boreal biome
 tags:
 - Boreal
 title: Pests, Pathogens and Mammals in Alaska 

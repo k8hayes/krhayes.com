@@ -4,7 +4,7 @@ external_link: ""
 image:
   caption: 
   focal_point: Smart
-summary: Regional Impacts of Increasing Fire Frequency and Climate Change on Carbon Dynamics and Species Composition
+summary: Regional impacts of increasing fire frequency and climate change on carbon dynamics and species composition
 tags:
 - Reburns Alaska
 - Boreal

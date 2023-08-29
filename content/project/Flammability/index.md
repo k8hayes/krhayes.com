@@ -5,7 +5,7 @@ image:
   caption: Photo by K. Hayes
   focal_point: Smart
 links: 
-summary: Evaluating Flammability of Reburns in the Boreal Forests of Interior Alaska
+summary: Evaluating flammability of reburns in the boreal forests of Interior Alaska
 tags:
 - Boreal Flammability
 - Boreal
