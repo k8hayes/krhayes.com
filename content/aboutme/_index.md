@@ -10,7 +10,7 @@ I'm a landscape and ecosystem ecologist and currently a NSF Postdoctoral Fellow 
 
 My interest in fire sparked from working on charcoal records in a paleoecology lab as an undergraduate at the University of Wisconsin Madison. Prior to my Ph.D., I reconstructed long-term patterns of fire in coast redwood forests as part of my master's research at the University of Oregon. My doctoral research at the University of Colorado Denver explored how increasing fires in Alaska changes forest communities, forest carbon storage and future patterns of fire.
 
-Beyond research, I'm an avid sewer, I collect records and houseplants and I grew up in the Midwest so I have strong opinions about cheese and the packers. 
+Outside of research, I'm an avid sewer, I collect records and houseplants and I grew up in the Midwest so I have strong opinions about cheese and the packers. 
 
 My teaching philosophy is [here](https://krhayes.com/files/Teaching_statement.pdf), and my CV is [here](https://krhayes.com/files/cv.pdf). 
 

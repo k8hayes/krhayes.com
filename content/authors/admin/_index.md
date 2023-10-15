@@ -4,13 +4,13 @@ authors:
 bio: 
 education:
   courses:
-  - course: PhD in Integrative and Systems Biology
+  - course: Ph.D. in Integrative and Systems Biology
     institution: University of Colorado Denver
     year: 2022
-  - course: MS in Geography
+  - course: M.S. in Geography
     institution: University of Oregon
     year: 2018
-  - course: BS in Geography, Environmental Studies and Spanish
+  - course: B.S. in Geography, Environmental Studies and Spanish
     institution: University of Wisconsin Madison
     year: 2016
 email: ""
@@ -38,6 +38,6 @@ user_groups:
 - Visitors
 ---
 
-Hi! I'm Kate. I'm a Postdoctoral Scientist at the Cary Institute of Ecosystem Studies. I work in the intersection of paleoecology, landscape and disturbance ecology, studying how ecosystems change over time and space. 
+Hi! I'm Kate. I'm an NSF Postdoctoral Scientist at the Cary Institute of Ecosystem Studies. I work in the intersection of paleoecology, landscape and disturbance ecology, studying how ecosystems change over time and space. 
 
 I'm interested in how changing disturbance regimes alter ecosystems and how we can make science more open and accessible. 
