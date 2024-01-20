@@ -13,3 +13,6 @@ My interest in fire sparked from working on charcoal records in a paleoecology l
 Outside of research, I collect records and houseplants and I grew up in the Midwest so I have strong opinions about cheese and the packers. 
 
 My teaching philosophy is [here](https://krhayes.com/files/Teaching_statement.pdf), and my CV is [here](https://krhayes.com/files/cv.pdf). 
+
+![test](/aboutme/_index_files/unprecedented.jpg)
+>Comic by the lovely and incomparable [Sophie Lucido Johnson](https://www.sophielucidojohnson.com/) and [Sammi Skolmoski](https://sammiskolmoski.com/index.html/).
