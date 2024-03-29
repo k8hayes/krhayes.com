@@ -1,6 +1,6 @@
-options(blogdown.author = "Mary Berry",
+options(blogdown.author = "Kate Hayes",
         blogdown.ext = ".Rmd",
-        blogdown.subdir = "post",
+        blogdown.subdir = "blog",
         blogdown.yaml.empty = TRUE,
         blogdown.new_bundle = TRUE,
         blogdown.title_case = TRUE)
