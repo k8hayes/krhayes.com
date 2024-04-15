@@ -1,0 +1,22 @@
+project:
+  type: website
+
+website:
+  title: "Katherine Hayes"
+  navbar:
+    right:
+      - text: "About Me"
+        file: about.qmd
+      - text: "Blog"
+        file: blog.qmd
+      - text: "CV"
+        file: cv.pdf
+    
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: false
+
+editor: visual
+

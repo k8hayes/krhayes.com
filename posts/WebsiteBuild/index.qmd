@@ -1,0 +1,73 @@
+---
+title: "How I built my site"
+subtitle: Migrating from blogdown to Quarto
+author: "Kate Hayes"
+date: "2024-04-15"
+date-modified: last-modified
+categories: [Workflow]
+format:
+  html:
+    toc: true
+    toc-title: Contents
+    toc-location: left
+    grid:
+      margin-width: 350px
+reference-location: margin
+citation-location: margin
+---
+
+There's tons of resources out there for how to built a personal website as an academic, made by folks with actual expertise in web design, coding, etc.
+
+I'd wanted to start my own blog / [digital garden](https://maggieappleton.com/garden-history) for years. Initially, the roadblock was imposter syndrome - did I actually have anything to write about? Would it be useful to anyone? isn't it all a bit cringe?[^1]
+
+[^1]: Counterpoints:
+
+    1.  I've never suffered from a lack of opinions
+    2.  writing is useful to me so it doesn't really matter if it's useful to anyone else
+    3.  cringe isn't real
+
+Once those worries were ~~shouted down~~ overcome, the main roadblock became technical know-how. I originally developed my website using a bundle of tools including blogdown, github, netlify all centered around the very popular academic theme from hugo. I've had it for years now, but it was heavy-lifting - building it took what felt like a week of work back in 2020, and I couldn't update easily without having to relearn the folder structure rules each time.
+
+Originally, I wanted to tweak the theme, add some blog pages and be done with it, but writeups like [this](https://masalmon.eu/2020/02/29/hugo-maintenance/) from Maelle Salmon discussing hugo theme maintenance and this [one](https://www.apreshill.com/blog/2022-04-we-dont-talk-about-quarto/) from Arielle on Quarto made me wonder if there was a better way.
+
+The straw that broke the camel's back was ~~vanity~~ the [Tufte theme](https://quarto-dev.github.io/quarto-gallery/page-layout/tufte.html) that's possible in Quarto - per the requirements of receiving a degree in geography, my copy of *Visual Display of Quantitative Information* lives on my coffee table. Adding Tufte's beautiful sidenotes and column spacing is as easy as adding a line or two of yaml in Quarto and opens up a whole new world of snarky asides[^2].
+
+[^2]: See: this entire writeup
+
+### Personal Website Development 101
+
+Some asides before we get into the specifics:
+
+"Have a personal website" is advice you run into over and over when thinking about a scientific career. Unfortunately, often that conversation starts and stops there. Questions like how? where? what goes on a personal website?
+
+## Switching from blogdown to quarto
+
+### Initiating a quarto website
+
+Initiating a Quarto website is shockingly easy. Working from Rstudio, you simply open a **New Project**, select **Quarto Website**, name it something new and click **Render** to preview.
+
+That's it. 4 steps, X files, and you're previewing the structure. Now, your render won't be hosted anywhere but locally and you haven't attached it to Github yet, but already that's a much more easy entry than the one I remember from Hugo.
+
+### 
+
+To add a blog:
+
+initiatiate a quarto file for your landing page
+
+add to menu bar
+
+start a folder called posts
+
+start to fill it with posts
+
+### Switching netlify hosts
+
+I'd expected that my challenge would be deciphering the CSS / hugo language, but really it ended up being deciphering the folder structure within the website. Hugo hosts websites as static, meaning they compile upon request (more detail on the distinction between static and dynamic websites here)
+
+*Static vs Dynamic*
+
+A static website delivers web pages exactly as they are stored (in this case, as a series of folders and markdown files within a repository). Dynamic websites generate content in real time, meaning they can deliver web pages differently to different audiences (think a forum, in which the forum page will appear differently depending on the user who's logged in).
+
+other resources
+
+-   https://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/#playing-around

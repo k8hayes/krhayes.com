@@ -1,0 +1,60 @@
+---
+title: "How much does a moose weigh?"
+subtitle: The rabbit holes of model parameterization
+author: "Kate Hayes"
+date: "2024-04-12"
+categories: [Model Parameterization, iLand]
+format:
+  html:
+    toc: true
+    toc-location: left
+    grid:
+      margin-width: 350px
+reference-location: margin
+citation-location: margin
+editor: visual
+bibliography: references.bib
+---
+
+*AKA - a field ecologist discovers how heartbreaking it is to bury the enormity of work required to parameterize and benchmark a model into the supplement section of a paper*
+
+As part of my [NSF postdoctoral fellowship](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2219248&HistoricalAwards=false) exploring interactions between fire and biotic disturbances in Interior Alaska, I've spent a lot of my time in the last year parameterizing moose and hare for the model iLand using the biotic disturbance model BITE. This has lead to some interesting conversations over the last few months - several unsuspecting new introductions at conferences have stared at me, slightly blankly, before asking "so, there are tiny moose in your model?"[^1]
+
+[^1]: Reader, I would love
+
+BITE (full name: BIotic disTurbance Engine) is a module built by the very smart Juha Honkankiemi (LUKE) and Werner Rammer (Technical University of Munich) to simulate a whole world of biotic disturbances [@honkaniemi2021]. The term "biotic disturbances" is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi like running canker or XX are biotic disturbances. Called "agents" for short, each of these types of biotic disturbances occur in very different numbers across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don't get into your firewood).
+
+While a landscape model might be able to easily represent an individual mastodon roaming across a landscape, modeling each individual fungi spore across a landscape is absolutely not possible computationally. To deal with this, BITE represents agents in units of biomass. Kilograms of mastodon move across cells within the model, uprooting kilograms of trees and consuming kilograms of spruce needles before falling into kilograms of tar pits[^2].
+
+[^2]: (technically no, though I'm sure if you thought too hard about it, you could add a raster of tar pits into the model)
+
+This means you have two key decisions to make when starting to parameterize a new agent:
+
+1.  How many are there?
+2.  What do they weigh?
+
+Like so many things in science, answering those questions is way more complicated than I'd expected.
+
+### How many moose are there?
+
+Because moose are so incredibly important for Alaska[^3], we have a surprisingly good grasp on their numbers - hunting keeps populations steady at about XX moose per ha in different regions. Hunters are required to provide harvest data, and while that data certainly has some limitations, it does give us a good sense year to year for the density of moose across the state.
+
+[^3]: Moose are a critical subsistence resource for Alaskan communities, they regulate vegetation communities and they increase tips for tour bus drivers when spotted on a tour (citation - Brian Buma)
+
+Managers also monitor moose populations using something called the [geospatial population estimator protocol (GSPE)](https://www.nps.gov/articles/000/moose-abundance-estimates.htm#:~:text=In%20Alaska%20and%20Canada%2C%20moose,geospatial%20population%20estimator%20(GSPE).). Using data from aerial count surveys, managers use GSPE and other modeling approaches to estimate populations across
+
+See [@reinking2022] for more on the important relationship between wildlife and snow and also the incredible phrasing of "snow professionals" and "snow science community"[^4].
+
+[^4]: I love my job
+
+All to say, we can say with some (some!) certainty that there are somewhere between XX and XX moose in Interior Alaska, about XX per acre.
+
+### What do moose weigh?
+
+Well, I started with the obvious route. Googling "how much does a moose weigh" doesn't get you very far. Plus, moose body mass differs across the regions where they live - moose are generally largest in Alaska, and smaller further south [@pastor1988]. Googling "how much does a moose weigh alaska" leads to a page from the Alaska Department of Fish and Game that gives moose an average weight of 550 kilograms. They cite Bishop 1988, who puts bull moose between 540 - 680 kilograms and cows between 360 - 590 kg in Alaska.
+
+#### Body Mass differs by Gender
+
+\[\] puts the weight of an average moose at XX kilograms. \[\] points out that body mass is different between male and female moose - \[\] points out that body mass of female moose differs according to the number of calves they've produced. The number of calves they produce depends in turn on the conditions that year - was there enough food? was it warm enough?
+
+So, if moose weight depends on the gender ratio across the population, what's the gender ratio of the moose population in Alaska? Surprisingly, we have a good grasp of this - hunting targets male moose, so populations are maintained at a level of Xx moose per in. Fish and Game reports the densities per game unit. The model landscape I use for this work falls within game unit 20A, and a 2014 report shows a ratio of

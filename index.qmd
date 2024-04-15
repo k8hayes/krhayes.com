@@ -1,0 +1,31 @@
+---
+title: "Katherine Hayes"
+subtitle: "Ecosystem Ecologist"
+about:
+  template: trestles
+  image: profile.jpg
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/k8rhayes
+    - icon: github
+      text: Github
+      href: https://github.com/k8hayes
+    - icon: google
+      text: Google Scholar
+      href: https://scholar.google.com/citations?user=7cDtSBAAAAAJ&hl=en
+---
+
+# Hi! I'm Kate
+
+I'm a landscape and ecosystem ecologist and currently an NSF Postdoctoral Scientist at the Cary Institute of Ecosystem Studies. I work in the intersection of paleoecology, landscape and disturbance ecology, studying how ecosystems change over time and space.
+
+I'm interested in how changing disturbance regimes alter ecosystems and how we can make science more open and accessible.
+
+## Education
+
+**Ph.D in Integrated & Systems Biology** University of Colorado Denver \| Denver, CO
+
+**M.S. in Geography** University of Oregon \| Eugene, OR
+
+**B.S. in Geography, Spanish and Environmental Studies** University of Wisconsin Madison \| Madison, WI
