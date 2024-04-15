@@ -22,26 +22,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -184,9 +165,7 @@ div.csl-indent {
 
 <p><em>AKA - a field ecologist discovers how heartbreaking it is to bury the enormity of work required to parameterize and benchmark a model into the supplement section of a paper</em></p>
 <p>As part of my <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2219248&amp;HistoricalAwards=false">NSF postdoctoral fellowship</a> exploring interactions between fire and biotic disturbances in Interior Alaska, I’ve spent a lot of my time in the last year parameterizing moose and hare for the model iLand using the biotic disturbance model BITE. This has lead to some interesting conversations over the last few months - several unsuspecting new introductions at conferences have stared at me, slightly blankly, before asking “so, there are tiny moose in your model?”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Reader, I would love</p></li><div id="ref-honkaniemi2021" class="csl-entry" role="listitem">
-Honkaniemi, Juha, Werner Rammer, and Rupert Seidl. 2021. <span>“From Mycelia to Mastodons <span></span> A General Approach for Simulating Biotic Disturbances in Forest Ecosystems.”</span> <em>Environmental Modelling &amp; Software</em> 138 (April): 104977. <a href="https://doi.org/10.1016/j.envsoft.2021.104977">https://doi.org/10.1016/j.envsoft.2021.104977</a>.
-</div></div><p>BITE (full name: BIotic disTurbance Engine) is a module built by the very smart Juha Honkankiemi (LUKE) and Werner Rammer (Technical University of Munich) to simulate a whole world of biotic disturbances <span class="citation" data-cites="honkaniemi2021">(<a href="#ref-honkaniemi2021" role="doc-biblioref">Honkaniemi, Rammer, and Seidl 2021</a>)</span>. The term “biotic disturbances” is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi like running canker or XX are biotic disturbances. Called “agents” for short, each of these types of biotic disturbances occur in very different numbers across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don’t get into your firewood).</p>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Reader, I would love</p></li></div><p>BITE (full name: BIotic disTurbance Engine) is a module built by the very smart Juha Honkankiemi (LUKE) and Werner Rammer (Technical University of Munich) to simulate a whole world of biotic disturbances [@honkaniemi2021]. The term “biotic disturbances” is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi like running canker or XX are biotic disturbances. Called “agents” for short, each of these types of biotic disturbances occur in very different numbers across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don’t get into your firewood).</p>
 <p>While a landscape model might be able to easily represent an individual mastodon roaming across a landscape, modeling each individual fungi spore across a landscape is absolutely not possible computationally. To deal with this, BITE represents agents in units of biomass. Kilograms of mastodon move across cells within the model, uprooting kilograms of trees and consuming kilograms of spruce needles before falling into kilograms of tar pits<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;(technically no, though I’m sure if you thought too hard about it, you could add a raster of tar pits into the model)</p></li></div><p>This means you have two key decisions to make when starting to parameterize a new agent:</p>
 <ol type="1">
@@ -198,21 +177,16 @@ Honkaniemi, Juha, Werner Rammer, and Rupert Seidl. 2021. <span>“From Mycelia t
 <h3 class="anchored" data-anchor-id="how-many-moose-are-there">How many moose are there?</h3>
 <p>Because moose are so incredibly important for Alaska<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, we have a surprisingly good grasp on their numbers - hunting keeps populations steady at about XX moose per ha in different regions. Hunters are required to provide harvest data, and while that data certainly has some limitations, it does give us a good sense year to year for the density of moose across the state.</p>
 <div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;Moose are a critical subsistence resource for Alaskan communities, they regulate vegetation communities and they increase tips for tour bus drivers when spotted on a tour (citation - Brian Buma)</p></li></div><p>Managers also monitor moose populations using something called the <a href="https://www.nps.gov/articles/000/moose-abundance-estimates.htm#:~:text=In%20Alaska%20and%20Canada%2C%20moose,geospatial%20population%20estimator%20(GSPE).">geospatial population estimator protocol (GSPE)</a>. Using data from aerial count surveys, managers use GSPE and other modeling approaches to estimate populations across</p>
-<p>See <span class="citation" data-cites="reinking2022">(<a href="#ref-reinking2022" role="doc-biblioref">Reinking et al. 2022</a>)</span> for more on the important relationship between wildlife and snow and also the incredible phrasing of “snow professionals” and “snow science community”<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
-<div class="no-row-height column-margin column-container"><div id="ref-reinking2022" class="csl-entry" role="listitem">
-Reinking, Adele K., Stine Højlund Pedersen, Kelly Elder, Natalie T. Boelman, Thomas W. Glass, Brendan A. Oates, Scott Bergen, et al. 2022. <span>“Collaborative Wildlife<span></span>snow Science: Integrating Wildlife and Snow Expertise to Improve Research and Management.”</span> <em>Ecosphere</em> 13 (6): e4094. <a href="https://doi.org/10.1002/ecs2.4094">https://doi.org/10.1002/ecs2.4094</a>.
-</div><li id="fn4"><p><sup>4</sup>&nbsp;I love my job</p></li></div><p>All to say, we can say with some (some!) certainty that there are somewhere between XX and XX moose in Interior Alaska, about XX per acre.</p>
+<p>See [@reinking2022] for more on the important relationship between wildlife and snow and also the incredible phrasing of “snow professionals” and “snow science community”<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><li id="fn4"><p><sup>4</sup>&nbsp;I love my job</p></li></div><p>All to say, we can say with some (some!) certainty that there are somewhere between XX and XX moose in Interior Alaska, about XX per acre.</p>
 </section>
-<section id="what-do-moose-weigh" class="level3 page-columns page-full">
+<section id="what-do-moose-weigh" class="level3">
 <h3 class="anchored" data-anchor-id="what-do-moose-weigh">What do moose weigh?</h3>
-<p>Well, I started with the obvious route. Googling “how much does a moose weigh” doesn’t get you very far. Plus, moose body mass differs across the regions where they live - moose are generally largest in Alaska, and smaller further south <span class="citation" data-cites="pastor1988">(<a href="#ref-pastor1988" role="doc-biblioref">Pastor et al. 1988</a>)</span>. Googling “how much does a moose weigh alaska” leads to a page from the Alaska Department of Fish and Game that gives moose an average weight of 550 kilograms. They cite Bishop 1988, who puts bull moose between 540 - 680 kilograms and cows between 360 - 590 kg in Alaska.</p>
-<div class="no-row-height column-margin column-container"><div id="ref-pastor1988" class="csl-entry" role="listitem">
-Pastor, John, Robert J. Naiman, Bradley Dewey, and Pamela McInnes. 1988. <span>“Moose, Microbes, and the Boreal Forest.”</span> <em>BioScience</em> 38 (11): 770–77. <a href="https://doi.org/10.2307/1310786">https://doi.org/10.2307/1310786</a>.
-</div></div><section id="body-mass-differs-by-gender" class="level4">
+<p>Well, I started with the obvious route. Googling “how much does a moose weigh” doesn’t get you very far. Plus, moose body mass differs across the regions where they live - moose are generally largest in Alaska, and smaller further south [@pastor1988]. Googling “how much does a moose weigh alaska” leads to a page from the Alaska Department of Fish and Game that gives moose an average weight of 550 kilograms. They cite Bishop 1988, who puts bull moose between 540 - 680 kilograms and cows between 360 - 590 kg in Alaska.</p>
+<section id="body-mass-differs-by-gender" class="level4">
 <h4 class="anchored" data-anchor-id="body-mass-differs-by-gender">Body Mass differs by Gender</h4>
 <p>[] puts the weight of an average moose at XX kilograms. [] points out that body mass is different between male and female moose - [] points out that body mass of female moose differs according to the number of calves they’ve produced. The number of calves they produce depends in turn on the conditions that year - was there enough food? was it warm enough?</p>
 <p>So, if moose weight depends on the gender ratio across the population, what’s the gender ratio of the moose population in Alaska? Surprisingly, we have a good grasp of this - hunting targets male moose, so populations are maintained at a level of Xx moose per in. Fish and Game reports the densities per game unit. The model landscape I use for this work falls within game unit 20A, and a 2014 report shows a ratio of</p>
-
 
 
 </section>
