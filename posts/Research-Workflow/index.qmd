@@ -13,6 +13,7 @@ format:
       margin-width: 350px
 reference-location: margin
 citation-location: margin
+draft: true
 ---
 
 I've played around with many different research workflows over the years - physical notebooks, notes stored in infinite word documents, color-coded index cards when I was a brand new undergraduate writing my first research paper. I've gone back and forth since then about whether following a system is a really important tool or whether it's a particularly creative procrastination technique. I'd like to think I've found a middle ground. My current system is automated as much as possible to cut down on the busy work of maintaining the workflow itself.
