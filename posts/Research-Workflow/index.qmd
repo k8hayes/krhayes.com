@@ -4,7 +4,6 @@ subtitle: "How I structure my notes and citations"
 author: "Kate Hayes"
 date: "2024-04-15"
 categories: [Workflow]
-image: "image.jpg"
 date-modified: last-modified
 format:
   html:
