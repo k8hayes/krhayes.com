@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "No matching items"
+    "text": "Research Workflow\n\n\nHow I structure my notes and citations\n\n\n\n\nWorkflow\n\n\n\n\n\n\n\n\n\n\n\nApr 15, 2024\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -54,5 +54,19 @@
     "title": "Research Workflow",
     "section": "A full list of tools",
     "text": "A full list of tools\n\nObsidian\nObsidian Citation plug in\nbetterbibtex - creates citekeys that link zotero items to obsidian notes\nZotero\nZotero Chrome Extension - saves articles to zotero libraries within Chrome"
+  },
+  {
+    "objectID": "posts/WebsiteBuild/index.html",
+    "href": "posts/WebsiteBuild/index.html",
+    "title": "How I built my site",
+    "section": "",
+    "text": "There’s tons of resources out there for how to built a personal website as an academic, made by folks with actual expertise in web design, coding, etc.\nI’d wanted to start my own blog / digital garden for years. Initially, the roadblock was imposter syndrome - did I actually have anything to write about? Would it be useful to anyone? isn’t it all a bit cringe?1\nOnce those worries were shouted down overcome, the main roadblock became technical know-how. I originally developed my website using a bundle of tools including blogdown, github, netlify all centered around the very popular academic theme from hugo. I’ve had it for years now, but it was heavy-lifting - building it took what felt like a week of work back in 2020, and I couldn’t update easily without having to relearn the folder structure rules each time.\nOriginally, I wanted to tweak the theme, add some blog pages and be done with it, but writeups like this from Maelle Salmon discussing hugo theme maintenance and this one from Arielle on Quarto made me wonder if there was a better way.\nThe straw that broke the camel’s back was vanity the Tufte theme that’s possible in Quarto - per the requirements of receiving a degree in geography, my copy of Visual Display of Quantitative Information lives on my coffee table. Adding Tufte’s beautiful sidenotes and column spacing is as easy as adding a line or two of yaml in Quarto and opens up a whole new world of snarky asides2."
+  },
+  {
+    "objectID": "posts/WebsiteBuild/index.html#switching-from-blogdown-to-quarto",
+    "href": "posts/WebsiteBuild/index.html#switching-from-blogdown-to-quarto",
+    "title": "How I built my site",
+    "section": "Switching from blogdown to quarto",
+    "text": "Switching from blogdown to quarto\n\nInitiating a quarto website\nInitiating a Quarto website is shockingly easy. Working from Rstudio, you simply open a New Project, select Quarto Website, name it something new and click Render to preview.\nThat’s it. 4 steps, X files, and you’re previewing the structure. Now, your render won’t be hosted anywhere but locally and you haven’t attached it to Github yet, but already that’s a much more easy entry than the one I remember from Hugo.\n\n\n\nTo add a blog:\ninitiatiate a quarto file for your landing page\nadd to menu bar\nstart a folder called posts\nstart to fill it with posts\n\n\nSwitching netlify hosts\nI’d expected that my challenge would be deciphering the CSS / hugo language, but really it ended up being deciphering the folder structure within the website. Hugo hosts websites as static, meaning they compile upon request (more detail on the distinction between static and dynamic websites here)\nStatic vs Dynamic\nA static website delivers web pages exactly as they are stored (in this case, as a series of folders and markdown files within a repository). Dynamic websites generate content in real time, meaning they can deliver web pages differently to different audiences (think a forum, in which the forum page will appear differently depending on the user who’s logged in).\nother resources\n\nhttps://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/#playing-around"
   }
 ]
