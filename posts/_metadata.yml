@@ -17,3 +17,8 @@ format:
       margin-width: 350px
 reference-location: margin
 citation-location: margin
+
+# Adding comment sections
+comments: 
+  utterances: 
+    repo:  k8hayes/BlogComments
