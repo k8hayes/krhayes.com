@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Kate Hayes">
 <meta name="dcterms.date" content="2024-04-15">
 
 <title>Katherine Hayes - How I built my site</title>
@@ -122,12 +121,6 @@ ul.task-list li input[type="checkbox"] {
   
   <div class="quarto-title-meta">
 
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Kate Hayes </p>
-            </div>
-    </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
@@ -139,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">April 15, 2024</p>
+        <p class="date-modified">April 16, 2024</p>
       </div>
     </div>
       
@@ -157,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#switching-from-blogdown-to-quarto" id="toc-switching-from-blogdown-to-quarto" class="nav-link" data-scroll-target="#switching-from-blogdown-to-quarto">Switching from blogdown to quarto</a>
   <ul class="collapse">
   <li><a href="#initiating-a-quarto-website" id="toc-initiating-a-quarto-website" class="nav-link" data-scroll-target="#initiating-a-quarto-website">Initiating a quarto website</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#to-add-a-blog" id="toc-to-add-a-blog" class="nav-link" data-scroll-target="#to-add-a-blog">To add a blog:</a></li>
   <li><a href="#switching-netlify-hosts" id="toc-switching-netlify-hosts" class="nav-link" data-scroll-target="#switching-netlify-hosts">Switching netlify hosts</a></li>
   </ul></li>
   </ul>
@@ -184,23 +177,50 @@ ul.task-list li input[type="checkbox"] {
 </li></div><p>Once those worries were <del>shouted down</del> overcome, the main roadblock became technical know-how. I originally developed my website using a bundle of tools including blogdown, github, netlify all centered around the very popular academic theme from hugo. I’ve had it for years now, but it was heavy-lifting - building it took what felt like a week of work back in 2020, and I couldn’t update easily without having to relearn the folder structure rules each time.</p>
 <p>Originally, I wanted to tweak the theme, add some blog pages and be done with it, but writeups like <a href="https://masalmon.eu/2020/02/29/hugo-maintenance/">this</a> from Maelle Salmon discussing hugo theme maintenance and this <a href="https://www.apreshill.com/blog/2022-04-we-dont-talk-about-quarto/">one</a> from Arielle on Quarto made me wonder if there was a better way.</p>
 <p>The straw that broke the camel’s back was <del>vanity</del> the <a href="https://quarto-dev.github.io/quarto-gallery/page-layout/tufte.html">Tufte theme</a> that’s possible in Quarto - per the requirements of receiving a degree in geography, my copy of <em>Visual Display of Quantitative Information</em> lives on my coffee table. Adding Tufte’s beautiful sidenotes and column spacing is as easy as adding a line or two of yaml in Quarto and opens up a whole new world of snarky asides<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
-<div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;See: this entire writeup</p></li></div><section id="personal-website-development-101" class="level3">
+<div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;See: this entire writeup</p></li></div><section id="personal-website-development-101" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="personal-website-development-101">Personal Website Development 101</h3>
-<p>Some asides before we get into the specifics:</p>
-<p>“Have a personal website” is advice you run into over and over when thinking about a scientific career. Unfortunately, often that conversation starts and stops there. Questions like how? where? what goes on a personal website?</p>
+<p>“<em>Have a personal website</em>” is advice you run into over and over when thinking about a scientific career. In my experience, that advice started and stopped there. Which is too bad, since questions like <em>What do I put on my website</em>? <em>How do I build one</em>? <em>How much time should I sink into this</em>? are the start of some potentially really interesting conversations.</p>
+<p>Briefly<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, I think the logic behind the advice “Have a website” is usually that websites make you findable. In the grand tradition of lagging behind every other field, academia doesn’t typically use LinkedIn in any deep way and alternatives like ResearchGate or Academy haven’t seemed to take off. So, a biographic / personal website can be a straightforward way to establish your web presence in science (or, at a minimum, make you slightly more google-able)<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;lol</p></li><li id="fn4"><p><sup>4</sup>&nbsp;there are so many Kate/Katherine Hayeses and they all seem to have gotten into life coaching lately</p></li></div><p>My two cents is that the easiest way to answer the questions: <em>What do I put on my website</em>? <em>How do I build one</em>? <em>How much time should I sink into this</em>? is to figure out your ultimate objective first.</p>
+<p>I know that sounds obtuse: Kate, you just said prevailing advice is to have a website, isn’t having the website the objective?</p>
+<p>Sure, but what do you want to get out of having a website? Is it checking the box so you can move on with your life / science? Do you want to connect with other scientists in your field? Is it an exercise in coding?</p>
+<p>No wrong answers here, but if you’re hoping to check the box and get the hell off of social media<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, then it’ll shape how you build one and how much time you want to put in. If it works to have your website be a living CV, it might be worth finding a squarespace / weebly / etc platform where you can fill in the basic info, get a domain name and call it a day.</p>
+<div class="no-row-height column-margin column-container"><li id="fn5"><p><sup>5</sup>&nbsp;good on you</p></li></div><p>For me, drafting a website was originally an exercise to get more comfortable with Github. I had had some exposure, but didn’t use it consistently in my workflow and didn’t really have any collaborators that used it. Using repositories to host a website seemed like a quick way to get a bunch more experience with version control. Hence my excuse to <del>procrastinate</del> take the long way round, instead of turning towards more pre-packaged templates.</p>
+<p>When I first drafted my website as a <del>sophisticated procrastination technique</del> savy professional development exercise during my PhD, it was pretty sparse. I had my basic affiliation, interests, education information, a PDF copy of my CSV and links to my other online presences (ie, my google scholar profile, my github and my now mostly obsolete twitter profile). Out of imposter syndrome/FOMO, I added a Publications page and a Project page, but I’m not sure either added anything in retrospect.</p>
+<p>But, I’d always been interested in expanding it. As a remote postdoc who works from home, I’d like more ways to interact with other scientists, and while it’s probably presumptuous to assume any of this will be read at all, writing for even an imaginary audience has been a great way to write more day to day. Hence, blog.</p>
 </section>
 <section id="switching-from-blogdown-to-quarto" class="level2">
 <h2 class="anchored" data-anchor-id="switching-from-blogdown-to-quarto">Switching from blogdown to quarto</h2>
 <section id="initiating-a-quarto-website" class="level3">
 <h3 class="anchored" data-anchor-id="initiating-a-quarto-website">Initiating a quarto website</h3>
 <p>Initiating a Quarto website is shockingly easy. Working from Rstudio, you simply open a <strong>New Project</strong>, select <strong>Quarto Website</strong>, name it something new and click <strong>Render</strong> to preview.</p>
-<p>That’s it. 4 steps, X files, and you’re previewing the structure. Now, your render won’t be hosted anywhere but locally and you haven’t attached it to Github yet, but already that’s a much more easy entry than the one I remember from Hugo.</p>
+<p>That’s it. 4 steps, X files, and you’re previewing the structure. Now, your render won’t be hosted anywhere but locally, but already that’s a much more easy entry than the one I remember from Hugo.</p>
 </section>
-<section id="section" class="level3">
-<h3 class="anchored" data-anchor-id="section"></h3>
-<p>To add a blog:</p>
-<p>initiatiate a quarto file for your landing page</p>
-<p>add to menu bar</p>
+<section id="to-add-a-blog" class="level3">
+<h3 class="anchored" data-anchor-id="to-add-a-blog">To add a blog:</h3>
+<ul>
+<li><p>Initiatiate a quarto file for your landing page and call it something like <strong>blog.qmd</strong></p></li>
+<li><p>Navigate to your _quarto.yml file which should have been created when you initiated the New Website process above</p></li>
+<li><p>You should see yml code that looks like the following:</p></li>
+</ul>
+<pre><code>project:
+  type: website
+
+website:
+  title: "Katherine Hayes"
+  navbar:
+    right:
+      - text: "About Me"
+        file: about.qmd
+    
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: false
+
+editor: visual</code></pre>
+<p>Under navbar, you can now add a “Blog” label and point it towards the blog.qmd</p>
 <p>start a folder called posts</p>
 <p>start to fill it with posts</p>
 </section>
@@ -536,6 +556,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="k8hayes/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 
