@@ -56,11 +56,9 @@ But, I'd always been interested in expanding it. As a remote postdoc who works f
 
 Initiating a Quarto website is shockingly easy. Working from Rstudio, you simply open a **New Project**, select **Quarto Website**, name it something new and click **Render** to preview.
 
-That's it. 4 steps, X files, and you're previewing the structure. Now, your render won't be hosted anywhere but locally and you haven't attached it to Github yet, but already that's a much more easy entry than the one I remember from Hugo.
+That's it. 4 steps, X files, and you're previewing the structure. Now, your render won't be hosted anywhere but locally, but already that's a much more easy entry than the one I remember from Hugo.
 
-### 
-
-To add a blog:
+### To add a blog:
 
 -   Initiatiate a quarto file for your landing page and call it something like **blog.qmd**
 
