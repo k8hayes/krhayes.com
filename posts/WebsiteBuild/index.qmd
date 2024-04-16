@@ -1,7 +1,6 @@
 ---
 title: "How I built my site"
 subtitle: Migrating from blogdown to Quarto
-author: "Kate Hayes"
 date: "2024-04-15"
 date-modified: last-modified
 categories: [Workflow]
