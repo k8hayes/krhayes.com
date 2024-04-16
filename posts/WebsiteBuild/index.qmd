@@ -5,16 +5,6 @@ author: "Kate Hayes"
 date: "2024-04-15"
 date-modified: last-modified
 categories: [Workflow]
-format:
-  html:
-    toc: true
-    toc-title: Contents
-    toc-location: left
-    grid:
-      margin-width: 350px
-reference-location: margin
-citation-location: margin
-draft: true
 ---
 
 There's tons of resources out there for how to built a personal website as an academic, made by folks with actual expertise in web design, coding, etc.
