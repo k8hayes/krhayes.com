@@ -26,9 +26,29 @@ The straw that broke the camel's back was ~~vanity~~ the [Tufte theme](https://q
 
 ### Personal Website Development 101
 
-Some asides before we get into the specifics:
+"*Have a personal website*" is advice you run into over and over when thinking about a scientific career. In my experience, that advice started and stopped there. Which is too bad, since questions like *What do I put on my website*? *How do I build one*? *How much time should I sink into this*? are the start of some potentially really interesting conversations.
 
-"Have a personal website" is advice you run into over and over when thinking about a scientific career. Unfortunately, often that conversation starts and stops there. Questions like how? where? what goes on a personal website?
+Briefly[^3], I think the logic behind the advice "Have a website" is usually that websites make you findable. In the grand tradition of lagging behind every other field, academia doesn't typically use LinkedIn in any deep way and alternatives like ResearchGate or Academy haven't seemed to take off. So, a biographic / personal website can be a straightforward way to establish your web presence in science (or, at a minimum, make you slightly more google-able)[^4].
+
+[^3]: lol
+
+[^4]: there are so many Kate/Katherine Hayeses and they all seem to have gotten into life coaching lately
+
+My two cents is that the easiest way to answer the questions: *What do I put on my website*? *How do I build one*? *How much time should I sink into this*? is to figure out your ultimate objective first.
+
+I know that sounds obtuse: Kate, you just said prevailing advice is to have a website, isn't having the website the objective?
+
+Sure, but what do you want to get out of having a website? Is it checking the box so you can move on with your life / science? Do you want to connect with other scientists in your field? Is it an exercise in coding?
+
+No wrong answers here, but if you're hoping to check the box and get the hell off of social media[^5], then it'll shape how you build one and how much time you want to put in. If it works to have your website be a living CV, it might be worth finding a squarespace / weebly / etc platform where you can fill in the basic info, get a domain name and call it a day.
+
+[^5]: good on you
+
+For me, drafting a website was originally an exercise to get more comfortable with Github. I had had some exposure, but didn't use it consistently in my workflow and didn't really have any collaborators that used it. Using repositories to host a website seemed like a quick way to get a bunch more experience with version control. Hence my excuse to ~~procrastinate~~ take the long way round, instead of turning towards more pre-packaged templates.
+
+When I first drafted my website as a ~~sophisticated procrastination technique~~ savy professional development exercise during my PhD, it was pretty sparse. I had my basic affiliation, interests, education information, a PDF copy of my CSV and links to my other online presences (ie, my google scholar profile, my github and my now mostly obsolete twitter profile). Out of imposter syndrome/FOMO, I added a Publications page and a Project page, but I'm not sure either added anything in retrospect.
+
+But, I'd always been interested in expanding it. As a remote postdoc who works from home, I'd like more ways to interact with other scientists, and while it's probably presumptuous to assume any of this will be read at all, writing for even an imaginary audience has been a great way to write more day to day. Hence, blog.
 
 ## Switching from blogdown to quarto
 
@@ -42,9 +62,33 @@ That's it. 4 steps, X files, and you're previewing the structure. Now, your rend
 
 To add a blog:
 
-initiatiate a quarto file for your landing page
+-   Initiatiate a quarto file for your landing page and call it something like **blog.qmd**
 
-add to menu bar
+-   Navigate to your \_quarto.yml file which should have been created when you initiated the New Website process above
+
+-   You should see yml code that looks like the following:
+
+```         
+project:
+  type: website
+
+website:
+  title: "Katherine Hayes"
+  navbar:
+    right:
+      - text: "About Me"
+        file: about.qmd
+    
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: false
+
+editor: visual
+```
+
+Under navbar, you can now add a "Blog" label and point it towards the blog.qmd
 
 start a folder called posts
 
