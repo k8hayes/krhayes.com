@@ -1,17 +1,9 @@
 ---
 title: "Filtering MTBS perimeters by severity"
 subtitle: "+ a primer on Alaska Fire Perimeter Data"
-date: "2024-04-15"
+date: "2024-04-16"
 categories: [Spatial Analysis, terra]
 date-modified: last-modified
-format:
-  html:
-    toc: true
-    toc-location: left
-    grid:
-      margin-width: 350px
-reference-location: margin
-citation-location: margin
 draft: true
 bibliography: references.bib
 ---
