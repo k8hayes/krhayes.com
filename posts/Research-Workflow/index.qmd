@@ -24,7 +24,7 @@ From there, the [Citations plug-in](https://github.com/hans/obsidian-citation-pl
 
 So much has been written about the value of notetaking for knowledge production.
 
-One of my favorite takes is [How to take Smart Notes](https://docdrop.org/download_annotation_doc/How-to-Take-Smart-Notes-by-So%CC%88nke-Ahrens-40zol.pdf) by Sönke Ahrens which positions notetaking as an integral (maybe *the* integral) step of nonfiction or research writing. For me, building a system for keeping notes has always felt like a key way to focus on process, not outcome - knowledge production as a job can at best feel for me like endless opportunity, and at worst feels like an enormous void without clear boxes to check. Maintaining an annotated bibliography means I'm more likely to write every day, in some form, about something.
+One of my favorite takes is [How to take Smart Notes](https://docdrop.org/download_annotation_doc/How-to-Take-Smart-Notes-by-So%CC%88nke-Ahrens-40zol.pdf) by Sönke Ahrens which positions notetaking as an integral (maybe *the* integral) step of nonfiction or research writing. For me, building a system for notes has always felt like a key way to focus on process, not outcome - knowledge production as a job can at best feel for me like endless opportunity, and at worst feels like an enormous sisyphus-ian void. Maintaining an annotated bibliography means I'm more likely to write every day, in some form, about something.
 
 Once my citations are filed into zotero and I've updated all the fidly little plug-ins so obsidian and zotero are talking, then we get into the fun bits[^1].
 
@@ -54,7 +54,7 @@ This is the stage where the zettelkastan method guides start to describe spontan
 
 ### Obsidian templates
 
-Obsidian lets you create templates for different types of notes, stored in the Template folder in your vault. I have one for each note type, which populate with XXXHazel to sort
+Obsidian lets you create templates for different types of notes, stored in the Template folder in your vault. I have one for each note type \[visualize\]
 
 For a while, I would sort things into folders automatically, which I thought would incentivize me to finish notes I hadn't sorted yet. But then the vault filled with so many unfinished notes that it made it hard to navigate. Now I've got Hazel set up to sort things automatically based on their tags, which helps.
 
