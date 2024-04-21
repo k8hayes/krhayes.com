@@ -40,13 +40,13 @@ I know that sounds obtuse: Kate, you just said prevailing advice is to have a we
 
 Sure, but what do you want to get out of having a website? Is it checking the box so you can move on with your life / science? Do you want to connect with other scientists in your field? Is it an exercise in coding?
 
-No wrong answers here, but if you're hoping to check the box and get the hell off of social media[^5], then it'll shape how you build one and how much time you want to put in. If it works to have your website be a living CV, it might be worth finding a squarespace / weebly / etc platform where you can fill in the basic info, get a domain name and call it a day.
+No wrong answers here, but if you're hoping to check the box and get the hell off of social media[^5], then it should shape how you build one and how much time you want to put in. If it works to have your website be a living CV, it might be worth finding a squarespace / weebly / etc platform where you can fill in the basic info, get a domain name and call it a day.
 
 [^5]: good on you
 
 For me, drafting a website was originally an exercise to get more comfortable with Github. I had had some exposure, but didn't use it consistently in my workflow and didn't really have any collaborators that used it. Using repositories to host a website seemed like a quick way to get a bunch more experience with version control. Hence my excuse to ~~procrastinate~~ take the long way round, instead of turning towards more pre-packaged templates.
 
-When I first drafted my website as a ~~sophisticated procrastination technique~~ savy professional development exercise during my PhD, it was pretty sparse. I had my basic affiliation, interests, education information, a PDF copy of my CSV and links to my other online presences (ie, my google scholar profile, my github and my now mostly obsolete twitter profile). Out of imposter syndrome/FOMO, I added a Publications page and a Project page, but I'm not sure either added anything in retrospect.
+When I first drafted my website as a ~~sophisticated procrastination technique~~ savy professional development exercise during my PhD, it was pretty sparse. I had my basic affiliation, interests, education information, a PDF copy of my CV and links to my other online presences (ie, my google scholar profile, my github and my now mostly obsolete twitter profile). Out of imposter syndrome/FOMO, I added a Publications page and a Project page, but I'm not sure either added anything in retrospect.
 
 But, I'd always been interested in expanding it. As a remote postdoc who works from home, I'd like more ways to interact with other scientists, and while it's probably presumptuous to assume any of this will be read at all, writing for even an imaginary audience has been a great way to write more day to day. Hence, blog.
 
@@ -56,15 +56,43 @@ But, I'd always been interested in expanding it. As a remote postdoc who works f
 
 Initiating a Quarto website is shockingly easy. Working from Rstudio, you simply open a **New Project**, select **Quarto Website**, name it something new and click **Render** to preview.
 
-That's it. 4 steps, X files, and you're previewing the structure. Now, your render won't be hosted anywhere but locally, but already that's a much more easy entry than the one I remember from Hugo.
+Your Rstudio will look like this:
+
+![a brand new quarto website](images/NewWebsite.png){fig-alt="An empty brand new quarto website" fig-align="center"}
+
+And your render will look like this:
+
+![off to the races](images/Render.png)
+
+That's it. 4 steps, and you're previewing a website with a landing page, a menu bar and two pages. Now, your render won't be hosted anywhere but locally, but already that's a much more easy entry than the one I remember from Hugo.
 
 ### To add a blog:
 
--   Initiatiate a quarto file for your landing page and call it something like **blog.qmd**
+To add a blog[^6], or any pages that will live under a different landing page than the home page, add the following steps:
+
+[^6]: You can also create a "Quarto Blog" instead of "Quarto Website" by going to New Project - I just wanted to figure out how to do it by hand so I knew how to initiate other website pages down the line
+
+#### Create a landing page
+
+-   Initiate a quarto file for your landing page and call it something like **blog.qmd**
+
+-   Within blog.qmd, add the following lines to the yaml code at the top:
+
+```         
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+```
+
+Now, you'll need to add it to your site navigation:
 
 -   Navigate to your \_quarto.yml file which should have been created when you initiated the New Website process above
 
--   You should see yml code that looks like the following:
+-   You should see yml code - mine looks like the following:
 
 ```         
 project:
@@ -86,20 +114,88 @@ format:
 editor: visual
 ```
 
-Under navbar, you can now add a "Blog" label and point it towards the blog.qmd
+-   Under navbar, add lines that specify text and file similar to the example above (so, probably *text: "Blog"* and *file: blog.qmd*)
 
-start a folder called posts
+-   Create a folder called **posts** - your posts will live here, within individual folders
 
-start to fill it with posts
+#### Writing a blog post
+
+#### How to make a Series
 
 ### Switching netlify hosts
 
-I'd expected that my challenge would be deciphering the CSS / hugo language, but really it ended up being deciphering the folder structure within the website. Hugo hosts websites as static, meaning they compile upon request (more detail on the distinction between static and dynamic websites here)
+My old website was already hosted on Netlify, and I wanted to hold on to the same domain.
 
-*Static vs Dynamic*
+Initially, I started my Quarto website in a folder adjacent to the folder containing my existing website. When it came time to migrate, I copied my old website folders into an archive, and then replaced them with the new quarto folders (keeping the same Rproj file). Then I held my breath and pushed changes.
 
-A static website delivers web pages exactly as they are stored (in this case, as a series of folders and markdown files within a repository). Dynamic websites generate content in real time, meaning they can deliver web pages differently to different audiences (think a forum, in which the forum page will appear differently depending on the user who's logged in).
+After that, I needed to mollify Netlify - I disconnected
+
+# Some other unsorted tricks
+
+## draft: false - Publishing posts
+
+I ran into some trouble at first with draft: true - once you've added it to the the yml code at the top of your quarto document, you'll need to delete it entirely to get the post show up once you're ready to publish.
+
+## Adding pictures to the background of title blocks
+
+## Setting global blog post theme
+
+You can use the \_metadata.yml file to set options for all the files in the posts folder.
+
+Mine looks like this:
+
+```         
+# freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+freeze: true
+
+# Enable banner style title blocks
+title-block-banner: true
+
+# Default for Tufte Style
+format:
+  html:
+    toc: true
+    toc-title: Contents
+    toc-location: left
+    grid:
+      margin-width: 350px
+reference-location: margin
+citation-location: margin
+
+# Adding comment sections
+comments: 
+  utterances: 
+    repo:  k8hayes/BlogComments
+```
+
+## New Post Template
+
+To make starting new posts easy, I added a folder to my posts folder called **NewPostTemplate** - the index file within has the following settings:
+
+```         
+---
+title: "New Post Title"
+subtitle: "New Post Subtitle"
+date: today
+categories: []
+date-modified: last-modified
+draft: true
+---
+```
+
+Then, I can simply make a copy of that folder to start a new post. Make sure to update the date to the publication date - using *today* and *last-modified* in the internal workings of the quarto document means more rendering in the background (cite where I found that tip).
+
+## Adding Comment Sections
+
+# A non-exhaustive list of Quarto resources I found useful
 
 other resources
 
 -   https://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/#playing-around
+
+## Session info
+
+```{r session info}
+sessionInfo()
+```

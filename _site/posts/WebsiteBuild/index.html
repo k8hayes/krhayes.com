@@ -132,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">April 16, 2024</p>
+        <p class="date-modified">April 21, 2024</p>
       </div>
     </div>
       
@@ -153,6 +153,15 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#to-add-a-blog" id="toc-to-add-a-blog" class="nav-link" data-scroll-target="#to-add-a-blog">To add a blog:</a></li>
   <li><a href="#switching-netlify-hosts" id="toc-switching-netlify-hosts" class="nav-link" data-scroll-target="#switching-netlify-hosts">Switching netlify hosts</a></li>
   </ul></li>
+  <li><a href="#some-other-unsorted-tricks" id="toc-some-other-unsorted-tricks" class="nav-link" data-scroll-target="#some-other-unsorted-tricks">Some other unsorted tricks</a>
+  <ul class="collapse">
+  <li><a href="#draft-false---publishing-posts" id="toc-draft-false---publishing-posts" class="nav-link" data-scroll-target="#draft-false---publishing-posts">draft: false - Publishing posts</a></li>
+  <li><a href="#adding-pictures-to-the-background-of-title-blocks" id="toc-adding-pictures-to-the-background-of-title-blocks" class="nav-link" data-scroll-target="#adding-pictures-to-the-background-of-title-blocks">Adding pictures to the background of title blocks</a></li>
+  <li><a href="#setting-global-blog-post-theme" id="toc-setting-global-blog-post-theme" class="nav-link" data-scroll-target="#setting-global-blog-post-theme">Setting global blog post theme</a></li>
+  <li><a href="#new-post-template" id="toc-new-post-template" class="nav-link" data-scroll-target="#new-post-template">New Post Template</a></li>
+  <li><a href="#adding-comment-sections" id="toc-adding-comment-sections" class="nav-link" data-scroll-target="#adding-comment-sections">Adding Comment Sections</a></li>
+  </ul></li>
+  <li><a href="#a-non-exhaustive-list-of-quarto-resources-i-found-useful" id="toc-a-non-exhaustive-list-of-quarto-resources-i-found-useful" class="nav-link" data-scroll-target="#a-non-exhaustive-list-of-quarto-resources-i-found-useful">A non-exhaustive list of Quarto resources I found useful</a></li>
   </ul>
 </nav>
 </nav>
@@ -184,24 +193,52 @@ ul.task-list li input[type="checkbox"] {
 <div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;lol</p></li><li id="fn4"><p><sup>4</sup>&nbsp;there are so many Kate/Katherine Hayeses and they all seem to have gotten into life coaching lately</p></li></div><p>My two cents is that the easiest way to answer the questions: <em>What do I put on my website</em>? <em>How do I build one</em>? <em>How much time should I sink into this</em>? is to figure out your ultimate objective first.</p>
 <p>I know that sounds obtuse: Kate, you just said prevailing advice is to have a website, isn’t having the website the objective?</p>
 <p>Sure, but what do you want to get out of having a website? Is it checking the box so you can move on with your life / science? Do you want to connect with other scientists in your field? Is it an exercise in coding?</p>
-<p>No wrong answers here, but if you’re hoping to check the box and get the hell off of social media<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, then it’ll shape how you build one and how much time you want to put in. If it works to have your website be a living CV, it might be worth finding a squarespace / weebly / etc platform where you can fill in the basic info, get a domain name and call it a day.</p>
+<p>No wrong answers here, but if you’re hoping to check the box and get the hell off of social media<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, then it should shape how you build one and how much time you want to put in. If it works to have your website be a living CV, it might be worth finding a squarespace / weebly / etc platform where you can fill in the basic info, get a domain name and call it a day.</p>
 <div class="no-row-height column-margin column-container"><li id="fn5"><p><sup>5</sup>&nbsp;good on you</p></li></div><p>For me, drafting a website was originally an exercise to get more comfortable with Github. I had had some exposure, but didn’t use it consistently in my workflow and didn’t really have any collaborators that used it. Using repositories to host a website seemed like a quick way to get a bunch more experience with version control. Hence my excuse to <del>procrastinate</del> take the long way round, instead of turning towards more pre-packaged templates.</p>
-<p>When I first drafted my website as a <del>sophisticated procrastination technique</del> savy professional development exercise during my PhD, it was pretty sparse. I had my basic affiliation, interests, education information, a PDF copy of my CSV and links to my other online presences (ie, my google scholar profile, my github and my now mostly obsolete twitter profile). Out of imposter syndrome/FOMO, I added a Publications page and a Project page, but I’m not sure either added anything in retrospect.</p>
+<p>When I first drafted my website as a <del>sophisticated procrastination technique</del> savy professional development exercise during my PhD, it was pretty sparse. I had my basic affiliation, interests, education information, a PDF copy of my CV and links to my other online presences (ie, my google scholar profile, my github and my now mostly obsolete twitter profile). Out of imposter syndrome/FOMO, I added a Publications page and a Project page, but I’m not sure either added anything in retrospect.</p>
 <p>But, I’d always been interested in expanding it. As a remote postdoc who works from home, I’d like more ways to interact with other scientists, and while it’s probably presumptuous to assume any of this will be read at all, writing for even an imaginary audience has been a great way to write more day to day. Hence, blog.</p>
 </section>
-<section id="switching-from-blogdown-to-quarto" class="level2">
+<section id="switching-from-blogdown-to-quarto" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="switching-from-blogdown-to-quarto">Switching from blogdown to quarto</h2>
 <section id="initiating-a-quarto-website" class="level3">
 <h3 class="anchored" data-anchor-id="initiating-a-quarto-website">Initiating a quarto website</h3>
 <p>Initiating a Quarto website is shockingly easy. Working from Rstudio, you simply open a <strong>New Project</strong>, select <strong>Quarto Website</strong>, name it something new and click <strong>Render</strong> to preview.</p>
-<p>That’s it. 4 steps, X files, and you’re previewing the structure. Now, your render won’t be hosted anywhere but locally, but already that’s a much more easy entry than the one I remember from Hugo.</p>
+<p>Your Rstudio will look like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/NewWebsite.png" class="img-fluid figure-img" alt="An empty brand new quarto website"></p>
+<figcaption class="figure-caption">a brand new quarto website</figcaption>
+</figure>
+</div>
+<p>And your render will look like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Render.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">off to the races</figcaption>
+</figure>
+</div>
+<p>That’s it. 4 steps, and you’re previewing a website with a landing page, a menu bar and two pages. Now, your render won’t be hosted anywhere but locally, but already that’s a much more easy entry than the one I remember from Hugo.</p>
 </section>
-<section id="to-add-a-blog" class="level3">
+<section id="to-add-a-blog" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="to-add-a-blog">To add a blog:</h3>
+<p>To add a blog<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>, or any pages that will live under a different landing page than the home page, add the following steps:</p>
+<div class="no-row-height column-margin column-container"><li id="fn6"><p><sup>6</sup>&nbsp;You can also create a “Quarto Blog” instead of “Quarto Website” by going to New Project - I just wanted to figure out how to do it by hand so I knew how to initiate other website pages down the line</p></li></div><section id="create-a-landing-page" class="level4">
+<h4 class="anchored" data-anchor-id="create-a-landing-page">Create a landing page</h4>
 <ul>
-<li><p>Initiatiate a quarto file for your landing page and call it something like <strong>blog.qmd</strong></p></li>
+<li><p>Initiate a quarto file for your landing page and call it something like <strong>blog.qmd</strong></p></li>
+<li><p>Within blog.qmd, add the following lines to the yaml code at the top:</p></li>
+</ul>
+<pre><code>listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false</code></pre>
+<p>Now, you’ll need to add it to your site navigation:</p>
+<ul>
 <li><p>Navigate to your _quarto.yml file which should have been created when you initiated the New Website process above</p></li>
-<li><p>You should see yml code that looks like the following:</p></li>
+<li><p>You should see yml code - mine looks like the following:</p></li>
 </ul>
 <pre><code>project:
   type: website
@@ -220,22 +257,86 @@ format:
     toc: false
 
 editor: visual</code></pre>
-<p>Under navbar, you can now add a “Blog” label and point it towards the blog.qmd</p>
-<p>start a folder called posts</p>
-<p>start to fill it with posts</p>
+<ul>
+<li><p>Under navbar, add lines that specify text and file similar to the example above (so, probably <em>text: “Blog”</em> and <em>file: blog.qmd</em>)</p></li>
+<li><p>Create a folder called <strong>posts</strong> - your posts will live here, within individual folders</p></li>
+</ul>
+</section>
+<section id="writing-a-blog-post" class="level4">
+<h4 class="anchored" data-anchor-id="writing-a-blog-post">Writing a blog post</h4>
+</section>
+<section id="how-to-make-a-series" class="level4">
+<h4 class="anchored" data-anchor-id="how-to-make-a-series">How to make a Series</h4>
+</section>
 </section>
 <section id="switching-netlify-hosts" class="level3">
 <h3 class="anchored" data-anchor-id="switching-netlify-hosts">Switching netlify hosts</h3>
-<p>I’d expected that my challenge would be deciphering the CSS / hugo language, but really it ended up being deciphering the folder structure within the website. Hugo hosts websites as static, meaning they compile upon request (more detail on the distinction between static and dynamic websites here)</p>
-<p><em>Static vs Dynamic</em></p>
-<p>A static website delivers web pages exactly as they are stored (in this case, as a series of folders and markdown files within a repository). Dynamic websites generate content in real time, meaning they can deliver web pages differently to different audiences (think a forum, in which the forum page will appear differently depending on the user who’s logged in).</p>
+<p>My old website was already hosted on Netlify, and I wanted to hold on to the same domain.</p>
+<p>Initially, I started my Quarto website in a folder adjacent to the folder containing my existing website. When it came time to migrate, I copied my old website folders into an archive, and then replaced them with the new quarto folders (keeping the same Rproj file). Then I held my breath and pushed changes.</p>
+<p>After that, I needed to mollify Netlify - I disconnected</p>
+</section>
+</section>
+<section id="some-other-unsorted-tricks" class="level1">
+<h1>Some other unsorted tricks</h1>
+<section id="draft-false---publishing-posts" class="level2">
+<h2 class="anchored" data-anchor-id="draft-false---publishing-posts">draft: false - Publishing posts</h2>
+<p>I ran into some trouble at first with draft: true - once you’ve added it to the the yml code at the top of your quarto document, you’ll need to delete it entirely to get the post show up once you’re ready to publish.</p>
+</section>
+<section id="adding-pictures-to-the-background-of-title-blocks" class="level2">
+<h2 class="anchored" data-anchor-id="adding-pictures-to-the-background-of-title-blocks">Adding pictures to the background of title blocks</h2>
+</section>
+<section id="setting-global-blog-post-theme" class="level2">
+<h2 class="anchored" data-anchor-id="setting-global-blog-post-theme">Setting global blog post theme</h2>
+<p>You can use the _metadata.yml file to set options for all the files in the posts folder.</p>
+<p>Mine looks like this:</p>
+<pre><code># freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+freeze: true
+
+# Enable banner style title blocks
+title-block-banner: true
+
+# Default for Tufte Style
+format:
+  html:
+    toc: true
+    toc-title: Contents
+    toc-location: left
+    grid:
+      margin-width: 350px
+reference-location: margin
+citation-location: margin
+
+# Adding comment sections
+comments: 
+  utterances: 
+    repo:  k8hayes/BlogComments</code></pre>
+</section>
+<section id="new-post-template" class="level2">
+<h2 class="anchored" data-anchor-id="new-post-template">New Post Template</h2>
+<p>To make starting new posts easy, I added a folder to my posts folder called <strong>NewPostTemplate</strong> - the index file within has the following settings:</p>
+<pre><code>---
+title: "New Post Title"
+subtitle: "New Post Subtitle"
+date: today
+categories: []
+date-modified: last-modified
+draft: true
+---</code></pre>
+<p>Then, I can simply make a copy of that folder to start a new post. Make sure to update the date to the publication date - using <em>today</em> and <em>last-modified</em> in the internal workings of the quarto document means more rendering in the background (cite where I found that tip).</p>
+</section>
+<section id="adding-comment-sections" class="level2">
+<h2 class="anchored" data-anchor-id="adding-comment-sections">Adding Comment Sections</h2>
+</section>
+</section>
+<section id="a-non-exhaustive-list-of-quarto-resources-i-found-useful" class="level1">
+<h1>A non-exhaustive list of Quarto resources I found useful</h1>
 <p>other resources</p>
 <ul>
 <li>https://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/#playing-around</li>
 </ul>
 
 
-</section>
 </section>
 
 
