@@ -214,9 +214,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="data-export">Data Export</h2>
 <p>You can download a Data Export of your collection directly from the Discogs website by visiting the Dashboard of your account. This will include:</p>
 <div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>DataExport <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Discogs/files/ndhayes-collection-20230610-1224.csv"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DataExport))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <table class="table table-sm table-striped small">
 
@@ -368,87 +365,87 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Not all data available on the site is available by API - Price history per release and the stats page are the big ones.</p>
 <p>With your token in hand, you can use the <strong>httr2</strong> package <span class="citation" data-cites="httr2">(<a href="#ref-httr2" role="doc-biblioref"><strong>httr2?</strong></a>)</span> to call the API with your username.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#authenticate</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>user <span class="ot">&lt;-</span> <span class="st">"ndhayes"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>content <span class="ot">=</span> httr2<span class="sc">::</span><span class="fu">GET</span>(<span class="fu">paste0</span>(<span class="st">"https://api.discogs.com/users/"</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                            user,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"/collection/folders/0?&amp;token="</span>, token))</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># the output above is in JSON, so use the following to input it as a list</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>content <span class="ot">&lt;-</span> rjson<span class="sc">::</span><span class="fu">fromJSON</span>(<span class="fu">rawToChar</span>(content<span class="sc">$</span>content))</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>test <span class="ot">=</span> httr2<span class="sc">::</span><span class="fu">GET</span>(<span class="fu">paste0</span>(<span class="st">"https://api.discogs.com/users/"</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                            user,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"/collection/folders?&amp;token="</span>, token))</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>test <span class="ot">=</span> httr2<span class="sc">::</span><span class="fu">GET</span>(<span class="fu">paste0</span>(<span class="st">"https://api.discogs.com/users/"</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                            user,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"/collection/folders?&amp;token="</span>, token))</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>cookies</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#authenticate</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>user <span class="ot">&lt;-</span> <span class="st">"ndhayes"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>content <span class="ot">=</span> httr2<span class="sc">::</span><span class="fu">GET</span>(<span class="fu">paste0</span>(<span class="st">"https://api.discogs.com/users/"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                            user,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"/collection/folders/0?&amp;token="</span>, token))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># the output above is in JSON, so use the following to input it as a list</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>content <span class="ot">&lt;-</span> rjson<span class="sc">::</span><span class="fu">fromJSON</span>(<span class="fu">rawToChar</span>(content<span class="sc">$</span>content))</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>content <span class="ot">=</span> httr2<span class="sc">::</span><span class="fu">GET</span>(<span class="fu">paste0</span>(<span class="st">"https://api.discogs.com/users/"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                            user,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"/collection/folders?&amp;token="</span>, token))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>test <span class="ot">=</span> httr2<span class="sc">::</span><span class="fu">GET</span>(<span class="fu">paste0</span>(<span class="st">"https://api.discogs.com/users/"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                            user,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"/collection/folders?&amp;token="</span>, token))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>cookies</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This brings in all the information about a given profile. $count here is the number of albums in the collection, currently:</p>
+<p>This brings in all the information about a given profile. <strong>$count</strong> here is the number of albums in the collection, currently:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>content<span class="sc">$</span>count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>content<span class="sc">$</span>count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>(Keep in mind this is three people’s collections).</p>
 <p>Now, we want to use this access to collect and create a dataframe with all the items in the collection.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>collec_url <span class="ot">&lt;-</span> httr2<span class="sc">::</span><span class="fu">GET</span>(<span class="fu">paste0</span>(<span class="st">"https://api.discogs.com/users/"</span>,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                               user, <span class="st">"/collection/folders/"</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                               content[<span class="dv">1</span>]<span class="sc">$</span>id, <span class="st">"/releases?page=1&amp;amp;per_page=100&amp;token="</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                               token))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>collec_url <span class="ot">&lt;-</span> httr2<span class="sc">::</span><span class="fu">GET</span>(<span class="fu">paste0</span>(<span class="st">"https://api.discogs.com/users/"</span>,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                               user, <span class="st">"/collection/folders/"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                               content[<span class="dv">1</span>]<span class="sc">$</span>id, <span class="st">"/releases?page=1&amp;amp;per_page=100&amp;token="</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                               token))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (collec_url<span class="sc">$</span>status_code <span class="sc">==</span> <span class="dv">200</span>){</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  collec <span class="ot">&lt;-</span> rjson<span class="sc">::</span><span class="fu">fromJSON</span>(<span class="fu">rawToChar</span>(collec_url<span class="sc">$</span>content))</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  collecdata <span class="ot">&lt;-</span> collec<span class="sc">$</span>releases</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(collec<span class="sc">$</span>pagination<span class="sc">$</span>urls<span class="sc">$</span><span class="st">`</span><span class="at">next</span><span class="st">`</span>)){</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">repeat</span>{</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>      url <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">GET</span>(collec<span class="sc">$</span>pagination<span class="sc">$</span>urls<span class="sc">$</span><span class="st">`</span><span class="at">next</span><span class="st">`</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>      collec <span class="ot">&lt;-</span> rjson<span class="sc">::</span><span class="fu">fromJSON</span>(<span class="fu">rawToChar</span>(url<span class="sc">$</span>content))</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>      collecdata <span class="ot">&lt;-</span> <span class="fu">c</span>(collecdata, collec<span class="sc">$</span>releases)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span>(<span class="fu">is.null</span>(collec<span class="sc">$</span>pagination<span class="sc">$</span>urls<span class="sc">$</span><span class="st">`</span><span class="at">next</span><span class="st">`</span>)){</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (collec_url<span class="sc">$</span>status_code <span class="sc">==</span> <span class="dv">200</span>){</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  collec <span class="ot">&lt;-</span> rjson<span class="sc">::</span><span class="fu">fromJSON</span>(<span class="fu">rawToChar</span>(collec_url<span class="sc">$</span>content))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  collecdata <span class="ot">&lt;-</span> collec<span class="sc">$</span>releases</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(collec<span class="sc">$</span>pagination<span class="sc">$</span>urls<span class="sc">$</span><span class="st">`</span><span class="at">next</span><span class="st">`</span>)){</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">repeat</span>{</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      url <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">GET</span>(collec<span class="sc">$</span>pagination<span class="sc">$</span>urls<span class="sc">$</span><span class="st">`</span><span class="at">next</span><span class="st">`</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      collec <span class="ot">&lt;-</span> rjson<span class="sc">::</span><span class="fu">fromJSON</span>(<span class="fu">rawToChar</span>(url<span class="sc">$</span>content))</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      collecdata <span class="ot">&lt;-</span> <span class="fu">c</span>(collecdata, collec<span class="sc">$</span>releases)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span>(<span class="fu">is.null</span>(collec<span class="sc">$</span>pagination<span class="sc">$</span>urls<span class="sc">$</span><span class="st">`</span><span class="at">next</span><span class="st">`</span>)){</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Knowing what you can collect requires understanding what’s actually available. <strong>collecdata</strong> is a list of 1564 elements, each element representing a vinyl in the collection. Within each element are additional lists of data. <strong>basic_information</strong> contains</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>collecdata[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>collecdata[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>collection <span class="ot">&lt;-</span> <span class="fu">lapply</span>(collecdata, <span class="cf">function</span>(obj){</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">release_id =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>id <span class="sc">%||%</span> <span class="cn">NA</span>,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>labels[[<span class="dv">1</span>]]<span class="sc">$</span>name <span class="sc">%||%</span> <span class="cn">NA</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">year =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>year <span class="sc">%||%</span> <span class="cn">NA</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>title <span class="sc">%||%</span> <span class="cn">NA</span>, </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">artist_name =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>artists[[<span class="dv">1</span>]]<span class="sc">$</span>name <span class="sc">%||%</span> <span class="cn">NA</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">artist_id =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>artists[[<span class="dv">1</span>]]<span class="sc">$</span>id <span class="sc">%||%</span> <span class="cn">NA</span>,</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">artist_resource_url =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>artists[[<span class="dv">1</span>]]<span class="sc">$</span>resource_url <span class="sc">%||%</span> <span class="cn">NA</span>, </span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">format =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>formats[[<span class="dv">1</span>]]<span class="sc">$</span>name <span class="sc">%||%</span> <span class="cn">NA</span>,</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">genre =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>genres[[<span class="dv">1</span>]] <span class="sc">%||%</span> <span class="cn">NA</span>,</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">date_added =</span> obj<span class="sc">$</span>date_added <span class="sc">%||%</span> <span class="cn">NA</span>,</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">resource_url =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>resource_url <span class="sc">%||%</span> <span class="cn">NA</span>)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">%&gt;%</span> <span class="fu">do.call</span>(rbind, .) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(collection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>collection <span class="ot">&lt;-</span> <span class="fu">lapply</span>(collecdata, <span class="cf">function</span>(obj){</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">release_id =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>id <span class="sc">%||%</span> <span class="cn">NA</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>labels[[<span class="dv">1</span>]]<span class="sc">$</span>name <span class="sc">%||%</span> <span class="cn">NA</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">year =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>year <span class="sc">%||%</span> <span class="cn">NA</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>title <span class="sc">%||%</span> <span class="cn">NA</span>, </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">artist_name =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>artists[[<span class="dv">1</span>]]<span class="sc">$</span>name <span class="sc">%||%</span> <span class="cn">NA</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">artist_id =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>artists[[<span class="dv">1</span>]]<span class="sc">$</span>id <span class="sc">%||%</span> <span class="cn">NA</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">artist_resource_url =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>artists[[<span class="dv">1</span>]]<span class="sc">$</span>resource_url <span class="sc">%||%</span> <span class="cn">NA</span>, </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">format =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>formats[[<span class="dv">1</span>]]<span class="sc">$</span>name <span class="sc">%||%</span> <span class="cn">NA</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">genre =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>genres[[<span class="dv">1</span>]] <span class="sc">%||%</span> <span class="cn">NA</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">date_added =</span> obj<span class="sc">$</span>date_added <span class="sc">%||%</span> <span class="cn">NA</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">resource_url =</span> obj<span class="sc">$</span>basic_information<span class="sc">$</span>resource_url <span class="sc">%||%</span> <span class="cn">NA</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">%&gt;%</span> <span class="fu">do.call</span>(rbind, .) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(collection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="visualizing" class="level1">
 <h1>Visualizing</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">as.data.frame</span>(<span class="fu">head</span>(<span class="fu">sort</span>(<span class="fu">table</span>(collection<span class="sc">$</span>genre), <span class="at">decreasing =</span> <span class="cn">TRUE</span>), <span class="dv">10</span>)),</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Var1, Freq), <span class="at">y =</span> Freq)) <span class="sc">+</span> </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"#B79477"</span>) <span class="sc">+</span> </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Genre"</span>) <span class="sc">+</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Frequency"</span>) <span class="sc">+</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Most Frequent Genres"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">as.data.frame</span>(<span class="fu">head</span>(<span class="fu">sort</span>(<span class="fu">table</span>(collection<span class="sc">$</span>genre), <span class="at">decreasing =</span> <span class="cn">TRUE</span>), <span class="dv">10</span>)),</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Var1, Freq), <span class="at">y =</span> Freq)) <span class="sc">+</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"#B79477"</span>) <span class="sc">+</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Genre"</span>) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Most Frequent Genres"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="more-resources" class="level1">
@@ -459,7 +456,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="session-info" class="level2">
 <h2 class="anchored" data-anchor-id="session-info">Session info</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.3.3 (2024-02-29)
 Platform: aarch64-apple-darwin20 (64-bit)
