@@ -4,14 +4,6 @@ subtitle: "Using APIs to collect data"
 date: "2024-04-21"
 categories: []
 date-modified: last-modified
-format:
-  html:
-    toc: true
-    toc-location: left
-    grid:
-      margin-width: 350px
-reference-location: margin
-citation-location: margin
 draft: true
 bibliography: references.bib
 ---
@@ -39,11 +31,12 @@ Discogs has two ways to download data:
 
 ## Data Export
 
-You can download a Data Export of your collection from the Dashboard. This will include:
+You can download a Data Export of your collection directly from the Discogs website by visiting the Dashboard of your account. This will include:
 
 ```{r}
 #| tbl-cap-location: margin
 #| tbl-cap: Data Export from Discogs
+#| echo:false
 DataExport <- read.csv("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Discogs/files/ndhayes-collection-20230610-1224.csv")
 
 knitr::kable(head(DataExport))
@@ -63,7 +56,7 @@ Quick and dirty API definition- API, or Application Programming Interface is a w
 
 # Connecting to the Discogs API
 
-To connect to the Discogs API, go to Discogs Developer settings once logged ion. From there, you create a new application and generate a user token.
+To connect to the Discogs API, go to Discogs Developer settings once logged in. From there, you create a new application and generate a user token.
 
 ## Rate Limits
 
@@ -71,7 +64,7 @@ Discogs has a rate limit of 60 per minute (for authenticated requests). This mea
 
 Not all data available on the site is available by API - Price history per release and the stats page are the big ones.
 
-With your token in hand, you can use the **httr** package [@httr] to call the API with your username.
+With your token in hand, you can use the **httr2** package [@httr2] to call the API with your username.
 
 ```{r}
 #| echo: false
@@ -89,7 +82,7 @@ content = httr2::GET(paste0("https://api.discogs.com/users/",
 content <- rjson::fromJSON(rawToChar(content$content))
 
 
-test = httr2::GET(paste0("https://api.discogs.com/users/",
+content = httr2::GET(paste0("https://api.discogs.com/users/",
                             user,
                             "/collection/folders?&token=", token))
 test = httr2::GET(paste0("https://api.discogs.com/users/",
@@ -98,7 +91,7 @@ test = httr2::GET(paste0("https://api.discogs.com/users/",
 test$cookies
 ```
 
-This brings in all the information about a given profile. \$count here is the number of albums in the collection, currently:
+This brings in all the information about a given profile. **\$count** here is the number of albums in the collection, currently:
 
 ```{r}
 #| eval: false
