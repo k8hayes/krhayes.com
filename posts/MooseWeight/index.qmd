@@ -1,17 +1,8 @@
 ---
 title: "How much does a moose weigh?"
 subtitle: The rabbit holes of model parameterization
-author: "Kate Hayes"
 date: "2024-04-12"
-categories: [Model Parameterization, iLand]
-format:
-  html:
-    toc: true
-    toc-location: left
-    grid:
-      margin-width: 350px
-reference-location: margin
-citation-location: margin
+categories: [Model Parameterization, iLand, BITE]
 editor: visual
 bibliography: references.bib
 draft: true
@@ -52,10 +43,28 @@ All to say, we can say with some (some!) certainty that there are somewhere betw
 
 ### What do moose weigh?
 
-Well, I started with the obvious route. Googling "how much does a moose weigh" doesn't get you very far. Plus, moose body mass differs across the regions where they live - moose are generally largest in Alaska, and smaller further south \[\@pastor1988\]. Googling "how much does a moose weigh alaska" leads to a page from the Alaska Department of Fish and Game that gives moose an average weight of 550 kilograms. They cite Bishop 1988, who puts bull moose between 540 - 680 kilograms and cows between 360 - 590 kg in Alaska.
+Well, I started with the obvious route but turns out googling *how much does a moose weigh* doesn't get you very far.
 
-#### Body Mass differs by Gender
+#### Several factors influence moose body mass:
+
+-   Weight varies latitudinally - moose are generally largest in Alaska, and smaller further south \[\@pastor1988\]
+
+-   Weight varies by gender - Bull moose are on average much larger than cows
+
+-   Weigh varies by age -
+
+Googling "how much does a moose weigh alaska" leads to a page from the Alaska Department of Fish and Game that gives moose an average weight of 550 kilograms. They cite Bishop 1988, who puts bull moose between 540 - 680 kilograms and cows between 360 - 590 kg in Alaska.
+
+#### Alaska Moose
 
 \[\] puts the weight of an average moose at XX kilograms. \[\] points out that body mass is different between male and female moose - \[\] points out that body mass of female moose differs according to the number of calves they've produced. The number of calves they produce depends in turn on the conditions that year - was there enough food? was it warm enough?
 
 So, if moose weight depends on the gender ratio across the population, what's the gender ratio of the moose population in Alaska? Surprisingly, we have a good grasp of this - hunting targets male moose, so populations are maintained at a level of Xx moose per in. Fish and Game reports the densities per game unit. The model landscape I use for this work falls within game unit 20A, and a 2014 report shows a ratio of
+
+# More information
+
+## Session Info
+
+```{r session info}
+sessionInfo()
+```
