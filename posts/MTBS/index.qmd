@@ -2,7 +2,7 @@
 title: "Filtering MTBS perimeters by severity"
 subtitle: "+ a primer on Alaska Fire Perimeter Data"
 date: "2024-04-16"
-categories: [Spatial Analysis, terra]
+categories: [Spatial Data Analysis, terra]
 date-modified: last-modified
 draft: true
 bibliography: references.bib
@@ -18,7 +18,7 @@ Functionally, that means helicopter work (!!). Going into it, I was blinded a bi
 
 I've been digging through fire perimeter datasets, trying to locate fires that overlap.
 
-## Fire perimeter data in Alaska
+# Fire perimeter data in Alaska
 
 There are functionally two forms of fire perimeter data in Alaska: the [Alaska Large Fire Database](https://www.frames.gov/catalog/10465) (ALFD) and the [Monitoring Trends in Burn Severity (MTBS)](https://www.mtbs.gov/) dataset. 
 
@@ -28,7 +28,7 @@ The Alaska Large Fire Database, often referred to as "Alaska Large Fire" in my c
 
 Using ground surveys, airborne surveys and aerial or satellite photography
 
-### Monitoring Trends in Burn Severity (MTBS)
+## Monitoring Trends in Burn Severity (MTBS)
 
 MTBS data consists of burn severity and extent information on large fires[^3] across the US from 1984 to the present. Both burn severity and fire extent are derived from Landsat or Sentinel-2 data at a spatial resolution of 30 meters and a temporal resolution of 16 days or so - images are constructed pre- and post-fire to compare Normalized Burn Ratio (NBR) or Differenced Normalized Burn Ratio (dNBR). From there, MTBS depicts severity as a gradient of vegetation response from low (not much vegetation response) to high (potentially complete combustion of vegetation)[^4].
 
@@ -36,22 +36,36 @@ MTBS data consists of burn severity and extent information on large fires[^3] ac
 
 [^4]: with additional categories for unburned, increased greenness or outliers caused by clouds, shadows, water bodies, etc
 
-### Difference between ALFD and MTBS
+## Difference between ALFD and MTBS
 
 Alaska Large Fire Database has been assumed to overestimate burned area within mapped fire events [@chen2021], and produces consistently higher estimates of area burned across Alaska compared to MTBS. 
 
-In contrast, MTBS has been posited to underestimate burned area, since it excludes fires less than 1000 acres.
+In contrast, MTBS excludes fires less than 1000 acres, so there are clear reasons to believe it underestimates burned area.
 
 Understanding the strengths and drawbacks of both is important - in the context of reburning, MTBS is a particularly useful database - older fire perimeters from ALFD become less precise (cite), sometimes overestimating where the fires overlapped [@buma2022].
 
 \[Brief aside on self-regulating fire\]
 
-## Filtering MTBS in R
+# Filtering MTBS in R
 
 I wanted to filter out pixels within MTBS that burned at high severity in both fires.
+
+```{r set up}
+
+```
 
 To do that, I loaded in fire perimeters from XX and XX
 
 \[show code\]
 
 From there, you
+
+# More Resources
+
+## Session Info
+```{r session info}
+sessionInfo()
+```
+
+
+
