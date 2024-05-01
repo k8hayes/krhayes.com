@@ -63,9 +63,7 @@ From there, you
 # More Resources
 
 ## Session Info
+
 ```{r session info}
 sessionInfo()
 ```
-
-
-
