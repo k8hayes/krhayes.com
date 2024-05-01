@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "How I built my site\n\n\nMigrating from blogdown to Quarto\n\n\n\n\nWorkflow\n\n\n\n\n\n\n\n\n\n\n\nApr 15, 2024\n\n\n\n\n\n\n  \n\n\n\n\nResearch Workflow\n\n\nHow I structure my notes and citations\n\n\n\n\nWorkflow\n\n\n\n\n\n\n\n\n\n\n\nApr 15, 2024\n\n\n\n\n\n\nNo matching items"
+    "text": "Research Workflow\n\n\nHow I structure my notes and citations\n\n\n\n\nWorkflow\n\n\n\n\n\n\n\n\n\n\n\nApr 15, 2024\n\n\n\n\n\n\n  \n\n\n\n\nHow I built my site\n\n\nMigrating from blogdown to Quarto\n\n\n\n\nWorkflow\n\n\n\n\n\n\n\n\n\n\n\nApr 15, 2024\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -110,5 +110,12 @@
     "title": "How I built my site",
     "section": "Adding Comment Sections",
     "text": "Adding Comment Sections"
+  },
+  {
+    "objectID": "posts/WebsiteBuild/index.html#session-info",
+    "href": "posts/WebsiteBuild/index.html#session-info",
+    "title": "How I built my site",
+    "section": "Session info",
+    "text": "Session info\n\nsessionInfo()\n\nR version 4.3.3 (2024-02-29)\nPlatform: aarch64-apple-darwin20 (64-bit)\nRunning under: macOS Sonoma 14.0\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: America/Chicago\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.3.3    fastmap_1.1.1     cli_3.6.2        \n [5] tools_4.3.3       htmltools_0.5.8   rstudioapi_0.16.0 yaml_2.3.8       \n [9] rmarkdown_2.26    knitr_1.45        jsonlite_1.8.8    xfun_0.43        \n[13] digest_0.6.35     rlang_1.1.3       evaluate_0.23"
   }
 ]
