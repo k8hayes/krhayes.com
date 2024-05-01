@@ -1,0 +1,8 @@
+---
+title: "New Post Title"
+subtitle: "New Post Subtitle"
+date: today
+categories: []
+date-modified: last-modified
+draft: true
+---
