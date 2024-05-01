@@ -17,8 +17,12 @@ library(tidyverse)
 library(discogger)
 #library(magrittr) #for %>%
 library(cowplot)
+library(here)
 theme_set(theme_cowplot())
 `%||%` <- function(a,b) if(is.null(a)) b else a
+here::i_am("index.qmd")
+here("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Draft_Discogs/index.qmd")
+
 ```
 
 One of our family hobbies is collecting vinyl - my dad, sister and I share a Discogs(link) account, so that we can see each other's collections. It's fun to watch the value change over time, and can be a nice way to make sure you aren't overpaying in some trendy new record store.
@@ -37,7 +41,7 @@ You can download a Data Export of your collection directly from the Discogs webs
 #| tbl-cap-location: margin
 #| tbl-cap: Data Export from Discogs
 #| echo: false
-DataExport <- read.csv("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Discogs/files/ndhayes-collection-20230610-1224.csv")
+DataExport <- read.csv(here("files/ndhayes-collection-20230610-1224.csv"))
 
 knitr::kable(head(DataExport))
 ```
