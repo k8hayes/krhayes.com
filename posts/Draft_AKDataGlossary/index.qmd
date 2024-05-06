@@ -1,8 +1,28 @@
 ---
-title: "New Post Title"
+title: "An incomplete glossary of Alaska Data Products"
 subtitle: "New Post Subtitle"
 date: today
-categories: []
+categories: [Alaska, Spatial Data Analysis]
 date-modified: last-modified
 draft: true
 ---
+
+I put this together for my own reference, to avoid the inevitable alphabet soup with an extra sprinkle of: "does that extend to alaska again??". Obviously not exhaustive. 
+
+## Fire
+
+MTBS
+
+Alaska Large Fire
+
+The new one
+
+LANDFIRE
+
+## Vegetation
+
+## Climate
+
+DAYMET
+
+no PRISM data for AK
