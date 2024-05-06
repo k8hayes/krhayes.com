@@ -18,7 +18,7 @@ I'd wanted to start my own blog / [digital garden](https://maggieappleton.com/ga
 
 Once those worries were ~~shouted down~~ overcome, the main roadblock became technical know-how. I originally developed my website using a bundle of tools including blogdown, github, netlify all centered around the very popular academic theme from hugo. I've had it for years now, but it was heavy-lifting - building it took what felt like a week of work back in 2020, and I couldn't update easily without having to relearn the folder structure rules each time.
 
-Originally, I wanted to tweak the theme, add some blog pages and be done with it, but writeups like [this](https://masalmon.eu/2020/02/29/hugo-maintenance/) from Maelle Salmon discussing hugo theme maintenance and this [one](https://www.apreshill.com/blog/2022-04-we-dont-talk-about-quarto/) from Arielle on Quarto made me wonder if there was a better way.
+Originally, I wanted to tweak the theme, add some blog pages and be done with it, but writeups like [this](https://masalmon.eu/2020/02/29/hugo-maintenance/) from Maelle Salmon discussing hugo theme maintenance and this [one](https://www.apreshill.com/blog/2022-04-we-dont-talk-about-quarto/) from Alison Hill on Quarto made me wonder if there was a better way.
 
 The straw that broke the camel's back was ~~vanity~~ the [Tufte theme](https://quarto-dev.github.io/quarto-gallery/page-layout/tufte.html) that's possible in Quarto - per the requirements of receiving a degree in geography, my copy of *Visual Display of Quantitative Information* lives on my coffee table. Adding Tufte's beautiful sidenotes and column spacing is as easy as adding a line or two of yaml in Quarto and opens up a whole new world of snarky asides[^2].
 
@@ -44,9 +44,9 @@ No wrong answers here, but if you're hoping to check the box and get the hell of
 
 [^5]: good on you
 
-For me, drafting a website was originally an exercise to get more comfortable with Github. I had had some exposure, but didn't use it consistently in my workflow and didn't really have any collaborators that used it. Using repositories to host a website seemed like a quick way to get a bunch more experience with version control. Hence my excuse to ~~procrastinate~~ take the long way round, instead of turning towards more pre-packaged templates.
+For me, drafting a website was originally an exercise to get more comfortable with Github. I had had some exposure, but didn't use it consistently in my workflow and didn't really have any collaborators that used it. Using repositories to host a website seemed like a quick way to get a bunch more experience with version control. Hence my excuse to ~~procrastinate~~ **take the long way round**, instead of turning towards more pre-packaged templates.
 
-When I first drafted my website as a ~~sophisticated procrastination technique~~ savy professional development exercise during my PhD, it was pretty sparse. I had my basic affiliation, interests, education information, a PDF copy of my CV and links to my other online presences (ie, my google scholar profile, my github and my now mostly obsolete twitter profile). Out of imposter syndrome/FOMO, I added a Publications page and a Project page, but I'm not sure either added anything in retrospect.
+When I first drafted my website as a ~~sophisticated procrastination technique~~ **savy professional development exercise** during my PhD, it was pretty sparse. I had my basic affiliation, interests, education information, a PDF copy of my CV and links to my other online presences (ie, my google scholar profile, my github and my now mostly obsolete twitter profile). Out of imposter syndrome/FOMO, I added a Publications page and a Project page since I'd seen those on other people's websites, but I'm not sure either added anything in retrospect.
 
 But, I'd always been interested in expanding it. As a remote postdoc who works from home, I'd like more ways to interact with other scientists, and while it's probably presumptuous to assume any of this will be read at all, writing for even an imaginary audience has been a great way to write more day to day. Hence, blog.
 
@@ -122,7 +122,24 @@ editor: visual
 
 #### How to make a Series
 
-### Switching netlify hosts
+To publish blog posts in a series, they need to be located in a subdirectory of the **posts** folder. You'll also need a landing page. I'm writing up a series of posts on some of the model parameterization work I've done recently for my fire-herbivory project, so I named my series folder **posts/param_series** and added a landing page named **param_landing.gmd** (I know, creative).
+
+```         
+---
+title: "Series: ggplot2-tips"
+listing:
+  contents: posts/ggplot2-tips
+  sort: "date desc"
+  type: default
+  categories: false
+  sort-ui: false
+  filter-ui: false
+  fields: [date, title, reading-time, description]
+page-layout: full
+title-block-banner: true
+```
+
+## Switching netlify hosts
 
 My old website was already hosted on Netlify, and I wanted to hold on to the same domain.
 
@@ -132,9 +149,11 @@ After that, I needed to mollify Netlify - I disconnected
 
 # Some other unsorted tricks
 
+The following is mostly for my own reference, so proceed with care. If you're curious about anything else on this site, the full code is available in my corresponding github repository.
+
 ## draft: false - Publishing posts
 
-I ran into some trouble at first with draft: true - once you've added it to the the yml code at the top of your quarto document, you'll need to delete it entirely to get the post show up once you're ready to publish.
+I ran into some trouble at first with *draft: true* - once you've added it to the the yml code at the top of your quarto document, you'll need to delete it entirely to get the post show up once you're ready to publish.
 
 ## Adding pictures to the background of title blocks
 
@@ -184,7 +203,7 @@ draft: true
 ---
 ```
 
-Then, I can simply make a copy of that folder to start a new post. Make sure to update the date to the publication date - using *today* and *last-modified* in the internal workings of the quarto document means more rendering in the background (cite where I found that tip).
+Then, I can simply make a copy of that folder to start a new post. Make sure to update the date to the publication date - using *today* and *last-modified* in the internal workings of the quarto document means more rendering in the background ([per the Quarto documentation)](https://quarto.org/docs/websites/website-blog.html).
 
 ## Adding Comment Sections
 
