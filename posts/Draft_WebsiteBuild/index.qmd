@@ -149,7 +149,7 @@ After that, I needed to mollify Netlify - I disconnected
 
 # Some other unsorted tricks
 
-The following is mostly for my own reference, so proceed with care. If you're curious about anything else on this site, the full code is available in my corresponding github repository.
+The following is mostly for my own reference, so proceed with care. If you're curious about anything else on this site, the full code is available in my [corresponding github repository](https://github.com/k8hayes/krhayes.com).
 
 ## draft: false - Publishing posts
 
@@ -207,11 +207,23 @@ Then, I can simply make a copy of that folder to start a new post. Make sure to 
 
 ## Adding Comment Sections
 
-# A non-exhaustive list of Quarto resources I found useful
+# More Resources
 
-other resources
+A non-exhaustive list of useful Quarto information
+
+-   Alison Hill's guide to [Quarto](https://www.apreshill.com/blog/2022-04-we-dont-talk-about-quarto/)
 
 -   https://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/#playing-around
+
+-   [this](https://masalmon.eu/2020/02/29/hugo-maintenance/) from Maelle Salmon discussing hugo theme maintenance and this
+
+The Tufte Theme
+
+-   [Tufte theme](https://quarto-dev.github.io/quarto-gallery/page-layout/tufte.html)
+
+Digital Gardens
+
+-   [A history of digital gardens](https://maggieappleton.com/garden-history)
 
 ## Session info
 
