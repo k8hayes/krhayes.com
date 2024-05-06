@@ -2,7 +2,7 @@
 title: "Building a Discogs Visualization"
 subtitle: "Using APIs to collect data"
 date: "2024-04-21"
-categories: []
+categories: [Data Visualization]
 date-modified: last-modified
 draft: true
 bibliography: references.bib
@@ -11,18 +11,17 @@ bibliography: references.bib
 ```{r set up}
 #| echo: false
 #| warning: false
+#| output: false
 library(httr2)
 library(gt)
 library(tidyverse)
 library(discogger)
-#library(magrittr) #for %>%
 library(cowplot)
 library(here)
 theme_set(theme_cowplot())
 `%||%` <- function(a,b) if(is.null(a)) b else a
 here::i_am("index.qmd")
 here("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Draft_Discogs/index.qmd")
-
 ```
 
 One of our family hobbies is collecting vinyl - my dad, sister and I share a Discogs(link) account, so that we can see each other's collections. It's fun to watch the value change over time, and can be a nice way to make sure you aren't overpaying in some trendy new record store.
@@ -37,11 +36,11 @@ Discogs has two ways to download data:
 
 You can download a Data Export of your collection directly from the Discogs website by visiting the Dashboard of your account. This will include:
 
-```{r}
+```{r default export}
 #| tbl-cap-location: margin
 #| tbl-cap: Data Export from Discogs
 #| echo: false
-DataExport <- read.csv(here("files/ndhayes-collection-20230610-1224.csv"))
+DataExport <- read.csv("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Draft_Discogs/files/ndhayes-collection-20230610-1224.csv")
 
 knitr::kable(head(DataExport))
 ```
@@ -70,26 +69,22 @@ Not all data available on the site is available by API - Price history per relea
 
 With your token in hand, you can use the **httr2** package [@httr2] to call the API with your username.
 
-```{r}
+```{r token}
 #| echo: false
 token <- "LObJXzujvgrNCikIIlcFJoibfbSYznjUijDsYQoo"
 ```
 
-```{r}
-#| eval: false
-#authenticate
+```{r authenticate}
 user <- "ndhayes"
-content = httr2::GET(paste0("https://api.discogs.com/users/",
-                            user,
-                            "/collection/folders/0?&token=", token))
+content = httr::GET(paste0("https://api.discogs.com/users/", user, "/collection/folders/0?&token=", token))
 # the output above is in JSON, so use the following to input it as a list
 content <- rjson::fromJSON(rawToChar(content$content))
 
 
-content = httr2::GET(paste0("https://api.discogs.com/users/",
+content2 = httr::GET(paste0("https://api.discogs.com/users/",
                             user,
                             "/collection/folders?&token=", token))
-test = httr2::GET(paste0("https://api.discogs.com/users/",
+test = httr::GET(paste0("https://api.discogs.com/users/",
                             user,
                             "/collection/folders?&token=", token))
 test$cookies
@@ -97,8 +92,7 @@ test$cookies
 
 This brings in all the information about a given profile. **\$count** here is the number of albums in the collection, currently:
 
-```{r}
-#| eval: false
+```{r n of albums}
 content$count
 ```
 
@@ -106,16 +100,14 @@ content$count
 
 Now, we want to use this access to collect and create a dataframe with all the items in the collection.
 
-```{r}
-#| eval: false
-collec_url <- httr2::GET(paste0("https://api.discogs.com/users/",
+```{r create data frame of collection}
+collec_url <- httr::GET(paste0("https://api.discogs.com/users/",
                                user, "/collection/folders/",
                                content[1]$id, "/releases?page=1&amp;per_page=100&token=",
                                token))
 ```
 
-```{r}
-#| eval: false
+```{r loop}
 if (collec_url$status_code == 200){
   collec <- rjson::fromJSON(rawToChar(collec_url$content))
   
@@ -137,12 +129,10 @@ if (collec_url$status_code == 200){
 Knowing what you can collect requires understanding what's actually available. **collecdata** is a list of 1564 elements, each element representing a vinyl in the collection. Within each element are additional lists of data. **basic_information** contains
 
 ```{r}
-#| eval: false
 collecdata[[1]]
 ```
 
 ```{r}
-#| eval: false
 collection <- lapply(collecdata, function(obj){
   data.frame(release_id = obj$basic_information$id %||% NA,
              label = obj$basic_information$labels[[1]]$name %||% NA,
@@ -158,12 +148,12 @@ collection <- lapply(collecdata, function(obj){
 }) %>% do.call(rbind, .) %>% 
   unique()
 
-head(collection)
+knitr::kable(head(collection))
 ```
 
 # Visualizing
 
-```{r}
+```{r visualizing}
 #| eval: false
 ggplot(as.data.frame(head(sort(table(collection$genre), decreasing = TRUE), 10)),
        aes(x = reorder(Var1, Freq), y = Freq)) + 
