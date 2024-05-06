@@ -2,7 +2,7 @@
 title: "Filtering MTBS perimeters by severity"
 subtitle: "+ a primer on Alaska Fire Perimeter Data"
 date: "2024-04-16"
-categories: [Spatial Data Analysis, terra]
+categories: [Spatial Data Analysis, terra, Alaska]
 date-modified: last-modified
 draft: true
 bibliography: references.bib
@@ -20,7 +20,7 @@ I've been digging through fire perimeter datasets, trying to locate fires that o
 
 # Fire perimeter data in Alaska
 
-There are functionally two forms of fire perimeter data in Alaska: the [Alaska Large Fire Database](https://www.frames.gov/catalog/10465) (ALFD) and the [Monitoring Trends in Burn Severity (MTBS)](https://www.mtbs.gov/) dataset. 
+There are functionally two forms of fire perimeter data in Alaska: the [Alaska Large Fire Database](https://www.frames.gov/catalog/10465) (ALFD) and the [Monitoring Trends in Burn Severity (MTBS)](https://www.mtbs.gov/) dataset.
 
 ### [Alaska Large Fire Database](https://blm-egis.maps.arcgis.com/apps/instant/portfolio/index.html?appid=4841da6a16804c07849c27ea7db2a26b) (ALFD)
 
@@ -38,7 +38,7 @@ MTBS data consists of burn severity and extent information on large fires[^3] ac
 
 ## Difference between ALFD and MTBS
 
-Alaska Large Fire Database has been assumed to overestimate burned area within mapped fire events [@chen2021], and produces consistently higher estimates of area burned across Alaska compared to MTBS. 
+Alaska Large Fire Database has been assumed to overestimate burned area within mapped fire events [@chen2021], and produces consistently higher estimates of area burned across Alaska compared to MTBS.
 
 In contrast, MTBS excludes fires less than 1000 acres, so there are clear reasons to believe it underestimates burned area.
 
@@ -46,21 +46,183 @@ Understanding the strengths and drawbacks of both is important - in the context 
 
 \[Brief aside on self-regulating fire\]
 
+# Update - New Alaska fire perimeter data
+
 # Filtering MTBS in R
 
 I wanted to filter out pixels within MTBS that burned at high severity in both fires.
 
 ```{r set up}
-
+#| echo: false
+library(terra)
+library(sf)
+library(here)
+# if on MAC
+# run open smb://10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/ in terminal
 ```
 
 To do that, I loaded in fire perimeters from XX and XX
 
-\[show code\]
+```{r Yukon - Dall City}
+    DallCity <- rast("//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Yukon/DallCity_2004/ak6628114999320040706_20010623_20050720_dnbr6.tif")
+    
+    plot(DallCity, main = "Original")
+    
+    DallCity[DallCity[] < 3] <- NA
+    plot(DallCity, main = "Low")
+    
+    DallCity[DallCity[] > 4] <- NA
+    plot(DallCity, main = "High")
+    
+    DallCityHS <- trim(DallCity)
+    plot(DallCityHS, main = "Trim")
+```    
+
+
+````{r Yukon - West Fork}    
+    WestFork <- rast("//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Yukon/WestFork_2015/ak6635014986720150620_20140705_20160624_dnbr6.tif")
+  
+    plot(WestFork, main = "Original")
+  
+    WestFork[WestFork < 3] <- NA
+    plot(WestFork, main = "Low")
+    
+    WestFork[WestFork > 4] <- NA
+    plot(WestFork, main = "High")
+    
+    unique(WestFork$Layer_1)
+    
+    WestForkHS <- trim(WestFork)
+    plot(WestForkHS, main = "Filter")
+    unique(WestForkHS$Layer_1)
+`````
+
+````{r Yukon Combining}
+    Yukon_intersect <- intersect(DallCityHS, WestForkHS)
+    plot(Yukon_intersect)
+    
+    Yukon_raster <- crop(DallCityHS, WestForkHS, mask = TRUE)
+    plot(Yukon_raster)
+    
+    Yukon_shp <- as.polygons(Yukon_raster)
+    plot(Yukon_shp)
+    
+    writeVector(Yukon_shp, 
+          "//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Yukon/YukonHS_Overlap.shp",
+          overwrite = TRUE)
+````
+
+## Kanuti
+````{r Kanuti - BTTS}
+## Kanuti
+
+  ## BTTS 1991 #####################################
+  
+  KanBTT <- rast("//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Kanuti/BTTS1991/ak6670715154819910630_19860613_19920605_dnbr6.tif")
+  
+  plot(KanBTT, main = "Original")
+
+  KanBTT[KanBTT[] < 3] <- NA
+  plot(KanBTT, main = "Low")
+  
+  KanBTT[KanBTT[] > 4] <- NA
+  plot(KanBTT, main = "High")
+  
+  KanBTTHS <- trim(KanBTT)
+  plot(KanBTTHS, main = "Trim")
+`````
+
+
+````{r Kanuti - Evansville}  
+  Evan <- rast("//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Kanuti/Evansville2004/ak6687815131320040706_20020624_20050616_dnbr6.tif")
+  
+  plot(Evan, main = "Original")
+  
+  Evan[Evan < 3] <- NA
+  plot(Evan, main = "Low")
+  
+  Evan[Evan > 4] <- NA
+  plot(Evan, main = "High")
+  
+  EvanHS <- trim(Evan)
+  plot(EvanHS, main = "Trim")
+`````
+
+````{r Kanuti - Combining}   
+  ## Combining #######################
+  
+  Kanuti_intersect <- intersect(KanBTTHS, EvanHS)
+  plot(Kanuti_intersect)
+  
+  Kanuti_crop <- crop(KanBTTHS, EvanHS, mask = TRUE)
+  plot(Kanuti_crop)
+  
+  Kanuti_shp <- as.polygons(Kanuti_crop)
+  plot(Kanuti_shp)
+  
+  writeVector(Kanuti_shp, 
+              "//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Kanuti/KanutiHS_Overlap.shp")
+`````
+
+````{r Last Chance - BTT}
+  ## BTT 1994 #####################################
+  
+  BTT <- rast("//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/LastChance/BTT1994/ak6712115052019940608_19860823_19950825_dnbr6.tif")
+  
+  plot(BTT, main = "Original")
+  
+  BTT[BTT[] < 3] <- NA
+  plot(BTT, main = "Low")
+  
+  BTT[BTT[] > 4] <- NA
+  plot(BTT, main = "High")
+  
+  BTTHS <- trim(BTT)
+  plot(BTTHS, main = "Trim")
+`````
+
+````{r Last Chance - Chapman} 
+  ## Chapman 2005 #####################################
+  
+  Chapman <- rast("//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/LastChance/Chapman2005/ak6707615031720050530_20020617_20060612_dnbr6.tif")
+  
+  plot(Chapman, main = "Original")
+  
+  Chapman[Chapman < 3] <- NA
+  plot(Chapman, main = "Low")
+  
+  Chapman[Chapman > 4] <- NA
+  plot(Chapman, main = "High")
+  
+  ChapmanHS <- trim(Chapman)
+  
+  plot(ChapmanHS, main = "Trim")
+````
+
+````{r Last Chance - Combining}   
+  ## Combining #######################
+  
+  LastChance_intersect <- intersect(BTTHS, ChapmanHS)
+  plot(LastChance_intersect)
+  
+  LastChance_crop <- crop(BTTHS, ChapmanHS, mask = TRUE)
+  plot(LastChance_crop)
+  
+  LastChance_shp <- as.polygons(LastChance_crop)
+  plot(LastChance_shp)
+  
+  writeVector(LastChance_shp, 
+              "//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/LastChance/LastChanceHS_Overlap.shp")
+
+```
 
 From there, you
 
+# Update: new fire perimeters
+Carson et al. from the USGS has put out an analysis updating fire perimeters in Alaska. 
+
 # More Resources
+
 
 ## Session Info
 
