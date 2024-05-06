@@ -1,6 +1,6 @@
 ---
 title: "How much does a moose eat?"
-subtitle: "Part 2 in a series on Model Parameterization"
+subtitle: "Part 3 in a series on Model Parameterization"
 date: today
 categories: [Model Parameterization, iLand, BITE]
 date-modified: last-modified
