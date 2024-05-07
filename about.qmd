@@ -18,8 +18,4 @@ My interest in fire sparked from working on charcoal records in a paleoecology l
 
 Outside of research, I collect records and houseplants and I grew up in the Midwest so I have strong opinions about cheese and the packers.
 
-<<<<<<< HEAD
 My teaching philosophy is [here](https://krhayes.com/files/Teaching_statement.pdf), and my CV is [here](https://krhayes.com/cv.pdf).
-=======
-My teaching philosophy is [here](https://krhayes.com/files/Teaching_statement.pdf), and my CV is [here](krhayes.com/cv.pdf).
->>>>>>> 79c4d8011a251c3f219a7cdd8822be96ff0005a2
