@@ -10,11 +10,11 @@ draft: true
 
 *AKA - a field ecologist discovers how heartbreaking it is to bury the enormity of work required to parameterize and benchmark a model into the supplement section of a paper*
 
-As part of my [NSF postdoctoral fellowship](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2219248&HistoricalAwards=false) exploring interactions between fire and biotic disturbances in Interior Alaska, I've spent a lot of my time in the last year parameterizing moose and hare for the model iLand using the biotic disturbance model BITE. This has lead to some interesting conversations over the last few months - several unsuspecting new introductions at conferences have stared at me, slightly blankly, before asking "so, there are tiny moose in your model?"[^1]
+As part of my [NSF Postdoctoral Fellowship](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2219248&HistoricalAwards=false) exploring interactions between fire and biotic disturbances in Interior Alaska, I've spent a lot of my time in the last year parameterizing moose and hare for the model [iLand](https://iland-model.org/iLand+Hub) using the biotic disturbance model [BITE](https://iland-model.org/bite/#/). This has lead to some interesting conversations over the last few months - several unsuspecting new introductions at conferences have stared at me, slightly blankly, before asking "so, there are tiny moose in your model?"[^1]
 
 [^1]: Reader, I would love
 
-BITE (full name: BIotic disTurbance Engine) is a module built by the very smart Juha Honkankiemi (LUKE) and Werner Rammer (Technical University of Munich) to simulate a whole world of biotic disturbances \[\@honkaniemi2021\]. The term "biotic disturbances" is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi like running canker or XX are biotic disturbances. Called "agents" for short, each of these types of biotic disturbances occur in very different numbers across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don't get into your firewood).
+BITE (full name: BIotic disTurbance Engine) is a module built by the very smart Juha Honkankiemi (LUKE) and Werner Rammer (Technical University of Munich) to simulate a whole world of biotic disturbances [@honkaniemi2021]. The term "biotic disturbances" is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi like running canker or XX are biotic disturbances. Called "agents" for short, each of these types of biotic disturbances occur in very different numbers across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don't get into your firewood).
 
 While a landscape model might be able to easily represent an individual mastodon roaming across a landscape, modeling each individual fungi spore across a landscape is absolutely not possible computationally. To deal with this, BITE represents agents in units of biomass. Kilograms of mastodon move across cells within the model, uprooting kilograms of trees and consuming kilograms of spruce needles before falling into kilograms of tar pits[^2].
 
@@ -45,15 +45,23 @@ All to say, we can say with some (some!) certainty that there are somewhere betw
 
 Well, I started with the obvious route but turns out googling *how much does a moose weigh* doesn't get you very far.
 
+Googling "how much does a moose weigh alaska" leads to a page from the Alaska Department of Fish and Game that gives moose an average weight of 550 kilograms. They cite Bishop 1988, who puts bull moose between 540 - 680 kilograms and cows between 360 - 590 kg in Alaska.
+
 #### Several factors influence moose body mass:
 
--   Weight varies latitudinally - moose are generally largest in Alaska, and smaller further south \[\@pastor1988\]
+##### Weight varies latitudinally
 
--   Weight varies by gender - Bull moose are on average much larger than cows
+Moose are generally largest in Alaska, and smaller further south \[\@pastor1988\].
 
--   Weigh varies by age -
+##### Weight varies by gender
 
-Googling "how much does a moose weigh alaska" leads to a page from the Alaska Department of Fish and Game that gives moose an average weight of 550 kilograms. They cite Bishop 1988, who puts bull moose between 540 - 680 kilograms and cows between 360 - 590 kg in Alaska.
+Bull moose are on average much larger than cows (CITE).
+
+##### Weight varies by age
+
+##### Weight varies within a season
+
+Moose put on weight in the summer, and reach peak body mass in fall (Mautz 1978, Adamczewski et al. 1987, Schwartz et al. 1987).
 
 #### Alaska Moose
 
@@ -62,6 +70,8 @@ Googling "how much does a moose weigh alaska" leads to a page from the Alaska De
 So, if moose weight depends on the gender ratio across the population, what's the gender ratio of the moose population in Alaska? Surprisingly, we have a good grasp of this - hunting targets male moose, so populations are maintained at a level of Xx moose per in. Fish and Game reports the densities per game unit. The model landscape I use for this work falls within game unit 20A, and a 2014 report shows a ratio of
 
 # More information
+
+## References
 
 ## Session Info
 
