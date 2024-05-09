@@ -166,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">May 1, 2024</p>
+        <p class="date-modified">May 6, 2024</p>
       </div>
     </div>
       
@@ -185,8 +185,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#initiating-a-quarto-website" id="toc-initiating-a-quarto-website" class="nav-link" data-scroll-target="#initiating-a-quarto-website">Initiating a quarto website</a></li>
   <li><a href="#to-add-a-blog" id="toc-to-add-a-blog" class="nav-link" data-scroll-target="#to-add-a-blog">To add a blog:</a></li>
-  <li><a href="#switching-netlify-hosts" id="toc-switching-netlify-hosts" class="nav-link" data-scroll-target="#switching-netlify-hosts">Switching netlify hosts</a></li>
   </ul></li>
+  <li><a href="#switching-netlify-hosts" id="toc-switching-netlify-hosts" class="nav-link" data-scroll-target="#switching-netlify-hosts">Switching netlify hosts</a></li>
   <li><a href="#some-other-unsorted-tricks" id="toc-some-other-unsorted-tricks" class="nav-link" data-scroll-target="#some-other-unsorted-tricks">Some other unsorted tricks</a>
   <ul class="collapse">
   <li><a href="#draft-false---publishing-posts" id="toc-draft-false---publishing-posts" class="nav-link" data-scroll-target="#draft-false---publishing-posts">draft: false - Publishing posts</a></li>
@@ -195,7 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#new-post-template" id="toc-new-post-template" class="nav-link" data-scroll-target="#new-post-template">New Post Template</a></li>
   <li><a href="#adding-comment-sections" id="toc-adding-comment-sections" class="nav-link" data-scroll-target="#adding-comment-sections">Adding Comment Sections</a></li>
   </ul></li>
-  <li><a href="#a-non-exhaustive-list-of-quarto-resources-i-found-useful" id="toc-a-non-exhaustive-list-of-quarto-resources-i-found-useful" class="nav-link" data-scroll-target="#a-non-exhaustive-list-of-quarto-resources-i-found-useful">A non-exhaustive list of Quarto resources I found useful</a>
+  <li><a href="#more-resources" id="toc-more-resources" class="nav-link" data-scroll-target="#more-resources">More Resources</a>
   <ul class="collapse">
   <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session info</a></li>
   </ul></li>
@@ -221,7 +221,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>cringe isn’t real</li>
 </ol>
 </li></div><p>Once those worries were <del>shouted down</del> overcome, the main roadblock became technical know-how. I originally developed my website using a bundle of tools including blogdown, github, netlify all centered around the very popular academic theme from hugo. I’ve had it for years now, but it was heavy-lifting - building it took what felt like a week of work back in 2020, and I couldn’t update easily without having to relearn the folder structure rules each time.</p>
-<p>Originally, I wanted to tweak the theme, add some blog pages and be done with it, but writeups like <a href="https://masalmon.eu/2020/02/29/hugo-maintenance/">this</a> from Maelle Salmon discussing hugo theme maintenance and this <a href="https://www.apreshill.com/blog/2022-04-we-dont-talk-about-quarto/">one</a> from Arielle on Quarto made me wonder if there was a better way.</p>
+<p>Originally, I wanted to tweak the theme, add some blog pages and be done with it, but writeups like <a href="https://masalmon.eu/2020/02/29/hugo-maintenance/">this</a> from Maelle Salmon discussing hugo theme maintenance and this <a href="https://www.apreshill.com/blog/2022-04-we-dont-talk-about-quarto/">one</a> from Alison Hill on Quarto made me wonder if there was a better way.</p>
 <p>The straw that broke the camel’s back was <del>vanity</del> the <a href="https://quarto-dev.github.io/quarto-gallery/page-layout/tufte.html">Tufte theme</a> that’s possible in Quarto - per the requirements of receiving a degree in geography, my copy of <em>Visual Display of Quantitative Information</em> lives on my coffee table. Adding Tufte’s beautiful sidenotes and column spacing is as easy as adding a line or two of yaml in Quarto and opens up a whole new world of snarky asides<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;See: this entire writeup</p></li></div><section id="personal-website-development-101" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="personal-website-development-101">Personal Website Development 101</h3>
@@ -231,8 +231,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>I know that sounds obtuse: Kate, you just said prevailing advice is to have a website, isn’t having the website the objective?</p>
 <p>Sure, but what do you want to get out of having a website? Is it checking the box so you can move on with your life / science? Do you want to connect with other scientists in your field? Is it an exercise in coding?</p>
 <p>No wrong answers here, but if you’re hoping to check the box and get the hell off of social media<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, then it should shape how you build one and how much time you want to put in. If it works to have your website be a living CV, it might be worth finding a squarespace / weebly / etc platform where you can fill in the basic info, get a domain name and call it a day.</p>
-<div class="no-row-height column-margin column-container"><li id="fn5"><p><sup>5</sup>&nbsp;good on you</p></li></div><p>For me, drafting a website was originally an exercise to get more comfortable with Github. I had had some exposure, but didn’t use it consistently in my workflow and didn’t really have any collaborators that used it. Using repositories to host a website seemed like a quick way to get a bunch more experience with version control. Hence my excuse to <del>procrastinate</del> take the long way round, instead of turning towards more pre-packaged templates.</p>
-<p>When I first drafted my website as a <del>sophisticated procrastination technique</del> savy professional development exercise during my PhD, it was pretty sparse. I had my basic affiliation, interests, education information, a PDF copy of my CV and links to my other online presences (ie, my google scholar profile, my github and my now mostly obsolete twitter profile). Out of imposter syndrome/FOMO, I added a Publications page and a Project page, but I’m not sure either added anything in retrospect.</p>
+<div class="no-row-height column-margin column-container"><li id="fn5"><p><sup>5</sup>&nbsp;good on you</p></li></div><p>For me, drafting a website was originally an exercise to get more comfortable with Github. I had had some exposure, but didn’t use it consistently in my workflow and didn’t really have any collaborators that used it. Using repositories to host a website seemed like a quick way to get a bunch more experience with version control. Hence my excuse to <del>procrastinate</del> <strong>take the long way round</strong>, instead of turning towards more pre-packaged templates.</p>
+<p>When I first drafted my website as a <del>sophisticated procrastination technique</del> <strong>savy professional development exercise</strong> during my PhD, it was pretty sparse. I had my basic affiliation, interests, education information, a PDF copy of my CV and links to my other online presences (ie, my google scholar profile, my github and my now mostly obsolete twitter profile). Out of imposter syndrome/FOMO, I added a Publications page and a Project page since I’d seen those on other people’s websites, but I’m not sure either added anything in retrospect.</p>
 <p>But, I’d always been interested in expanding it. As a remote postdoc who works from home, I’d like more ways to interact with other scientists, and while it’s probably presumptuous to assume any of this will be read at all, writing for even an imaginary audience has been a great way to write more day to day. Hence, blog.</p>
 </section>
 <section id="switching-from-blogdown-to-quarto" class="level2 page-columns page-full">
@@ -304,20 +304,34 @@ editor: visual</code></pre>
 </section>
 <section id="how-to-make-a-series" class="level4">
 <h4 class="anchored" data-anchor-id="how-to-make-a-series">How to make a Series</h4>
+<p>To publish blog posts in a series, they need to be located in a subdirectory of the <strong>posts</strong> folder. You’ll also need a landing page. I’m writing up a series of posts on some of the model parameterization work I’ve done recently for my fire-herbivory project, so I named my series folder <strong>posts/param_series</strong> and added a landing page named <strong>param_landing.gmd</strong> (I know, creative).</p>
+<pre><code>---
+title: "Series: ggplot2-tips"
+listing:
+  contents: posts/ggplot2-tips
+  sort: "date desc"
+  type: default
+  categories: false
+  sort-ui: false
+  filter-ui: false
+  fields: [date, title, reading-time, description]
+page-layout: full
+title-block-banner: true</code></pre>
 </section>
 </section>
-<section id="switching-netlify-hosts" class="level3">
-<h3 class="anchored" data-anchor-id="switching-netlify-hosts">Switching netlify hosts</h3>
+</section>
+<section id="switching-netlify-hosts" class="level2">
+<h2 class="anchored" data-anchor-id="switching-netlify-hosts">Switching netlify hosts</h2>
 <p>My old website was already hosted on Netlify, and I wanted to hold on to the same domain.</p>
 <p>Initially, I started my Quarto website in a folder adjacent to the folder containing my existing website. When it came time to migrate, I copied my old website folders into an archive, and then replaced them with the new quarto folders (keeping the same Rproj file). Then I held my breath and pushed changes.</p>
 <p>After that, I needed to mollify Netlify - I disconnected</p>
 </section>
-</section>
 <section id="some-other-unsorted-tricks" class="level1">
 <h1>Some other unsorted tricks</h1>
+<p>The following is mostly for my own reference, so proceed with care. If you’re curious about anything else on this site, the full code is available in my <a href="https://github.com/k8hayes/krhayes.com">corresponding github repository</a>.</p>
 <section id="draft-false---publishing-posts" class="level2">
 <h2 class="anchored" data-anchor-id="draft-false---publishing-posts">draft: false - Publishing posts</h2>
-<p>I ran into some trouble at first with draft: true - once you’ve added it to the the yml code at the top of your quarto document, you’ll need to delete it entirely to get the post show up once you’re ready to publish.</p>
+<p>I ran into some trouble at first with <em>draft: true</em> - once you’ve added it to the the yml code at the top of your quarto document, you’ll need to delete it entirely to get the post show up once you’re ready to publish.</p>
 </section>
 <section id="adding-pictures-to-the-background-of-title-blocks" class="level2">
 <h2 class="anchored" data-anchor-id="adding-pictures-to-the-background-of-title-blocks">Adding pictures to the background of title blocks</h2>
@@ -360,22 +374,32 @@ categories: []
 date-modified: last-modified
 draft: true
 ---</code></pre>
-<p>Then, I can simply make a copy of that folder to start a new post. Make sure to update the date to the publication date - using <em>today</em> and <em>last-modified</em> in the internal workings of the quarto document means more rendering in the background (cite where I found that tip).</p>
+<p>Then, I can simply make a copy of that folder to start a new post. Make sure to update the date to the publication date - using <em>today</em> and <em>last-modified</em> in the internal workings of the quarto document means more rendering in the background (<a href="https://quarto.org/docs/websites/website-blog.html">per the Quarto documentation)</a>.</p>
 </section>
 <section id="adding-comment-sections" class="level2">
 <h2 class="anchored" data-anchor-id="adding-comment-sections">Adding Comment Sections</h2>
 </section>
 </section>
-<section id="a-non-exhaustive-list-of-quarto-resources-i-found-useful" class="level1">
-<h1>A non-exhaustive list of Quarto resources I found useful</h1>
-<p>other resources</p>
+<section id="more-resources" class="level1">
+<h1>More Resources</h1>
+<p>A non-exhaustive list of useful Quarto information</p>
 <ul>
-<li>https://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/#playing-around</li>
+<li><p>Alison Hill’s guide to <a href="https://www.apreshill.com/blog/2022-04-we-dont-talk-about-quarto/">Quarto</a></p></li>
+<li><p>https://blog.djnavarro.net/posts/2022-04-20_porting-to-quarto/#playing-around</p></li>
+<li><p><a href="https://masalmon.eu/2020/02/29/hugo-maintenance/">this</a> from Maelle Salmon discussing hugo theme maintenance and this</p></li>
+</ul>
+<p>The Tufte Theme</p>
+<ul>
+<li><a href="https://quarto-dev.github.io/quarto-gallery/page-layout/tufte.html">Tufte theme</a></li>
+</ul>
+<p>Digital Gardens</p>
+<ul>
+<li><a href="https://maggieappleton.com/garden-history">A history of digital gardens</a></li>
 </ul>
 <section id="session-info" class="level2">
 <h2 class="anchored" data-anchor-id="session-info">Session info</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.3.3 (2024-02-29)
 Platform: aarch64-apple-darwin20 (64-bit)
@@ -388,7 +412,7 @@ LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlap
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 
-time zone: America/Chicago
+time zone: America/New_York
 tzcode source: internal
 
 attached base packages:
