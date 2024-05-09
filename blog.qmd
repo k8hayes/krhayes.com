@@ -9,6 +9,5 @@ listing:
   sort-ui: false
   filter-ui: false
 page-layout: full
-title-block-banner: blog_header.jpg
-title-block-banner-color: white
+title-block-banner: true
 ---
