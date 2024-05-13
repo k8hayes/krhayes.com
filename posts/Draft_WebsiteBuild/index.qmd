@@ -90,7 +90,7 @@ listing:
 
 Now, you'll need to add it to your site navigation:
 
--   Navigate to your \_quarto.yml file which should have been created when you initiated the New Website process above
+-   Navigate to your **\_quarto.yml** file which should have been created when you initiated the New Website process above
 
 -   You should see yml code - mine looks like the following:
 
@@ -118,11 +118,15 @@ editor: visual
 
 -   Create a folder called **posts** - your posts will live here, within individual folders
 
+-   Within **posts**, each folder will contain an index.qmd file for the blog post
+
 #### Writing a blog post
 
 #### How to make a Series
 
 To publish blog posts in a series, they need to be located in a subdirectory of the **posts** folder. You'll also need a landing page. I'm writing up a series of posts on some of the model parameterization work I've done recently for my fire-herbivory project, so I named my series folder **posts/param_series** and added a landing page named **param_landing.gmd** (I know, creative).
+
+Within the landing page,
 
 ```         
 ---
@@ -159,7 +163,7 @@ I ran into some trouble at first with *draft: true* - once you've added it to th
 
 ## Setting global blog post theme
 
-You can use the \_metadata.yml file to set options for all the files in the posts folder.
+You can use the **\_metadata.yml** file to set options for all the files in the **posts** folder.
 
 Mine looks like this:
 
@@ -192,7 +196,7 @@ comments:
 
 To make starting new posts easy, I added a folder to my posts folder called **NewPostTemplate** - the index file within has the following settings:
 
-```         
+``` {.yml .yml}
 ---
 title: "New Post Title"
 subtitle: "New Post Subtitle"
@@ -203,9 +207,27 @@ draft: true
 ---
 ```
 
-Then, I can simply make a copy of that folder to start a new post. Make sure to update the date to the publication date - using *today* and *last-modified* in the internal workings of the quarto document means more rendering in the background ([per the Quarto documentation)](https://quarto.org/docs/websites/website-blog.html).
+Then, I can simply make a copy of that folder to start a new post. Make sure to update the date to the publication date once it's finalized - using *today* and *last-modified* in the internal workings of the quarto document is not really considered best practice, since it means more rendering in the background ([per the Quarto documentation)](https://quarto.org/docs/websites/website-blog.html).
 
 ## Adding Comment Sections
+
+I'm still figuring out how to add comments to the blog. There appears to be
+
+## Setting Tufte Theme
+
+To use a Tufte-style theme in the blog posts, I've added the following code to my \_metadata.yml file within the posts folder:
+
+```{# Default for Tufte Style}
+format:
+  html:
+    toc: true
+    toc-title: Contents
+    toc-location: left
+    grid:
+      margin-width: 350px
+reference-location: margin
+citation-location: margin
+```
 
 # More Resources
 
