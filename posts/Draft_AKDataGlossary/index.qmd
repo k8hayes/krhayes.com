@@ -1,13 +1,13 @@
 ---
 title: "An incomplete glossary of Alaska Data Products"
 subtitle: "New Post Subtitle"
-date: today
-categories: [Alaska, Spatial Data Analysis]
+date: "2024-04-21"
 date-modified: last-modified
+categories: [Alaska, Spatial Data Analysis]
 draft: true
 ---
 
-I put this together for my own reference, to avoid the inevitable alphabet soup with an extra sprinkle of: "does that extend to alaska again??". Obviously not exhaustive. 
+I put this together for my own reference, to avoid the inevitable alphabet soup with an extra sprinkle of: "does that extend to alaska again??". Obviously not exhaustive.
 
 ## Fire
 
