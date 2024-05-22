@@ -62,6 +62,14 @@ For a while, I would sort things into folders automatically, which I thought wou
 
 ### Connecting reference notes to zotero
 
+To connect my reference notes in obsidian to zotero, I use three plugins:
+
+1.  the **citations** community plugin in obsidian
+2.  the BetterBibText
+3.  MarkDBConnect
+
+**Citations**
+
 I use their short citation (Author, Year) as the title and link each to their corresponding zotero entry using a citekey (the method for which is described further in the documentation for the plugin Citations). It's not a perfect automation - sometimes I have to go in and manually edit the citekey to match the one in obsidian. I also had to change the obsidian settings to be XX, and the one in zotero is set as XX.
 
 Some notes: Zotero crashes pretty regularly on me - aka, every first time I open it. My guess is it's the extra add-ins and extensions, but I've been too lazy to double check or to look for a solution.
@@ -72,7 +80,10 @@ Some notes: Zotero crashes pretty regularly on me - aka, every first time I open
 
 -   https://martinezponciano.es/2021/04/05/research-workflow-as-a-phd-student-in-the-humanities/
 -   https://wippp.com/blog/taekman-zettelkasten-workflow-2023-using-devonthink-drafts-and-obsidian
+-   https://nicolevanderhoeven.com/blog/20210518-how-i-use-obsidian-at-work/#the-easier-way
 -   https://thesiswhisperer.com/2023/02/01/building-a-second-brain-for-writing-with-obsidian/
+-   https://notes.nicolevanderhoeven.com/obsidian-playbook/Using+Obsidian/01+First+steps+with+Obsidian/Obsidian
+-   https://notes.nicolevanderhoeven.com/sources/Presentation/Mine/The+Lost+Art+of+Taking+Good+Notes
 
 ## A full list of tools
 
