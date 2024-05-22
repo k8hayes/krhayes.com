@@ -168,6 +168,7 @@ div.csl-indent {
                                 <div class="quarto-categories">
                 <div class="quarto-category">Spatial Data Analysis</div>
                 <div class="quarto-category">terra</div>
+                <div class="quarto-category">Alaska</div>
               </div>
                   </div>
   </div>
@@ -186,7 +187,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">May 4, 2024</p>
+        <p class="date-modified">May 22, 2024</p>
       </div>
     </div>
       
@@ -206,7 +207,9 @@ div.csl-indent {
   <li><a href="#monitoring-trends-in-burn-severity-mtbs" id="toc-monitoring-trends-in-burn-severity-mtbs" class="nav-link" data-scroll-target="#monitoring-trends-in-burn-severity-mtbs">Monitoring Trends in Burn Severity (MTBS)</a></li>
   <li><a href="#difference-between-alfd-and-mtbs" id="toc-difference-between-alfd-and-mtbs" class="nav-link" data-scroll-target="#difference-between-alfd-and-mtbs">Difference between ALFD and MTBS</a></li>
   </ul></li>
+  <li><a href="#update---new-alaska-fire-perimeter-data" id="toc-update---new-alaska-fire-perimeter-data" class="nav-link" data-scroll-target="#update---new-alaska-fire-perimeter-data">Update - New Alaska fire perimeter data</a></li>
   <li><a href="#filtering-mtbs-in-r" id="toc-filtering-mtbs-in-r" class="nav-link" data-scroll-target="#filtering-mtbs-in-r">Filtering MTBS in R</a></li>
+  <li><a href="#update-new-fire-perimeters" id="toc-update-new-fire-perimeters" class="nav-link" data-scroll-target="#update-new-fire-perimeters">Update: new fire perimeters</a></li>
   <li><a href="#more-resources" id="toc-more-resources" class="nav-link" data-scroll-target="#more-resources">More Resources</a>
   <ul class="collapse">
   <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session Info</a></li>
@@ -229,7 +232,7 @@ div.csl-indent {
 <p>I’ve been digging through fire perimeter datasets, trying to locate fires that overlap.</p>
 <section id="fire-perimeter-data-in-alaska" class="level1 page-columns page-full">
 <h1>Fire perimeter data in Alaska</h1>
-<p>There are functionally two forms of fire perimeter data in Alaska: the <a href="https://www.frames.gov/catalog/10465">Alaska Large Fire Database</a> (ALFD) and the <a href="https://www.mtbs.gov/">Monitoring Trends in Burn Severity (MTBS)</a> dataset.&nbsp;</p>
+<p>There are functionally two forms of fire perimeter data in Alaska: the <a href="https://www.frames.gov/catalog/10465">Alaska Large Fire Database</a> (ALFD) and the <a href="https://www.mtbs.gov/">Monitoring Trends in Burn Severity (MTBS)</a> dataset (for more, see link to an incomplete glossary of Alaska data products).</p>
 <section id="alaska-large-fire-database-alfd" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="alaska-large-fire-database-alfd"><a href="https://blm-egis.maps.arcgis.com/apps/instant/portfolio/index.html?appid=4841da6a16804c07849c27ea7db2a26b">Alaska Large Fire Database</a> (ALFD)</h3>
 <p>The Alaska Large Fire Database, often referred to as “Alaska Large Fire” in my collaborative spaces for reasons I’m realizing I don’t know, is maintained by the Alaska Fire Service and contains fire perimeter data from 1942 to the present. It was developed in the 90s when collaborators from the Environmental Research institute of Michigan and the Alaska Interagency Coordination Center digitized and standardized perimeter information from fire reports that dated back to 1942 <span class="citation" data-cites="kasischke2002">(<a href="#ref-kasischke2002" role="doc-biblioref">Kasischke, Williams, and Barry 2002</a>)</span>.</p>
@@ -243,29 +246,204 @@ Kasischke, Eric S., David Williams, and Donald Barry. 2002. <span>“Analysis of
 <div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;defined here as 1,000 acres or bigger in the Western US</p></li><li id="fn4"><p><sup>4</sup>&nbsp;with additional categories for unburned, increased greenness or outliers caused by clouds, shadows, water bodies, etc</p></li></div></section>
 <section id="difference-between-alfd-and-mtbs" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="difference-between-alfd-and-mtbs">Difference between ALFD and MTBS</h2>
-<p>Alaska Large Fire Database has been assumed to overestimate burned area within mapped fire events <span class="citation" data-cites="chen2021">(<a href="#ref-chen2021" role="doc-biblioref">Chen et al. 2021</a>)</span>, and produces consistently higher estimates of area burned across Alaska compared to MTBS.&nbsp;</p>
+<p>Alaska Large Fire Database has been assumed to overestimate burned area within mapped fire events <span class="citation" data-cites="chen2021">(<a href="#ref-chen2021" role="doc-biblioref">Chen et al. 2021</a>)</span>, and produces consistently higher estimates of area burned across Alaska compared to MTBS.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-chen2021" class="csl-entry" role="listitem">
 Chen, Dong, Varada Shevade, Allison Baer, and Tatiana V. Loboda. 2021. <span>“Missing Burns in the High Northern Latitudes: The Case for Regionally Focused Burned Area Products.”</span> <em>Remote Sensing</em> 13 (20): 4145. <a href="https://doi.org/10.3390/rs13204145">https://doi.org/10.3390/rs13204145</a>.
-</div></div><p>In contrast, MTBS excludes fires less than 1000 acres, so there are clear reasons to believe it underestimates burned area.</p>
+</div></div><p>In contrast, MTBS excludes fires less than 1,000 acres, so there are clear reasons to believe it underestimates burned area.</p>
 <p>Understanding the strengths and drawbacks of both is important - in the context of reburning, MTBS is a particularly useful database - older fire perimeters from ALFD become less precise (cite), sometimes overestimating where the fires overlapped <span class="citation" data-cites="buma2022">(<a href="#ref-buma2022" role="doc-biblioref">Buma et al. 2022</a>)</span>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-buma2022" class="csl-entry" role="listitem">
 Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires Increasing in the Alaskan Boreal Forest as Fire Self-Regulation Decays Across Forest Types.”</span> <em>Scientific Reports</em> 12 (1): 4901. <a href="https://doi.org/10.1038/s41598-022-08912-8">https://doi.org/10.1038/s41598-022-08912-8</a>.
 </div></div><p>[Brief aside on self-regulating fire]</p>
 </section>
 </section>
+<section id="update---new-alaska-fire-perimeter-data" class="level1">
+<h1>Update - New Alaska fire perimeter data</h1>
+<p>Fun that as I was writing this, I was immediately corrected - the USGS has released updated fire perimeters for the National Wildlife Refuges</p>
+<p>Now, this only covers the Wildlife Refuges in Alaska, but those refuges cover about 30% of the state (and represent 80% of all the land in the National Fish and Wildlife Refuge System), so that’s still a pretty big chunk of landscape.</p>
+</section>
 <section id="filtering-mtbs-in-r" class="level1">
 <h1>Filtering MTBS in R</h1>
 <p>I wanted to filter out pixels within MTBS that burned at high severity in both fires.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>terra 1.7.55</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>here() starts at /Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com</code></pre>
+</div>
+</div>
+<p>An aside - I’m storing these files on a remote server. The bash code below mounts the folder I need so I can access it in Quarto.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> smb://10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>To do that, I loaded in fire perimeters from XX and XX</p>
-<p>[show code]</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>    <span class="co"># DallCity &lt;- rast("//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Yukon/DallCity_2004/ak6628114999320040706_20010623_20050720_dnbr6.tif")</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>   DallCity <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"/Volumes/GIS/site selection 2024/targetMTBS/Yukon/DallCity_2004/ak6628114999320040706_20010623_20050720_dnbr6.tif"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(DallCity, <span class="at">main =</span> <span class="st">"Original"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/Yukon - Dall City-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    DallCity[DallCity[] <span class="sc">&lt;</span> <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(DallCity, <span class="at">main =</span> <span class="st">"Low"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/Yukon - Dall City-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    DallCity[DallCity[] <span class="sc">&gt;</span> <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(DallCity, <span class="at">main =</span> <span class="st">"High"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/Yukon - Dall City-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>    DallCityHS <span class="ot">&lt;-</span> <span class="fu">trim</span>(DallCity)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(DallCityHS, <span class="at">main =</span> <span class="st">"Trim"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/Yukon - Dall City-4.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>    WestFork <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Yukon/WestFork_2015/ak6635014986720150620_20140705_20160624_dnbr6.tif"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(WestFork, <span class="at">main =</span> <span class="st">"Original"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    WestFork[WestFork <span class="sc">&lt;</span> <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(WestFork, <span class="at">main =</span> <span class="st">"Low"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    WestFork[WestFork <span class="sc">&gt;</span> <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(WestFork, <span class="at">main =</span> <span class="st">"High"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unique</span>(WestFork<span class="sc">$</span>Layer_1)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    WestForkHS <span class="ot">&lt;-</span> <span class="fu">trim</span>(WestFork)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(WestForkHS, <span class="at">main =</span> <span class="st">"Filter"</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unique</span>(WestForkHS<span class="sc">$</span>Layer_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>    Yukon_intersect <span class="ot">&lt;-</span> <span class="fu">intersect</span>(DallCityHS, WestForkHS)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(Yukon_intersect)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    Yukon_raster <span class="ot">&lt;-</span> <span class="fu">crop</span>(DallCityHS, WestForkHS, <span class="at">mask =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(Yukon_raster)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    Yukon_shp <span class="ot">&lt;-</span> <span class="fu">as.polygons</span>(Yukon_raster)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(Yukon_shp)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">writeVector</span>(Yukon_shp, </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>          <span class="st">"//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Yukon/YukonHS_Overlap.shp"</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Kanuti</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Kanuti</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="do">## BTTS 1991 #####################################</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  KanBTT <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Kanuti/BTTS1991/ak6670715154819910630_19860613_19920605_dnbr6.tif"</span>)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(KanBTT, <span class="at">main =</span> <span class="st">"Original"</span>)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  KanBTT[KanBTT[] <span class="sc">&lt;</span> <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(KanBTT, <span class="at">main =</span> <span class="st">"Low"</span>)</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  KanBTT[KanBTT[] <span class="sc">&gt;</span> <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(KanBTT, <span class="at">main =</span> <span class="st">"High"</span>)</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>  KanBTTHS <span class="ot">&lt;-</span> <span class="fu">trim</span>(KanBTT)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(KanBTTHS, <span class="at">main =</span> <span class="st">"Trim"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>  Evan <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Kanuti/Evansville2004/ak6687815131320040706_20020624_20050616_dnbr6.tif"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(Evan, <span class="at">main =</span> <span class="st">"Original"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  Evan[Evan <span class="sc">&lt;</span> <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(Evan, <span class="at">main =</span> <span class="st">"Low"</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  Evan[Evan <span class="sc">&gt;</span> <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(Evan, <span class="at">main =</span> <span class="st">"High"</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  EvanHS <span class="ot">&lt;-</span> <span class="fu">trim</span>(Evan)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(EvanHS, <span class="at">main =</span> <span class="st">"Trim"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Combining #######################</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  Kanuti_intersect <span class="ot">&lt;-</span> <span class="fu">intersect</span>(KanBTTHS, EvanHS)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(Kanuti_intersect)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  Kanuti_crop <span class="ot">&lt;-</span> <span class="fu">crop</span>(KanBTTHS, EvanHS, <span class="at">mask =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(Kanuti_crop)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  Kanuti_shp <span class="ot">&lt;-</span> <span class="fu">as.polygons</span>(Kanuti_crop)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(Kanuti_shp)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeVector</span>(Kanuti_shp, </span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>              <span class="st">"//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Kanuti/KanutiHS_Overlap.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>  <span class="do">## BTT 1994 #####################################</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  BTT <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/LastChance/BTT1994/ak6712115052019940608_19860823_19950825_dnbr6.tif"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(BTT, <span class="at">main =</span> <span class="st">"Original"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  BTT[BTT[] <span class="sc">&lt;</span> <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(BTT, <span class="at">main =</span> <span class="st">"Low"</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  BTT[BTT[] <span class="sc">&gt;</span> <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(BTT, <span class="at">main =</span> <span class="st">"High"</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  BTTHS <span class="ot">&lt;-</span> <span class="fu">trim</span>(BTT)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(BTTHS, <span class="at">main =</span> <span class="st">"Trim"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Chapman 2005 #####################################</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  Chapman <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/LastChance/Chapman2005/ak6707615031720050530_20020617_20060612_dnbr6.tif"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(Chapman, <span class="at">main =</span> <span class="st">"Original"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  Chapman[Chapman <span class="sc">&lt;</span> <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(Chapman, <span class="at">main =</span> <span class="st">"Low"</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  Chapman[Chapman <span class="sc">&gt;</span> <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(Chapman, <span class="at">main =</span> <span class="st">"High"</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  ChapmanHS <span class="ot">&lt;-</span> <span class="fu">trim</span>(Chapman)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(ChapmanHS, <span class="at">main =</span> <span class="st">"Trim"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Combining #######################</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  LastChance_intersect <span class="ot">&lt;-</span> <span class="fu">intersect</span>(BTTHS, ChapmanHS)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(LastChance_intersect)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  LastChance_crop <span class="ot">&lt;-</span> <span class="fu">crop</span>(BTTHS, ChapmanHS, <span class="at">mask =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(LastChance_crop)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  LastChance_shp <span class="ot">&lt;-</span> <span class="fu">as.polygons</span>(LastChance_crop)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(LastChance_shp)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeVector</span>(LastChance_shp, </span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>              <span class="st">"//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/LastChance/LastChanceHS_Overlap.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>From there, you</p>
+</section>
+<section id="update-new-fire-perimeters" class="level1">
+<h1>Update: new fire perimeters</h1>
+<p>Carson et al.&nbsp;from the USGS has put out an analysis updating fire perimeters in Alaska.</p>
 </section>
 <section id="more-resources" class="level1">
 <h1>More Resources</h1>
 <section id="session-info" class="level2">
 <h2 class="anchored" data-anchor-id="session-info">Session Info</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.3.3 (2024-02-29)
 Platform: aarch64-apple-darwin20 (64-bit)
@@ -284,11 +462,17 @@ tzcode source: internal
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+[1] here_1.0.1   sf_1.0-16    terra_1.7-55
+
 loaded via a namespace (and not attached):
- [1] htmlwidgets_1.6.4 compiler_4.3.3    fastmap_1.1.1     cli_3.6.2        
- [5] tools_4.3.3       htmltools_0.5.8   rstudioapi_0.16.0 yaml_2.3.8       
- [9] rmarkdown_2.26    knitr_1.45        jsonlite_1.8.8    xfun_0.43        
-[13] digest_0.6.35     rlang_1.1.3       evaluate_0.23    </code></pre>
+ [1] digest_0.6.35      codetools_0.2-19   fastmap_1.1.1      xfun_0.43         
+ [5] magrittr_2.0.3     e1071_1.7-14       KernSmooth_2.23-22 knitr_1.45        
+ [9] htmltools_0.5.8    rmarkdown_2.26     classInt_0.4-10    cli_3.6.2         
+[13] grid_4.3.3         DBI_1.2.2          proxy_0.4-27       class_7.3-22      
+[17] compiler_4.3.3     rprojroot_2.0.4    rstudioapi_0.16.0  tools_4.3.3       
+[21] evaluate_0.23      Rcpp_1.0.12        yaml_2.3.8         rlang_1.1.3       
+[25] jsonlite_1.8.8     htmlwidgets_1.6.4  units_0.8-5       </code></pre>
 </div>
 </div>
 
