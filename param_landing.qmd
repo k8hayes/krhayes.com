@@ -2,12 +2,8 @@
 title: "Model Parameterization"
 subtitle: "A series"
 listing:
-  contents: posts
+  contents: posts/param_series/**/*.qmd
   sort: "date desc"
   type: default
-  categories: true
-  sort-ui: false
-  filter-ui: false
 page-layout: full
-title-block-banner: true
 ---
