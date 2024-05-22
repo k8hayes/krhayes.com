@@ -24,3 +24,5 @@ Start by creating a new file. Then, you can use the button on the far left to in
 By adding files to your Template folder in Obsidian, you can populate 
 
 ## Automating with Hazel
+
+## More resources
