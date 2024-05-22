@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Research Workflow\n\n\nHow I structure my notes and citations\n\n\n\n\nWorkflow\n\n\n\n\n\n\n\n\n\n\n\nApr 15, 2024\n\n\n\n\n\n\n  \n\n\n\n\nHow I built my site\n\n\nMigrating from blogdown to Quarto\n\n\n\n\nWorkflow\n\n\n\n\n\n\n\n\n\n\n\nApr 15, 2024\n\n\n\n\n\n\nNo matching items"
+    "text": "Model Parameterization\n\n\nA series\n\n\n\n\n\n\n\n \n\n\n\n\n  \n\n\n\n\nResearch Workflow\n\n\nHow I structure my notes and citations\n\n\n\n\nWorkflow\n\n\n\n\n\n\n\n\n\n\n\nApr 15, 2024\n\n\n\n\n\n\n  \n\n\n\n\nHow I built my site\n\n\nMigrating from blogdown to Quarto\n\n\n\n\nWorkflow\n\n\n\n\n\n\n\n\n\n\n\nApr 15, 2024\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -208,5 +208,12 @@
     "title": "How I built my site",
     "section": "Switching netlify hosts",
     "text": "Switching netlify hosts\nMy old website was already hosted on Netlify, and I wanted to hold on to the same domain.\nInitially, I started my Quarto website in a folder adjacent to the folder containing my existing website. When it came time to migrate, I copied my old website folders into an archive, and then replaced them with the new quarto folders (keeping the same Rproj file). Then I held my breath and pushed changes.\nAfter that, I needed to mollify Netlify - I disconnected"
+  },
+  {
+    "objectID": "posts/param_series/param_landing.html",
+    "href": "posts/param_series/param_landing.html",
+    "title": "Model Parameterization",
+    "section": "",
+    "text": "No matching items"
   }
 ]

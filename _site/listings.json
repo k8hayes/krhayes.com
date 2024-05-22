@@ -2,8 +2,13 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/param_series/param_landing.html",
       "/posts/Draft_ResearchWorkflow/index.html",
       "/posts/Draft_WebsiteBuild/index.html"
     ]
+  },
+  {
+    "listing": "/posts/param_series/param_landing.html",
+    "items": []
   }
 ]
