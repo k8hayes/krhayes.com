@@ -17,6 +17,7 @@ format:
       margin-width: 350px
 reference-location: margin
 citation-location: margin
+cap-location: margin
 
 # Adding comment sections
 comments: 
