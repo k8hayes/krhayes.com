@@ -166,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">May 6, 2024</p>
+        <p class="date-modified">May 13, 2024</p>
       </div>
     </div>
       
@@ -216,8 +216,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-export" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="data-export">Data Export</h2>
 <p>You can download a Data Export of your collection directly from the Discogs website by visiting the Dashboard of your account. This will include:</p>
-<div class="cell page-columns page-full">
-<div class="cell-output-display page-columns page-full">
+<div class="cell page-columns page-full" data-tbl-column="body">
+<div class="cell-output-display column-body page-columns page-full">
 <table class="table table-sm table-striped small">
 
 <colgroup>
@@ -383,16 +383,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>cookies</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                  domain flag path secure          expiration    name
-1 #HttpOnly_.discogs.com TRUE    /   TRUE 2024-05-05 18:45:42 __cf_bm
+1 #HttpOnly_.discogs.com TRUE    /   TRUE 2024-05-13 18:07:20 __cf_bm
                                                                                                                                                   value
-1 WT3OAHjr08lvNVLcYXf63wTYmIYUlXAWOUE9vmAEtm8-1714950942-1.0.1.1-rmiSExCNoDVlcLuem9NUdHcwXjRObc.VFOucvu931FHBPAWVbEyXEaaag6aintSeXjpEkkrStgJeJfE7wKqPtA</code></pre>
+1 BNvBoGiWM6rbyu_Yoe882sIjl6ZKUQ4v_biziMKR_so-1715639840-1.0.1.1-SztpTD_NdJGe.kmzA07UX2ONTT2KUSVzDC5DOc5ZBqovK2A6xccyZChi.aEEzqGolEORQVVC3Uyhvek100qYRQ</code></pre>
 </div>
 </div>
 <p>This brings in all the information about a given profile. <strong>$count</strong> here is the number of albums in the collection, currently:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>content<span class="sc">$</span>count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1587</code></pre>
+<pre><code>[1] 1588</code></pre>
 </div>
 </div>
 <p>(Keep in mind this is three people’s collections).</p>
@@ -421,7 +421,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Knowing what you can collect requires understanding what’s actually available. <strong>collecdata</strong> is a list of 1564 elements, each element representing a vinyl in the collection. Within each element are additional lists of data. <strong>basic_information</strong> contains</p>
+<p>Knowing what you can collect requires understanding what’s actually available. <strong>collecdata</strong> is a list of 1588 elements, each element representing a vinyl in the collection. Within each element are additional lists of data. <strong>basic_information</strong> contains</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>collecdata[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -717,6 +717,30 @@ $notes[[2]]$value
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Genre"</span>) <span class="sc">+</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Frequency"</span>) <span class="sc">+</span></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Most Frequent Genres"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/most frequeny genres-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">as.data.frame</span>(<span class="fu">head</span>(<span class="fu">sort</span>(<span class="fu">table</span>(collection<span class="sc">$</span>artist_name), <span class="at">decreasing =</span> <span class="cn">TRUE</span>), <span class="dv">10</span>)), <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Var1, Freq), <span class="at">y =</span> Freq)) <span class="sc">+</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"#B79477"</span>) <span class="sc">+</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Artists"</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Most Frequent Artists"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/most frequent artists-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dplyr<span class="sc">::</span><span class="fu">filter</span>(collection, year <span class="sc">!=</span> <span class="dv">0</span>), <span class="fu">aes</span>(<span class="at">x =</span> year)) <span class="sc">+</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"count"</span>, <span class="at">fill =</span> <span class="st">"#B79477"</span>) <span class="sc">+</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Year"</span>) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Release Date"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/release date-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 </section>
 <section id="more-resources" class="level1">
@@ -727,7 +751,7 @@ $notes[[2]]$value
 <section id="session-info" class="level2">
 <h2 class="anchored" data-anchor-id="session-info">Session info</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.3.3 (2024-02-29)
 Platform: aarch64-apple-darwin20 (64-bit)
@@ -764,8 +788,8 @@ loaded via a namespace (and not attached):
 [29] assertthat_0.2.1  vctrs_0.6.5       R6_2.5.1          lifecycle_1.0.4  
 [33] htmlwidgets_1.6.4 pkgconfig_2.0.3   pillar_1.9.0      gtable_0.3.4     
 [37] glue_1.7.0        xfun_0.43         tidyselect_1.2.1  rstudioapi_0.16.0
-[41] knitr_1.45        rjson_0.2.21      htmltools_0.5.8   rmarkdown_2.26   
-[45] compiler_4.3.3   </code></pre>
+[41] knitr_1.45        farver_2.1.1      rjson_0.2.21      htmltools_0.5.8  
+[45] labeling_0.4.3    rmarkdown_2.26    compiler_4.3.3   </code></pre>
 </div>
 </div>
 

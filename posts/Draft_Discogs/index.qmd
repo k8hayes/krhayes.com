@@ -40,6 +40,7 @@ You can download a Data Export of your collection directly from the Discogs webs
 #| tbl-cap-location: margin
 #| tbl-cap: Data Export from Discogs
 #| echo: false
+#| tbl-column: body
 DataExport <- read.csv("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Draft_Discogs/files/ndhayes-collection-20230610-1224.csv")
 
 knitr::kable(head(DataExport))
@@ -126,7 +127,7 @@ if (collec_url$status_code == 200){
 }
 ```
 
-Knowing what you can collect requires understanding what's actually available. **collecdata** is a list of 1564 elements, each element representing a vinyl in the collection. Within each element are additional lists of data. **basic_information** contains
+Knowing what you can collect requires understanding what's actually available. **collecdata** is a list of 1588 elements, each element representing a vinyl in the collection. Within each element are additional lists of data. **basic_information** contains
 
 ```{r}
 collecdata[[1]]
@@ -143,6 +144,10 @@ collection <- lapply(collecdata, function(obj){
              artist_resource_url = obj$basic_information$artists[[1]]$resource_url %||% NA, 
              format = obj$basic_information$formats[[1]]$name %||% NA,
              genre = obj$basic_information$genres[[1]] %||% NA,
+             genre2 = obj$basic_information$genres[[2]] %||% NA,
+             style1 = obj$basic_information$styles[[1]] %||% NA,
+             style2 = obj$basic_information$styles[[2]] %||% NA,
+             style3 = obj$basic_information$styles[[3]] %||% NA,
              date_added = obj$date_added %||% NA,
              resource_url = obj$basic_information$resource_url %||% NA)
 }) %>% do.call(rbind, .) %>% 
@@ -153,8 +158,7 @@ knitr::kable(head(collection))
 
 # Visualizing
 
-```{r visualizing}
-#| eval: false
+```{r most frequeny genres}
 ggplot(as.data.frame(head(sort(table(collection$genre), decreasing = TRUE), 10)),
        aes(x = reorder(Var1, Freq), y = Freq)) + 
   geom_bar(stat = "identity", fill = "#B79477") + 
@@ -162,6 +166,57 @@ ggplot(as.data.frame(head(sort(table(collection$genre), decreasing = TRUE), 10))
   xlab("Genre") +
   ylab("Frequency") +
   ggtitle("Most Frequent Genres")
+```
+
+```{r most frequent artists}
+ggplot(as.data.frame(head(sort(table(collection$artist_name), decreasing = TRUE), 10)), aes(x = reorder(Var1, Freq), y = Freq)) + 
+  geom_bar(stat = "identity", fill = "#B79477") + 
+  coord_flip() + 
+  xlab("Artists") +
+  ylab("Frequency") +
+  ggtitle("Most Frequent Artists")
+```
+
+```{r release date}
+ggplot(dplyr::filter(collection, year != 0), aes(x = year)) + 
+  geom_bar(stat = "count", fill = "#B79477") + 
+  xlab("Year") +
+  ylab("Frequency") +
+  ggtitle("Release Date")
+```
+
+We also want information about price. The following uses release_id as an index to collect information from each.
+
+```{r}
+collection_2 <- lapply(as.list(collection$release_id), function(obj){
+  url <- httr::GET(paste0("https://api.discogs.com/releases/", obj))
+  url <- rjson::fromJSON(rawToChar(url$content))
+  data.frame(release_id = obj, 
+             label = url$label[[1]]$name %||% NA,
+             year = url$year %||% NA, 
+             title = url$title %||% NA, 
+             artist_name = url$artist[[1]]$name %||% NA, 
+             styles = url$styles[[1]] %||% NA,
+             genre = url$genre[[1]] %||% NA,
+             average_note = url$community$rating$average %||% NA, 
+             votes = url$community$rating$count %||% NA, 
+             want = url$community$want %||% NA, 
+             have = url$community$have %||% NA, 
+             lowest_price = url$lowest_price %||% NA, 
+             country = url$country %||% NA)
+   Sys.sleep(3)
+}) %>% do.call(rbind, .) %>% 
+  unique()
+
+knitr::kable(head(collection))
+```
+
+```{r}
+ggplot(dplyr::filter(collection_2, year != 0), aes(x = lowest_price)) + 
+  geom_bar(stat = "count", fill = "#B79477") + 
+  xlab("Lowest price") +
+  ylab("Frequency") +
+  ggtitle("Release Date")
 ```
 
 # More resources:
