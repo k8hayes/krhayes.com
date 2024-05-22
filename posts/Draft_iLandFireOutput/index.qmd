@@ -447,6 +447,14 @@ knitr::kable(iLandReburn)
 
 So, lower percentages than we see in the MTBS data.
 
+An obviously incomplete spitball list of reasons reburning could be lower in iLand:
+
+-   **iLand is super stochastic?** - runs vary from simulation to simulation. I can try replicating this simulation a few hundred times and averaging fire frequency across them all to see if the distribution of reburning becomes more similar to what we observe in MTBS
+
+-   **Uncertainty in MTBS?**
+
+-   **Mechanisms that drive fire in iLand underestimate reburning?**
+
 ## What about fire severity?
 
 Now, we can introduce one more layer: in theory, we[^9] often expect reburns (or fires that burn into existing fire perimeters) to occur at diminishing severity. Depending on the window between fires, fuel availability may limit combustion in reburns. Based on that logic, are there overlaps between stands that burned at high severity?
@@ -565,7 +573,7 @@ length(unique(fireID$rid))
 (length(unique(fireID$rid)) / domain) *100
 ```
 
-So, only about 1% of the landscape burned at high severity across the 100 year simulation window. (Though, technically that would be an underestimate since it doesn't take into account the resource units that reburned). Let's go ahead and exclude the resource units that reburned:
+So, only about 1% of the landscape burned at high severity across the 100 year simulation window. (Though, technically that would be an underestimate since it doesn't take into account the resource units that reburned).
 
 # Session Info
 
