@@ -124,7 +124,7 @@ editor: visual
 
 #### How to make a Series
 
-To publish blog posts in a series, they need to be located in a subdirectory of the **posts** folder. You'll also need a landing page. I'm writing up a series of posts on some of the model parameterization work I've done recently for my fire-herbivory project, so I named my series folder **posts/param_series** and added a landing page named **param_landing.gmd** (I know, creative).
+To publish blog posts in a series, they need to be located in a subdirectory of the **posts** folder. You'll also need a landing page. I'm writing up a series of posts on some of the model parameterization work I've done recently for my fire-herbivory project, so I named my series folder **posts/param_series** and added a landing page named **param_landing.gmd** (I know, creative). Make sure the landing page is located in the top directory, the one where your about / index / blog quarto documents are located.
 
 Within the landing page,
 
@@ -142,6 +142,30 @@ listing:
 page-layout: full
 title-block-banner: true
 ```
+
+You'll need to modify the **contents:** setting within your blog.qmd file so it sees the contents of the series folder. You can do this using [glob syntax](https://quarto.org/docs/reference/globs.html) - a very fun name for what essentially means "global patterns". \*\* can be used to tell quarto to look within any folder, and \*.qmd will select any quarto document.
+
+Thus, you can then change your blog yml from:
+
+``` yml
+title: "Blog"
+subtitle: "An attempt at a digital garden / notebook"
+listing:
+  contents: posts
+```
+
+To this:
+
+``` yml
+title: "Blog"
+subtitle: "An attempt at a digital garden / notebook"
+listing:
+  contents: 
+  - posts/**/*.qmd
+  - posts/**/**/*.qmd
+```
+
+And it should catch any quarto documents within the nested folders.
 
 ## Switching netlify hosts
 

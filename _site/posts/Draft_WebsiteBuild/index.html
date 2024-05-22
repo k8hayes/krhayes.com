@@ -166,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">May 13, 2024</p>
+        <p class="date-modified">May 22, 2024</p>
       </div>
     </div>
       
@@ -194,6 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#setting-global-blog-post-theme" id="toc-setting-global-blog-post-theme" class="nav-link" data-scroll-target="#setting-global-blog-post-theme">Setting global blog post theme</a></li>
   <li><a href="#new-post-template" id="toc-new-post-template" class="nav-link" data-scroll-target="#new-post-template">New Post Template</a></li>
   <li><a href="#adding-comment-sections" id="toc-adding-comment-sections" class="nav-link" data-scroll-target="#adding-comment-sections">Adding Comment Sections</a></li>
+  <li><a href="#setting-tufte-theme" id="toc-setting-tufte-theme" class="nav-link" data-scroll-target="#setting-tufte-theme">Setting Tufte Theme</a></li>
   </ul></li>
   <li><a href="#more-resources" id="toc-more-resources" class="nav-link" data-scroll-target="#more-resources">More Resources</a>
   <ul class="collapse">
@@ -274,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   filter-ui: false</code></pre>
 <p>Now, you’ll need to add it to your site navigation:</p>
 <ul>
-<li><p>Navigate to your _quarto.yml file which should have been created when you initiated the New Website process above</p></li>
+<li><p>Navigate to your <strong>_quarto.yml</strong> file which should have been created when you initiated the New Website process above</p></li>
 <li><p>You should see yml code - mine looks like the following:</p></li>
 </ul>
 <pre><code>project:
@@ -297,6 +298,7 @@ editor: visual</code></pre>
 <ul>
 <li><p>Under navbar, add lines that specify text and file similar to the example above (so, probably <em>text: “Blog”</em> and <em>file: blog.qmd</em>)</p></li>
 <li><p>Create a folder called <strong>posts</strong> - your posts will live here, within individual folders</p></li>
+<li><p>Within <strong>posts</strong>, each folder will contain an index.qmd file for the blog post</p></li>
 </ul>
 </section>
 <section id="writing-a-blog-post" class="level4">
@@ -304,7 +306,8 @@ editor: visual</code></pre>
 </section>
 <section id="how-to-make-a-series" class="level4">
 <h4 class="anchored" data-anchor-id="how-to-make-a-series">How to make a Series</h4>
-<p>To publish blog posts in a series, they need to be located in a subdirectory of the <strong>posts</strong> folder. You’ll also need a landing page. I’m writing up a series of posts on some of the model parameterization work I’ve done recently for my fire-herbivory project, so I named my series folder <strong>posts/param_series</strong> and added a landing page named <strong>param_landing.gmd</strong> (I know, creative).</p>
+<p>To publish blog posts in a series, they need to be located in a subdirectory of the <strong>posts</strong> folder. You’ll also need a landing page. I’m writing up a series of posts on some of the model parameterization work I’ve done recently for my fire-herbivory project, so I named my series folder <strong>posts/param_series</strong> and added a landing page named <strong>param_landing.gmd</strong> (I know, creative). Make sure the landing page is located in the top directory, the one where your about / index / blog quarto documents are located.</p>
+<p>Within the landing page,</p>
 <pre><code>---
 title: "Series: ggplot2-tips"
 listing:
@@ -317,6 +320,19 @@ listing:
   fields: [date, title, reading-time, description]
 page-layout: full
 title-block-banner: true</code></pre>
+<p>You’ll need to modify the <strong>contents:</strong> setting within your blog.qmd file so it sees the contents of the series folder. You can do this using gllob syntax:</p>
+<p>Mine went from:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Blog"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> </span><span class="st">"An attempt at a digital garden / notebook"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">listing</span><span class="kw">:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">contents</span><span class="kw">:</span><span class="at"> posts</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To this:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Blog"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> </span><span class="st">"An attempt at a digital garden / notebook"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">listing</span><span class="kw">:</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">contents</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> posts/**/*.qmd</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> posts/**/**/*.qmd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 </section>
@@ -338,7 +354,7 @@ title-block-banner: true</code></pre>
 </section>
 <section id="setting-global-blog-post-theme" class="level2">
 <h2 class="anchored" data-anchor-id="setting-global-blog-post-theme">Setting global blog post theme</h2>
-<p>You can use the _metadata.yml file to set options for all the files in the posts folder.</p>
+<p>You can use the <strong>_metadata.yml</strong> file to set options for all the files in the <strong>posts</strong> folder.</p>
 <p>Mine looks like this:</p>
 <pre><code># freeze computational output
 # (see https://quarto.org/docs/projects/code-execution.html#freeze)
@@ -366,18 +382,24 @@ comments:
 <section id="new-post-template" class="level2">
 <h2 class="anchored" data-anchor-id="new-post-template">New Post Template</h2>
 <p>To make starting new posts easy, I added a folder to my posts folder called <strong>NewPostTemplate</strong> - the index file within has the following settings:</p>
-<pre><code>---
-title: "New Post Title"
-subtitle: "New Post Subtitle"
-date: today
-categories: []
-date-modified: last-modified
-draft: true
----</code></pre>
-<p>Then, I can simply make a copy of that folder to start a new post. Make sure to update the date to the publication date - using <em>today</em> and <em>last-modified</em> in the internal workings of the quarto document means more rendering in the background (<a href="https://quarto.org/docs/websites/website-blog.html">per the Quarto documentation)</a>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"New Post Title"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> </span><span class="st">"New Post Subtitle"</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> today</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">date-modified</span><span class="kw">:</span><span class="at"> last-modified</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">draft</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then, I can simply make a copy of that folder to start a new post. Make sure to update the date to the publication date once it’s finalized - using <em>today</em> and <em>last-modified</em> in the internal workings of the quarto document is not really considered best practice, since it means more rendering in the background (<a href="https://quarto.org/docs/websites/website-blog.html">per the Quarto documentation)</a>.</p>
 </section>
 <section id="adding-comment-sections" class="level2">
 <h2 class="anchored" data-anchor-id="adding-comment-sections">Adding Comment Sections</h2>
+<p>I’m still figuring out how to add comments to the blog. There appears to be</p>
+</section>
+<section id="setting-tufte-theme" class="level2">
+<h2 class="anchored" data-anchor-id="setting-tufte-theme">Setting Tufte Theme</h2>
+<p>To use a Tufte-style theme in the blog posts, I’ve added the following code to my _metadata.yml file within the posts folder:</p>
+<p><code>{# Default for Tufte Style} format:   html:     toc: true     toc-title: Contents     toc-location: left     grid:       margin-width: 350px reference-location: margin citation-location: margin</code></p>
 </section>
 </section>
 <section id="more-resources" class="level1">
@@ -399,7 +421,7 @@ draft: true
 <section id="session-info" class="level2">
 <h2 class="anchored" data-anchor-id="session-info">Session info</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.3.3 (2024-02-29)
 Platform: aarch64-apple-darwin20 (64-bit)
@@ -420,9 +442,9 @@ attached base packages:
 
 loaded via a namespace (and not attached):
  [1] htmlwidgets_1.6.4 compiler_4.3.3    fastmap_1.1.1     cli_3.6.2        
- [5] tools_4.3.3       htmltools_0.5.8   yaml_2.3.8        rmarkdown_2.26   
- [9] knitr_1.45        jsonlite_1.8.8    xfun_0.43         digest_0.6.35    
-[13] rlang_1.1.3       evaluate_0.23    </code></pre>
+ [5] tools_4.3.3       htmltools_0.5.8   rstudioapi_0.16.0 yaml_2.3.8       
+ [9] rmarkdown_2.26    knitr_1.45        jsonlite_1.8.8    xfun_0.43        
+[13] digest_0.6.35     rlang_1.1.3       evaluate_0.23    </code></pre>
 </div>
 </div>
 
