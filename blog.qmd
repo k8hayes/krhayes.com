@@ -2,7 +2,9 @@
 title: "Blog"
 subtitle: "An attempt at a digital garden / notebook"
 listing:
-  contents: posts
+  contents: 
+  - posts/**/*.qmd
+  - posts/**/**/*.qmd
   sort: "date desc"
   type: default
   categories: true

@@ -2,13 +2,27 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/posts/param_series/param_landing.html",
       "/posts/Draft_ResearchWorkflow/index.html",
-      "/posts/Draft_WebsiteBuild/index.html"
+      "/posts/Draft_WebsiteBuild/index.html",
+      "/posts/iLand_series/Draft_iLandFireOutput/index.html"
     ]
   },
   {
     "listing": "/posts/param_series/param_landing.html",
+    "items": []
+  },
+  {
+    "listing": "/posts/iLand_series/iLand_landing.html",
+    "items": []
+  },
+  {
+    "listing": "/iLand_landing.html",
+    "items": [
+      "/posts/iLand_series/Draft_iLandFireOutput/index.html"
+    ]
+  },
+  {
+    "listing": "/param_landing.html",
     "items": []
   }
 ]

@@ -217,17 +217,7 @@ I'm still figuring out how to add comments to the blog. There appears to be
 
 To use a Tufte-style theme in the blog posts, I've added the following code to my \_metadata.yml file within the posts folder:
 
-```{# Default for Tufte Style}
-format:
-  html:
-    toc: true
-    toc-title: Contents
-    toc-location: left
-    grid:
-      margin-width: 350px
-reference-location: margin
-citation-location: margin
-```
+`{# Default for Tufte Style} format:   html:     toc: true     toc-title: Contents     toc-location: left     grid:       margin-width: 350px reference-location: margin citation-location: margin`
 
 # More Resources
 
