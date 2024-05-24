@@ -243,6 +243,12 @@ To use a Tufte-style theme in the blog posts, I've added the following code to m
 
 `{# Default for Tufte Style} format:   html:     toc: true     toc-title: Contents     toc-location: left     grid:       margin-width: 350px reference-location: margin citation-location: margin`
 
+## Packaging data for blog posts
+
+I tend to work with some large files, and work across multiple desktops. In order to pull in data for individual blog posts, I've been playing with using **save.image()** to collect all the files in an analysis, and save an .RData file in a folder I can reference from the blog quarto document.
+
+One quirk I haven't sorted out yet - **save.image()** doesn't save SpatRaster objects. Not sure how to deal with this yet.
+
 # More Resources
 
 A non-exhaustive list of useful Quarto information
