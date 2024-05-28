@@ -118,6 +118,8 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<script src="../../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../../styles.css">
@@ -187,7 +189,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">May 22, 2024</p>
+        <p class="date-modified">May 28, 2024</p>
       </div>
     </div>
       
@@ -212,11 +214,10 @@ div.csl-indent {
   <li><a href="#determining-overlap-between-rasters-using-the-terra-package" id="toc-determining-overlap-between-rasters-using-the-terra-package" class="nav-link" data-scroll-target="#determining-overlap-between-rasters-using-the-terra-package">Determining overlap between rasters using the <em>terra</em> package</a></li>
   <li><a href="#iland-reburn-trends" id="toc-iland-reburn-trends" class="nav-link" data-scroll-target="#iland-reburn-trends">iLand Reburn trends</a>
   <ul class="collapse">
-  <li><a href="#comparing-iland-trends-to-mtbs-data" id="toc-comparing-iland-trends-to-mtbs-data" class="nav-link" data-scroll-target="#comparing-iland-trends-to-mtbs-data">Comparing iLand trends to MTBS data</a></li>
+  <li><a href="#how-does-reburning-in-iland-compare-to-reburning-in-mtbs" id="toc-how-does-reburning-in-iland-compare-to-reburning-in-mtbs" class="nav-link" data-scroll-target="#how-does-reburning-in-iland-compare-to-reburning-in-mtbs">How does reburning in iLand compare to reburning in MTBS?</a></li>
   </ul></li>
   <li><a href="#what-about-fire-severity" id="toc-what-about-fire-severity" class="nav-link" data-scroll-target="#what-about-fire-severity">What about fire severity?</a></li>
   </ul></li>
-  <li><a href="#filtering-sapling-by-high-severity-fire" id="toc-filtering-sapling-by-high-severity-fire" class="nav-link" data-scroll-target="#filtering-sapling-by-high-severity-fire">Filtering sapling by high severity fire</a></li>
   <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session Info</a></li>
   </ul>
 </nav>
@@ -238,12 +239,12 @@ div.csl-indent {
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"/Volumes/kate_storage/Files4Website/iLandReburn.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
 <section id="what-are-the-patterns-of-reburning-in-iland" class="level1">
 <h1>What are the patterns of reburning in iLand?</h1>
 <p>As part of my <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2219248&amp;HistoricalAwards=false">NSF Postdoc fellowship</a>, I’ve been working on modeling herbivores in <a href="https://iland-model.org/iLand+Hub">iLand</a> using the biotic disturbance model <a href="https://iland-model.org/bite/#/">BITE</a>. In particular, I want to understand if biotic disturbances generally (and herbivores specifically) can interact with fire such that they modify forest composition or forest carbon at a landscape scale.</p>
-<p>The following analysis started as an aside: I wanted to filter my simulation results to find modeled stands regenerating after fire so that I could compare age-growth relationships to those we wind in exclosure and other empirical studies of herbivory.</p>
+<p>The following analysis started as an aside: I wanted to filter my simulation results to find modeled stands regenerating after fire so that I could compare age-growth relationships to those found in exclosure and other empirical studies of herbivory.</p>
 </section>
 <section id="fire-output-in-iland" class="level1 page-columns page-full">
 <h1>Fire output in iLand</h1>
@@ -251,28 +252,25 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="determining-which-fires-in-iland-were-stand-replacing">Determining which fires in iLand were stand-replacing</h2>
 <p>First, I need to determine which fires in my iLand run were “stand-replacing” -</p>
 <p>The fire output in iLand produces a table of each fire, shown below.</p>
-<div class="cell page-columns page-full">
-<div class="cell-output-display page-columns page-full">
+<div class="cell">
+<div class="cell-output-display">
 <table class="table table-sm table-striped small">
-
 <colgroup>
-<col style="width: 2%">
 <col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 6%">
 <col style="width: 6%">
 <col style="width: 4%">
+<col style="width: 4%">
 <col style="width: 5%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 9%">
 <col style="width: 6%">
 <col style="width: 8%">
-<col style="width: 7%">
-<col style="width: 5%">
-<col style="width: 7%">
-<col style="width: 5%">
-<col style="width: 7%">
+<col style="width: 6%">
 <col style="width: 8%">
-<col style="width: 7%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -291,533 +289,480 @@ div.csl-indent {
 <th style="text-align: right;">avgFuel_kg_ha</th>
 <th style="text-align: right;">windSpeed</th>
 <th style="text-align: right;">windDirection</th>
-<th style="text-align: right;">prop.dens.killed</th>
-<th style="text-align: right;">prop.ba.killed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">11</td>
+<td style="text-align: right;">6</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">96883764</td>
-<td style="text-align: right;">97351200</td>
-<td style="text-align: right;">289</td>
-<td style="text-align: right;">5630</td>
-<td style="text-align: right;">12270</td>
-<td style="text-align: right;">13679919</td>
-<td style="text-align: right;">12510376</td>
-<td style="text-align: right;">64129.16998</td>
-<td style="text-align: right;">58463.27235</td>
+<td style="text-align: right;">9355921</td>
+<td style="text-align: right;">9359200</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">7390</td>
+<td style="text-align: right;">8810</td>
+<td style="text-align: right;">1106699</td>
+<td style="text-align: right;">1064982</td>
+<td style="text-align: right;">2388.6883</td>
+<td style="text-align: right;">2298.610</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">44357.68</td>
-<td style="text-align: right;">13.29435</td>
-<td style="text-align: right;">205.9562</td>
-<td style="text-align: right;">0.9145066</td>
-<td style="text-align: right;">0.9116487</td>
+<td style="text-align: right;">39755.37</td>
+<td style="text-align: right;">17.67204</td>
+<td style="text-align: right;">187.2722</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">64</td>
+<td style="text-align: right;">11</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">15851999</td>
-<td style="text-align: right;">15920400</td>
-<td style="text-align: right;">116</td>
-<td style="text-align: right;">2570</td>
-<td style="text-align: right;">9330</td>
-<td style="text-align: right;">2293076</td>
-<td style="text-align: right;">1625662</td>
-<td style="text-align: right;">33511.95806</td>
-<td style="text-align: right;">21128.45379</td>
+<td style="text-align: right;">10613320</td>
+<td style="text-align: right;">10667600</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">18030</td>
+<td style="text-align: right;">23030</td>
+<td style="text-align: right;">535890</td>
+<td style="text-align: right;">514951</td>
+<td style="text-align: right;">2157.1445</td>
+<td style="text-align: right;">2067.686</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">24137.48</td>
-<td style="text-align: right;">17.32059</td>
-<td style="text-align: right;">263.5101</td>
-<td style="text-align: right;">0.7089438</td>
-<td style="text-align: right;">0.6304751</td>
+<td style="text-align: right;">55101.33</td>
+<td style="text-align: right;">16.16441</td>
+<td style="text-align: right;">254.2023</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">96</td>
+<td style="text-align: right;">18</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">6549658</td>
-<td style="text-align: right;">6713200</td>
-<td style="text-align: right;">75</td>
-<td style="text-align: right;">19290</td>
-<td style="text-align: right;">22050</td>
-<td style="text-align: right;">393360</td>
-<td style="text-align: right;">284585</td>
-<td style="text-align: right;">7913.40858</td>
-<td style="text-align: right;">3996.28188</td>
+<td style="text-align: right;">66038024</td>
+<td style="text-align: right;">66571200</td>
+<td style="text-align: right;">256</td>
+<td style="text-align: right;">20110</td>
+<td style="text-align: right;">11130</td>
+<td style="text-align: right;">9971141</td>
+<td style="text-align: right;">8522890</td>
+<td style="text-align: right;">62771.2287</td>
+<td style="text-align: right;">53269.425</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">44159.06</td>
-<td style="text-align: right;">29.40221</td>
-<td style="text-align: right;">185.1146</td>
-<td style="text-align: right;">0.7234721</td>
-<td style="text-align: right;">0.5050013</td>
+<td style="text-align: right;">43763.40</td>
+<td style="text-align: right;">12.09752</td>
+<td style="text-align: right;">197.0730</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">13235234</td>
+<td style="text-align: right;">13236000</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">16010</td>
+<td style="text-align: right;">8770</td>
+<td style="text-align: right;">1722762</td>
+<td style="text-align: right;">1362931</td>
+<td style="text-align: right;">15451.4867</td>
+<td style="text-align: right;">11253.633</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">40959.27</td>
+<td style="text-align: right;">23.64123</td>
+<td style="text-align: right;">268.0712</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">62118545</td>
+<td style="text-align: right;">62408800</td>
+<td style="text-align: right;">249</td>
+<td style="text-align: right;">7630</td>
+<td style="text-align: right;">2990</td>
+<td style="text-align: right;">6223445</td>
+<td style="text-align: right;">4654781</td>
+<td style="text-align: right;">82294.3472</td>
+<td style="text-align: right;">55315.312</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">45441.38</td>
+<td style="text-align: right;">23.28553</td>
+<td style="text-align: right;">235.8422</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">153096650</td>
+<td style="text-align: right;">153714800</td>
+<td style="text-align: right;">383</td>
+<td style="text-align: right;">4110</td>
+<td style="text-align: right;">14530</td>
+<td style="text-align: right;">13023363</td>
+<td style="text-align: right;">9126662</td>
+<td style="text-align: right;">219533.7647</td>
+<td style="text-align: right;">126019.528</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">43652.15</td>
+<td style="text-align: right;">13.33987</td>
+<td style="text-align: right;">254.2933</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">1258524</td>
+<td style="text-align: right;">1277600</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">22990</td>
+<td style="text-align: right;">13390</td>
+<td style="text-align: right;">141322</td>
+<td style="text-align: right;">99230</td>
+<td style="text-align: right;">2471.1608</td>
+<td style="text-align: right;">1493.027</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">29401.03</td>
+<td style="text-align: right;">11.58742</td>
+<td style="text-align: right;">200.6049</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">101</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">94890586</td>
-<td style="text-align: right;">95015600</td>
-<td style="text-align: right;">287</td>
-<td style="text-align: right;">8270</td>
-<td style="text-align: right;">11270</td>
-<td style="text-align: right;">10093901</td>
-<td style="text-align: right;">6885090</td>
-<td style="text-align: right;">221345.34695</td>
-<td style="text-align: right;">130366.00588</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">33678.91</td>
-<td style="text-align: right;">24.75156</td>
-<td style="text-align: right;">261.7756</td>
-<td style="text-align: right;">0.6821040</td>
-<td style="text-align: right;">0.5889711</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">124</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">12898630</td>
-<td style="text-align: right;">13028800</td>
-<td style="text-align: right;">116</td>
-<td style="text-align: right;">23510</td>
-<td style="text-align: right;">2610</td>
-<td style="text-align: right;">974964</td>
-<td style="text-align: right;">659794</td>
-<td style="text-align: right;">23205.63838</td>
-<td style="text-align: right;">11612.34549</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">36563.46</td>
-<td style="text-align: right;">22.67477</td>
-<td style="text-align: right;">260.5065</td>
-<td style="text-align: right;">0.6767368</td>
-<td style="text-align: right;">0.5004105</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">126</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">16994606</td>
-<td style="text-align: right;">16994800</td>
-<td style="text-align: right;">229</td>
-<td style="text-align: right;">25310</td>
-<td style="text-align: right;">5810</td>
-<td style="text-align: right;">975947</td>
-<td style="text-align: right;">614879</td>
-<td style="text-align: right;">23219.76275</td>
-<td style="text-align: right;">9673.67553</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">30128.80</td>
-<td style="text-align: right;">28.61050</td>
-<td style="text-align: right;">247.7852</td>
-<td style="text-align: right;">0.6300332</td>
-<td style="text-align: right;">0.4166139</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">131</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">5082355</td>
-<td style="text-align: right;">5242400</td>
-<td style="text-align: right;">65</td>
-<td style="text-align: right;">13010</td>
-<td style="text-align: right;">20610</td>
-<td style="text-align: right;">335412</td>
-<td style="text-align: right;">258789</td>
-<td style="text-align: right;">5844.93478</td>
-<td style="text-align: right;">3048.21079</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">45330.19</td>
-<td style="text-align: right;">24.84329</td>
-<td style="text-align: right;">195.1017</td>
-<td style="text-align: right;">0.7715556</td>
-<td style="text-align: right;">0.5215132</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">139</td>
 <td style="text-align: right;">8</td>
-<td style="text-align: right;">33098136</td>
-<td style="text-align: right;">33213600</td>
-<td style="text-align: right;">169</td>
-<td style="text-align: right;">16170</td>
-<td style="text-align: right;">13450</td>
-<td style="text-align: right;">3083139</td>
-<td style="text-align: right;">2099777</td>
-<td style="text-align: right;">68682.70977</td>
-<td style="text-align: right;">35581.78891</td>
+<td style="text-align: right;">17526161</td>
+<td style="text-align: right;">17739600</td>
+<td style="text-align: right;">129</td>
+<td style="text-align: right;">1450</td>
+<td style="text-align: right;">14410</td>
+<td style="text-align: right;">517573</td>
+<td style="text-align: right;">397160</td>
+<td style="text-align: right;">6548.2361</td>
+<td style="text-align: right;">2715.915</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">31690.72</td>
-<td style="text-align: right;">27.87372</td>
-<td style="text-align: right;">246.4692</td>
-<td style="text-align: right;">0.6810517</td>
-<td style="text-align: right;">0.5180604</td>
+<td style="text-align: right;">32069.33</td>
+<td style="text-align: right;">27.12384</td>
+<td style="text-align: right;">260.0029</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">149</td>
+<td style="text-align: right;">113</td>
 <td style="text-align: right;">9</td>
-<td style="text-align: right;">34561606</td>
-<td style="text-align: right;">34937600</td>
-<td style="text-align: right;">176</td>
-<td style="text-align: right;">12350</td>
-<td style="text-align: right;">6090</td>
-<td style="text-align: right;">2927871</td>
-<td style="text-align: right;">2112701</td>
-<td style="text-align: right;">53846.48902</td>
-<td style="text-align: right;">29529.94707</td>
+<td style="text-align: right;">23251611</td>
+<td style="text-align: right;">23413600</td>
+<td style="text-align: right;">151</td>
+<td style="text-align: right;">15850</td>
+<td style="text-align: right;">6210</td>
+<td style="text-align: right;">1705366</td>
+<td style="text-align: right;">1193239</td>
+<td style="text-align: right;">34838.5227</td>
+<td style="text-align: right;">19189.206</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">39251.23</td>
-<td style="text-align: right;">15.83725</td>
-<td style="text-align: right;">232.5756</td>
-<td style="text-align: right;">0.7215827</td>
-<td style="text-align: right;">0.5484099</td>
+<td style="text-align: right;">42169.49</td>
+<td style="text-align: right;">25.58756</td>
+<td style="text-align: right;">233.4567</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">158</td>
+<td style="text-align: right;">115</td>
 <td style="text-align: right;">10</td>
-<td style="text-align: right;">5008688</td>
-<td style="text-align: right;">5073600</td>
-<td style="text-align: right;">74</td>
-<td style="text-align: right;">20970</td>
-<td style="text-align: right;">5410</td>
-<td style="text-align: right;">322113</td>
-<td style="text-align: right;">234789</td>
-<td style="text-align: right;">6419.70560</td>
-<td style="text-align: right;">2663.07236</td>
+<td style="text-align: right;">1981966</td>
+<td style="text-align: right;">2008400</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">1210</td>
+<td style="text-align: right;">13970</td>
+<td style="text-align: right;">66117</td>
+<td style="text-align: right;">50832</td>
+<td style="text-align: right;">683.4222</td>
+<td style="text-align: right;">229.551</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">37870.53</td>
-<td style="text-align: right;">16.98597</td>
-<td style="text-align: right;">236.8049</td>
-<td style="text-align: right;">0.7289026</td>
-<td style="text-align: right;">0.4148278</td>
+<td style="text-align: right;">16211.83</td>
+<td style="text-align: right;">15.73365</td>
+<td style="text-align: right;">239.5789</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">165</td>
+<td style="text-align: right;">127</td>
 <td style="text-align: right;">11</td>
-<td style="text-align: right;">20983206</td>
-<td style="text-align: right;">21021600</td>
-<td style="text-align: right;">134</td>
-<td style="text-align: right;">12970</td>
-<td style="text-align: right;">5870</td>
-<td style="text-align: right;">2202217</td>
-<td style="text-align: right;">1669355</td>
-<td style="text-align: right;">20681.91981</td>
-<td style="text-align: right;">9969.31817</td>
+<td style="text-align: right;">24433818</td>
+<td style="text-align: right;">24488400</td>
+<td style="text-align: right;">151</td>
+<td style="text-align: right;">1970</td>
+<td style="text-align: right;">19310</td>
+<td style="text-align: right;">1130352</td>
+<td style="text-align: right;">896409</td>
+<td style="text-align: right;">15474.3118</td>
+<td style="text-align: right;">8279.242</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">19127.85</td>
-<td style="text-align: right;">12.36714</td>
-<td style="text-align: right;">197.8489</td>
-<td style="text-align: right;">0.7580338</td>
-<td style="text-align: right;">0.4820306</td>
+<td style="text-align: right;">51011.59</td>
+<td style="text-align: right;">13.86956</td>
+<td style="text-align: right;">257.5287</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">165</td>
+<td style="text-align: right;">128</td>
 <td style="text-align: right;">12</td>
-<td style="text-align: right;">26065519</td>
-<td style="text-align: right;">26225600</td>
-<td style="text-align: right;">158</td>
-<td style="text-align: right;">19290</td>
-<td style="text-align: right;">18330</td>
-<td style="text-align: right;">2255179</td>
-<td style="text-align: right;">1590130</td>
-<td style="text-align: right;">43034.64590</td>
-<td style="text-align: right;">18570.11227</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">34609.20</td>
-<td style="text-align: right;">25.19390</td>
-<td style="text-align: right;">206.4544</td>
-<td style="text-align: right;">0.7051015</td>
-<td style="text-align: right;">0.4315154</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">179</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">56019575</td>
-<td style="text-align: right;">56355200</td>
-<td style="text-align: right;">230</td>
-<td style="text-align: right;">6410</td>
-<td style="text-align: right;">13170</td>
-<td style="text-align: right;">7889225</td>
-<td style="text-align: right;">5358627</td>
-<td style="text-align: right;">168602.72581</td>
-<td style="text-align: right;">98952.44714</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">26142.38</td>
-<td style="text-align: right;">24.29683</td>
-<td style="text-align: right;">235.7723</td>
-<td style="text-align: right;">0.6792336</td>
-<td style="text-align: right;">0.5868971</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">187</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">56410510</td>
-<td style="text-align: right;">56542800</td>
-<td style="text-align: right;">217</td>
-<td style="text-align: right;">6770</td>
-<td style="text-align: right;">16030</td>
-<td style="text-align: right;">5075284</td>
-<td style="text-align: right;">3713131</td>
-<td style="text-align: right;">74329.44694</td>
-<td style="text-align: right;">36648.79489</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">26680.33</td>
-<td style="text-align: right;">24.17115</td>
-<td style="text-align: right;">202.0327</td>
-<td style="text-align: right;">0.7316105</td>
-<td style="text-align: right;">0.4930589</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">193</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">34376334</td>
-<td style="text-align: right;">34387200</td>
-<td style="text-align: right;">182</td>
-<td style="text-align: right;">20770</td>
-<td style="text-align: right;">17030</td>
-<td style="text-align: right;">3322160</td>
-<td style="text-align: right;">2515138</td>
-<td style="text-align: right;">43449.12792</td>
-<td style="text-align: right;">17464.54359</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">31182.87</td>
-<td style="text-align: right;">15.57638</td>
-<td style="text-align: right;">201.0913</td>
-<td style="text-align: right;">0.7570791</td>
-<td style="text-align: right;">0.4019538</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">195</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">6088756</td>
-<td style="text-align: right;">6135200</td>
-<td style="text-align: right;">76</td>
-<td style="text-align: right;">5830</td>
-<td style="text-align: right;">9430</td>
-<td style="text-align: right;">1356401</td>
-<td style="text-align: right;">1004352</td>
-<td style="text-align: right;">14354.13383</td>
-<td style="text-align: right;">8691.89829</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">11408.85</td>
-<td style="text-align: right;">22.63347</td>
-<td style="text-align: right;">255.7752</td>
-<td style="text-align: right;">0.7404536</td>
-<td style="text-align: right;">0.6055328</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">200</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">1289453</td>
-<td style="text-align: right;">1322000</td>
-<td style="text-align: right;">36</td>
-<td style="text-align: right;">20510</td>
-<td style="text-align: right;">5810</td>
-<td style="text-align: right;">39091</td>
-<td style="text-align: right;">33956</td>
-<td style="text-align: right;">558.91930</td>
-<td style="text-align: right;">273.52549</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">46282.30</td>
-<td style="text-align: right;">26.70902</td>
-<td style="text-align: right;">202.2856</td>
-<td style="text-align: right;">0.8686398</td>
-<td style="text-align: right;">0.4893828</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">207</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">59111492</td>
-<td style="text-align: right;">59434800</td>
-<td style="text-align: right;">237</td>
-<td style="text-align: right;">7610</td>
-<td style="text-align: right;">5750</td>
-<td style="text-align: right;">7604161</td>
-<td style="text-align: right;">5676456</td>
-<td style="text-align: right;">91884.23175</td>
-<td style="text-align: right;">51738.88162</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">34560.45</td>
-<td style="text-align: right;">15.32176</td>
-<td style="text-align: right;">191.6643</td>
-<td style="text-align: right;">0.7464934</td>
-<td style="text-align: right;">0.5630877</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">224</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">47687753</td>
-<td style="text-align: right;">47810400</td>
-<td style="text-align: right;">284</td>
-<td style="text-align: right;">1510</td>
-<td style="text-align: right;">2330</td>
-<td style="text-align: right;">2219373</td>
-<td style="text-align: right;">1716112</td>
-<td style="text-align: right;">35159.98181</td>
-<td style="text-align: right;">15960.04719</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">43672.10</td>
-<td style="text-align: right;">27.20487</td>
-<td style="text-align: right;">253.8487</td>
-<td style="text-align: right;">0.7732418</td>
-<td style="text-align: right;">0.4539265</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">228</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">32085233</td>
-<td style="text-align: right;">32196400</td>
-<td style="text-align: right;">206</td>
-<td style="text-align: right;">9610</td>
-<td style="text-align: right;">1230</td>
-<td style="text-align: right;">2080694</td>
-<td style="text-align: right;">1572746</td>
-<td style="text-align: right;">27274.86819</td>
-<td style="text-align: right;">12322.53122</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">32625.69</td>
-<td style="text-align: right;">19.42410</td>
-<td style="text-align: right;">227.6527</td>
-<td style="text-align: right;">0.7558757</td>
-<td style="text-align: right;">0.4517907</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">231</td>
-<td style="text-align: right;">21</td>
-<td style="text-align: right;">43469106</td>
-<td style="text-align: right;">43807200</td>
-<td style="text-align: right;">208</td>
-<td style="text-align: right;">20830</td>
-<td style="text-align: right;">21190</td>
-<td style="text-align: right;">3571605</td>
-<td style="text-align: right;">2747242</td>
-<td style="text-align: right;">49451.33664</td>
-<td style="text-align: right;">21163.22849</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">39588.24</td>
-<td style="text-align: right;">13.93008</td>
-<td style="text-align: right;">261.8830</td>
-<td style="text-align: right;">0.7691898</td>
-<td style="text-align: right;">0.4279607</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">234</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">54738561</td>
-<td style="text-align: right;">54928000</td>
-<td style="text-align: right;">257</td>
-<td style="text-align: right;">23330</td>
-<td style="text-align: right;">17570</td>
-<td style="text-align: right;">3298838</td>
-<td style="text-align: right;">2386416</td>
-<td style="text-align: right;">53786.05581</td>
-<td style="text-align: right;">19237.70280</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">25043.97</td>
-<td style="text-align: right;">16.45527</td>
-<td style="text-align: right;">202.9285</td>
-<td style="text-align: right;">0.7234111</td>
-<td style="text-align: right;">0.3576708</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">248</td>
-<td style="text-align: right;">23</td>
-<td style="text-align: right;">63440029</td>
-<td style="text-align: right;">63493200</td>
-<td style="text-align: right;">325</td>
-<td style="text-align: right;">2070</td>
-<td style="text-align: right;">22410</td>
-<td style="text-align: right;">3163204</td>
-<td style="text-align: right;">2554517</td>
-<td style="text-align: right;">42867.25226</td>
-<td style="text-align: right;">25530.62430</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">54281.30</td>
-<td style="text-align: right;">26.04806</td>
-<td style="text-align: right;">236.2636</td>
-<td style="text-align: right;">0.8075726</td>
-<td style="text-align: right;">0.5955741</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">264</td>
-<td style="text-align: right;">24</td>
-<td style="text-align: right;">9915494</td>
-<td style="text-align: right;">9948800</td>
-<td style="text-align: right;">100</td>
-<td style="text-align: right;">4190</td>
-<td style="text-align: right;">4670</td>
-<td style="text-align: right;">946176</td>
-<td style="text-align: right;">710855</td>
-<td style="text-align: right;">11098.18404</td>
-<td style="text-align: right;">5718.68786</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">27464.17</td>
-<td style="text-align: right;">29.62071</td>
-<td style="text-align: right;">243.4961</td>
-<td style="text-align: right;">0.7512926</td>
-<td style="text-align: right;">0.5152814</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">268</td>
-<td style="text-align: right;">25</td>
-<td style="text-align: right;">13713404</td>
-<td style="text-align: right;">13948000</td>
-<td style="text-align: right;">106</td>
-<td style="text-align: right;">12370</td>
-<td style="text-align: right;">16270</td>
-<td style="text-align: right;">1073229</td>
-<td style="text-align: right;">784371</td>
-<td style="text-align: right;">18262.37177</td>
-<td style="text-align: right;">7338.12209</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">37207.85</td>
-<td style="text-align: right;">13.36183</td>
-<td style="text-align: right;">209.6268</td>
-<td style="text-align: right;">0.7308515</td>
-<td style="text-align: right;">0.4018165</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">277</td>
-<td style="text-align: right;">26</td>
-<td style="text-align: right;">4499530</td>
-<td style="text-align: right;">4583200</td>
+<td style="text-align: right;">3461822</td>
+<td style="text-align: right;">3543600</td>
 <td style="text-align: right;">60</td>
-<td style="text-align: right;">2270</td>
-<td style="text-align: right;">20890</td>
-<td style="text-align: right;">5939</td>
-<td style="text-align: right;">4984</td>
-<td style="text-align: right;">70.07013</td>
-<td style="text-align: right;">52.88915</td>
+<td style="text-align: right;">6130</td>
+<td style="text-align: right;">6090</td>
+<td style="text-align: right;">520249</td>
+<td style="text-align: right;">365378</td>
+<td style="text-align: right;">7815.2903</td>
+<td style="text-align: right;">4422.803</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">45291.33</td>
-<td style="text-align: right;">24.48842</td>
-<td style="text-align: right;">182.9285</td>
-<td style="text-align: right;">0.8391985</td>
-<td style="text-align: right;">0.7548030</td>
+<td style="text-align: right;">19316.17</td>
+<td style="text-align: right;">18.26541</td>
+<td style="text-align: right;">228.5157</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">289</td>
-<td style="text-align: right;">27</td>
-<td style="text-align: right;">68341322</td>
-<td style="text-align: right;">68634000</td>
-<td style="text-align: right;">282</td>
-<td style="text-align: right;">11210</td>
-<td style="text-align: right;">21550</td>
-<td style="text-align: right;">3430135</td>
-<td style="text-align: right;">2667448</td>
-<td style="text-align: right;">52449.25671</td>
-<td style="text-align: right;">22096.72053</td>
+<td style="text-align: right;">155</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">42209881</td>
+<td style="text-align: right;">42216000</td>
+<td style="text-align: right;">242</td>
+<td style="text-align: right;">530</td>
+<td style="text-align: right;">14930</td>
+<td style="text-align: right;">3168223</td>
+<td style="text-align: right;">2320287</td>
+<td style="text-align: right;">51250.5543</td>
+<td style="text-align: right;">23932.379</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">48183.86</td>
-<td style="text-align: right;">22.53994</td>
-<td style="text-align: right;">180.0251</td>
-<td style="text-align: right;">0.7776510</td>
-<td style="text-align: right;">0.4212971</td>
+<td style="text-align: right;">38331.30</td>
+<td style="text-align: right;">24.37498</td>
+<td style="text-align: right;">207.2945</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">170</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">30183070</td>
+<td style="text-align: right;">30241600</td>
+<td style="text-align: right;">158</td>
+<td style="text-align: right;">5810</td>
+<td style="text-align: right;">20370</td>
+<td style="text-align: right;">1348460</td>
+<td style="text-align: right;">1133645</td>
+<td style="text-align: right;">19465.7227</td>
+<td style="text-align: right;">11652.611</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">55874.93</td>
+<td style="text-align: right;">15.20795</td>
+<td style="text-align: right;">216.0514</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">186</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">3774943</td>
+<td style="text-align: right;">3904400</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">4230</td>
+<td style="text-align: right;">7330</td>
+<td style="text-align: right;">280457</td>
+<td style="text-align: right;">190965</td>
+<td style="text-align: right;">5742.5958</td>
+<td style="text-align: right;">2823.583</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">36889.62</td>
+<td style="text-align: right;">16.33519</td>
+<td style="text-align: right;">263.5800</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">186</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">14987103</td>
+<td style="text-align: right;">15212000</td>
+<td style="text-align: right;">109</td>
+<td style="text-align: right;">4130</td>
+<td style="text-align: right;">13010</td>
+<td style="text-align: right;">1636544</td>
+<td style="text-align: right;">1228222</td>
+<td style="text-align: right;">23955.1826</td>
+<td style="text-align: right;">9779.148</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">24929.67</td>
+<td style="text-align: right;">29.18820</td>
+<td style="text-align: right;">191.5560</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">192</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">6080132</td>
+<td style="text-align: right;">6218400</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">19730</td>
+<td style="text-align: right;">3030</td>
+<td style="text-align: right;">556809</td>
+<td style="text-align: right;">391779</td>
+<td style="text-align: right;">11443.7747</td>
+<td style="text-align: right;">5326.691</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">29748.50</td>
+<td style="text-align: right;">12.43170</td>
+<td style="text-align: right;">240.7054</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">196</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">82774479</td>
+<td style="text-align: right;">82817600</td>
+<td style="text-align: right;">279</td>
+<td style="text-align: right;">8770</td>
+<td style="text-align: right;">5230</td>
+<td style="text-align: right;">6073521</td>
+<td style="text-align: right;">4301367</td>
+<td style="text-align: right;">126098.1813</td>
+<td style="text-align: right;">62908.374</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">35699.13</td>
+<td style="text-align: right;">13.31725</td>
+<td style="text-align: right;">183.1845</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">205</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">42031808</td>
+<td style="text-align: right;">42087200</td>
+<td style="text-align: right;">211</td>
+<td style="text-align: right;">7830</td>
+<td style="text-align: right;">22150</td>
+<td style="text-align: right;">1186354</td>
+<td style="text-align: right;">971450</td>
+<td style="text-align: right;">18140.2053</td>
+<td style="text-align: right;">8789.391</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">54178.54</td>
+<td style="text-align: right;">24.14464</td>
+<td style="text-align: right;">190.5515</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">206</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">4759821</td>
+<td style="text-align: right;">4852800</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">14530</td>
+<td style="text-align: right;">14770</td>
+<td style="text-align: right;">292863</td>
+<td style="text-align: right;">223986</td>
+<td style="text-align: right;">5391.1960</td>
+<td style="text-align: right;">2530.305</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">40919.96</td>
+<td style="text-align: right;">22.24638</td>
+<td style="text-align: right;">188.9378</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">209</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">27161911</td>
+<td style="text-align: right;">27330000</td>
+<td style="text-align: right;">161</td>
+<td style="text-align: right;">10550</td>
+<td style="text-align: right;">7650</td>
+<td style="text-align: right;">2228298</td>
+<td style="text-align: right;">1700506</td>
+<td style="text-align: right;">24846.2545</td>
+<td style="text-align: right;">11125.712</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">22243.74</td>
+<td style="text-align: right;">11.80762</td>
+<td style="text-align: right;">219.2560</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">229</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">86507214</td>
+<td style="text-align: right;">86949600</td>
+<td style="text-align: right;">319</td>
+<td style="text-align: right;">1650</td>
+<td style="text-align: right;">7350</td>
+<td style="text-align: right;">8545906</td>
+<td style="text-align: right;">6381659</td>
+<td style="text-align: right;">114956.2688</td>
+<td style="text-align: right;">54858.865</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">35720.83</td>
+<td style="text-align: right;">24.34829</td>
+<td style="text-align: right;">214.7623</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">255</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">6448735</td>
+<td style="text-align: right;">6564000</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">21630</td>
+<td style="text-align: right;">10610</td>
+<td style="text-align: right;">407364</td>
+<td style="text-align: right;">325927</td>
+<td style="text-align: right;">6143.1676</td>
+<td style="text-align: right;">2588.093</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">38903.49</td>
+<td style="text-align: right;">11.11992</td>
+<td style="text-align: right;">232.8224</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">273</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">74646095</td>
+<td style="text-align: right;">74958000</td>
+<td style="text-align: right;">259</td>
+<td style="text-align: right;">6330</td>
+<td style="text-align: right;">5730</td>
+<td style="text-align: right;">9639587</td>
+<td style="text-align: right;">7044859</td>
+<td style="text-align: right;">129629.1524</td>
+<td style="text-align: right;">70688.719</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">29775.69</td>
+<td style="text-align: right;">11.04457</td>
+<td style="text-align: right;">205.9398</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">288</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">12147746</td>
+<td style="text-align: right;">12311200</td>
+<td style="text-align: right;">111</td>
+<td style="text-align: right;">14110</td>
+<td style="text-align: right;">4930</td>
+<td style="text-align: right;">691252</td>
+<td style="text-align: right;">496647</td>
+<td style="text-align: right;">14124.9318</td>
+<td style="text-align: right;">5887.714</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">42145.70</td>
+<td style="text-align: right;">17.91752</td>
+<td style="text-align: right;">257.8751</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">290</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">61986520</td>
+<td style="text-align: right;">62263200</td>
+<td style="text-align: right;">235</td>
+<td style="text-align: right;">6130</td>
+<td style="text-align: right;">7250</td>
+<td style="text-align: right;">13305606</td>
+<td style="text-align: right;">10319713</td>
+<td style="text-align: right;">92403.2798</td>
+<td style="text-align: right;">47632.022</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">16508.43</td>
+<td style="text-align: right;">27.38842</td>
+<td style="text-align: right;">235.8599</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">291</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">6288371</td>
+<td style="text-align: right;">6466800</td>
+<td style="text-align: right;">81</td>
+<td style="text-align: right;">21630</td>
+<td style="text-align: right;">7530</td>
+<td style="text-align: right;">417439</td>
+<td style="text-align: right;">322173</td>
+<td style="text-align: right;">6507.2185</td>
+<td style="text-align: right;">2719.114</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">40083.61</td>
+<td style="text-align: right;">25.11454</td>
+<td style="text-align: right;">264.0305</td>
 </tr>
 </tbody>
 </table>
-<div class="quarto-table-caption margin-caption">Base iLand Fire Output</div></div>
 </div>
-<p>There’s two ways to represent fire severity using this output: the <strong>proportion of trees killed</strong> within each fire, and the <strong>proportion of basal area killed</strong>. Those two metrics are distinct in slight yet important ways - a fire might kill all trees in a young stand but if the trees themselves were small, the impact on basal area won’t be terribly large. Or, a fire might kill only the largest/oldest individuals in a stand, thus impacting carbon greatly in a way that wouldn’t show up using just <strong>proportion of trees killed</strong>. Here, since we’re interested in how forests are regenerating, we’ll focus on instances where fires killed all trees, but I’ll show both for the sake of it.</p>
+</div>
+<p>There’s two ways to represent fire severity using this output: the <strong>proportion of trees killed</strong> within each fire, and the <strong>proportion of basal area killed</strong>. Those two metrics are distinct in slight yet important ways - a fire might kill all trees in a young stand but if the trees themselves were small, the impact on basal area won’t be terribly large. Or, a fire might kill only the largest/oldest individuals in a stand, thus impacting carbon greatly in a way that wouldn’t show up using just <strong>proportion of trees killed</strong>. Here, since we’re interested in how forests are regenerating, I’ll focus on instances where fires killed all trees, but I’ll show both for the sake of it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop the fire years where there was no burn</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  fire <span class="ot">&lt;-</span> fire[fire<span class="sc">$</span>area_m2 <span class="sc">&gt;</span> <span class="dv">0</span>,] <span class="co"># no fire years with no burn</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(<span class="fu">unique</span>(fire<span class="sc">$</span>fireId)) <span class="co"># how many fires occurred across the simulation?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop the fire years where there was no burn</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  fire <span class="ot">&lt;-</span> fire[fire<span class="sc">$</span>area_m2 <span class="sc">&gt;</span> <span class="dv">0</span>,] <span class="co"># no fire years with no burn</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(<span class="fu">unique</span>(fire<span class="sc">$</span>fireId)) <span class="co"># how many fires occurred across the simulation?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 27</code></pre>
+</div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  fire <span class="ot">&lt;-</span> fire <span class="sc">%&gt;%</span> </span>
@@ -829,19 +774,34 @@ div.csl-indent {
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      fire<span class="sc">$</span>prop.ba.killed[fire<span class="sc">$</span>basalArea_total <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># set to 0</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      fire<span class="sc">$</span>prop.dens.killed[fire<span class="sc">$</span>n_trees <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>However, there’s one challenge with this:</p>
-<div class="cell caption-margin">
-
+<p>However, there’s one challenge with this. Here’s the percent of stems killed across fires:</p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-stems-killed" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="index_files/figure-html/fig-stems-killed-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;1: Percent of stems killed across fires</figcaption>
+</figure>
 </div>
-<div class="cell caption-margin">
-
+</div>
+</div>
+<p>And here’s the percent basal area killed across all fires:</p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-ba-killed" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="index_files/figure-html/fig-ba-killed-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;2: Percent basal area killed across fires</figcaption>
+</figure>
+</div>
+</div>
 </div>
 <p>You’ll notice neither metric shows values that are completely equal to 100%. At first this seems like a problem, right?<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;none of our fires were stand-replacing??</p></li></div><p>This is an important nuance of the iLand fire output - <strong>n_trees_killed</strong> and <strong>basalArea_died</strong> are aggregated across the entire fire. Cells within the fire may have experienced full canopy mortality, but since we’re working with averages, it’ll be very very rare (if not impossible) for a stand to have 100% of stems killed across the entire fire.</p>
 </section>
 <section id="saving-additional-fire-output" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="saving-additional-fire-output">Saving additional fire output</h2>
-<p>We’ll need more detail, and thankfully there’s a fun way to solve this - by adding a javascript file to the <strong>scripts</strong> folder, you can add code that tells iLand to save raster files of the perimeter of each fire with additional information. Some options of things to turn on include:</p>
+<p>I’ll need more detail, and thankfully there’s a fun way to solve this - by adding a javascript file to the <strong>scripts</strong> folder, you can add code that tells iLand to save raster files of the perimeter of each fire with additional information. Some options of things to turn on include:</p>
 <ul>
 <li><strong>crownKill</strong>: fraction of the crown killed within a burned resource unit (see <a href="https://iland-model.org/wildfire" title="fire disturbance modeling">wildfire</a> ).</li>
 <li><strong>diedStemsFrac</strong>: fraction of killed trees within a burned resource unit</li>
@@ -855,10 +815,10 @@ div.csl-indent {
 </ul>
 <div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;Breaking the forth wall: discovered this output while putting together this quarto document. In future runs, I’ll turn this on and avoid some of the steps described later in the document to filter out reburns</p></li><li id="fn3"><p><sup>3</sup>&nbsp;Note that this is trees killed within burned resource units, not saplings. It still works for our purposes for a few reasons:</p>
 <ol type="1">
-<li>The likelihood that saplings survive in a burned resource unit where all trees are killed seems low (but we can go ahead and check later on)</li>
-<li>Since I’m interested in height-growth relationships, I’ll be filtering out saplings with ages older than the time since fire for the resource unit, so we should catch any that slip through (again, even if they do)</li>
+<li>The likelihood that saplings survive in a burned resource unit where all trees are killed seems low (but I can go ahead and check later on)</li>
+<li>Since I’m interested in height-growth relationships, I’ll be filtering out saplings with ages older than the time since fire for the resource unit, so I should catch any that slip through (again, even if they do)</li>
 </ol>
-</li></div><p>For this analysis, we’ll stick to <strong>diedStemsFrac</strong> - the number of trees killed within a resource unit<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. First, you need to add a function into your iLand model to tell it to save the extra output.</p>
+</li></div><p>For this analysis, I’ll stick to <strong>diedStemsFrac</strong> - the number of trees killed within a resource unit<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. First, you need to add a function into your iLand model to tell it to save the extra output.</p>
 <p>The code to do so is the following:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">afterFireProcessing</span>() {</span>
@@ -870,29 +830,282 @@ div.csl-indent {
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Add this in to a javascript file within the <strong>Scripts</strong> folder in your iLand folder ecosystem, and enable &lt;management&gt; under &lt;/model&gt; in your project file. Now, if you set up a <strong>“dead”</strong> folder in your output, a raster of values of stems killed will save after each fire.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
-<div class="no-row-height column-margin column-container"><li id="fn4"><p><sup>4</sup>&nbsp;To track other items from the list of variables above, call a new Fire.grid() within the afterFireProcessing function and give it a unique save destination</p></li></div><p>In order to filter our sapling output by the cells that experienced canopy-replacing fire, we can filter not only by the rasters (the footprint of the fire), but by the value of <strong>diedStemsFraction</strong> variable within each raster pixel (which represent resource units in the iLand landscape).</p>
-<p>Then, load the fire perimeters into R:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># stacking fire spread files</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>      path <span class="ot">=</span> <span class="st">"D:/workspace/Kate/iland/model/output/dead/snapshot42"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>      fire_maps <span class="ot">=</span> <span class="fu">rast</span>(<span class="fu">list.files</span>(path, <span class="at">full.names =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The function <strong>rast()</strong> from the <em>terra</em> package <span class="citation" data-cites="terra">(<a href="#ref-terra" role="doc-biblioref">Hijmans 2023</a>)</span> creates a <strong>SpatRaster</strong> object, a object type in R that can represent multi-layer or multi-variable raster data. Here, the object <strong>fire_maps</strong> we just created is a three-dimensional raster - the first two dimensions are the x and y axis of our iLand landscape and the third dimension is 27 layers of fire perimeters (one for each fire within the simulation). Each pixel within that raster represents an individual resource unit from the iLand landscape and contains a value from 0 -1, representing <strong>diedStemsFrac.</strong></p>
+<div class="no-row-height column-margin column-container"><li id="fn4"><p><sup>4</sup>&nbsp;To track other items from the list of variables above, call a new Fire.grid() within the afterFireProcessing function and give it a unique save destination</p></li></div><p>In order to filter our sapling output by the cells that experienced canopy-replacing fire, I can filter not only by the rasters (the footprint of the fire), but by the value of <strong>diedStemsFraction</strong> variable within each raster pixel (which represent resource units in the iLand landscape).</p>
+<p>The function <strong>rast()</strong> from the <em>terra</em> package <span class="citation" data-cites="terra">(<a href="#ref-terra" role="doc-biblioref">Hijmans 2023</a>)</span> creates a <strong>SpatRaster</strong> object, a object type in R that can represent multi-layer or multi-variable raster data. Here, the object <strong>fire_maps</strong> is a three-dimensional raster - the first two dimensions are the x and y axis of our iLand landscape and the third dimension is 27 layers of fire perimeters (one for each fire within the simulation). Each pixel within that raster represents an individual resource unit from the iLand landscape and contains a value from 0 -1, representing <strong>diedStemsFrac.</strong></p>
 <div class="no-row-height column-margin column-container"><div id="ref-terra" class="csl-entry" role="listitem">
 Hijmans, Robert J. 2023. <span>“Terra: Spatial Data Analysis.”</span> <a href="https://CRAN.R-project.org/package=terra">https://CRAN.R-project.org/package=terra</a>.
-</div></div><div class="cell tbl-cap-location-margin" data-tbl-cap="Values of fire_maps SpatRaster">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fire_maps </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nlyr</span>(fire_maps) <span class="co"># 27 layers, one for each fire</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">values</span>(fire_maps)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div><div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fire_maps </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class       : SpatRaster 
+dimensions  : 239, 255, 27  (nrow, ncol, nlyr)
+resolution  : 100, 100  (x, y)
+extent      : 462504.2, 488004.2, 7215242, 7239142  (xmin, xmax, ymin, ymax)
+coord. ref. :  
+source      : fire_maps.tif 
+names       : dead_1, dead_10, dead_11, dead_12, dead_13, dead_14, ... 
+min values  :      0,       0,       0,       0,       0,       0, ... 
+max values  :      1,       1,       1,       1,       1,       1, ... </code></pre>
 </div>
-<p>We can call on each of those 27 layers to examine the fire perimeters one by one. For example, this is the fire perimeter from the first fire in the simulation:</p>
-<div class="cell caption-margin">
-
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nlyr</span>(fire_maps) <span class="co"># 27 layers, one for each fire</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 27</code></pre>
 </div>
-<p>We’ll use these rasters to determine which resource units experienced stand-replacing fire<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, and use those resource unit IDs to filter the sapling and tree data.</p>
-<div class="no-row-height column-margin column-container"><li id="fn5"><p><sup>5</sup>&nbsp;Which we can now define more specifically as <strong>diedStemFrac</strong> = 1</p></li></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">values</span>(fire_maps)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">dead_1</th>
+<th style="text-align: right;">dead_10</th>
+<th style="text-align: right;">dead_11</th>
+<th style="text-align: right;">dead_12</th>
+<th style="text-align: right;">dead_13</th>
+<th style="text-align: right;">dead_14</th>
+<th style="text-align: right;">dead_15</th>
+<th style="text-align: right;">dead_16</th>
+<th style="text-align: right;">dead_17</th>
+<th style="text-align: right;">dead_18</th>
+<th style="text-align: right;">dead_19</th>
+<th style="text-align: right;">dead_2</th>
+<th style="text-align: right;">dead_20</th>
+<th style="text-align: right;">dead_21</th>
+<th style="text-align: right;">dead_22</th>
+<th style="text-align: right;">dead_23</th>
+<th style="text-align: right;">dead_24</th>
+<th style="text-align: right;">dead_25</th>
+<th style="text-align: right;">dead_26</th>
+<th style="text-align: right;">dead_27</th>
+<th style="text-align: right;">dead_3</th>
+<th style="text-align: right;">dead_4</th>
+<th style="text-align: right;">dead_5</th>
+<th style="text-align: right;">dead_6</th>
+<th style="text-align: right;">dead_7</th>
+<th style="text-align: right;">dead_8</th>
+<th style="text-align: right;">dead_9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>I can call on each of those 27 layers to examine the fire perimeters one by one. For example, this is the fire perimeter from the first fire in the simulation:</p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-fireEx1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="index_files/figure-html/fig-fireEx1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;3: Fire Perimeter of first fire in spin-up simulation. The color gradient represents diedStemsFrac as a value from 0 to 1.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>I’ll use these rasters to determine which resource units experienced stand-replacing fire<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, and use those resource unit IDs to filter the sapling and tree data.</p>
+<div class="no-row-height column-margin column-container"><li id="fn5"><p><sup>5</sup>&nbsp;Which I can now define more specifically as <strong>diedStemFrac</strong> = 1</p></li></div><div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -902,10 +1115,10 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>An aside: this run is a spin-up simulation - I ran iLand, initializing forests from an empty landscape<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> in year 0, and simulated forest growth and fire over 300 years. This seems to be the sweet spot for simulation runs - at year 300, we have a landscape full of a mix of mature, regenerating and recently burned stands, just as we’d observe in real life. Since fires that occur early in the spin-up inherently burn young stands, it’s not terribly representative of the relationship between height and age in regrowth that we want to eventually compare to the herbivore-impacted relationship. So, we’ll filter to just the last 100 years of the simulation.</p>
+<p>An aside: this run is a spin-up simulation - I ran iLand, initializing forests from an empty landscape<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> in year 0, and simulated forest growth and fire over 300 years. This seems to be the sweet spot for simulation runs - at year 300, it’s a landscape full of a mix of mature, regenerating and recently burned stands, just as we’d observe in real life. Since fires that occur early in the spin-up inherently burn young stands, it’s not terribly representative of the relationship between height and age in regrowth that I want to eventually compare to the herbivore-impacted relationship. So, I’ll filter to just the last 100 years of the simulation.</p>
 </div>
 </div>
-<div class="no-row-height column-margin column-container"><li id="fn6"><p><sup>6</sup>&nbsp;An aside to the aside (meta!!) - it’s an empty landscape in the sense that there are no trees in year 0, but we do initialize using a soil organic layer that varies heterogeneously across the landscape. This isn’t just to represent real life for real life’s sake - initializing from truly empty (truly bare ground) causes totally different patterns of forests. As has been shown in decades of work in Alaska by Jill Johnstone and others, soil organic layer filters forest community composition in really critical ways, allowing spruce to outcompete species like birch and aspen which can’t persist in thick soil or moss layers for as long.</p></li></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="no-row-height column-margin column-container"><li id="fn6"><p><sup>6</sup>&nbsp;An aside to the aside (meta!!) - it’s an empty landscape in the sense that there are no trees in year 0, but I do initialize using a soil organic layer that varies heterogeneously across the landscape. This isn’t just to represent real life for real life’s sake - initializing from truly empty (truly bare ground) causes totally different patterns of forests. As has been shown in decades of work in Alaska by Jill Johnstone and others, soil organic layer filters forest community composition in really critical ways, allowing spruce to outcompete species like birch and aspen which can’t persist in thick soil or moss layers for as long.</p></li></div><div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -919,14 +1132,16 @@ Note
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filtering to last 100 years of fire</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  fire100 <span class="ot">&lt;-</span> fire <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">&gt;</span><span class="dv">200</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(<span class="fu">unique</span>(fire100<span class="sc">$</span>fireId)) <span class="co"># How many fires in the last 100 years?</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># dropping layers from fire raster</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  fire_maps100 <span class="ot">&lt;-</span> <span class="fu">subset</span>(fire_maps, </span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">paste0</span>(<span class="st">"dead_"</span>, fire100<span class="sc">$</span>fireId))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filtering to last 100 years of fire</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  fire100 <span class="ot">&lt;-</span> fire <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">&gt;</span><span class="dv">200</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(<span class="fu">unique</span>(fire100<span class="sc">$</span>fireId)) <span class="co"># How many fires in the last 100 years?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># dropping layers from fire raster</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  fire_maps100 <span class="ot">&lt;-</span> <span class="fu">subset</span>(fire_maps, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">paste0</span>(<span class="st">"dead_"</span>, fire100<span class="sc">$</span>fireId))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -935,117 +1150,185 @@ Note
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>you can take the girl out of the Reburn PhD, but you can’t take the Reburn PhD out of the girl</p>
-</div><li id="fn7"><p><sup>7</sup>&nbsp;Particularly since the historic fire return interval for this system was somewhere between 100-300 years <span class="citation" data-cites="kelly2013">(<a href="#ref-kelly2013" role="doc-biblioref"><strong>kelly2013?</strong></a>)</span></p></li></div><p>Even within the relatively narrow window of 100 years<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, reburning occurs within the model! Here’s the footprint of all fires in the last 100 years of the spin up - you can see there’s some considerable overlap, or reburning.</p>
-<div class="cell caption-margin">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># setting background to NA to make transparent</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  fire_mapsNA <span class="ot">&lt;-</span> <span class="fu">subst</span>(fire_maps100, <span class="dv">0</span>, <span class="cn">NA</span>) <span class="co"># need to do this anyways but now it'll let us stack</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[<span class="st">"dead_18"</span>])</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[<span class="st">"dead_19"</span>], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[<span class="st">"dead_20"</span>], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[<span class="st">"dead_21"</span>], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[<span class="st">"dead_22"</span>], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[<span class="st">"dead_23"</span>], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[<span class="st">"dead_24"</span>], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[<span class="st">"dead_25"</span>], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[<span class="st">"dead_26"</span>], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[<span class="st">"dead_27"</span>], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><li id="fn7"><p><sup>7</sup>&nbsp;what makes it narrow is the historic fire return interval for this system was somewhere between 100-300 years <span class="citation" data-cites="kelly2013">(<a href="#ref-kelly2013" role="doc-biblioref"><strong>kelly2013?</strong></a>)</span></p></li></div><p>Even within the relatively narrow window of 100 years<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, reburning occurs within the model! Here’s the footprint of all fires in the last 100 years of the spin up - you can see there’s some considerable overlap, or reburning.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># setting background to NA to make transparent</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  fire_mapsNA <span class="ot">&lt;-</span> <span class="fu">subst</span>(fire_maps100, <span class="dv">0</span>, <span class="cn">NA</span>) <span class="co"># need to do this anyways but now it'll let us stack</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[[<span class="dv">1</span>]])</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[[<span class="dv">2</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[[<span class="dv">3</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[[<span class="dv">4</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[[<span class="dv">5</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[[<span class="dv">6</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[[<span class="dv">7</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[[<span class="dv">8</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[[<span class="dv">9</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-fire_overlap" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="index_files/figure-html/fig-fire_overlap-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;4: All fire perimeters from the last 100 years of the spin-up simulation.</figcaption>
+</figure>
+</div>
+</div>
 </div>
 <section id="determining-overlap-between-rasters-using-the-terra-package" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="determining-overlap-between-rasters-using-the-terra-package">Determining overlap between rasters using the <em>terra</em> package</h2>
-<p>Since for this analysis we’re interested in the relationship between height and age, we’ll need to filter out stands that burned shortly<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> after preceding fires - a disturbance pattern which would definitely impact age-height relationships. We’ll need to figure out where the overlaps actually occur, so we can exclude the corresponding resource units from the sapling and tree data later. I’ll do this process in two ways: 1) by looking at the physical overlap between the entirety of the fire perimeters, 2) by looking only at the overlap between high severity fires.</p>
+<p>Since for this analysis I’m interested in the relationship between height and age, I’ll need to filter out stands that burned shortly<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> after preceding fires - a disturbance pattern which would definitely impact age-height relationships. I’ll need to figure out where the overlaps actually occur, so I can exclude the corresponding resource units from the sapling and tree data later. I’ll do this process in two ways: 1) by looking at the physical overlap between the entirety of the fire perimeters, 2) by looking only at the overlap between high severity fires.</p>
 <div class="no-row-height column-margin column-container"><li id="fn8"><p><sup>8</sup>&nbsp;Typically, “short-interval” fire in the boreal is defined as 50 years or less between fires <span class="citation" data-cites="buma2022">(<a href="#ref-buma2022" role="doc-biblioref">Buma et al. 2022</a>)</span>. Since I’m looking across a window of 100 years, I’m assuming everything that reburns in that 100 years is “short-interval” - I haven’t looked to see if there’s resource units that burn in year 1 and reburn in year 99, and maybe I’ll do that down the line, but right now I don’t want to bother.</p><div id="ref-buma2022" class="csl-entry" role="listitem">
 Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires Increasing in the Alaskan Boreal Forest as Fire Self-Regulation Decays Across Forest Types.”</span> <em>Scientific Reports</em> 12 (1): 4901. <a href="https://doi.org/10.1038/s41598-022-08912-8">https://doi.org/10.1038/s41598-022-08912-8</a>.
 </div></li></div><p>The <strong>intersect()</strong> function in <em>terra</em> is useful for checking overlap, but only takes two rasters at a time:</p>
-<div class="cell caption-margin">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>overlap <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">intersect</span>(fire_mapsNA[[<span class="st">"dead_18"</span>]],</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                            fire_mapsNA[[<span class="st">"dead_19"</span>]])</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(overlap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>overlap <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">intersect</span>(fire_mapsNA[[<span class="dv">1</span>]],</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                            fire_mapsNA[[<span class="dv">2</span>]])</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(overlap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-cap-margin" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="index_files/figure-html/fig-cap-margin-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;5: Overlap between first two fires</figcaption>
+</figure>
+</div>
+</div>
 </div>
 <p>Turns out, the best way I’ve found to quickly check which rasters overlap actually involves <em>terra</em>’s <strong>mosaic()</strong> function:</p>
-<div class="cell caption-margin">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split all the layers into a list</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>mapList <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">split</span>(fire_mapsNA, <span class="dv">1</span><span class="sc">:</span><span class="fu">nlyr</span>(fire_mapsNA))</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># turn list into SpatRaster Collection</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>mapSPC <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">sprc</span>(mapList) </span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># merge values across layers</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>reburn <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">mosaic</span>(mapSPC, <span class="at">fun =</span> <span class="st">"sum"</span>) <span class="co"># can apply a number of functions (mean, etc)</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(reburn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split all the layers into a list</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>mapList <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">split</span>(fire_mapsNA, <span class="dv">1</span><span class="sc">:</span><span class="fu">nlyr</span>(fire_mapsNA))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># turn list into SpatRaster Collection</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>mapSPC <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">sprc</span>(mapList) </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># merge values across layers</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>reburn <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">mosaic</span>(mapSPC, <span class="at">fun =</span> <span class="st">"sum"</span>) <span class="co"># can apply a number of functions (mean, etc)</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(reburn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-mosaic" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="index_files/figure-html/fig-mosaic-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;6: Using mosaic() to collapse layers</figcaption>
+</figure>
 </div>
-<p>Yay!! Okay!! Now, if we set all the values of the layers to 1, we’ll end up with a raster of number of fires.</p>
+</div>
+</div>
+<p>Yay!! Okay!! Now, if I set all the values of the layers to 1, I’ll end up with a raster of number of fires.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>perim <span class="ot">&lt;-</span> fire_maps100 <span class="sc">&gt;</span> <span class="dv">0</span> <span class="co"># exclude unburned values</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># setting all values to 1 regardless of diedStemFrac</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>perim <span class="ot">&lt;-</span> <span class="fu">subst</span>(perim, <span class="cn">TRUE</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>) <span class="co"># everything else NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>perim <span class="ot">&lt;-</span> fire_maps100 <span class="sc">&gt;</span> <span class="dv">0</span> <span class="co"># exclude unburned values</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># setting all values to 1 regardless of diedStemFrac</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>perim <span class="ot">&lt;-</span> <span class="fu">subst</span>(perim, <span class="cn">TRUE</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>) <span class="co"># everything else NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell caption-margin">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split all the layers into a list</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>perimList <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">split</span>(perim, <span class="dv">1</span><span class="sc">:</span><span class="fu">nlyr</span>(perim))</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># turn list into SpatRaster Collection</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>perimSPC <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">sprc</span>(perimList) </span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># merge values across layers</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>nFire <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">mosaic</span>(perimSPC, <span class="at">fun =</span> <span class="st">"sum"</span>)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nFire)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split all the layers into a list</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>perimList <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">split</span>(perim, <span class="dv">1</span><span class="sc">:</span><span class="fu">nlyr</span>(perim))</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># turn list into SpatRaster Collection</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>perimSPC <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">sprc</span>(perimList) </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># merge values across layers</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>nFire <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">mosaic</span>(perimSPC, <span class="at">fun =</span> <span class="st">"sum"</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nFire)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-reburnhist" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="index_files/figure-html/fig-reburnhist-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;7: Reburn history</figcaption>
+</figure>
 </div>
-<p>yay!! Now we can filter by the value of <strong>nFire</strong> to get the specific resource units that burned and eventually exclude them for the analysis.</p>
+</div>
+</div>
+<p>yay!! Now I can filter by the value of <strong>nFire</strong> to get the specific resource units that burned and eventually exclude them for the analysis.</p>
 </section>
 <section id="iland-reburn-trends" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="iland-reburn-trends">iLand Reburn trends</h2>
 <p>A few more exploratory tangential questions since we’re here:</p>
-<p>How much of the landscape burned once?</p>
-<div class="cell caption-margin">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>nfire1 <span class="ot">&lt;-</span> <span class="fu">subst</span>(nFire, <span class="dv">1</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nfire1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="how-much-of-the-landscape-burned-once" class="level5 page-columns page-full">
+<h5 class="anchored" data-anchor-id="how-much-of-the-landscape-burned-once">How much of the landscape burned once?</h5>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>nfire1 <span class="ot">&lt;-</span> <span class="fu">subst</span>(nFire, <span class="dv">1</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nfire1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-1xperim" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="index_files/figure-html/fig-1xperim-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;8: 1x fire perimeters</figcaption>
+</figure>
+</div>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># also bring in the environment grid </span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we'll use this to get ids for each grid</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>      env.grid <span class="ot">=</span> <span class="fu">rast</span>(<span class="st">"D:/workspace/Kate/iland/materials/env/env.grid.tif"</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># what RID burned once?</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>nfire1rid <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">mask</span>(env.grid, nfire1))</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># how many unique resource units are there?</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>domain <span class="ot">&lt;-</span> <span class="fu">ncell</span>(env.grid) <span class="co"># dimensions are 239 by 255 </span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># how many resource units burned once?</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(nfire1rid<span class="sc">$</span>env.grid)) </span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co"># so, what %?</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>((<span class="fu">length</span>(<span class="fu">unique</span>(nfire1rid<span class="sc">$</span>env.grid)) <span class="sc">/</span> domain) <span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what RID burned once?</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>nfire1rid <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">mask</span>(env.grid, nfire1))</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># how many unique resource units are there?</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>domain <span class="ot">&lt;-</span> <span class="fu">ncell</span>(env.grid) <span class="co"># dimensions are 239 by 255 </span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># how many resource units burned once?</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(nfire1rid<span class="sc">$</span>env.grid)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 13300</code></pre>
 </div>
-<p>How much burned twice?</p>
-<div class="cell caption-margin">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>nfire2 <span class="ot">&lt;-</span> <span class="fu">subst</span>(nFire, <span class="dv">2</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nfire2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># so, what %?</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>((<span class="fu">length</span>(<span class="fu">unique</span>(nfire1rid<span class="sc">$</span>env.grid)) <span class="sc">/</span> domain) <span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 21.8</code></pre>
+</div>
+</div>
+</section>
+<section id="how-much-burned-twice" class="level5 page-columns page-full">
+<h5 class="anchored" data-anchor-id="how-much-burned-twice">How much burned twice?</h5>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>nfire2 <span class="ot">&lt;-</span> <span class="fu">subst</span>(nFire, <span class="dv">2</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nfire2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-2xperim" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="index_files/figure-html/fig-2xperim-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;9: 2x fire perimeters</figcaption>
+</figure>
+</div>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what RID burned twice?</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>nfire2rid <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">mask</span>(env.grid, nfire2))</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># so, what %?</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>((<span class="fu">length</span>(<span class="fu">unique</span>(nfire2rid<span class="sc">$</span>env.grid)) <span class="sc">/</span> domain) <span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what RID burned twice?</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>nfire2rid <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">mask</span>(env.grid, nfire2))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># so, what %?</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>((<span class="fu">length</span>(<span class="fu">unique</span>(nfire2rid<span class="sc">$</span>env.grid)) <span class="sc">/</span> domain) <span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.8</code></pre>
 </div>
-<p>How much burned three times?</p>
-<div class="cell caption-margin">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>nfire3 <span class="ot">&lt;-</span> <span class="fu">subst</span>(nFire, <span class="dv">3</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nfire3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="how-much-burned-three-times" class="level5 page-columns page-full">
+<h5 class="anchored" data-anchor-id="how-much-burned-three-times">How much burned three times?</h5>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>nfire3 <span class="ot">&lt;-</span> <span class="fu">subst</span>(nFire, <span class="dv">3</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nfire3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-3xperim" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="index_files/figure-html/fig-3xperim-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;10: 3x fire perimeters</figcaption>
+</figure>
+</div>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what RID burned thrice?</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>nfire3rid <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">mask</span>(env.grid, nfire3))</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># so, what %?</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>((<span class="fu">length</span>(<span class="fu">unique</span>(nfire3rid<span class="sc">$</span>env.grid)) <span class="sc">/</span> domain) <span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what RID burned thrice?</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>nfire3rid <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">mask</span>(env.grid, nfire3))</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># so, what %?</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>((<span class="fu">length</span>(<span class="fu">unique</span>(nfire3rid<span class="sc">$</span>env.grid)) <span class="sc">/</span> domain) <span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8.2</code></pre>
 </div>
-<section id="comparing-iland-trends-to-mtbs-data" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="comparing-iland-trends-to-mtbs-data">Comparing iLand trends to MTBS data</h3>
+</div>
+</section>
+<section id="how-does-reburning-in-iland-compare-to-reburning-in-mtbs" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="how-does-reburning-in-iland-compare-to-reburning-in-mtbs">How does reburning in iLand compare to reburning in MTBS?</h3>
 <p>How does that compare to what we see in the real life frequency of reburning? As part of my work with reburns during my PhD, I worked on a paper with Brian Buma, Melissa Lucash and Shelby Weiss where we looked at trends in reburning across Alaska using the Monitoring Trends in Burn Severity database (MTBS) <span class="citation" data-cites="buma2022">(<a href="#ref-buma2022" role="doc-biblioref">Buma et al. 2022</a>)</span>.</p>
 <div class="no-row-height column-margin column-container"></div><p>A few important differences to cover up front:</p>
 <ul>
@@ -1053,17 +1336,109 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 <li>We used a threshold of 2 to categorize MTBS maps of burn severity into “burned” and “unburned” classifications. I don’t remember if we tested the sensitivity of our analysis to that threshold - I’m super curious how those percentages would change if we filtered to just the cells marked as high severity by MTBS.</li>
 <li>I don’t remember off the top of my head how we dealt with Ecoregion / what Ecoregion CPCRW would fall into.</li>
 </ul>
-<div id="tbl-MTBS-reburns" class="cell tbl-cap-location-margin tbl-parent anchored" data-tbl-cap="Reburn Frequency of MTBS data from 1984 - 2016, across ecoregion (Buma et al. ">
-<p><strong>?(caption)</strong></p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="tbl-MTBS-reburns" class="anchored page-columns page-full">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Ecoregion</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">% Burned Total</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">% Burned Once</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">% Burned Twice</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">% Burned Thrice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Interior forested lowlands/uplands</td>
+<td style="text-align: right;">18.7</td>
+<td style="text-align: right;">95.5</td>
+<td style="text-align: right;">4.3</td>
+<td style="text-align: right;">0.10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Yukon Flats</td>
+<td style="text-align: right;">29.5</td>
+<td style="text-align: right;">95.5</td>
+<td style="text-align: right;">4.4</td>
+<td style="text-align: right;">0.10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Interior bottomlands</td>
+<td style="text-align: right;">21.3</td>
+<td style="text-align: right;">96.4</td>
+<td style="text-align: right;">3.6</td>
+<td style="text-align: right;">0.05</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Interior highlands</td>
+<td style="text-align: right;">17.3</td>
+<td style="text-align: right;">97.7</td>
+<td style="text-align: right;">2.2</td>
+<td style="text-align: right;">0.04</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ogilvie Mountains</td>
+<td style="text-align: right;">29.2</td>
+<td style="text-align: right;">99.0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-weight: bold;">Overall</td>
+<td style="text-align: right; font-weight: bold;">19.8</td>
+<td style="text-align: right; font-weight: bold;">96.2</td>
+<td style="text-align: right; font-weight: bold;">3.7</td>
+<td style="text-align: right; font-weight: bold;">0.10</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-table-caption margin-caption">Table&nbsp;1: Reburn Frequency of MTBS data from 1984 - 2016, across ecoregion (Buma et al.</div></div>
+
+
+</div>
 </div>
 <p>Again, the reburn frequency in the 100 year interval of iLand is the following:</p>
 <div class="cell">
 
 </div>
-<div id="tbl-iLand-reburns" class="cell tbl-cap-location-margin tbl-parent anchored" data-tbl-cap="iLand Reburn Frequency ">
-<p><strong>?(caption)</strong></p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="tbl-iLand-reburns" class="anchored page-columns page-full">
+<table class="table table-sm table-striped small">
+
+<colgroup>
+<col style="width: 14%">
+<col style="width: 21%">
+<col style="width: 20%">
+<col style="width: 21%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Ecoregion</th>
+<th style="text-align: right;">% Burned Total</th>
+<th style="text-align: right;">% Burned Once</th>
+<th style="text-align: right;">% Burned Twice</th>
+<th style="text-align: right;">% Burned Thrice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">iLand</td>
+<td style="text-align: right;">33.8</td>
+<td style="text-align: right;">21.8</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">8.2</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-table-caption margin-caption">Table&nbsp;2: iLand Reburn Frequency</div></div>
 </div>
-<p>So, lower percentages than we see in the MTBS data.</p>
+</div>
+<p>So, lower percentages than in the MTBS data.</p>
 <p>An obviously incomplete spitball list of reasons reburning could be lower in iLand:</p>
 <ul>
 <li><p><strong>iLand is super stochastic?</strong> - runs vary from simulation to simulation. I can try replicating this simulation a few hundred times and averaging fire frequency across them all to see if the distribution of reburning becomes more similar to what we observe in MTBS</p></li>
@@ -1074,97 +1449,220 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 </section>
 <section id="what-about-fire-severity" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="what-about-fire-severity">What about fire severity?</h2>
-<p>Now, we can introduce one more layer: in theory, we<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> often expect reburns (or fires that burn into existing fire perimeters) to occur at diminishing severity. Depending on the window between fires, fuel availability may limit combustion in reburns. Based on that logic, are there overlaps between stands that burned at high severity?</p>
-<div class="no-row-height column-margin column-container"><li id="fn9"><p><sup>9</sup>&nbsp;we, the royal fire ecologists</p></li></div><div class="cell caption-margin">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter to just stands with high severity</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># cells with diedStemsFrac = 1</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  fire_mapsHS <span class="ot">&lt;-</span> <span class="fu">subst</span>(fire_maps100, <span class="dv">1</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="st">"dead_18"</span>]])</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="st">"dead_19"</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="st">"dead_20"</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="st">"dead_21"</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="st">"dead_22"</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="st">"dead_23"</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="st">"dead_24"</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="st">"dead_25"</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="st">"dead_26"</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="st">"dead_27"</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now, I can introduce one more layer: in theory, we<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> often expect reburns (or fires that burn into existing fire perimeters) to occur at diminishing severity. Depending on the window between fires, fuel availability may limit combustion in reburns. Based on that logic, are there overlaps between stands that burned at high severity?</p>
+<div class="no-row-height column-margin column-container"><li id="fn9"><p><sup>9</sup>&nbsp;we, the royal fire ecologists</p></li></div><div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter to just stands with high severity</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># cells with diedStemsFrac = 1</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  fire_mapsHS <span class="ot">&lt;-</span> <span class="fu">subst</span>(fire_maps100, <span class="dv">1</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="dv">1</span>]])</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="dv">2</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="dv">3</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="dv">4</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="dv">5</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="dv">6</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="dv">7</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="dv">8</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="dv">9</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-HS" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="index_files/figure-html/fig-HS-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;11: High severity fires</figcaption>
+</figure>
+</div>
+</div>
 </div>
 <p>Obviously less area there. Is there any overlap?</p>
-<div class="cell" data-fig-cap-location="margin">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split all the layers into a list</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>hsList <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">split</span>(fire_mapsHS, <span class="dv">1</span><span class="sc">:</span><span class="fu">nlyr</span>(fire_mapsHS))</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># turn list into SpatRaster Collection</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>hsSPC <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">sprc</span>(hsList) </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># merge values across layers</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>nFireHS <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">mosaic</span>(hsSPC, <span class="at">fun =</span> <span class="st">"sum"</span>)</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nFireHS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell page-columns page-full" data-fig-cap-location="margin">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split all the layers into a list</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>hsList <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">split</span>(fire_mapsHS, <span class="dv">1</span><span class="sc">:</span><span class="fu">nlyr</span>(fire_mapsHS))</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># turn list into SpatRaster Collection</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>hsSPC <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">sprc</span>(hsList) </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># merge values across layers</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>nFireHS <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">mosaic</span>(hsSPC, <span class="at">fun =</span> <span class="st">"sum"</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nFireHS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-reburnHS-count" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="index_files/figure-html/fig-reburnHS-count-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;12: Times each resource unit has burned at high severity</figcaption>
+</figure>
+</div>
+</div>
 </div>
 <p>Okay. Pretty sparse, but technically there’s still resource units that burned completely both times.</p>
-<div class="cell" data-fig-cap-location="margin">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>nfireHS2 <span class="ot">&lt;-</span> <span class="fu">subst</span>(nFireHS, <span class="dv">2</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nfireHS2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell page-columns page-full" data-fig-cap-location="margin">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>nfireHS2 <span class="ot">&lt;-</span> <span class="fu">subst</span>(nFireHS, <span class="dv">2</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nfireHS2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-reburnHS1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="index_files/figure-html/fig-reburnHS1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;13: Resource Units that burned twice, each time high severity</figcaption>
+</figure>
+</div>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what RID burned twice at HS?</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>nfireHS2rid <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">mask</span>(env.grid, nfireHS2))</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># how many resource units?</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(nfireHS2rid<span class="sc">$</span>env.grid))</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># so, what %?</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>(<span class="fu">length</span>(<span class="fu">unique</span>(nfireHS2rid<span class="sc">$</span>env.grid)) <span class="sc">/</span> domain) <span class="sc">*</span><span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what RID burned twice at HS?</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>nfireHS2rid <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">mask</span>(env.grid, nfireHS2))</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># how many resource units?</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(nfireHS2rid<span class="sc">$</span>env.grid))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># so, what %?</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>(<span class="fu">length</span>(<span class="fu">unique</span>(nfireHS2rid<span class="sc">$</span>env.grid)) <span class="sc">/</span> domain) <span class="sc">*</span><span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01312659</code></pre>
+</div>
 </div>
 <p>I’m curious about the years that burned twice at high severity. What’s the interval between them?</p>
-<p>To get back to years, we’ll have to use the list of RIDs to find <em>fireID</em> in the <strong>fire_maps</strong> object, and then use <em>fireID</em> to look in the original fire output from iLand. Essentially, retracing our steps. I’ll start by converting the object containing resource units that burned twice at high severity (<strong>nfireHS2</strong>) back to a polygon, so I can use <em>terra</em>’s <strong>extract()</strong> function to pull information from fire_maps.</p>
+<p>To get back to years, I’ll have to use the list of RIDs to find <em>fireID</em> in the <strong>fire_maps</strong> object, and then use <em>fireID</em> to look in the original fire output from iLand. Essentially, retracing our steps. I’ll start by converting the object containing resource units that burned twice at high severity (<strong>nfireHS2</strong>) back to a polygon, so I can use <em>terra</em>’s <strong>extract()</strong> function to pull information from fire_maps.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>nfireHS2poly <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">as.polygons</span>(nfireHS2)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nfireHS2poly)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>fire_mapsHS2 <span class="ot">&lt;-</span> <span class="fu">extract</span>(fire_maps100, nfireHS2poly)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fire_mapsHS2)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># drop ID column</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>fire_mapsHS2 <span class="ot">&lt;-</span> fire_mapsHS2 <span class="sc">%&gt;%</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>ID) <span class="sc">%&gt;%</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> <span class="fu">any</span>(. <span class="sc">!=</span> <span class="dv">0</span>)))</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(fire_mapsHS2)</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 18 reburned 19</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 18 reburned 20</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 23 reburned 27</span></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 25 reburned 27</span></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>fireHS2 <span class="ot">&lt;-</span>  fire <span class="sc">%&gt;%</span></span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(year, fireId)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(fireId <span class="sc">%in%</span> <span class="fu">as.numeric</span>(<span class="fu">str_sub</span>(<span class="fu">colnames</span>(fire_mapsHS2), <span class="sc">-</span><span class="dv">2</span>))) </span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>fireHS2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>nfireHS2poly <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">as.polygons</span>(nfireHS2)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nfireHS2poly)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/interval between HS reburn-1.png" class="img-fluid" width="672"></p>
 </div>
-</section>
-</section>
-<section id="filtering-sapling-by-high-severity-fire" class="level1">
-<h1>Filtering sapling by high severity fire</h1>
-<p>Now, we want to use the row id numbers from the <strong>fire_mapsHS</strong> object to filter out rows in the <strong>sapling</strong> and <strong>stand</strong> output that burned at high severity. The following code loops through each of the fire maps, extracting the resource unit ID numbers, the fire ID and the fire year (which come from the default fire output) and compiling into a dataframe, <strong>fireID</strong>. What fraction of the landscape burned at high severity? (ie, how many resource units?)</p>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fire_mapsHS2 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(fire_maps100, nfireHS2poly)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fire_mapsHS2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID dead_19 dead_20 dead_21   dead_22 dead_23 dead_24 dead_25 dead_26 dead_27
+1  1       0       0       0 0.9005525       0       1       0       1       0
+2  1       0       0       0 0.8333333       0       1       0       1       0
+3  1       0       0       0 0.8809524       0       1       0       1       0
+4  1       0       0       0 0.9444444       0       1       0       1       0
+5  1       0       0       0 0.8918919       0       1       0       1       0
+6  1       0       0       0 0.9545454       0       1       0       1       0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop ID column</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>fire_mapsHS2 <span class="ot">&lt;-</span> fire_mapsHS2 <span class="sc">%&gt;%</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>ID) <span class="sc">%&gt;%</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> <span class="fu">any</span>(. <span class="sc">!=</span> <span class="dv">0</span>)))</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(fire_mapsHS2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">dead_22</th>
+<th style="text-align: right;">dead_24</th>
+<th style="text-align: right;">dead_26</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.9005525</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.8333333</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.8809524</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9444444</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.8918919</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9545454</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 18 reburned 19</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 18 reburned 20</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 23 reburned 27</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 25 reburned 27</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>fireHS2 <span class="ot">&lt;-</span>  fire <span class="sc">%&gt;%</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(year, fireId)) <span class="sc">%&gt;%</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(fireId <span class="sc">%in%</span> <span class="fu">as.numeric</span>(<span class="fu">str_sub</span>(<span class="fu">colnames</span>(fire_mapsHS2), <span class="sc">-</span><span class="dv">2</span>))) </span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>fireHS2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+   year fireId
+  &lt;int&gt;  &lt;int&gt;
+1   229     22
+2   273     24
+3   290     26</code></pre>
+</div>
+</div>
+<p>Now, I want to use the row id numbers from the <strong>fire_mapsHS</strong> object to filter out rows in the <strong>sapling</strong> and <strong>stand</strong> output that burned at high severity. The following code loops through each of the fire maps, extracting the resource unit ID numbers, the fire ID and the fire year (which come from the default fire output) and compiling into a dataframe, <strong>fireID</strong>. What fraction of the landscape burned at high severity? (ie, how many resource units?)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how many unique resource units are there?</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>domain <span class="ot">&lt;-</span> <span class="fu">ncell</span>(env.grid) <span class="co"># dimensions are 239 by 255 </span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># how many resource units burned at HS?</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(fireID<span class="sc">$</span>rid)) </span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># so, what %?</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>(<span class="fu">length</span>(<span class="fu">unique</span>(fireID<span class="sc">$</span>rid)) <span class="sc">/</span> domain) <span class="sc">*</span><span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>fireID <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(fire100)) {</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Skip fires that burned nothing</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (fire100<span class="sc">$</span>area_m2[i] <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>    mask <span class="ot">&lt;-</span> fire_mapsHS[[<span class="fu">paste0</span>(<span class="st">"dead_"</span>, fire100<span class="sc">$</span>fireId[i])]]</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use the mask to extract the rids for burned grids</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>    burned_rids <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">mask</span>(env.grid, mask))</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>    burned_rids<span class="ot">=</span> burned_rids<span class="sc">%&gt;%</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(env.grid))</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>    burned_rids<span class="sc">$</span>year<span class="ot">=</span>fire100<span class="sc">$</span>year[i]</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>    burned_rids<span class="sc">$</span>fireID <span class="ot">=</span> fire100<span class="sc">$</span>fireId[i]</span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>  fireID <span class="ot">=</span> <span class="fu">rbind</span>(fireID, burned_rids)</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>fireID <span class="ot">=</span> fireID <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="st">"rid"</span> <span class="ot">=</span> env.grid, <span class="st">"fire.year"</span> <span class="ot">=</span> year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how many unique resource units are there?</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>domain <span class="ot">&lt;-</span> <span class="fu">ncell</span>(env.grid) <span class="co"># dimensions are 239 by 255 </span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co"># how many resource units burned at HS?</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(fireID<span class="sc">$</span>rid)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 622</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># so, what %?</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>(<span class="fu">length</span>(<span class="fu">unique</span>(fireID<span class="sc">$</span>rid)) <span class="sc">/</span> domain) <span class="sc">*</span><span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.020592</code></pre>
+</div>
 </div>
 <p>So, only about 1% of the landscape burned at high severity across the 100 year simulation window. (Though, technically that would be an underestimate since it doesn’t take into account the resource units that reburned).</p>
+</section>
 </section>
 <section id="session-info" class="level1">
 <h1>Session Info</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.3.3 (2024-02-29)
 Platform: aarch64-apple-darwin20 (64-bit)
@@ -1198,9 +1696,9 @@ loaded via a namespace (and not attached):
 [21] yaml_2.3.8        tools_4.3.3       tzdb_0.4.0        colorspace_2.1-0 
 [25] vctrs_0.6.5       R6_2.5.1          lifecycle_1.0.4   htmlwidgets_1.6.4
 [29] pkgconfig_2.0.3   pillar_1.9.0      gtable_0.3.4      glue_1.7.0       
-[33] Rcpp_1.0.12       systemfonts_1.0.6 xfun_0.43         tidyselect_1.2.1 
-[37] rstudioapi_0.16.0 knitr_1.45        htmltools_0.5.8   rmarkdown_2.26   
-[41] svglite_2.1.3     compiler_4.3.3   </code></pre>
+[33] Rcpp_1.0.12       systemfonts_1.0.6 highr_0.10        xfun_0.43        
+[37] tidyselect_1.2.1  rstudioapi_0.16.0 knitr_1.45        htmltools_0.5.8  
+[41] rmarkdown_2.26    svglite_2.1.3     compiler_4.3.3   </code></pre>
 </div>
 </div>
 
