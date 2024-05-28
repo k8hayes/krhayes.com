@@ -78,7 +78,7 @@ To add a blog[^6], or any pages that will live under a different landing page th
 
 -   Within blog.qmd, add the following lines to the yaml code at the top:
 
-```         
+``` yml
 listing:
   contents: posts
   sort: "date desc"
@@ -94,7 +94,7 @@ Now, you'll need to add it to your site navigation:
 
 -   You should see yml code - mine looks like the following:
 
-```         
+``` yml
 project:
   type: website
 
@@ -128,8 +128,7 @@ To publish blog posts in a series, they need to be located in a subdirectory of 
 
 Within the landing page,
 
-```         
----
+``` yml
 title: "Series: ggplot2-tips"
 listing:
   contents: posts/ggplot2-tips
@@ -191,7 +190,7 @@ You can use the **\_metadata.yml** file to set options for all the files in the 
 
 Mine looks like this:
 
-```         
+``` yaml
 # freeze computational output
 # (see https://quarto.org/docs/projects/code-execution.html#freeze)
 freeze: true
@@ -220,7 +219,7 @@ comments:
 
 To make starting new posts easy, I added a folder to my posts folder called **NewPostTemplate** - the index file within has the following settings:
 
-``` {.yml .yml}
+``` {.yaml .yml .yml}
 ---
 title: "New Post Title"
 subtitle: "New Post Subtitle"
