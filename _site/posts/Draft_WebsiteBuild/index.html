@@ -166,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">May 22, 2024</p>
+        <p class="date-modified">May 28, 2024</p>
       </div>
     </div>
       
@@ -195,6 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#new-post-template" id="toc-new-post-template" class="nav-link" data-scroll-target="#new-post-template">New Post Template</a></li>
   <li><a href="#adding-comment-sections" id="toc-adding-comment-sections" class="nav-link" data-scroll-target="#adding-comment-sections">Adding Comment Sections</a></li>
   <li><a href="#setting-tufte-theme" id="toc-setting-tufte-theme" class="nav-link" data-scroll-target="#setting-tufte-theme">Setting Tufte Theme</a></li>
+  <li><a href="#packaging-data-for-blog-posts" id="toc-packaging-data-for-blog-posts" class="nav-link" data-scroll-target="#packaging-data-for-blog-posts">Packaging data for blog posts</a></li>
   </ul></li>
   <li><a href="#more-resources" id="toc-more-resources" class="nav-link" data-scroll-target="#more-resources">More Resources</a>
   <ul class="collapse">
@@ -238,21 +239,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="switching-from-blogdown-to-quarto" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="switching-from-blogdown-to-quarto">Switching from blogdown to quarto</h2>
-<section id="initiating-a-quarto-website" class="level3">
+<section id="initiating-a-quarto-website" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="initiating-a-quarto-website">Initiating a quarto website</h3>
 <p>Initiating a Quarto website is shockingly easy. Working from Rstudio, you simply open a <strong>New Project</strong>, select <strong>Quarto Website</strong>, name it something new and click <strong>Render</strong> to preview.</p>
 <p>Your Rstudio will look like this:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="images/NewWebsite.png" class="img-fluid figure-img" alt="An empty brand new quarto website"></p>
-<figcaption class="figure-caption">a brand new quarto website</figcaption>
+<figcaption class="figure-caption margin-caption">a brand new quarto website</figcaption>
 </figure>
 </div>
 <p>And your render will look like this:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="images/Render.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">off to the races</figcaption>
+<figcaption class="figure-caption margin-caption">off to the races</figcaption>
 </figure>
 </div>
 <p>That’s it. 4 steps, and you’re previewing a website with a landing page, a menu bar and two pages. Now, your render won’t be hosted anywhere but locally, but already that’s a much more easy entry than the one I remember from Hugo.</p>
@@ -266,35 +267,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Initiate a quarto file for your landing page and call it something like <strong>blog.qmd</strong></p></li>
 <li><p>Within blog.qmd, add the following lines to the yaml code at the top:</p></li>
 </ul>
-<pre><code>listing:
-  contents: posts
-  sort: "date desc"
-  type: default
-  categories: true
-  sort-ui: false
-  filter-ui: false</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">listing</span><span class="kw">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">contents</span><span class="kw">:</span><span class="at"> posts</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">sort</span><span class="kw">:</span><span class="at"> </span><span class="st">"date desc"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> default</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">sort-ui</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">filter-ui</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now, you’ll need to add it to your site navigation:</p>
 <ul>
 <li><p>Navigate to your <strong>_quarto.yml</strong> file which should have been created when you initiated the New Website process above</p></li>
 <li><p>You should see yml code - mine looks like the following:</p></li>
 </ul>
-<pre><code>project:
-  type: website
-
-website:
-  title: "Katherine Hayes"
-  navbar:
-    right:
-      - text: "About Me"
-        file: about.qmd
-    
-format:
-  html:
-    theme: cosmo
-    css: styles.css
-    toc: false
-
-editor: visual</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">website</span><span class="kw">:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Katherine Hayes"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">right</span><span class="kw">:</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">"About Me"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">file</span><span class="kw">:</span><span class="at"> about.qmd</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> cosmo</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> styles.css</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">editor</span><span class="kw">:</span><span class="at"> visual</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><p>Under navbar, add lines that specify text and file similar to the example above (so, probably <em>text: “Blog”</em> and <em>file: blog.qmd</em>)</p></li>
 <li><p>Create a folder called <strong>posts</strong> - your posts will live here, within individual folders</p></li>
@@ -308,20 +309,19 @@ editor: visual</code></pre>
 <h4 class="anchored" data-anchor-id="how-to-make-a-series">How to make a Series</h4>
 <p>To publish blog posts in a series, they need to be located in a subdirectory of the <strong>posts</strong> folder. You’ll also need a landing page. I’m writing up a series of posts on some of the model parameterization work I’ve done recently for my fire-herbivory project, so I named my series folder <strong>posts/param_series</strong> and added a landing page named <strong>param_landing.gmd</strong> (I know, creative). Make sure the landing page is located in the top directory, the one where your about / index / blog quarto documents are located.</p>
 <p>Within the landing page,</p>
-<pre><code>---
-title: "Series: ggplot2-tips"
-listing:
-  contents: posts/ggplot2-tips
-  sort: "date desc"
-  type: default
-  categories: false
-  sort-ui: false
-  filter-ui: false
-  fields: [date, title, reading-time, description]
-page-layout: full
-title-block-banner: true</code></pre>
-<p>You’ll need to modify the <strong>contents:</strong> setting within your blog.qmd file so it sees the contents of the series folder. You can do this using gllob syntax:</p>
-<p>Mine went from:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Series: ggplot2-tips"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">listing</span><span class="kw">:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">contents</span><span class="kw">:</span><span class="at"> posts/ggplot2-tips</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">sort</span><span class="kw">:</span><span class="at"> </span><span class="st">"date desc"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> default</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">sort-ui</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">filter-ui</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">fields</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">date</span><span class="kw">,</span><span class="at"> title</span><span class="kw">,</span><span class="at"> reading-time</span><span class="kw">,</span><span class="at"> description</span><span class="kw">]</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">page-layout</span><span class="kw">:</span><span class="at"> full</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">title-block-banner</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You’ll need to modify the <strong>contents:</strong> setting within your blog.qmd file so it sees the contents of the series folder. You can do this using <a href="https://quarto.org/docs/reference/globs.html">glob syntax</a> - a very fun name for what essentially means “global patterns”. ** can be used to tell quarto to look within any folder, and *.qmd will select any quarto document.</p>
+<p>Thus, you can then change your blog yml from:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Blog"</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> </span><span class="st">"An attempt at a digital garden / notebook"</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">listing</span><span class="kw">:</span></span>
@@ -333,6 +333,7 @@ title-block-banner: true</code></pre>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">contents</span><span class="kw">:</span><span class="at"> </span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> posts/**/*.qmd</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> posts/**/**/*.qmd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And it should catch any quarto documents within the nested folders.</p>
 </section>
 </section>
 </section>
@@ -356,33 +357,33 @@ title-block-banner: true</code></pre>
 <h2 class="anchored" data-anchor-id="setting-global-blog-post-theme">Setting global blog post theme</h2>
 <p>You can use the <strong>_metadata.yml</strong> file to set options for all the files in the <strong>posts</strong> folder.</p>
 <p>Mine looks like this:</p>
-<pre><code># freeze computational output
-# (see https://quarto.org/docs/projects/code-execution.html#freeze)
-freeze: true
-
-# Enable banner style title blocks
-title-block-banner: true
-
-# Default for Tufte Style
-format:
-  html:
-    toc: true
-    toc-title: Contents
-    toc-location: left
-    grid:
-      margin-width: 350px
-reference-location: margin
-citation-location: margin
-
-# Adding comment sections
-comments: 
-  utterances: 
-    repo:  k8hayes/BlogComments</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># freeze computational output</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (see https://quarto.org/docs/projects/code-execution.html#freeze)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">freeze</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Enable banner style title blocks</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">title-block-banner</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Default for Tufte Style</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc-title</span><span class="kw">:</span><span class="at"> Contents</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc-location</span><span class="kw">:</span><span class="at"> left</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">grid</span><span class="kw">:</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">margin-width</span><span class="kw">:</span><span class="at"> 350px</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">reference-location</span><span class="kw">:</span><span class="at"> margin</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">citation-location</span><span class="kw">:</span><span class="at"> margin</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding comment sections</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">comments</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">utterances</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">repo</span><span class="kw">:</span><span class="at">  k8hayes/BlogComments</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="new-post-template" class="level2">
 <h2 class="anchored" data-anchor-id="new-post-template">New Post Template</h2>
 <p>To make starting new posts easy, I added a folder to my posts folder called <strong>NewPostTemplate</strong> - the index file within has the following settings:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml yml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"New Post Title"</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> </span><span class="st">"New Post Subtitle"</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> today</span></span>
@@ -400,6 +401,11 @@ comments:
 <h2 class="anchored" data-anchor-id="setting-tufte-theme">Setting Tufte Theme</h2>
 <p>To use a Tufte-style theme in the blog posts, I’ve added the following code to my _metadata.yml file within the posts folder:</p>
 <p><code>{# Default for Tufte Style} format:   html:     toc: true     toc-title: Contents     toc-location: left     grid:       margin-width: 350px reference-location: margin citation-location: margin</code></p>
+</section>
+<section id="packaging-data-for-blog-posts" class="level2">
+<h2 class="anchored" data-anchor-id="packaging-data-for-blog-posts">Packaging data for blog posts</h2>
+<p>I tend to work with some large files, and work across multiple desktops. In order to pull in data for individual blog posts, I’ve been playing with using <strong>save.image()</strong> to collect all the files in an analysis, and save an .RData file in a folder I can reference from the blog quarto document.</p>
+<p>One quirk I haven’t sorted out yet - <strong>save.image()</strong> doesn’t save SpatRaster objects. Not sure how to deal with this yet.</p>
 </section>
 </section>
 <section id="more-resources" class="level1">
