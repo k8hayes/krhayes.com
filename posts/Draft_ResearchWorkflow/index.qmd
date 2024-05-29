@@ -1,7 +1,8 @@
 ---
-title: "Research Workflow"
-subtitle: "How I structure my notes and citations"
-date: "2024-04-15"
+title: Research Workflow
+subtitle: How I structure my notes and citations
+description: Notes on notes
+date: 2024-04-15
 categories: [Workflow]
 date-modified: last-modified
 ---
