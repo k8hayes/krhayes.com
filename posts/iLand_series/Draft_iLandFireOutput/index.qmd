@@ -1,17 +1,10 @@
 ---
-title: "Benchmarking Reburning in iLand"
-subtitle: "Using terra to quantify overlaps in fire perimeter rasters"
-date: "2024-05-28"
+title: Benchmarking Reburning in iLand
+description: Using terra to quantify overlaps in fire perimeter rasters
+subtitle: Part One in a Series on iLand benchmarking
+date: 2024-05-28
 categories: [Spatial Data Analysis, iLand, Benchmarking]
 date-modified: last-modified
-format:
-  html:
-    toc: true
-    toc-location: left
-    grid:
-      margin-width: 350px
-reference-location: margin
-citation-location: margin
 bibliography: references.bib
 ---
 
