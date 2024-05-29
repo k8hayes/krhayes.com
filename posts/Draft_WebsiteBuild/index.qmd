@@ -1,7 +1,8 @@
 ---
-title: "How I built my site"
+title: How I built my site
+description: Breaking the fourth wall
 subtitle: Migrating from blogdown to Quarto
-date: "2024-04-15"
+date: 2024-04-15
 date-modified: last-modified
 categories: [Workflow]
 ---
