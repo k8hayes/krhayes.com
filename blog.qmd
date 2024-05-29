@@ -1,5 +1,5 @@
 ---
-title: "Blog"
+title: Blog
 subtitle: "An attempt at a digital garden / notebook"
 listing:
   contents: 
