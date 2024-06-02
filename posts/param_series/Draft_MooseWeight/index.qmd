@@ -1,9 +1,9 @@
 ---
-title: "How much does a moose weigh?"
+title: How much does a moose weigh?
 subtitle: The rabbit holes of model parameterization
-date: "2024-04-12"
+date: 2024-04-12
 categories: [Model Parameterization, iLand, BITE]
-editor: visual
+date-modified: last-modified
 bibliography: references.bib
 draft: true
 ---
