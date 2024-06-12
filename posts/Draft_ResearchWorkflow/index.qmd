@@ -9,11 +9,13 @@ date-modified: last-modified
 
 I've played around with many different research workflows over the years - physical notebooks, notes stored in infinite word documents, color-coded index cards when I was a brand new undergraduate writing my first research paper. I've gone back and forth since then about whether following a system is a really important tool or whether it's a particularly creative procrastination technique. I'd like to think I've found a middle ground. My current system is automated as much as possible to cut down on the busy work of maintaining the workflow itself.
 
+![A current snapshot of my obsidian vault / annotated bibliography](Vault_Snapshot.png)
+
 # The Tools
 
 **In a sentence:** I use Obsidian, paired with zotero, to index notes in what I'd call an extremely modified [zettelkasten](https://zettelkasten.de/introduction/) approach.
 
-**In more than a sentence:**
+**In more than a sentence:** I keep notes on each article I read, linking concepts between them, and pulling together more in-depth thoughts in longer notes. Obsidian lets me save each note as a markdown file, indexed by the relevant reference in Zotero.
 
 ## Saving, filing and reading articles
 
@@ -35,21 +37,23 @@ I use three different types of notes: Reference Notes, Concept Notes and Project
 
 ### Reference notes
 
-Reference notes represent individual articles - I try to follow a structure once assigned to me as a graduate student: a paragraph or two summarizing the article, a paragraph reviewing my own thoughts as I read, a sentence of takeaways and whatever citations I'd like to keep track of in a bulleted list at the end. Reviewing an article in that way can be an undertaking - I have a lot of notes in some stage of completion, and many for which a full summary might be overkill.
+I create Reference notes for the scientific papers I read - I try to follow a structure once assigned to me as a graduate student: a paragraph or two summarizing the article, a paragraph reviewing my own thoughts as I read, a sentence of takeaways and whatever citations I'd like to keep track of in a bulleted list at the end. Reviewing an article in that way can be an undertaking - I have a lot of notes in some stage of completion, and many for which a full summary might be overkill.
 
 ### Concept notes
 
-Concept notes are the connecting ideas and concepts between reference notes - some of them are just tags (*boreal*, *fire*, *herbivory*), others turn into quick notes to mark definitions (words I had to look up, things like *autotrophic respiration* or *thermophilization*), and some end up as deep file drawers (like *moose*, which is a long list of average body weight, home range sizes, preferred forage species and other values I think I might use as parameters or citations some day).
+I create Concept notes that connect the ideas and concepts between reference notes - some of them are just tags (*boreal*, *fire*, *herbivory*), others turn into quick notes to mark definitions (words I had to look up, things like *autotrophic respiration* or *thermophilization*), and some end up as deep file drawers (like *moose*, which is a long list of average body weight, home range sizes, preferred forage species and other values I think I might use as parameters or citations some day).
 
 ### Project notes
 
-In theory, project notes are where the ideas pieced together in references and concepts start to take shape. My current project notes are named things like *How does climate change alter the dynamics of biotic disturbances?* Or S*hrub expansion in the Arctic* - ideas I've started to pull together across articles.
+I start to create project notes to keep track of broader concepts that emerge across journal papers and concepts. I have project notes named things like are named things like *How does climate change alter the dynamics of biotic disturbances?* Or S*hrub expansion in the Arctic* - ideas I've started to pull together across articles.
+
+![](ProjectNotes.png){fig-align="right"}
 
 ::: callout-note
 This is the stage where the zettelkastan method guides start to describe spontaneous idea generating - some mystical point at which all the notes start to connect in interesting ways. Depending on the blog post, sometimes the zettelkastan can feel like a sales pitch, one where the "papers just write themselves!". I have some skepticism around this - but I do agree that so far it's been really useful to have a place to sort out some of these growing ideas. Some of my more developed project notes have started to read like the introduction to a literature review or a talk, which is exciting.
 :::
 
-The payoff:
+![Some of my notes on moose](Moose_Network.png)
 
 # The weeds
 
