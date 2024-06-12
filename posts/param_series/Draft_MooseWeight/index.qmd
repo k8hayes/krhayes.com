@@ -14,11 +14,11 @@ As part of my [NSF Postdoctoral Fellowship](https://www.nsf.gov/awardsearch/show
 
 [^1]: Reader, I would love
 
-BITE (full name: BIotic disTurbance Engine) is a module built by the very smart Juha Honkankiemi (LUKE) and Werner Rammer (Technical University of Munich) to simulate a whole world of biotic disturbances [@honkaniemi2021]. The term "biotic disturbances" is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi like running canker or XX are biotic disturbances. Called "agents" for short, each of these types of biotic disturbances occur in very different numbers across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don't get into your firewood).
+BITE (full name: BIotic disTurbance Engine) is a module built by the very smart Juha Honkankiemi (LUKE) and Werner Rammer (Technical University of Munich) to simulate a whole world of biotic disturbances [@honkaniemi2021]. The term "biotic disturbances" is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi-driven pathogens like aspen running canker are biotic disturbances. Called "agents" for short, each of these types of biotic disturbances occur in very different numbers across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don't get into your firewood).
 
 While a landscape model might be able to easily represent an individual mastodon roaming across a landscape, modeling each individual fungi spore across a landscape is absolutely not possible computationally. To deal with this, BITE represents agents in units of biomass. Kilograms of mastodon move across cells within the model, uprooting kilograms of trees and consuming kilograms of spruce needles before falling into kilograms of tar pits[^2].
 
-[^2]: (technically no, though I'm sure if you thought too hard about it, you could add a raster of tar pits into the model)
+[^2]: (technically no, though I'm sure you could overthink it and implement it as a bit)
 
 This means you have two key decisions to make when starting to parameterize a new agent:
 
@@ -29,7 +29,7 @@ Like so many things in science, answering those questions is way more complicate
 
 ### How many moose are there?
 
-Because moose are so incredibly important for Alaska[^3], we have a surprisingly good grasp on their numbers - hunting keeps populations steady at about XX moose per ha in different regions. Hunters are required to provide harvest data, and while that data certainly has some limitations, it does give us a good sense year to year for the density of moose across the state.
+Because moose are such an incredibly important species in Alaska[^3], we have a surprisingly good grasp on their numbers - hunting keeps populations steady at about XX moose per ha in different regions. Hunters are required to provide harvest data, and while that data certainly has some limitations, it does give us a good sense year to year for the density of moose across the state.
 
 [^3]: Moose are a critical subsistence resource for Alaskan communities, they regulate vegetation communities and they increase tips for tour bus drivers when spotted on a tour (citation - Brian Buma)
 
