@@ -187,7 +187,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">June 8, 2024</p>
+        <p class="date-modified">June 17, 2024</p>
       </div>
     </div>
       
@@ -225,18 +225,23 @@ div.csl-indent {
 <p>As part of my <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2219248&amp;HistoricalAwards=false">NSF Postdoctoral Fellowship</a> exploring interactions between fire and biotic disturbances in Interior Alaska, I’ve spent a lot of my time in the last year parameterizing moose and hare for the model <a href="https://iland-model.org/iLand+Hub">iLand</a> using the biotic disturbance model <a href="https://iland-model.org/bite/#/">BITE</a>. This has lead to some interesting conversations over the last few months - several unsuspecting new introductions at conferences have stared at me, slightly blankly, before asking “so, there are tiny moose in your model?”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Reader, I would love</p></li><div id="ref-honkaniemi2021" class="csl-entry" role="listitem">
 Honkaniemi, Juha, Werner Rammer, and Rupert Seidl. 2021. <span>“From Mycelia to Mastodons <span></span> A General Approach for Simulating Biotic Disturbances in Forest Ecosystems.”</span> <em>Environmental Modelling &amp; Software</em> 138 (April): 104977. <a href="https://doi.org/10.1016/j.envsoft.2021.104977">https://doi.org/10.1016/j.envsoft.2021.104977</a>.
-</div></div><p>BITE (full name: BIotic disTurbance Engine) is a module built by the very smart Juha Honkankiemi (LUKE) and Werner Rammer (Technical University of Munich) to simulate a whole world of biotic disturbances <span class="citation" data-cites="honkaniemi2021">(<a href="#ref-honkaniemi2021" role="doc-biblioref">Honkaniemi, Rammer, and Seidl 2021</a>)</span>. The term “biotic disturbances” is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi like running canker or XX are biotic disturbances. Called “agents” for short, each of these types of biotic disturbances occur in very different numbers across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don’t get into your firewood).</p>
+</div></div><p>BITE (full name: BIotic disTurbance Engine) is a module built by the very smart Juha Honkankiemi (LUKE) and Werner Rammer (Technical University of Munich) to simulate a whole world of biotic disturbances <span class="citation" data-cites="honkaniemi2021">(<a href="#ref-honkaniemi2021" role="doc-biblioref">Honkaniemi, Rammer, and Seidl 2021</a>)</span>. The term “biotic disturbances” is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi-driven pathogens like aspen running canker are biotic disturbances. Called “agents” for short, each of these types of biotic disturbances occur in very different numbers across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don’t get into your firewood).</p>
 <p>While a landscape model might be able to easily represent an individual mastodon roaming across a landscape, modeling each individual fungi spore across a landscape is absolutely not possible computationally. To deal with this, BITE represents agents in units of biomass. Kilograms of mastodon move across cells within the model, uprooting kilograms of trees and consuming kilograms of spruce needles before falling into kilograms of tar pits<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
-<div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;(technically no, though I’m sure if you thought too hard about it, you could add a raster of tar pits into the model)</p></li></div><p>This means you have two key decisions to make when starting to parameterize a new agent:</p>
+<div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;(technically no, though I’m sure you could overthink it and implement it as a bit)</p></li></div><p>This means you have two key decisions to make when starting to parameterize a new agent:</p>
 <ol type="1">
 <li>How many are there?</li>
 <li>What do they weigh?</li>
 </ol>
-<p>Like so many things in science, answering those questions is way more complicated than I’d expected.</p>
+<p>Like so many things in science, answering those questions is complicated.</p>
 <section id="how-many-moose-are-there" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="how-many-moose-are-there">How many moose are there?</h3>
-<p>Because moose are so incredibly important for Alaska<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, we have a surprisingly good grasp on their numbers - hunting keeps populations steady at about XX moose per ha in different regions. Hunters are required to provide harvest data, and while that data certainly has some limitations, it does give us a good sense year to year for the density of moose across the state.</p>
-<div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;Moose are a critical subsistence resource for Alaskan communities, they regulate vegetation communities and they increase tips for tour bus drivers when spotted on a tour (citation - Brian Buma)</p></li></div><p>Managers also monitor moose populations using something called the <a href="https://www.nps.gov/articles/000/moose-abundance-estimates.htm#:~:text=In%20Alaska%20and%20Canada%2C%20moose,geospatial%20population%20estimator%20(GSPE).">geospatial population estimator protocol (GSPE)</a>. Using data from aerial count surveys, managers use GSPE and other modeling approaches to estimate populations across</p>
+<p>Because moose are such an incredibly important species in Alaska<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, we have a surprisingly good grasp on their numbers - hunting keeps populations steady at about XX moose per ha in different regions. Hunters are required to provide harvest data, and while that data certainly has some limitations, it does give us a good sense year to year for the density of moose across the state.</p>
+<div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;Moose are a critical subsistence resource for Alaskan communities, they regulate vegetation communities and they increase tips for tour bus drivers when spotted on a tour (citation - Brian Buma)</p></li><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/moose.JPG" class="img-fluid figure-img"></p>
+</figure>
+</div></div>
+<p>Managers also monitor moose populations using something called the <a href="https://www.nps.gov/articles/000/moose-abundance-estimates.htm#:~:text=In%20Alaska%20and%20Canada%2C%20moose,geospatial%20population%20estimator%20(GSPE).">geospatial population estimator protocol (GSPE)</a>. Using data from aerial count surveys, managers use GSPE and other modeling approaches to estimate populations across</p>
 <p>See [@reinking2022] for more on the important relationship between wildlife and snow and also the incredible phrasing of “snow professionals” and “snow science community”<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
 <div class="no-row-height column-margin column-container"><li id="fn4"><p><sup>4</sup>&nbsp;I love my job</p></li></div><p>All to say, we can say with some (some!) certainty that there are somewhere between XX and XX moose in Interior Alaska, about XX per acre.</p>
 </section>
@@ -289,7 +294,7 @@ LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlap
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 
-time zone: America/Anchorage
+time zone: America/Chicago
 tzcode source: internal
 
 attached base packages:
@@ -297,9 +302,9 @@ attached base packages:
 
 loaded via a namespace (and not attached):
  [1] htmlwidgets_1.6.4 compiler_4.3.3    fastmap_1.1.1     cli_3.6.2        
- [5] tools_4.3.3       htmltools_0.5.8   rstudioapi_0.16.0 yaml_2.3.8       
- [9] rmarkdown_2.26    knitr_1.45        jsonlite_1.8.8    xfun_0.44        
-[13] digest_0.6.35     rlang_1.1.3       evaluate_0.23    </code></pre>
+ [5] tools_4.3.3       htmltools_0.5.8   yaml_2.3.8        rmarkdown_2.26   
+ [9] knitr_1.45        jsonlite_1.8.8    xfun_0.44         digest_0.6.35    
+[13] rlang_1.1.3       evaluate_0.23    </code></pre>
 </div>
 </div>
 

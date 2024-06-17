@@ -25,13 +25,15 @@ This means you have two key decisions to make when starting to parameterize a ne
 1.  How many are there?
 2.  What do they weigh?
 
-Like so many things in science, answering those questions is way more complicated than I'd expected.
+Like so many things in science, answering those questions is complicated.
 
 ### How many moose are there?
 
 Because moose are such an incredibly important species in Alaska[^3], we have a surprisingly good grasp on their numbers - hunting keeps populations steady at about XX moose per ha in different regions. Hunters are required to provide harvest data, and while that data certainly has some limitations, it does give us a good sense year to year for the density of moose across the state.
 
 [^3]: Moose are a critical subsistence resource for Alaskan communities, they regulate vegetation communities and they increase tips for tour bus drivers when spotted on a tour (citation - Brian Buma)
+
+![](images/moose.JPG){.column-margin}
 
 Managers also monitor moose populations using something called the [geospatial population estimator protocol (GSPE)](https://www.nps.gov/articles/000/moose-abundance-estimates.htm#:~:text=In%20Alaska%20and%20Canada%2C%20moose,geospatial%20population%20estimator%20(GSPE).). Using data from aerial count surveys, managers use GSPE and other modeling approaches to estimate populations across
 
