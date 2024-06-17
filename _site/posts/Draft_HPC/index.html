@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-<head>
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.288">
 
-<meta charset="utf-8" />
-<meta name="generator" content="quarto-1.4.288" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<meta name="dcterms.date" content="2024-06-02">
+<meta name="description" content="New Post Description">
 
-<meta name="author" content="Kate Hayes" />
-<meta name="dcterms.date" content="2024-04-12" />
-
-<title>Katherine Hayes – How much does a moose weigh?</title>
+<title>Katherine Hayes - The Basics of High Performance Computing in Ecology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -45,7 +43,23 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-<!-- htmldependencies:E3FAD763 -->
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,35 +87,37 @@ div.csl-indent {
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css" />
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body>
+<body class="floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="/index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Katherine Hayes</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-  aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
-  onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="/about.html" rel="" target="">
+    <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">About Me</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="/blog.html" rel="" target="">
+    <a class="nav-link" href="../../blog.html" rel="" target="">
  <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../cv.pdf" rel="" target="">
+ <span class="menu-text">CV</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -111,22 +127,18 @@ div.csl-indent {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-<!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    </div>
-<!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
-  <div class="quarto-title-banner">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">How much does a moose weigh?</h1>
-                                <div class="quarto-categories">
-                <div class="quarto-category">Model Parameterization</div>
-                <div class="quarto-category">iLand</div>
+      <h1 class="title">The Basics of High Performance Computing in Ecology</h1>
+            <p class="subtitle lead">HPC not for dummies, but for ecologists who just haven’t been exposed to it yet</p>
+                  <div>
+        <div class="description">
+          New Post Description
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">workflow</div>
               </div>
                   </div>
   </div>
@@ -134,84 +146,134 @@ div.csl-indent {
   
   <div class="quarto-title-meta">
 
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Kate Hayes </p>
-            </div>
-    </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">April 12, 2024</p>
+        <p class="date">June 2, 2024</p>
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">June 2, 2024</p>
+      </div>
+    </div>
       
     </div>
     
   
-  </header>
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#defining-some-key-ideas" id="toc-defining-some-key-ideas" class="nav-link active" data-scroll-target="#defining-some-key-ideas">Defining some key ideas</a>
+  <ul class="collapse">
+  <li><a href="#what-is-a-cluster" id="toc-what-is-a-cluster" class="nav-link" data-scroll-target="#what-is-a-cluster">What is a cluster?</a></li>
+  <li><a href="#what-is-a-node" id="toc-what-is-a-node" class="nav-link" data-scroll-target="#what-is-a-node">What is a node?</a></li>
+  <li><a href="#distinct-servers-connected-to-one-another-with-a-fast-interconnect-so-data-can-be-passed-between-them-very-quickly" id="toc-distinct-servers-connected-to-one-another-with-a-fast-interconnect-so-data-can-be-passed-between-them-very-quickly" class="nav-link" data-scroll-target="#distinct-servers-connected-to-one-another-with-a-fast-interconnect-so-data-can-be-passed-between-them-very-quickly">distinct servers, connected to one another with a fast interconnect so data can be passed between them very quickly</a></li>
+  <li><a href="#what-is-a-core" id="toc-what-is-a-core" class="nav-link" data-scroll-target="#what-is-a-core">What is a core?</a></li>
+  <li><a href="#what-is-cpu" id="toc-what-is-cpu" class="nav-link" data-scroll-target="#what-is-cpu">What is CPU?</a></li>
+  <li><a href="#what-is-derecho" id="toc-what-is-derecho" class="nav-link" data-scroll-target="#what-is-derecho">What is Derecho?</a></li>
+  <li><a href="#what-is-casper" id="toc-what-is-casper" class="nav-link" data-scroll-target="#what-is-casper">What is Casper?</a></li>
+  <li><a href="#key-differences-between-casper-and-derecho" id="toc-key-differences-between-casper-and-derecho" class="nav-link" data-scroll-target="#key-differences-between-casper-and-derecho">Key Differences between Casper and Derecho:</a></li>
+  <li><a href="#how-do-you-access-derecho-casper" id="toc-how-do-you-access-derecho-casper" class="nav-link" data-scroll-target="#how-do-you-access-derecho-casper">How do you access Derecho / Casper?</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
-<section id="how-do-you-determine-the-average-weight-of-a-moose" class="level2">
-<h2>How do you determine the average weight of a moose?</h2>
-<p><em>AKA - a field ecologist discovers how heartbreaking it is to bury the enormity of work required to parameterize and benchmark a model into the supplement section of a paper</em></p>
-<p>As part of my <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2219248&amp;HistoricalAwards=false">NSF postdoctoral fellowship</a> exploring interactions between fire and biotic disturbances in Interior Alaska, I’ve spent a lot of my time in the last year parameterizing moose and hare for the model iLand using the biotic disturbance model BITE. This has lead to some interesting conversations over the last few months - several unsuspecting new introductions at conferences have stared at me, slightly blankly, before asking “so, there are tiny moose in your model?”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>BITE (full name: BIotic disTurbance Engine) is a module built by the very smart Juha Honkankiemi (LUKE) and Werner Rammer (Technical University of Munich) to simulate a whole world of biotic disturbances <span class="citation" data-cites="honkaniemi2021">(<a href="#ref-honkaniemi2021" role="doc-biblioref">Honkaniemi, Rammer, and Seidl 2021</a>)</span>. The term “biotic disturbances” is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi like running canker or XX are biotic disturbances. Called “agents” for short, each of these types of biotic disturbances occur in very different numbers across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don’t get into your firewood).</p>
-<p>While a landscape model might be able to easily represent an individual mastodon roaming across a landscape, modeling each individual fungi spore across a landscape is absolutely not possible computationally. To deal with this, BITE represents agents in units of biomass. Kilograms of mastodon move across cells within the model, uprooting kilograms of trees and consuming kilograms of spruce needles before falling into kilograms of tar pits<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
-<p>This means you have two key decisions to make when starting to parameterize a new agent:</p>
-<ol type="1">
-<li><p>how many of them are they?</p></li>
-<li><p>what do they weigh?</p></li>
-</ol>
-<p>Like so many things in science, answering those questions is way more complicated than I’d expected.</p>
-<section id="how-many-moose-are-there" class="level3">
-<h3>How many moose are there?</h3>
-<p>Because moose are so incredibly important for Alaska<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, we have a surprisingly good grasp on their numbers - hunting keeps populations steady at about XX moose per ha in different regions. Hunters are required to provide harvest data, and while that data certainly has some limitations, it does give us a good sense year to year for the density of moose across the state.</p>
-<p>Managers also monitor moose populations using something called the <a href="https://www.nps.gov/articles/000/moose-abundance-estimates.htm#:~:text=In%20Alaska%20and%20Canada%2C%20moose,geospatial%20population%20estimator%20(GSPE).">geospatial population estimator protocol (GSPE)</a>. Using data from aerial count surveys, managers use GSPE and other modeling approaches to estimate populations across</p>
-<p>See <span class="citation" data-cites="reinking2022">(<a href="#ref-reinking2022" role="doc-biblioref">Reinking et al. 2022</a>)</span> for more on the important relationship between wildlife and snow and also the incredible phrasing of “snow professionals” and “snow science community”<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
-<p>All to say, we can say with some (some!) certainty that there are somewhere between XX and XX moose in Interior Alaska, about XX per acre.</p>
+
+
+
+<section id="defining-some-key-ideas" class="level1 page-columns page-full">
+<h1>Defining some key ideas</h1>
+<p>High performance computing is the ability to process data and perform complex calculations at high speed. This is often achieved via super computers, which contain thousands of compute notes</p>
+<section id="what-is-a-cluster" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-cluster">What is a cluster?</h2>
+<p>a large computer composed of a collection of many smaller separate servers (computers) called nodes</p>
 </section>
-<section id="what-do-moose-weigh" class="level3">
-<h3>What do moose weigh?</h3>
-<p>Well, I started with the obvious route. Googling “how much does a moose weigh” doesn’t get you very far. Plus, moose body mass differs across the regions where they live - moose are generally largest in Alaska, and smaller further south <span class="citation" data-cites="pastor1988">(<a href="#ref-pastor1988" role="doc-biblioref">Pastor et al. 1988</a>)</span>. Googling “how much does a moose weigh alaska” leads to a page from the Alaska Department of Fish and Game that gives moose an average weight of 550 kilograms. They cite Bishop 1988, who puts bull moose between 540 - 680 kilograms and cows between 360 - 590 kg in Alaska.</p>
+<section id="what-is-a-node" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-node">What is a node?</h2>
 </section>
-<section id="body-mass-differs-by-gender" class="level3">
-<h3>Body Mass differs by Gender</h3>
-<p>[] puts the weight of an average moose at XX kilograms. [] points out that body mass is different between male and female moose - [] points out that body mass of female moose differs according to the number of calves they’ve produced. The number of calves they produce depends in turn on the conditions that year - was there enough food? was it warm enough?</p>
-<p>So, if moose weight depends on the gender ratio across the population, what’s the gender ratio of the moose population in Alaska? Surprisingly, we have a good grasp of this - hunting targets male moose, so populations are maintained at a level of Xx moose per in. Fish and Game reports the densities per game unit. The model landscape I use for this work falls within game unit 20A, and a 2014 report shows a ratio of</p>
-<div id="quarto-navigation-envelope" class="hidden">
-<p><span class="hidden" data-render-id="quarto-int-sidebar-title">Katherine Hayes</span> <span class="hidden" data-render-id="quarto-int-navbar-title">Katherine Hayes</span> <span class="hidden" data-render-id="quarto-int-navbar:About Me">About Me</span> <span class="hidden" data-render-id="quarto-int-navbar:/about.html">/about.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Blog">Blog</span> <span class="hidden" data-render-id="quarto-int-navbar:/blog.html">/blog.html</span></p>
-</div>
-<div id="quarto-meta-markdown" class="hidden">
-<p><span class="hidden" data-render-id="quarto-metatitle">Katherine Hayes - How much does a moose weigh?</span> <span class="hidden" data-render-id="quarto-twittercardtitle">Katherine Hayes - How much does a moose weigh?</span> <span class="hidden" data-render-id="quarto-ogcardtitle">Katherine Hayes - How much does a moose weigh?</span> <span class="hidden" data-render-id="quarto-metasitename">Katherine Hayes</span> <span class="hidden" data-render-id="quarto-twittercarddesc"></span> <span class="hidden" data-render-id="quarto-ogcardddesc"></span></p>
-</div>
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-honkaniemi2021" class="csl-entry" role="listitem">
-Honkaniemi, Juha, Werner Rammer, and Rupert Seidl. 2021. <span>“From Mycelia to Mastodons <span></span> A General Approach for Simulating Biotic Disturbances in Forest Ecosystems.”</span> <em>Environmental Modelling &amp; Software</em> 138 (April): 104977. <a href="https://doi.org/10.1016/j.envsoft.2021.104977">https://doi.org/10.1016/j.envsoft.2021.104977</a>.
-</div>
-<div id="ref-pastor1988" class="csl-entry" role="listitem">
-Pastor, John, Robert J. Naiman, Bradley Dewey, and Pamela McInnes. 1988. <span>“Moose, Microbes, and the Boreal Forest.”</span> <em>BioScience</em> 38 (11): 770–77. <a href="https://doi.org/10.2307/1310786">https://doi.org/10.2307/1310786</a>.
-</div>
-<div id="ref-reinking2022" class="csl-entry" role="listitem">
-Reinking, Adele K., Stine Højlund Pedersen, Kelly Elder, Natalie T. Boelman, Thomas W. Glass, Brendan A. Oates, Scott Bergen, et al. 2022. <span>“Collaborative Wildlife<span></span>snow Science: Integrating Wildlife and Snow Expertise to Improve Research and Management.”</span> <em>Ecosphere</em> 13 (6): e4094. <a href="https://doi.org/10.1002/ecs2.4094">https://doi.org/10.1002/ecs2.4094</a>.
-</div>
-</div>
+<section id="distinct-servers-connected-to-one-another-with-a-fast-interconnect-so-data-can-be-passed-between-them-very-quickly" class="level2">
+<h2 class="anchored" data-anchor-id="distinct-servers-connected-to-one-another-with-a-fast-interconnect-so-data-can-be-passed-between-them-very-quickly">distinct servers, connected to one another with a fast interconnect so data can be passed between them very quickly</h2>
+</section>
+<section id="what-is-a-core" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-core">What is a core?</h2>
+</section>
+<section id="what-is-cpu" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-cpu">What is CPU?</h2>
+<p>Central Processing Unit - primary component of a computer, acts as a “control center”</p>
+</section>
+<section id="what-is-derecho" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-derecho">What is Derecho?</h2>
+<p>NCAR-Wyoming Supercomputing Center</p>
+<p>All located in cheyenne not Boulder, began in 2012</p>
+<p>home to NWSC-3 Derecho Super computer</p>
+<p>cheyenne just retired, 4032 nodes</p>
+<p>derecho has more nodes but also more cores per node</p>
+<p>3.5x performance compared to cheyenne</p>
+<p>Derecho has different types of nodes</p>
+<p>- CPU-only Compute Nodes (2488 total, 318,464 total cores)</p>
+<p>- GPU Compute nodes (82 total)</p>
+<p>- Login nodes (8 total)</p>
+</section>
+<section id="what-is-casper" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-casper">What is Casper?</h2>
+<p>casper = data and viusualization system</p>
+<p>more heterogeneous node structure - not all have same tech on each node</p>
+</section>
+<section id="key-differences-between-casper-and-derecho" class="level2">
+<h2 class="anchored" data-anchor-id="key-differences-between-casper-and-derecho">Key Differences between Casper and Derecho:</h2>
+<p>Derecho - run many ilands all at once</p>
+<p>casper - can run on smaller nodes all at once</p>
+<p>need to clarify which node you want to request</p>
+<p>Think of derecho as something you use for big climate models</p>
+<p>if you compile something on derecho, it may not compile on casper and vice versa</p>
+</section>
+<section id="how-do-you-access-derecho-casper" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="how-do-you-access-derecho-casper">How do you access Derecho / Casper?</h2>
+<p>Submitting a Derecho allocation</p>
+<p>small and large allocations</p>
+<p>will it matter that I’m not at a university</p>
+<p>sign in with hayesk@ucar.edu</p>
+<p>need to submit ticket with help desk if you need to reset password [still need to reset mine]</p>
+<p>SAM = Systems accounting Manager</p>
+<p>- user settings</p>
+<p>- tells you use history</p>
+<p>can change default shell</p>
+<p>software tools on CISL for use inside HPC environment</p>
+<p>- compilers (intel)</p>
+<p>- 10 libraries (NetCDF, PNetCDF, HDF5</p>
+<p>analysis (r, python, julia)</p>
+<p>etc</p>
+<p>need to know:</p>
+<p>- how many nodes am i going to use</p>
+<p>Some of my favorite resources on Ecological coding</p>
+<ul>
+<li><span class="citation" data-cites="wilson2014">(<a href="#ref-wilson2014" role="doc-biblioref">Wilson et al. 2014</a>)</span></li>
+</ul>
+
+
+<div class="no-row-height column-margin column-container"><div id="ref-wilson2014" class="csl-entry" role="listitem">
+Wilson, Greg, D. A. Aruliah, C. Titus Brown, Neil P. Chue Hong, Matt Davis, Richard T. Guy, Steven H. D. Haddock, et al. 2014. <span>“Best Practices for Scientific Computing.”</span> Edited by Jonathan A. Eisen. <em>PLoS Biology</em> 12 (1): e1001745. <a href="https://doi.org/10.1371/journal.pbio.1001745">https://doi.org/10.1371/journal.pbio.1001745</a>.
+</div></div>
 </section>
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>I would love<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>(technically no, though I’m sure if you thought too hard about it, you could add a raster of tar pits into the model)<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Moose are a critical subsistence resource for Alaskan communities, they regulate vegetation communities and they increase tips for tour bus drivers when spotted on a tour (citation - Brian Buma)<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>I love my job<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</aside>
 
 </main> <!-- /main -->
-<script id = "quarto-html-after-body" type="application/javascript">
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -528,8 +590,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://utteranc.es/client.js" repo="k8hayes/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
 </div> <!-- /content -->
 
-</body>
 
-</html>
+
+
+</body></html>

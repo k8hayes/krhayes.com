@@ -208,6 +208,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<div class="cell">
+
+</div>
 <p>One of our family hobbies is collecting vinyl - my dad, sister and I share a Discogs(link) account, so that we can see each other’s collections. It’s fun to watch the value change over time, and can be a nice way to make sure you aren’t overpaying in some trendy new record store.</p>
 <p>I was inspired by blogs like XX and <a href="https://www.alexrabin.com/about/record-collection">this one</a> which visualize their collection in interesting ways.</p>
 <section id="discogs-data" class="level1 page-columns page-full">
@@ -367,6 +370,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Discogs has a rate limit of 60 per minute (for authenticated requests). This means the API tracks the requests over a moving average over a 60 second window which resets if no requests are made in 60 seconds. This means we’ll need to throttle our requests</p>
 <p>Not all data available on the site is available by API - Price history per release and the stats page are the big ones.</p>
 <p>With your token in hand, you can use the <strong>httr2</strong> package <span class="citation" data-cites="httr2">(<a href="#ref-httr2" role="doc-biblioref"><strong>httr2?</strong></a>)</span> to call the API with your username.</p>
+<div class="cell">
+
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>user <span class="ot">&lt;-</span> <span class="st">"ndhayes"</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>content <span class="ot">=</span> httr<span class="sc">::</span><span class="fu">GET</span>(<span class="fu">paste0</span>(<span class="st">"https://api.discogs.com/users/"</span>, user, <span class="st">"/collection/folders/0?&amp;token="</span>, token))</span>
