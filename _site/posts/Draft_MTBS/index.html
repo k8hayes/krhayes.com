@@ -167,8 +167,6 @@ div.csl-indent {
             <p class="subtitle lead">+ a primer on Alaska Fire Perimeter Data</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Spatial Data Analysis</div>
-                <div class="quarto-category">terra</div>
-                <div class="quarto-category">Alaska</div>
               </div>
                   </div>
   </div>
@@ -187,7 +185,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">May 22, 2024</p>
+        <p class="date-modified">June 18, 2024</p>
       </div>
     </div>
       
@@ -228,22 +226,22 @@ div.csl-indent {
 
 
 <p>As part of my work with the <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2215118&amp;HistoricalAwards=false">Past, Present and Future of Boreal Feedbacks</a> project, this summer I’ll be sampling forest composition and structure in forests that have reburned. One of our early goals with this project was to sample reburned forests off the road system - in part because they tend to go unsampled for obvious reasons<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and in part because we’re combining modern observations of reburned forests with lake sediment records that provide context on the last 2,500 years of forest composition, and those lakes are off the road system.</p>
-<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Alaska is big</p></li><li id="fn2"><p><sup>2</sup>&nbsp;For the record, also not how I pick field sites</p></li></div><p>Functionally, that means helicopter work (!!). Going into it, I was blinded a bit by the excitement of flying helicopters (beautiful views!!), and hadn’t braced myself for some of the challenges - helicopters can only land in so many spots, and it’s an expensive privilege, so you can’t just wander into the woods and pick a spot<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Alaska is big</p></li><li id="fn2"><p><sup>2</sup>&nbsp;For the record, also not how I pick field sites</p></li></div><p>Functionally, that means helicopter work (!!). Going into it, I was blinded a bit by the excitement of flying helicopters (beautiful views!!), and hadn’t braced myself for some of the challenges (also dangerous!!). It added pressure to picking field sites: helicopters can only land in so many spots, and it’s an expensive privilege, so you can’t just wander into the woods and pick a spot<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <p>I’ve been digging through fire perimeter datasets, trying to locate fires that overlap.</p>
 <section id="fire-perimeter-data-in-alaska" class="level1 page-columns page-full">
 <h1>Fire perimeter data in Alaska</h1>
 <p>There are functionally two forms of fire perimeter data in Alaska: the <a href="https://www.frames.gov/catalog/10465">Alaska Large Fire Database</a> (ALFD) and the <a href="https://www.mtbs.gov/">Monitoring Trends in Burn Severity (MTBS)</a> dataset (for more, see link to an incomplete glossary of Alaska data products).</p>
 <section id="alaska-large-fire-database-alfd" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="alaska-large-fire-database-alfd"><a href="https://blm-egis.maps.arcgis.com/apps/instant/portfolio/index.html?appid=4841da6a16804c07849c27ea7db2a26b">Alaska Large Fire Database</a> (ALFD)</h3>
-<p>The Alaska Large Fire Database, often referred to as “Alaska Large Fire” in my collaborative spaces for reasons I’m realizing I don’t know, is maintained by the Alaska Fire Service and contains fire perimeter data from 1942 to the present. It was developed in the 90s when collaborators from the Environmental Research institute of Michigan and the Alaska Interagency Coordination Center digitized and standardized perimeter information from fire reports that dated back to 1942 <span class="citation" data-cites="kasischke2002">(<a href="#ref-kasischke2002" role="doc-biblioref">Kasischke, Williams, and Barry 2002</a>)</span>.</p>
-<div class="no-row-height column-margin column-container"><div id="ref-kasischke2002" class="csl-entry" role="listitem">
+<p>The Alaska Large Fire Database, often referred to as “Alaska Large Fire”<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> in my collaborative spaces for reasons I’m realizing I don’t know, is maintained by the Alaska Fire Service and contains fire perimeter data from 1942 to the present. It was developed in the 90s when collaborators from the Environmental Research institute of Michigan and the Alaska Interagency Coordination Center digitized and standardized perimeter information from fire reports that dated back to 1942 <span class="citation" data-cites="kasischke2002">(<a href="#ref-kasischke2002" role="doc-biblioref">Kasischke, Williams, and Barry 2002</a>)</span>.</p>
+<div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;said quickly, all in one word</p></li><div id="ref-kasischke2002" class="csl-entry" role="listitem">
 Kasischke, Eric S., David Williams, and Donald Barry. 2002. <span>“Analysis of the Patterns of Large Fires in the Boreal Forest Region of Alaska.”</span> <em>International Journal of Wildland Fire</em> 11 (2): 131–44. <a href="https://doi.org/10.1071/wf02023">https://doi.org/10.1071/wf02023</a>.
 </div></div><p>Using ground surveys, airborne surveys and aerial or satellite photography</p>
 </section>
 <section id="monitoring-trends-in-burn-severity-mtbs" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="monitoring-trends-in-burn-severity-mtbs">Monitoring Trends in Burn Severity (MTBS)</h2>
-<p>MTBS data consists of burn severity and extent information on large fires<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> across the US from 1984 to the present. Both burn severity and fire extent are derived from Landsat or Sentinel-2 data at a spatial resolution of 30 meters and a temporal resolution of 16 days or so - images are constructed pre- and post-fire to compare Normalized Burn Ratio (NBR) or Differenced Normalized Burn Ratio (dNBR). From there, MTBS depicts severity as a gradient of vegetation response from low (not much vegetation response) to high (potentially complete combustion of vegetation)<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
-<div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;defined here as 1,000 acres or bigger in the Western US</p></li><li id="fn4"><p><sup>4</sup>&nbsp;with additional categories for unburned, increased greenness or outliers caused by clouds, shadows, water bodies, etc</p></li></div></section>
+<p>MTBS data consists of burn severity and extent information on large fires<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> across the US from 1984 to the present. Both burn severity and fire extent are derived from Landsat or Sentinel-2 data at a spatial resolution of 30 meters and a temporal resolution of 16 days or so - images are constructed pre- and post-fire to compare Normalized Burn Ratio (NBR) or Differenced Normalized Burn Ratio (dNBR). From there, MTBS depicts severity as a gradient of vegetation response from low (not much vegetation response) to high (potentially complete combustion of vegetation)<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><li id="fn4"><p><sup>4</sup>&nbsp;defined here as 1,000 acres or bigger in the Western US</p></li><li id="fn5"><p><sup>5</sup>&nbsp;with additional categories for unburned, increased greenness or outliers caused by clouds, shadows, water bodies, etc</p></li></div></section>
 <section id="difference-between-alfd-and-mtbs" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="difference-between-alfd-and-mtbs">Difference between ALFD and MTBS</h2>
 <p>Alaska Large Fire Database has been assumed to overestimate burned area within mapped fire events <span class="citation" data-cites="chen2021">(<a href="#ref-chen2021" role="doc-biblioref">Chen et al. 2021</a>)</span>, and produces consistently higher estimates of area burned across Alaska compared to MTBS.</p>
@@ -279,32 +277,40 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> smb://10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>To do that, I loaded in fire perimeters from XX and XX</p>
+<p>We’ll start with loading in the DNBR raster from the Dall City fire - this fire burned 530,717 acres in 2004.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>    <span class="co"># DallCity &lt;- rast("//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Yukon/DallCity_2004/ak6628114999320040706_20010623_20050720_dnbr6.tif")</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>DallCity <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"/Volumes/GIS/site selection 2024/targetMTBS/Yukon/DallCity_2004/ak6628114999320040706_20010623_20050720_dnbr6.tif"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>   DallCity <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"/Volumes/GIS/site selection 2024/targetMTBS/Yukon/DallCity_2004/ak6628114999320040706_20010623_20050720_dnbr6.tif"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(DallCity, <span class="at">main =</span> <span class="st">"Original"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(DallCity, <span class="at">main =</span> <span class="st">"Original"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/Yukon - Dall City-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    DallCity[DallCity[] <span class="sc">&lt;</span> <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(DallCity, <span class="at">main =</span> <span class="st">"Low"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Within that perimeter, here are the cells (again, 30 meter resolution) that burned at low severity (as defined by MTBS):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a> DallCity[DallCity[] <span class="sc">&lt;</span> <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">plot</span>(DallCity, <span class="at">main =</span> <span class="st">"Low"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/Yukon - Dall City-2.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/dall city low severity-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    DallCity[DallCity[] <span class="sc">&gt;</span> <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(DallCity, <span class="at">main =</span> <span class="st">"High"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And here’s high:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>DallCity[DallCity[] <span class="sc">&gt;</span> <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(DallCity, <span class="at">main =</span> <span class="st">"High"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/Yukon - Dall City-3.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/dall city high severity-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>    DallCityHS <span class="ot">&lt;-</span> <span class="fu">trim</span>(DallCity)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(DallCityHS, <span class="at">main =</span> <span class="st">"Trim"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, we can use the same indexing to trim down to just the high severity cells:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>DallCityHS <span class="ot">&lt;-</span> <span class="fu">trim</span>(DallCity)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(DallCityHS, <span class="at">main =</span> <span class="st">"Trim"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/Yukon - Dall City-4.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/dall city trim-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>The Dall City fire overlaps with West fork, which burned XX acres in</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>    WestFork <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Yukon/WestFork_2015/ak6635014986720150620_20140705_20160624_dnbr6.tif"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -355,6 +361,7 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 <span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>  KanBTTHS <span class="ot">&lt;-</span> <span class="fu">trim</span>(KanBTT)</span>
 <span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(KanBTTHS, <span class="at">main =</span> <span class="st">"Trim"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Next, we’ll look</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>  Evan <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Kanuti/Evansville2004/ak6687815131320040706_20020624_20050616_dnbr6.tif"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -466,13 +473,13 @@ other attached packages:
 [1] here_1.0.1   sf_1.0-16    terra_1.7-55
 
 loaded via a namespace (and not attached):
- [1] digest_0.6.35      codetools_0.2-19   fastmap_1.1.1      xfun_0.43         
+ [1] digest_0.6.35      codetools_0.2-19   fastmap_1.1.1      xfun_0.44         
  [5] magrittr_2.0.3     e1071_1.7-14       KernSmooth_2.23-22 knitr_1.45        
  [9] htmltools_0.5.8    rmarkdown_2.26     classInt_0.4-10    cli_3.6.2         
 [13] grid_4.3.3         DBI_1.2.2          proxy_0.4-27       class_7.3-22      
-[17] compiler_4.3.3     rprojroot_2.0.4    rstudioapi_0.16.0  tools_4.3.3       
-[21] evaluate_0.23      Rcpp_1.0.12        yaml_2.3.8         rlang_1.1.3       
-[25] jsonlite_1.8.8     htmlwidgets_1.6.4  units_0.8-5       </code></pre>
+[17] compiler_4.3.3     rprojroot_2.0.4    tools_4.3.3        evaluate_0.23     
+[21] Rcpp_1.0.12        yaml_2.3.8         rlang_1.1.3        jsonlite_1.8.8    
+[25] htmlwidgets_1.6.4  units_0.8-5       </code></pre>
 </div>
 </div>
 

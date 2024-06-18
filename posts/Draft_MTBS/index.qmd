@@ -1,10 +1,9 @@
 ---
-title: "Filtering MTBS perimeters by severity"
-subtitle: "+ a primer on Alaska Fire Perimeter Data"
-date: "2024-04-16"
-categories: [Spatial Data Analysis, terra, Alaska]
+title: Filtering MTBS perimeters by severity
+subtitle: + a primer on Alaska Fire Perimeter Data
+date: 2024-04-16
+categories: [Spatial Data Analysis]
 date-modified: last-modified
-draft: true
 bibliography: references.bib
 ---
 
@@ -12,7 +11,7 @@ As part of my work with the [Past, Present and Future of Boreal Feedbacks](https
 
 [^1]: Alaska is big
 
-Functionally, that means helicopter work (!!). Going into it, I was blinded a bit by the excitement of flying helicopters (beautiful views!!), and hadn't braced myself for some of the challenges - helicopters can only land in so many spots, and it's an expensive privilege, so you can't just wander into the woods and pick a spot[^2].
+Functionally, that means helicopter work (!!). Going into it, I was blinded a bit by the excitement of flying helicopters (beautiful views!!), and hadn't braced myself for some of the challenges (also dangerous!!). It added pressure to picking field sites: helicopters can only land in so many spots, and it's an expensive privilege, so you can't just wander into the woods and pick a spot[^2].
 
 [^2]: For the record, also not how I pick field sites
 
@@ -24,17 +23,19 @@ There are functionally two forms of fire perimeter data in Alaska: the [Alaska L
 
 ### [Alaska Large Fire Database](https://blm-egis.maps.arcgis.com/apps/instant/portfolio/index.html?appid=4841da6a16804c07849c27ea7db2a26b) (ALFD)
 
-The Alaska Large Fire Database, often referred to as "Alaska Large Fire" in my collaborative spaces for reasons I'm realizing I don't know, is maintained by the Alaska Fire Service and contains fire perimeter data from 1942 to the present. It was developed in the 90s when collaborators from the Environmental Research institute of Michigan and the Alaska Interagency Coordination Center digitized and standardized perimeter information from fire reports that dated back to 1942 [@kasischke2002].
+The Alaska Large Fire Database, often referred to as "Alaska Large Fire"[^3] in my collaborative spaces for reasons I'm realizing I don't know, is maintained by the Alaska Fire Service and contains fire perimeter data from 1942 to the present. It was developed in the 90s when collaborators from the Environmental Research institute of Michigan and the Alaska Interagency Coordination Center digitized and standardized perimeter information from fire reports that dated back to 1942 [@kasischke2002].
+
+[^3]: said quickly, all in one word
 
 Using ground surveys, airborne surveys and aerial or satellite photography
 
 ## Monitoring Trends in Burn Severity (MTBS)
 
-MTBS data consists of burn severity and extent information on large fires[^3] across the US from 1984 to the present. Both burn severity and fire extent are derived from Landsat or Sentinel-2 data at a spatial resolution of 30 meters and a temporal resolution of 16 days or so - images are constructed pre- and post-fire to compare Normalized Burn Ratio (NBR) or Differenced Normalized Burn Ratio (dNBR). From there, MTBS depicts severity as a gradient of vegetation response from low (not much vegetation response) to high (potentially complete combustion of vegetation)[^4].
+MTBS data consists of burn severity and extent information on large fires[^4] across the US from 1984 to the present. Both burn severity and fire extent are derived from Landsat or Sentinel-2 data at a spatial resolution of 30 meters and a temporal resolution of 16 days or so - images are constructed pre- and post-fire to compare Normalized Burn Ratio (NBR) or Differenced Normalized Burn Ratio (dNBR). From there, MTBS depicts severity as a gradient of vegetation response from low (not much vegetation response) to high (potentially complete combustion of vegetation)[^5].
 
-[^3]: defined here as 1,000 acres or bigger in the Western US
+[^4]: defined here as 1,000 acres or bigger in the Western US
 
-[^4]: with additional categories for unburned, increased greenness or outliers caused by clouds, shadows, water bodies, etc
+[^5]: with additional categories for unburned, increased greenness or outliers caused by clouds, shadows, water bodies, etc
 
 ## Difference between ALFD and MTBS
 
@@ -69,24 +70,42 @@ An aside - I'm storing these files on a remote server. The bash code below mount
 open smb://10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/
 ```
 
-To do that, I loaded in fire perimeters from XX and XX
+We'll start with loading in the DNBR raster from the Dall City fire - this fire burned 530,717 acres in 2004.
 
 ```{r Yukon - Dall City}
-    # DallCity <- rast("//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Yukon/DallCity_2004/ak6628114999320040706_20010623_20050720_dnbr6.tif")
+DallCity <- rast("/Volumes/GIS/site selection 2024/targetMTBS/Yukon/DallCity_2004/ak6628114999320040706_20010623_20050720_dnbr6.tif")
     
-   DallCity <- rast("/Volumes/GIS/site selection 2024/targetMTBS/Yukon/DallCity_2004/ak6628114999320040706_20010623_20050720_dnbr6.tif")
-    
-    plot(DallCity, main = "Original")
-    
-    DallCity[DallCity[] < 3] <- NA
-    plot(DallCity, main = "Low")
-    
-    DallCity[DallCity[] > 4] <- NA
-    plot(DallCity, main = "High")
-    
-    DallCityHS <- trim(DallCity)
-    plot(DallCityHS, main = "Trim")
+plot(DallCity, main = "Original")
 ```
+
+We'll get rid of the black border:
+
+```{r dall city black border}
+
+```
+
+Within that perimeter, here are the cells (again, 30 meter resolution) that burned at low severity (as defined by MTBS):
+
+```{r dall city low severity}
+ DallCity[DallCity[] < 3] <- NA
+ plot(DallCity, main = "Low")
+```
+
+And here's high:
+
+```{r dall city high severity}
+DallCity[DallCity[] > 4] <- NA
+plot(DallCity, main = "High")
+```
+
+Now, we can use the same indexing to trim down to just the high severity cells:
+
+```{r dall city trim}
+DallCityHS <- trim(DallCity)
+plot(DallCityHS, main = "Trim")
+```
+
+The Dall City fire overlaps with West fork, which burned XX acres in
 
 ```{r Yukon - West Fork}
 #| eval: false
@@ -141,6 +160,8 @@ To do that, I loaded in fire perimeters from XX and XX
   KanBTTHS <- trim(KanBTT)
   plot(KanBTTHS, main = "Trim")
 ```
+
+Next, we'll look
 
 ```{r Kanuti - Evansville}
 #| eval: false
