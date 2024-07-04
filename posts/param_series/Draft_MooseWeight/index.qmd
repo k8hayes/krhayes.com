@@ -1,7 +1,7 @@
 ---
 title: How much does a moose weigh?
 subtitle: The rabbit holes of model parameterization
-date: 2024-04-12
+date: 2024-07-4
 categories: [Model Parameterization, iLand, BITE]
 date-modified: last-modified
 bibliography: references.bib
@@ -14,7 +14,9 @@ As part of my [NSF Postdoctoral Fellowship](https://www.nsf.gov/awardsearch/show
 
 [^1]: Reader, I would love
 
-BITE (full name: BIotic disTurbance Engine) is a module built by the very smart Juha Honkankiemi (LUKE) and Werner Rammer (Technical University of Munich) to simulate a whole world of biotic disturbances [@honkaniemi2021]. The term "biotic disturbances" is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi-driven pathogens like aspen running canker are biotic disturbances. Called "agents" for short, each of these types of disturbances occur in very different numbers across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don't get into your firewood).
+BITE (full name: *BIotic disTurbance Engine*) is a module built by the very smart Juha Honkankiemi (LUKE) and Werner Rammer (Technical University of Munich) to simulate a whole world of biotic disturbances [@honkaniemi2021].
+
+The term "biotic disturbances" is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi-driven pathogens like aspen running canker are biotic disturbances. Called "agents" for short, each of these types of disturbances occur in very different numbers across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don't get into your firewood).
 
 While a landscape model might be able to easily represent an individual mastodon roaming across a landscape, modeling each individual fungi spore across a landscape is absolutely not possible computationally. To deal with this, BITE represents agents in units of biomass. Kilograms of mastodon move across cells within the model, uprooting kilograms of trees and consuming kilograms of spruce needles before falling into kilograms of tar pits[^2].
 
@@ -27,11 +29,11 @@ This means you have two key decisions to make when starting to parameterize a ne
 
 Answering both is complicated.
 
-### How many moose are there?
+# How many moose are there?
 
-Well, total? 2.2 million moose, according to [@moll2022]. Apparantly those 2.2 million are split pretty evenly between North America and Eurasia.
+Well, total? 2.2 million moose, according to [@moll2022]. Apparently those 2.2 million are split pretty evenly between North America and Eurasia.
 
-#### *Where do we get those numbers on moose density?*
+### *Where do we get those numbers on moose density?*
 
 It's hard to count moose. Logistically, financially, ecologically[^3].
 
@@ -59,7 +61,7 @@ You can also count moose using harvest data - hunters are required to provide da
 
 [^6]: not everyone reports
 
-### Okay, but K8, how many moose?
+## Okay, but K8, how many moose?
 
 According to Alaska Fish and Game, there are an estimated 175,000 moose in Alaska. Those 175,000 are spread out in densities anywhere from 1 to 150 moose per 30 square miles[^7]. That's over the entire state however, including tundra where moose can be quite scarce.
 
@@ -75,33 +77,35 @@ objective: 10-15,000 moose across population (adopted 2016)
 
 That brings us to the second question.
 
-### What do moose weigh?
+# What do moose weigh?
 
-Well, I started with the obvious route but googling *how much does a moose weigh* doesn't get you very far.
+Well, I started with the obvious route but googling *how much does a moose weigh* doesn't get you very far. It does tell you however, that moose are generally largest in Alaska[^8], and smaller further south [@pastor1988].
 
-Googling "how much does a moose weigh alaska" leads to a page from the Alaska Department of Fish and Game that gives moose an average weight of 550 kilograms. They cite Bishop 1988, who puts bull moose between 540 - 680 kilograms and cows between 360 - 590 kg in Alaska.
+[^8]: cue the obligatory "everything's bigger up here"
 
-#### Several factors influence moose body mass:
+## What do moose weigh in Alaska?
 
-##### Weight varies latitudinally
+Googling *how much does a moose weigh alaska* leads to a page from the Alaska Department of Fish and Game that gives moose an average weight of 550 kilograms. They cite Bishop 1988, who puts bull moose between 540 - 680 kilograms and cows between 360 - 590 kg in Alaska.
 
-Moose are generally largest in Alaska, and smaller further south \[\@pastor1988\].
-
-##### Weight varies by gender
+Why the difference between male and female?
 
 Bull moose are on average much larger than cows (CITE).
 
-##### Weight varies by age
+Obviously body mass also varies across a season[^9], across age, or depending on predator pressure. But this is the point at which I get to pull the time-honored card of *not in the scope of the research,* and move on. Maybe, if moose appear to have a critical role mitigating the impact of fire on Alaskan forests, someone will give me funding to build a more complicated model of moose population dynamics, maybe one that incorporates twinning rates and body mass[^10].
 
-##### Weight varies within a season
+[^9]: moose often put on weight in the summer, reaching "peak body mass" in the fall in preparation for the long winter (Mautz 1978, Adamczewski et al. 1987, Schwartz et al. 1987)
 
-Moose put on weight in the summer, and reach peak body mass in fall (Mautz 1978, Adamczewski et al. 1987, Schwartz et al. 1987).
+[^10]: one can hope and also this is the moment I usually realize I'm a nerd (yes it takes this long)
 
-#### Alaska Moose
+The number of calves they produce depends in turn on the conditions that year - was there enough food? was it warm enough?
 
-\[\] puts the weight of an average moose at XX kilograms. \[\] points out that body mass is different between male and female moose - \[\] points out that body mass of female moose differs according to the number of calves they've produced. The number of calves they produce depends in turn on the conditions that year - was there enough food? was it warm enough?
+So, if moose weight depends on the gender ratio across the population, what's the gender ratio of the moose population in Alaska? Surprisingly, we have a good grasp of this - hunting targets male moose, so populations are maintained at a level of \>25 bulls per 100 cows (after hunting).
 
-So, if moose weight depends on the gender ratio across the population, what's the gender ratio of the moose population in Alaska? Surprisingly, we have a good grasp of this - hunting targets male moose, so populations are maintained at a level of Xx moose per in. Fish and Game reports the densities per game unit. The model landscape I use for this work falls within game unit 20A, and a 2014 report shows a ratio of
+## What do moose weigh in the model?
+
+But, the model needs a single number. And iLand doesn't represent seasons. Nor population demographics (at least not yet). So, to ~~maintain my sanity~~ *make some simplifying assumptions*, I'll take a weighted average.
+
+I'll start by assuming an average calf weighs XX kilograms (or XX pounds), a cow weighs XX kg (XX pounds) and a bull weighs XX kg (XX pounds). Assuming a ratio of XX calves to XX adults, and 25 bulls:100 cows, I can take a weighted average. That gets us to XX moose.
 
 # More information
 
