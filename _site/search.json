@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Benchmarking Reburning in iLand\n\n\nPart One in a Series on iLand benchmarking\n\n\n\n\nSpatial Data Analysis\n\n\niLand\n\n\nBenchmarking\n\n\n\n\nUsing terra to quantify overlaps in fire perimeter rasters\n\n\n\n\n\n\nMay 28, 2024\n\n\n\n\n\n\n  \n\n\n\n\nResearch Workflow\n\n\nHow I structure my notes and citations\n\n\n\n\nWorkflow\n\n\n\n\nNotes on notes\n\n\n\n\n\n\nApr 15, 2024\n\n\n\n\n\n\n  \n\n\n\n\nHow I built my site\n\n\nMigrating from blogdown to Quarto\n\n\n\n\nWorkflow\n\n\n\n\nBreaking the fourth wall\n\n\n\n\n\n\nApr 15, 2024\n\n\n\n\n\n\nNo matching items"
+    "text": "Benchmarking Reburning in iLand\n\n\nPart One in a Series on iLand benchmarking\n\n\n\n\nSpatial Data Analysis\n\n\niLand\n\n\nBenchmarking\n\n\n\n\nUsing terra to quantify overlaps in fire perimeter rasters\n\n\n\n\n\n\nMay 28, 2024\n\n\n\n\n\n\n  \n\n\n\n\nFiltering MTBS perimeters by severity\n\n\n\na primer on Alaska Fire Perimeter Data\n\n\n\n\nSpatial Data Analysis\n\n\n\n\n\n\n\n\n\n\n\n\nApr 16, 2024\n\n\n\n\n\n\n  \n\n\n\n\nResearch Workflow\n\n\nHow I structure my notes and citations\n\n\n\n\nWorkflow\n\n\n\n\nNotes on notes\n\n\n\n\n\n\nApr 15, 2024\n\n\n\n\n\n\n  \n\n\n\n\nHow I built my site\n\n\nMigrating from blogdown to Quarto\n\n\n\n\nWorkflow\n\n\n\n\nBreaking the fourth wall\n\n\n\n\n\n\nApr 15, 2024\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -19,6 +19,34 @@
     "title": "Model Parameterization",
     "section": "",
     "text": "No matching items"
+  },
+  {
+    "objectID": "posts/Draft_MTBS/index.html",
+    "href": "posts/Draft_MTBS/index.html",
+    "title": "Filtering MTBS perimeters by severity",
+    "section": "",
+    "text": "As part of my work with the Past, Present and Future of Boreal Feedbacks project, this summer I’ll be sampling forest composition and structure in forests that have reburned. One of our early goals with this project was to sample reburned forests off the road system - in part because they tend to go unsampled for obvious reasons1, and in part because we’re combining modern observations of reburned forests with lake sediment records that provide context on the last 2,500 years of forest composition, and those lakes are off the road system.\nFunctionally, that means helicopter work (!!). Going into it, I was blinded a bit by the excitement of flying helicopters (beautiful views!!), and hadn’t braced myself for some of the challenges (also dangerous!!). It added pressure to picking field sites: helicopters can only land in so many spots, and it’s an expensive privilege, so you can’t just wander into the woods and pick a spot2.\nI’ve been digging through fire perimeter datasets, trying to locate fires that overlap."
+  },
+  {
+    "objectID": "posts/Draft_MTBS/index.html#monitoring-trends-in-burn-severity-mtbs",
+    "href": "posts/Draft_MTBS/index.html#monitoring-trends-in-burn-severity-mtbs",
+    "title": "Filtering MTBS perimeters by severity",
+    "section": "Monitoring Trends in Burn Severity (MTBS)",
+    "text": "Monitoring Trends in Burn Severity (MTBS)\nMTBS data consists of burn severity and extent information on large fires4 across the US from 1984 to the present. Both burn severity and fire extent are derived from Landsat or Sentinel-2 data at a spatial resolution of 30 meters and a temporal resolution of 16 days or so - images are constructed pre- and post-fire to compare Normalized Burn Ratio (NBR) or Differenced Normalized Burn Ratio (dNBR). From there, MTBS depicts severity as a gradient of vegetation response from low (not much vegetation response) to high (potentially complete combustion of vegetation)5.\n4 defined here as 1,000 acres or bigger in the Western US5 with additional categories for unburned, increased greenness or outliers caused by clouds, shadows, water bodies, etc"
+  },
+  {
+    "objectID": "posts/Draft_MTBS/index.html#difference-between-alfd-and-mtbs",
+    "href": "posts/Draft_MTBS/index.html#difference-between-alfd-and-mtbs",
+    "title": "Filtering MTBS perimeters by severity",
+    "section": "Difference between ALFD and MTBS",
+    "text": "Difference between ALFD and MTBS\nAlaska Large Fire Database has been assumed to overestimate burned area within mapped fire events (Chen et al. 2021), and produces consistently higher estimates of area burned across Alaska compared to MTBS.\n\nChen, Dong, Varada Shevade, Allison Baer, and Tatiana V. Loboda. 2021. “Missing Burns in the High Northern Latitudes: The Case for Regionally Focused Burned Area Products.” Remote Sensing 13 (20): 4145. https://doi.org/10.3390/rs13204145.\nIn contrast, MTBS excludes fires less than 1,000 acres, so there are clear reasons to believe it underestimates burned area.\nUnderstanding the strengths and drawbacks of both is important - in the context of reburning, MTBS is a particularly useful database - older fire perimeters from ALFD become less precise (cite), sometimes overestimating where the fires overlapped (Buma et al. 2022).\n\nBuma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. “Short-Interval Fires Increasing in the Alaskan Boreal Forest as Fire Self-Regulation Decays Across Forest Types.” Scientific Reports 12 (1): 4901. https://doi.org/10.1038/s41598-022-08912-8.\n[Brief aside on self-regulating fire]"
+  },
+  {
+    "objectID": "posts/Draft_MTBS/index.html#session-info",
+    "href": "posts/Draft_MTBS/index.html#session-info",
+    "title": "Filtering MTBS perimeters by severity",
+    "section": "Session Info",
+    "text": "Session Info\n\nsessionInfo()\n\nR version 4.3.3 (2024-02-29)\nPlatform: aarch64-apple-darwin20 (64-bit)\nRunning under: macOS Sonoma 14.0\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: America/Chicago\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n[1] here_1.0.1   sf_1.0-16    terra_1.7-55\n\nloaded via a namespace (and not attached):\n [1] digest_0.6.35      codetools_0.2-19   fastmap_1.1.1      xfun_0.44         \n [5] magrittr_2.0.3     e1071_1.7-14       KernSmooth_2.23-22 knitr_1.45        \n [9] htmltools_0.5.8    rmarkdown_2.26     classInt_0.4-10    cli_3.6.2         \n[13] grid_4.3.3         DBI_1.2.2          proxy_0.4-27       class_7.3-22      \n[17] compiler_4.3.3     rprojroot_2.0.4    tools_4.3.3        evaluate_0.23     \n[21] Rcpp_1.0.12        yaml_2.3.8         rlang_1.1.3        jsonlite_1.8.8    \n[25] htmlwidgets_1.6.4  units_0.8-5"
   },
   {
     "objectID": "posts/iLand_series/Draft_iLandFireOutput/index.html#determining-which-fires-in-iland-were-stand-replacing",
@@ -187,33 +215,5 @@
     "title": "Working with iLand Output",
     "section": "",
     "text": "Benchmarking Reburning in iLand\n\n\nPart One in a Series on iLand benchmarking\n\n\nUsing terra to quantify overlaps in fire perimeter rasters\n\n\n\n\n\n\nMay 28, 2024\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/Draft_MTBS/index.html",
-    "href": "posts/Draft_MTBS/index.html",
-    "title": "Filtering MTBS perimeters by severity",
-    "section": "",
-    "text": "As part of my work with the Past, Present and Future of Boreal Feedbacks project, this summer I’ll be sampling forest composition and structure in forests that have reburned. One of our early goals with this project was to sample reburned forests off the road system - in part because they tend to go unsampled for obvious reasons1, and in part because we’re combining modern observations of reburned forests with lake sediment records that provide context on the last 2,500 years of forest composition, and those lakes are off the road system.\nFunctionally, that means helicopter work (!!). Going into it, I was blinded a bit by the excitement of flying helicopters (beautiful views!!), and hadn’t braced myself for some of the challenges (also dangerous!!). It added pressure to picking field sites: helicopters can only land in so many spots, and it’s an expensive privilege, so you can’t just wander into the woods and pick a spot2.\nI’ve been digging through fire perimeter datasets, trying to locate fires that overlap."
-  },
-  {
-    "objectID": "posts/Draft_MTBS/index.html#monitoring-trends-in-burn-severity-mtbs",
-    "href": "posts/Draft_MTBS/index.html#monitoring-trends-in-burn-severity-mtbs",
-    "title": "Filtering MTBS perimeters by severity",
-    "section": "Monitoring Trends in Burn Severity (MTBS)",
-    "text": "Monitoring Trends in Burn Severity (MTBS)\nMTBS data consists of burn severity and extent information on large fires4 across the US from 1984 to the present. Both burn severity and fire extent are derived from Landsat or Sentinel-2 data at a spatial resolution of 30 meters and a temporal resolution of 16 days or so - images are constructed pre- and post-fire to compare Normalized Burn Ratio (NBR) or Differenced Normalized Burn Ratio (dNBR). From there, MTBS depicts severity as a gradient of vegetation response from low (not much vegetation response) to high (potentially complete combustion of vegetation)5.\n4 defined here as 1,000 acres or bigger in the Western US5 with additional categories for unburned, increased greenness or outliers caused by clouds, shadows, water bodies, etc"
-  },
-  {
-    "objectID": "posts/Draft_MTBS/index.html#difference-between-alfd-and-mtbs",
-    "href": "posts/Draft_MTBS/index.html#difference-between-alfd-and-mtbs",
-    "title": "Filtering MTBS perimeters by severity",
-    "section": "Difference between ALFD and MTBS",
-    "text": "Difference between ALFD and MTBS\nAlaska Large Fire Database has been assumed to overestimate burned area within mapped fire events (Chen et al. 2021), and produces consistently higher estimates of area burned across Alaska compared to MTBS.\n\nChen, Dong, Varada Shevade, Allison Baer, and Tatiana V. Loboda. 2021. “Missing Burns in the High Northern Latitudes: The Case for Regionally Focused Burned Area Products.” Remote Sensing 13 (20): 4145. https://doi.org/10.3390/rs13204145.\nIn contrast, MTBS excludes fires less than 1,000 acres, so there are clear reasons to believe it underestimates burned area.\nUnderstanding the strengths and drawbacks of both is important - in the context of reburning, MTBS is a particularly useful database - older fire perimeters from ALFD become less precise (cite), sometimes overestimating where the fires overlapped (Buma et al. 2022).\n\nBuma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. “Short-Interval Fires Increasing in the Alaskan Boreal Forest as Fire Self-Regulation Decays Across Forest Types.” Scientific Reports 12 (1): 4901. https://doi.org/10.1038/s41598-022-08912-8.\n[Brief aside on self-regulating fire]"
-  },
-  {
-    "objectID": "posts/Draft_MTBS/index.html#session-info",
-    "href": "posts/Draft_MTBS/index.html#session-info",
-    "title": "Filtering MTBS perimeters by severity",
-    "section": "Session Info",
-    "text": "Session Info\n\nsessionInfo()\n\nR version 4.3.3 (2024-02-29)\nPlatform: aarch64-apple-darwin20 (64-bit)\nRunning under: macOS Sonoma 14.0\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: America/Chicago\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n[1] here_1.0.1   sf_1.0-16    terra_1.7-55\n\nloaded via a namespace (and not attached):\n [1] digest_0.6.35      codetools_0.2-19   fastmap_1.1.1      xfun_0.44         \n [5] magrittr_2.0.3     e1071_1.7-14       KernSmooth_2.23-22 knitr_1.45        \n [9] htmltools_0.5.8    rmarkdown_2.26     classInt_0.4-10    cli_3.6.2         \n[13] grid_4.3.3         DBI_1.2.2          proxy_0.4-27       class_7.3-22      \n[17] compiler_4.3.3     rprojroot_2.0.4    tools_4.3.3        evaluate_0.23     \n[21] Rcpp_1.0.12        yaml_2.3.8         rlang_1.1.3        jsonlite_1.8.8    \n[25] htmlwidgets_1.6.4  units_0.8-5"
   }
 ]
