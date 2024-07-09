@@ -8,13 +8,19 @@ title-block-banner: about_header.jpg
 title-block-banner-color: white
 ---
 
-I'm an ecosystem ecologist and currently a NSF Postdoctoral Fellow in the [Forest Futures Lab](http://forestfutureslab.org/) at the [Cary Institute of Ecosystem Studies](http://caryinstitute.org). I work in the intersection of paleoecology, landscape ecology and disturbance ecology, using field, lab, and modeling tools to study how ecosystems change over space and time.
+I'm an ecosystem ecologist and currently a [NSF Postdoctoral Fellow](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2219248&HistoricalAwards=false) in the [Forest Futures Lab](http://forestfutureslab.org/) at the [Cary Institute of Ecosystem Studies](http://caryinstitute.org). I work in the intersection of paleoecology, landscape ecology and disturbance ecology, using field, lab, and modeling tools to study how ecosystems change over space and time.
 
 ::: column-margin
 ![Comic by the lovely and incomparable [Sophie Lucido Johnson](https://www.sophielucidojohnson.com/) and [Sammi Skolmoski](https://sammiskolmoski.com/index.html/)](unprecedented.jpg)
 :::
 
-My interest in fire sparked from working on charcoal records in a paleoecology lab as an undergraduate at the University of Wisconsin Madison. Prior to my Ph.D., I reconstructed long-term patterns of fire in coast redwood forests as part of my master's research at the University of Oregon. My doctoral research at the University of Colorado Denver explored how increasing fires in Alaska changes forest communities, forest carbon storage and future patterns of fire. As a postdoctoral fellow, I'm trying to understand how fire might interact with moose, snowshoe hare, and other agents of change.
+I got into ecology through the past - I worked as an undergraduate field and lab assistant in [Jack William](https://williamspaleolab.github.io/)'s paleoecology lab at the University of Wisconsin Madison, coring lake sediments and counting charcoal samples, which sparked an interest in fire.
+
+After graduating from UW-Madison, I moved to Eugene, Oregon to work with [Dan Gavin](https://pages.uoregon.edu/dgavin/) at the University of Oregon. Working in Northern California, I sampled soil and charcoal in old growth coast redwood forests, trying to understand how frequent prehistoric fire was in those forests, and the role it played in soil carbon storage.
+
+After the redwoods, I moved north and forward in time to Alaskan boreal forests, completing a PhD in Integrative and Systems Biology at the University of Colorado Denver. Working with [Brian Buma](https://www.brianbuma.com/) (now at the Environmental Defense Fund), I picked up training in landscape, disturbance and fire ecology, combining field measurements of forest composition, structure and carbon with landscape and fire behavior models. I worked in burned black spruce forests in the Interior of Alaska, measuring how frequent fire (reburning) changes forest communities, forest carbon storage and future patterns of fire.
+
+While setting up my PhD field sites, I stumbled down a herbivory rabbit hole after noticing intense browsing from moose and hare in my reburned plots. I put together a proposal to work with [Winslow Hansen](https://www.caryinstitute.org/science/our-scientists/dr-winslow-d-hansen) and [Jill Johnstone](https://npelusask.weebly.com/) to use process-based landscape modeling to explore whether herbivores like moose and hare might interact with fire to shape forest composition and carbon at a landscape scale.
 
 Outside of research, I collect records and houseplants and I grew up in the Midwest so I have strong opinions about cheese and the packers.
 
