@@ -61,7 +61,6 @@ I wanted to filter out pixels within MTBS that burned at high severity in both f
 #| echo: false
 library(terra)
 library(sf)
-library(here)
 ```
 
 An aside - I'm storing these files on a remote server. The bash code below mounts the folder I need so I can access it in Quarto.
@@ -78,176 +77,197 @@ DallCity <- rast("/Volumes/GIS/site selection 2024/targetMTBS/Yukon/DallCity_200
 plot(DallCity, main = "Original")
 ```
 
+| Col1 | Col2                     | Col3 |
+|------|--------------------------|------|
+| 1    | unburned to low severity |      |
+| 2    | low severity             |      |
+| 3    | moderate severity        |      |
+| 4    | high severity            |      |
+
 We'll get rid of the black border:
 
 ```{r dall city black border}
+DallCity <- subst(DallCity, 0, NA)
 
+plot(DallCity, main = "Original")
 ```
 
-Within that perimeter, here are the cells (again, 30 meter resolution) that burned at low severity (as defined by MTBS):
-
-```{r dall city low severity}
- DallCity[DallCity[] < 3] <- NA
- plot(DallCity, main = "Low")
-```
-
-And here's high:
+Within that perimeter, here are the cells (again, 30 meter resolution) that burned at high severity (as defined by MTBS):
 
 ```{r dall city high severity}
-DallCity[DallCity[] > 4] <- NA
-plot(DallCity, main = "High")
+DallCityHS <- subst(DallCity, 4, 4, 
+                    others = NA)
+
+plot(DallCityHS, main = "High")
 ```
 
 Now, we can use the same indexing to trim down to just the high severity cells:
 
 ```{r dall city trim}
-DallCityHS <- trim(DallCity)
+DallCityHS <- trim(DallCityHS)
+
 plot(DallCityHS, main = "Trim")
 ```
 
 The Dall City fire overlaps with West fork, which burned XX acres in
 
 ```{r Yukon - West Fork}
-#| eval: false
-    WestFork <- rast("//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Yukon/WestFork_2015/ak6635014986720150620_20140705_20160624_dnbr6.tif")
+    WestFork <- rast("/Volumes/GIS/site selection 2024/targetMTBS/Yukon/WestFork_2015/ak6635014986720150620_20140705_20160624_dnbr6.tif")
   
     plot(WestFork, main = "Original")
   
-    WestFork[WestFork < 3] <- NA
-    plot(WestFork, main = "Low")
+    WestFork <- subst(WestFork, 0, NA)
     
-    WestFork[WestFork > 4] <- NA
-    plot(WestFork, main = "High")
+    plot(WestFork, main = "Original")
+ 
     
-    unique(WestFork$Layer_1)
+    WestForkHS <- subst(WestFork, 4, 4, 
+                    others = NA)
     
-    WestForkHS <- trim(WestFork)
-    plot(WestForkHS, main = "Filter")
-    unique(WestForkHS$Layer_1)
+    plot(WestForkHS)
+    
+   overlap <- intersect(WestForkHS, DallCityHS)
+   
+   plot(overlap)
+   
+   yukon2xHS <- subst(overlap, TRUE, 1, others = NA)
+   
+   plot(yukon2xHS)
+   
+   yukon2xHS <- trim(yukon2xHS)
+   
+   plot(yukon2xHS)
+   
+    yukon2xHS_shp <- as.polygons(yukon2xHS)
+    plot(yukon2xHS_shp)
+    
+    # writeVector(yukon2xHS_shp, 
+     #     "/Users/katherinehayes/Desktop/yukon2xHS.shp",
+     #     overwrite = TRUE)
 ```
 
-```{r Yukon Combining}
-#| eval: false
-    Yukon_intersect <- intersect(DallCityHS, WestForkHS)
-    plot(Yukon_intersect)
-    
-    Yukon_raster <- crop(DallCityHS, WestForkHS, mask = TRUE)
-    plot(Yukon_raster)
-    
-    Yukon_shp <- as.polygons(Yukon_raster)
-    plot(Yukon_shp)
-    
-    writeVector(Yukon_shp, 
-          "//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Yukon/YukonHS_Overlap.shp",
-          overwrite = TRUE)
-
-## Kanuti
-#| eval: false
+```{r Kanuti}
 ## Kanuti
 
   ## BTTS 1991 #####################################
   
-  KanBTT <- rast("//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Kanuti/BTTS1991/ak6670715154819910630_19860613_19920605_dnbr6.tif")
+  KanBTT <- rast("/Volumes/GIS/site selection 2024/targetMTBS/Kanuti/BTTS1991/ak6670715154819910630_19860613_19920605_dnbr6.tif")
   
   plot(KanBTT, main = "Original")
+  
+  KanBTT <- subst(KanBTT, 0, NA)
+    
+  plot(KanBTT, main = "Original")
+ 
+    
+  KanBTTHS <- subst(KanBTT, 4, 4, 
+                    others = NA)
+    
+    plot(KanBTTHS)
 
-  KanBTT[KanBTT[] < 3] <- NA
-  plot(KanBTT, main = "Low")
-  
-  KanBTT[KanBTT[] > 4] <- NA
-  plot(KanBTT, main = "High")
-  
-  KanBTTHS <- trim(KanBTT)
-  plot(KanBTTHS, main = "Trim")
 ```
 
 Next, we'll look
 
 ```{r Kanuti - Evansville}
-#| eval: false
-  Evan <- rast("//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Kanuti/Evansville2004/ak6687815131320040706_20020624_20050616_dnbr6.tif")
+
+  Evan <- rast("/Volumes/GIS/site selection 2024/targetMTBS/Kanuti/Evansville2004/ak6687815131320040706_20020624_20050616_dnbr6.tif")
   
   plot(Evan, main = "Original")
   
-  Evan[Evan < 3] <- NA
-  plot(Evan, main = "Low")
-  
-  Evan[Evan > 4] <- NA
-  plot(Evan, main = "High")
-  
-  EvanHS <- trim(Evan)
-  plot(EvanHS, main = "Trim")
+  Evan <- subst(Evan, 0, NA)
+    
+  plot(Evan, main = "Original")
+ 
+    
+  EvanHS <- subst(Evan, 4, 4, 
+                    others = NA)
+    
+    plot(EvanHS)
+    
 ```
 
 ```{r Kanuti - Combining}
-#| eval: false
+
   ## Combining #######################
-  
-  Kanuti_intersect <- intersect(KanBTTHS, EvanHS)
-  plot(Kanuti_intersect)
-  
-  Kanuti_crop <- crop(KanBTTHS, EvanHS, mask = TRUE)
-  plot(Kanuti_crop)
-  
-  Kanuti_shp <- as.polygons(Kanuti_crop)
-  plot(Kanuti_shp)
-  
-  writeVector(Kanuti_shp, 
-              "//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/Kanuti/KanutiHS_Overlap.shp")
+    
+    overlap <- intersect(KanBTTHS, EvanHS)
+   
+   plot(overlap)
+   
+   Kanuti2xHS <- subst(overlap, TRUE, 1, others = NA)
+   
+   plot(Kanuti2xHS)
+   
+   Kanuti2xHS <- trim(Kanuti2xHS)
+   
+   plot(Kanuti2xHS)
+   
+    Kanuti2xHS_shp <- as.polygons(Kanuti2xHS)
+    plot(Kanuti2xHS_shp)
+    
+     #writeVector(Kanuti2xHS_shp, 
+       #   "/Users/katherinehayes/Desktop/Kanuti2xHS.shp",
+        #  overwrite = TRUE)
 ```
 
 ```{r Last Chance - BTT}
-#| eval: false
+
   ## BTT 1994 #####################################
   
-  BTT <- rast("//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/LastChance/BTT1994/ak6712115052019940608_19860823_19950825_dnbr6.tif")
+  BTT <- rast("/Volumes/GIS/site selection 2024/targetMTBS/LastChance/BTT1994/ak6712115052019940608_19860823_19950825_dnbr6.tif")
   
+    BTT <- subst(BTT, 0, NA)
+    
   plot(BTT, main = "Original")
-  
-  BTT[BTT[] < 3] <- NA
-  plot(BTT, main = "Low")
-  
-  BTT[BTT[] > 4] <- NA
-  plot(BTT, main = "High")
-  
-  BTTHS <- trim(BTT)
-  plot(BTTHS, main = "Trim")
+ 
+    
+  BTThs <- subst(BTT, 4, 4, 
+                    others = NA)
+    
+    plot(BTThs)
 ```
 
 ```{r Last Chance - Chapman}
-#| eval: false
+
   ## Chapman 2005 #####################################
   
-  Chapman <- rast("//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/LastChance/Chapman2005/ak6707615031720050530_20020617_20060612_dnbr6.tif")
+  Chapman <- rast("/Volumes/GIS/site selection 2024/targetMTBS/LastChance/Chapman2005/ak6707615031720050530_20020617_20060612_dnbr6.tif")
   
   plot(Chapman, main = "Original")
-  
-  Chapman[Chapman < 3] <- NA
-  plot(Chapman, main = "Low")
-  
-  Chapman[Chapman > 4] <- NA
-  plot(Chapman, main = "High")
-  
-  ChapmanHS <- trim(Chapman)
-  
-  plot(ChapmanHS, main = "Trim")
+   
+  Chapman <- subst(Chapman, 0, NA)
+    
+  plot(Chapman, main = "Original")
+ 
+  ChapmanHS <- subst(Chapman, 4, 4, 
+                    others = NA)
+    
+    plot(ChapmanHS)
 ```
 
 ```{r Last Chance - Combining}
-#| eval: false
+
   ## Combining #######################
   
-  LastChance_intersect <- intersect(BTTHS, ChapmanHS)
-  plot(LastChance_intersect)
-  
-  LastChance_crop <- crop(BTTHS, ChapmanHS, mask = TRUE)
-  plot(LastChance_crop)
-  
-  LastChance_shp <- as.polygons(LastChance_crop)
-  plot(LastChance_shp)
-  
-  writeVector(LastChance_shp, 
-              "//10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/site selection 2024/targetMTBS/LastChance/LastChanceHS_Overlap.shp")
+   overlap <- intersect(BTThs, ChapmanHS)
+   
+   plot(overlap)
+   
+   Last2xHS <- subst(overlap, TRUE, 1, others = NA)
+   
+   plot(Last2xHS)
+   
+   Last2xHS <- trim(Last2xHS)
+   
+   plot(Last2xHS)
+   
+    Last2xHS_shp <- as.polygons(Last2xHS)
+    plot(Last2xHS_shp)
+    
+     #writeVector(Last2xHS_shp, 
+       #   "/Users/katherinehayes/Desktop/LastChance2xHS.shp",
+        #  overwrite = TRUE)
 
 ```
 
