@@ -11,6 +11,8 @@ website:
         file: blog.qmd
       - text: "CV"
         file: cv.pdf
+      - text: "ESA Poster 2024"
+        file: esaposter2024.pdf
     
 format:
   html:
