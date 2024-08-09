@@ -49,13 +49,13 @@ Moose seem to prefer stems and plants with more biomass (Bergstrom and Dannell 1
 
 ### Moose diet may depend on burn history
 
-So, how do you set moose preferences in a landscape model that doesn't include seasons, forage quality or forage quantity? (not even really a rhetorical question, if you have suggestions, please email!)
+So, how do you set moose preferences in a landscape model that doesn't include seasons, forage quality or forage quantity? (not even really a rhetorical question, if you have suggestions, please email!!)
 
 This has been my approach: have moose target primarily aspen and birch.
 
 ## The Willow Question
 
-Right now, willow is not parameterized in iLand. Species parameterization for trees can be an undertaking, and it's an active conflict / bit in our lab wherein some of us think it makes sense to parameterize willow, and some of us do not.
+Right now, willow is not parameter in iLand. Species parameterization for trees can be an undertaking, and it's an active conflict / bit in our lab wherein some of us think it makes sense to parameterize willow, and some of us do not.
 
 # More resources
 

@@ -49,7 +49,7 @@ More importantly, they're highly mobile - a single moose can move up to 65 miles
 
 To adequately count moose, you need to count moose over a large area, which is expensive.
 
-Aerial surveys are the most common method to count moose - flying a helicopter or a plane over a known area and counting the moose spotted from above. This doesn't account for the moose not spotted (an issue in wildlife ecology often referred to as "sightability"), but it still remains more cost-effective than methods like pellet surveys or camera trapping, which face the same sightability issue but typically require more resources.
+Aerial surveys are the most common method - counting moose in a known area from a helicopter or a plane. This doesn't account for the moose not spotted (an issue in wildlife ecology often referred to as "sightability"), but it still remains more cost-effective than methods like pellet surveys or camera trapping, which face the same sightability issue but typically require more resources.
 
 An aside - climate change may make those aerial surveys more difficult. \[snow\]
 
@@ -95,7 +95,7 @@ Obviously body mass also varies across a season[^9], across age, or depending on
 
 [^9]: moose often put on weight in the summer, reaching "peak body mass" in the fall in preparation for the long winter (Mautz 1978, Adamczewski et al. 1987, Schwartz et al. 1987)
 
-[^10]: one can hope and also this is the moment I usually realize I'm a nerd (yes it takes this long)
+[^10]: this is how manifestation works, right?
 
 The number of calves they produce depends in turn on the conditions that year - was there enough food? was it warm enough?
 
