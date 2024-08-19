@@ -1,0 +1,44 @@
+---
+title: Calculating light availability from fisheye photos
+subtitle: How to use the package hemispheR
+date: 2024-08-19
+categories: [Spatial Data Analysis, Workflow]
+date-modified: last-modified
+bibliography: references.bib
+---
+
+As part of my PhD trying to capture the impact of reburning on boreal forests, I measured understory plant communities in my study sites. I don't have a background in community ecology, but have been working with a labmate and friend to understand the impact of reburning on the communities we measured. As part of that effort, I've been curious about light availability - the reburned stands I worked in as a PhD became more and more open with more reburning, and presumably that increase in the availability of light would help certain members of the understory.
+
+\[insert photos from stands here\]
+
+In order to capture the light coming through the canopy in these sites, there was a moment in our sampling protocol where we set up a camera with a fisheye lense on a flat surface in the middle of the plot, laid down on our backs trying to hid in the vegetation around us, and looked up at the sky. My favorite part of sampling, for the record. (We weren't always able to sneak out of the frame successfully - ).
+
+To convert pictures like these into measurements of the light coming through the canopy, I've been exploring how to use the [@hemispheR] package in R. 
+
+# Introduction to hemispheR
+
+# Filtering MTBS in R
+
+I wanted to filter out pixels within MTBS that burned at high severity in both fires.
+
+```{r set up}
+#| echo: false
+library(hemispheR)
+
+```
+
+I'll start by loading in one of our photos
+
+```{r Yukon - Dall City}
+
+```
+
+
+
+# More Resources
+
+## Session Info
+
+```{r session info}
+sessionInfo()
+```
