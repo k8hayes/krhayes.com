@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.288">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-08-19">
+
+<title>Katherine Hayes - Calculating light availability from fisheye photos</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="floating nav-fixed slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Katherine Hayes</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../cv.pdf" rel="" target="">
+ <span class="menu-text">CV</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Calculating light availability from fisheye photos</h1>
+            <p class="subtitle lead">How to use the package hemispheR</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Spatial Data Analysis</div>
+                <div class="quarto-category">Workflow</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 19, 2024</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">August 20, 2024</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-hemispher" id="toc-introduction-to-hemispher" class="nav-link active" data-scroll-target="#introduction-to-hemispher">Introduction to hemispheR</a></li>
+  <li><a href="#automating-hemispher" id="toc-automating-hemispher" class="nav-link" data-scroll-target="#automating-hemispher">Automating hemispheR</a></li>
+  <li><a href="#how-does-canopy-openness-differ-across-reburn" id="toc-how-does-canopy-openness-differ-across-reburn" class="nav-link" data-scroll-target="#how-does-canopy-openness-differ-across-reburn">How does canopy openness differ across reburn?</a></li>
+  <li><a href="#whats-the-relationship-between-canopy-openess-and-tree-density" id="toc-whats-the-relationship-between-canopy-openess-and-tree-density" class="nav-link" data-scroll-target="#whats-the-relationship-between-canopy-openess-and-tree-density">What’s the relationship between canopy openess and tree density?</a></li>
+  <li><a href="#whats-the-relationship-between-canopy-openess-and-solar-irradiance" id="toc-whats-the-relationship-between-canopy-openess-and-solar-irradiance" class="nav-link" data-scroll-target="#whats-the-relationship-between-canopy-openess-and-solar-irradiance">What’s the relationship between canopy openess and solar irradiance?</a></li>
+  <li><a href="#more-resources" id="toc-more-resources" class="nav-link" data-scroll-target="#more-resources">More Resources</a>
+  <ul class="collapse">
+  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session Info</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+<p>As part of my PhD trying to capture the impact of reburning on boreal forests, I measured understory plant communities in my study sites. I don’t have a background in community ecology, but have been working with a labmate and friend to understand the impact of reburning on the communities we measured. As part of that effort, I’ve been curious about light availability - the reburned stands I worked in as a PhD became more and more open with more reburning, and presumably that increase in the availability of light would help certain members of the understory.</p>
+<p>[insert photos from stands here]</p>
+<p>In order to capture the light coming through the canopy in these sites, there was a moment in our sampling protocol where we set up a camera with a fisheye lens on a flat surface in the middle of the plot, laid down on our backs trying to hid in the vegetation around us<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and looked up at the sky. My favorite part of sampling, for the record.</p>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;We weren’t always able to sneak out of the frame successfully…</p></li><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/outtake.JPG" class="img-fluid figure-img"></p>
+</figure>
+</div></div>
+<p>To convert pictures like these into measurements of the light coming through the canopy, I’ve been exploring how to use the <span class="citation" data-cites="hemispheR">(<a href="#ref-hemispheR" role="doc-biblioref">Chianucci and Macek 2023</a>)</span> package in R.</p>
+<section id="introduction-to-hemispher" class="level1 page-columns page-full">
+<h1>Introduction to hemispheR</h1>
+<p><span class="citation" data-cites="hemispheR">(<a href="#ref-hemispheR" role="doc-biblioref">Chianucci and Macek 2023</a>)</span> was built to help process digital hemispherical photography (DHP). It calculates leaf area index, a ratio of total leaf area of vegetation to the surface area grown, using equations predicting the relationship between the surface area of leaves and the fraction of light they intercept.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-hemispheR" class="csl-entry" role="listitem">
+Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package for Fisheye Canopy Image Analysis.”</span> <a href="https://doi.org/10.1016/j.agrformet.2023.109470">https://doi.org/10.1016/j.agrformet.2023.109470</a>.
+</div></div><p>While leaf area index is really useful, I’m mostly interested in light availability more broadly - I’m really just looking for the fraction of canopy to open sky. <span class="citation" data-cites="hemispheR">(<a href="#ref-hemispheR" role="doc-biblioref">Chianucci and Macek 2023</a>)</span> classifies pixels within an image as either canopy or sky as a step to calculating leaf area index, so it should work great for this.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: terra</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>terra 1.7.78</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ tidyr::extract()    masks terra::extract()
+✖ dplyr::filter()     masks stats::filter()
+✖ dplyr::group_rows() masks kableExtra::group_rows()
+✖ dplyr::lag()        masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
+
+Attaching package: 'cowplot'
+
+
+The following object is masked from 'package:lubridate':
+
+    stamp</code></pre>
+</div>
+</div>
+<p>I’ll start by importing one of our canopy photos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ph11_0 <span class="ot">&lt;-</span> <span class="fu">import_fisheye</span>(<span class="at">filename =</span> <span class="st">"images/11_0.JPG"</span>,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">circular =</span> <span class="cn">TRUE</span>, <span class="at">display =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>It is a circular fisheye, where xc, yc and radius are 2456, 1632, 1630</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/importing 11_0-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ph11_0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/importing 11_0-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>This is a picture from one of our mature plots - note the black spruce all around the edges of the photo.</p>
+<p>Using the binarize_fisheye() function, I can classify the pixels as either canopy (0) or sky (1).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ph11_0_bin <span class="ot">&lt;-</span> <span class="fu">binarize_fisheye</span>(ph11_0, <span class="at">display =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/11_0 binarize-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ph11_0_bin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/11_0 binarize-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Then, I’ll convert the raster into a data.frame so I can calculate the ratio of canopy to sky:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ph11_0_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(ph11_0_bin) <span class="co"># 0 is canopy # 1 is sky</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ratio of canopy to sky</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(ph11_0_data <span class="sc">==</span> <span class="dv">0</span>)) <span class="sc">/</span> <span class="fu">length</span>(<span class="fu">which</span>(ph11_0_data <span class="sc">==</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.106016</code></pre>
+</div>
+</div>
+<p>Or, said another way, the fraction of sky:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(ph11_0_data <span class="sc">==</span> <span class="dv">0</span>)) <span class="sc">/</span> <span class="fu">nrow</span>(ph11_0_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8041526</code></pre>
+</div>
+</div>
+<p>Now, I’ll compare that to a picture from one of our thrice-burned plots:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ph23_3 <span class="ot">&lt;-</span> <span class="fu">import_fisheye</span>(<span class="at">filename =</span> <span class="st">"images/23_3.JPG"</span>,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">circular =</span> <span class="cn">TRUE</span>, <span class="at">display =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>It is a circular fisheye, where xc, yc and radius are 2456, 1632, 1630</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/23_3 binarize-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ph23_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/23_3 binarize-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Different ratios:</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="automating-hemispher" class="level1">
+<h1>Automating hemispheR</h1>
+<p>Now, I’d like to replicate this 50 times, reading in each picture and extracting the ratio of canopy to sky. Here’s the code to do so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the path to your folder containing JPG files</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>folder_path <span class="ot">&lt;-</span> <span class="st">"data/canopy pictures/"</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># List all JPG files in the folder</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>file_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> folder_path, <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.JPG$"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize an empty data frame to store results</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot =</span> <span class="fu">character</span>(),</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ratio =</span> <span class="fu">integer</span>(),</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">percentSky =</span> <span class="fu">integer</span>(),</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (file_path <span class="cf">in</span> file_list) {</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  photo <span class="ot">&lt;-</span> hemispheR<span class="sc">::</span><span class="fu">import_fisheye</span>(<span class="at">filename =</span> file_path,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">circular =</span> <span class="cn">TRUE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  photo_bin <span class="ot">&lt;-</span> <span class="fu">binarize_fisheye</span>(photo)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  photoData <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(photo_bin)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  ratio <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">which</span>(photoData <span class="sc">==</span> <span class="dv">1</span>)) <span class="sc">/</span> <span class="fu">length</span>(<span class="fu">which</span>(photoData <span class="sc">==</span> <span class="dv">0</span>))</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  percentSky <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">which</span>(photoData <span class="sc">==</span> <span class="dv">1</span>)) <span class="sc">/</span> <span class="fu">nrow</span>(photoData)</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Append the results to the data frame</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">rbind</span>(results, <span class="fu">data.frame</span>(</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot =</span> file_path,</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">ratio =</span> ratio,</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentSky =</span> percentSky,</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> results <span class="sc">%&gt;%</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plot =</span> <span class="fu">sub</span>(<span class="st">".JPG"</span>, <span class="st">""</span>, <span class="fu">sub</span>(<span class="st">".*//"</span>, <span class="st">""</span>, results<span class="sc">$</span>plot)),</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>         <span class="at">treat =</span> <span class="fu">as.numeric</span>(<span class="fu">sub</span>(<span class="st">".*_"</span>, <span class="st">""</span>, plot)))</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">left_join</span>(results, index, <span class="at">by =</span> <span class="fu">join_by</span>(plot, treat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">plot</th>
+<th style="text-align: right;">ratio</th>
+<th style="text-align: right;">percentSky</th>
+<th style="text-align: right;">treat</th>
+<th style="text-align: left;">site</th>
+<th style="text-align: right;">Photo.ID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">10_0</td>
+<td style="text-align: right;">0.1746233</td>
+<td style="text-align: right;">0.1486632</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1445</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">11_0</td>
+<td style="text-align: right;">0.2435451</td>
+<td style="text-align: right;">0.1958474</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1435</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">12_1</td>
+<td style="text-align: right;">1.1441331</td>
+<td style="text-align: right;">0.5336110</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1410</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">15_3</td>
+<td style="text-align: right;">0.7507232</td>
+<td style="text-align: right;">0.4288075</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1399</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">16_2</td>
+<td style="text-align: right;">1.4706656</td>
+<td style="text-align: right;">0.5952508</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1453</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">17_3</td>
+<td style="text-align: right;">0.7460729</td>
+<td style="text-align: right;">0.4272862</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1505</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">18_1</td>
+<td style="text-align: right;">0.5084734</td>
+<td style="text-align: right;">0.3370781</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1516</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">19_2</td>
+<td style="text-align: right;">0.4659223</td>
+<td style="text-align: right;">0.3178356</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1528</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2_3</td>
+<td style="text-align: right;">0.5401879</td>
+<td style="text-align: right;">0.3507286</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1519</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">22_3</td>
+<td style="text-align: right;">0.6296953</td>
+<td style="text-align: right;">0.3863884</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1504</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">23_3</td>
+<td style="text-align: right;">0.5919714</td>
+<td style="text-align: right;">0.3718480</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1518</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">24_3</td>
+<td style="text-align: right;">1.0248911</td>
+<td style="text-align: right;">0.5061463</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1511</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">25_3</td>
+<td style="text-align: right;">0.6134905</td>
+<td style="text-align: right;">0.3802257</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1507</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">26_2</td>
+<td style="text-align: right;">1.2169560</td>
+<td style="text-align: right;">0.5489311</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1512</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">27_2</td>
+<td style="text-align: right;">1.8369597</td>
+<td style="text-align: right;">0.6475100</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1522</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">28_1</td>
+<td style="text-align: right;">2.7322672</td>
+<td style="text-align: right;">0.7320663</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1529</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">29_1</td>
+<td style="text-align: right;">0.6071337</td>
+<td style="text-align: right;">0.3777742</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1517</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3_2</td>
+<td style="text-align: right;">0.4905932</td>
+<td style="text-align: right;">0.3291261</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1524</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">33_1</td>
+<td style="text-align: right;">0.8058943</td>
+<td style="text-align: right;">0.4462577</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1513</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">34_2</td>
+<td style="text-align: right;">0.7007807</td>
+<td style="text-align: right;">0.4120347</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1503</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">35_3</td>
+<td style="text-align: right;">1.4096601</td>
+<td style="text-align: right;">0.5850037</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1509</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">36_1</td>
+<td style="text-align: right;">0.8700637</td>
+<td style="text-align: right;">0.4652588</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1520</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">37_3</td>
+<td style="text-align: right;">0.4515839</td>
+<td style="text-align: right;">0.3110974</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1395</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4_2</td>
+<td style="text-align: right;">0.4909976</td>
+<td style="text-align: right;">0.3293081</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">STEESE</td>
+<td style="text-align: right;">1523</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">40_2</td>
+<td style="text-align: right;">0.7864964</td>
+<td style="text-align: right;">0.4402452</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1480</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">41_1</td>
+<td style="text-align: right;">2.6747496</td>
+<td style="text-align: right;">0.7278726</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1446</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">42_1</td>
+<td style="text-align: right;">2.1638783</td>
+<td style="text-align: right;">0.6839322</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1501</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">44_0</td>
+<td style="text-align: right;">0.1648066</td>
+<td style="text-align: right;">0.1414884</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1450</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">47_2</td>
+<td style="text-align: right;">0.7421887</td>
+<td style="text-align: right;">0.4260094</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1394</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">48_1</td>
+<td style="text-align: right;">2.6706692</td>
+<td style="text-align: right;">0.7275701</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1448</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">50_1</td>
+<td style="text-align: right;">0.7569991</td>
+<td style="text-align: right;">0.4308478</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1417</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">52_1</td>
+<td style="text-align: right;">0.3861226</td>
+<td style="text-align: right;">0.2785631</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1428</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">54_3</td>
+<td style="text-align: right;">0.6794471</td>
+<td style="text-align: right;">0.4045659</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1403</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">55_3</td>
+<td style="text-align: right;">1.2984896</td>
+<td style="text-align: right;">0.5649317</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1401</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">58_0</td>
+<td style="text-align: right;">0.2065476</td>
+<td style="text-align: right;">0.1711889</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1443</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">64_1</td>
+<td style="text-align: right;">1.1790658</td>
+<td style="text-align: right;">0.5410878</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1418</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">65_1</td>
+<td style="text-align: right;">1.0632665</td>
+<td style="text-align: right;">0.5153316</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1424</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7_3</td>
+<td style="text-align: right;">0.9310793</td>
+<td style="text-align: right;">0.4821549</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1409</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">8_2</td>
+<td style="text-align: right;">0.4157489</td>
+<td style="text-align: right;">0.2936601</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">DALTON</td>
+<td style="text-align: right;">1473</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="how-does-canopy-openness-differ-across-reburn" class="level1">
+<h1>How does canopy openness differ across reburn?</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(treat), </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">y =</span> percentSky<span class="sc">*</span><span class="dv">100</span>, <span class="at">fill =</span> site)) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of Fires"</span>, <span class="at">y =</span> <span class="st">"Percent Sky %"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="whats-the-relationship-between-canopy-openess-and-tree-density" class="level1">
+<h1>What’s the relationship between canopy openess and tree density?</h1>
+<div class="cell">
+
+</div>
+</section>
+<section id="whats-the-relationship-between-canopy-openess-and-solar-irradiance" class="level1">
+<h1>What’s the relationship between canopy openess and solar irradiance?</h1>
+<p>I’ve also used solar irradiance before as a proxy for light availability. How similar are those metrics?</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="more-resources" class="level1">
+<h1>More Resources</h1>
+<section id="session-info" class="level2">
+<h2 class="anchored" data-anchor-id="session-info">Session Info</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.4.1 (2024-06-14)
+Platform: aarch64-apple-darwin20
+Running under: macOS Sonoma 14.0
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: America/Chicago
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] cowplot_1.1.3    lubridate_1.9.3  forcats_1.0.0    stringr_1.5.1   
+ [5] dplyr_1.1.4      purrr_1.0.2      readr_2.1.5      tidyr_1.3.1     
+ [9] tibble_3.2.1     ggplot2_3.5.1    tidyverse_2.0.0  kableExtra_1.4.0
+[13] hemispheR_1.1.4  terra_1.7-78    
+
+loaded via a namespace (and not attached):
+ [1] gtable_0.3.5         xfun_0.45            raster_3.6-26       
+ [4] htmlwidgets_1.6.4    lattice_0.22-6       tzdb_0.4.0          
+ [7] vctrs_0.6.5          tools_4.4.1          generics_0.1.3      
+[10] proxy_0.4-27         fansi_1.0.6          pkgconfig_2.0.3     
+[13] KernSmooth_2.23-24   checkmate_2.3.2      lifecycle_1.0.4     
+[16] farver_2.1.2         compiler_4.4.1       munsell_0.5.1       
+[19] ijtiff_2.3.4         dismo_1.3-14         codetools_0.2-20    
+[22] htmltools_0.5.8.1    class_7.3-22         yaml_2.3.8          
+[25] pillar_1.9.0         classInt_0.4-10      tidyselect_1.2.1    
+[28] digest_0.6.36        stringi_1.8.4        sf_1.0-16           
+[31] labeling_0.4.3       fastmap_1.2.0        grid_4.4.1          
+[34] colorspace_2.1-0     cli_3.6.3            magrittr_2.0.3      
+[37] utf8_1.2.4           e1071_1.7-14         withr_3.0.0         
+[40] autothresholdr_1.4.2 backports_1.5.0      scales_1.3.0        
+[43] sp_2.1-4             timechange_0.3.0     rmarkdown_2.27      
+[46] hms_1.1.3            evaluate_0.24.0      knitr_1.47          
+[49] viridisLite_0.4.2    rlang_1.1.4          Rcpp_1.0.12         
+[52] zeallot_0.1.0        glue_1.7.0           DBI_1.2.3           
+[55] xml2_1.3.6           strex_2.0.0          svglite_2.1.3       
+[58] rstudioapi_0.16.0    jsonlite_1.8.8       R6_2.5.1            
+[61] systemfonts_1.1.0    units_0.8-5         </code></pre>
+</div>
+</div>
+
+
+
+</section>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="k8hayes/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
