@@ -11,74 +11,75 @@ As part of my PhD trying to capture the impact of reburning on boreal forests, I
 
 \[insert photos from stands here\]
 
-In order to capture the light coming through the canopy in these sites, there was a moment in our sampling protocol where we set up a camera with a fisheye lense on a flat surface in the middle of the plot, laid down on our backs trying to hid in the vegetation around us, and looked up at the sky. My favorite part of sampling, for the record. (We weren't always able to sneak out of the frame successfully - ).
+In order to capture the light coming through the canopy in these sites, there was a moment in our sampling protocol where we set up a camera with a fisheye lens on a flat surface in the middle of the plot, laid down on our backs trying to hid in the vegetation around us[^1], and looked up at the sky. My favorite part of sampling, for the record.
 
-To convert pictures like these into measurements of the light coming through the canopy, I've been exploring how to use the [@hemispheR] package in R.
+[^1]: We weren't always able to sneak out of the frame successfully...
+
+![](images/outtake.JPG){.column-margin}
+
+To convert pictures like these into measurements of the light coming through the canopy, I've been exploring how to use the hemispheR package in R.
 
 # Introduction to hemispheR
 
-[@hemispheR] was built to help process digital hemispherical photography (DHP). It calculates leaf area index, a ratio of total leaf area of vegetation to the surface area grown, using equations predicting the relationship between the surface area of leaves and the fraction of light they intercept.
+hemispheR was built to help process digital hemispherical photography (DHP) [@hemispheR]. It calculates leaf area index, a ratio of total leaf area of vegetation to the surface area grown, using equations predicting the relationship between the surface area of leaves and the fraction of light they intercept.
 
-While leaf area index is really useful, I'm mostly interested in light availability more broadly - I'm really just looking for the fraction of canopy to open sky. [@hemispheR] classifies pixels within an image as either canopy or sky as a step to calculating leaf area index, so it should work great for this.
+While leaf area index is really useful, I'm mostly interested in light availability more broadly - I'm really just looking for the fraction of canopy to open sky. hemispheR classifies pixels within an image as either canopy or sky as a step to calculating leaf area index, so it should work great for this.
 
 ```{r set up}
-#| echo: false
+#| output: FALSE
+#| echo: FALSE
 library(hemispheR)
+library(kableExtra)
 library(tidyverse)
 library(cowplot)
 theme_set(theme_cowplot())
+
+results <- read.csv("data/canopyOpen.csv")
+
 ```
 
 I'll start by importing one of our canopy photos.
 
-```{r importing 10_0}
-ph10_0 <- import_fisheye(filename = "data/canopy pictures/10_0.JPG",
+```{r importing 11_0}
+ph11_0 <- import_fisheye(filename = "images/11_0.JPG",
                        circular = TRUE, display = TRUE)
-plot(ph10_0)
+plot(ph11_0)
 ```
 
-This is a picture from one of our mature plots - note the black spruce all around the edges of the photo. 
+This is a picture from one of our mature plots - note the black spruce all around the edges of the photo.
 
-Using the binarize_fisheye() function, I can classify the pixels as either canopy (0) or sky (1). 
+Using the binarize_fisheye() function, I can classify the pixels as either canopy (0) or sky (1).
 
-```{r 10_0 binarize}
-ph10_0_bin <- binarize_fisheye(ph10_0, display = TRUE)
-plot(ph10_0_bin)
+```{r 11_0 binarize}
+ph11_0_bin <- binarize_fisheye(ph11_0, display = TRUE)
 ```
 
 Then, I'll convert the raster into a data.frame so I can calculate the ratio of canopy to sky:
 
-```{r 10_0 ratio}
-ph10_0_data <- as.data.frame(ph10_0_bin) # 0 is canopy # 1 is sky
+```{r 11_0 ratio}
+ph11_0_data <- as.data.frame(ph11_0_bin) # 0 is canopy # 1 is sky
 
 # ratio of canopy to sky
-length(which(ph10_0_data == 0)) / length(which(ph10_0_data == 1))
+length(which(ph11_0_data == 0)) / length(which(ph11_0_data == 1))
 
 ```
 
 Or, said another way, the fraction of sky:
 
-```{r 10_0 percentSky}
-length(which(ph10_0_data == 0)) / nrow(ph10_0_data)
+```{r 11_0 percentSky}
+length(which(ph11_0_data == 0)) / nrow(ph11_0_data)
 ```
 
-Now, I'll compare that to a picure from one of our thrice-burned plots:
+Now, I'll compare that to a picture from one of our thrice-burned plots:
 
-```{r importing 15_3}
-ph10_0 <- import_fisheye(filename = "data/canopy pictures/10_0.JPG",
+```{r 23_3 binarize}
+ph23_3 <- import_fisheye(filename = "images/23_3.JPG",
                        circular = TRUE, display = TRUE)
-plot(ph10_0)
-```
-
-```{r 15_3 binarize}
-ph10_0 <- import_fisheye(filename = "data/canopy pictures/10_0.JPG",
-                       circular = TRUE, display = TRUE)
-plot(ph10_0)
 ```
 
 Different ratios:
 
-```{r _3 ratio / percent sky}
+```{r 23_3 ratio / percent sky}
 
 ```
 
@@ -87,6 +88,7 @@ Different ratios:
 Now, I'd like to replicate this 50 times, reading in each picture and extracting the ratio of canopy to sky. Here's the code to do so:
 
 ```{r loop}
+#| eval: false
 # Define the path to your folder containing JPG files
 folder_path <- "data/canopy pictures/"
 
@@ -128,10 +130,11 @@ results <- results %>%
   mutate(plot = sub(".JPG", "", sub(".*//", "", results$plot)),
          treat = as.numeric(sub(".*_", "", plot)))
 
-rm(file_list, file_path, folder_path,percentSky, ratio, 
-   photo_bin, photo, photoData)
-
 results <- left_join(results, index, by = join_by(plot, treat))
+```
+
+```{r}
+kable(results)
 ```
 
 # How does canopy openness differ across reburn?
@@ -144,10 +147,12 @@ ggplot(results, aes(x = as.factor(treat),
 
 ```
 
-
 # What's the relationship between canopy openess and tree density?
 
+```{r tree density}
 
+
+```
 
 # What's the relationship between canopy openess and solar irradiance?
 
@@ -157,7 +162,6 @@ I've also used solar irradiance before as a proxy for light availability. How si
 
 
 ```
-
 
 # More Resources
 
