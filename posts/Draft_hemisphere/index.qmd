@@ -150,11 +150,14 @@ ggplot(results, aes(x = as.factor(treat),
 # What's the relationship between canopy openess and tree density?
 
 ```{r tree density}
+density <- read.csv("data/density.csv")
 
+density <- density %>%
+  group_by()
 
 ```
 
-# What's the relationship between canopy openess and solar irradiance?
+# What's the relationship between canopy openness and solar irradiance?
 
 I've also used solar irradiance before as a proxy for light availability. How similar are those metrics?
 
