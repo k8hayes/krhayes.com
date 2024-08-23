@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2024-08-19">
+<meta name="description" content="How to use the package hemispheR">
 
 <title>Katherine Hayes - Calculating light availability from fisheye photos</title>
 <style>
@@ -165,7 +166,12 @@ div.csl-indent {
     <div class="quarto-title column-body">
       <h1 class="title">Calculating light availability from fisheye photos</h1>
             <p class="subtitle lead">Ft. pretty pictures</p>
-                                <div class="quarto-categories">
+                  <div>
+        <div class="description">
+          How to use the package hemispheR
+        </div>
+      </div>
+                          <div class="quarto-categories">
                 <div class="quarto-category">Spatial Data Analysis</div>
                 <div class="quarto-category">Workflow</div>
               </div>
@@ -249,7 +255,7 @@ Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package f
 </div>
 <p><em>import_fisheye()</em> imports the photo as a raster, defining the edges of the picture.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ph11_0 <span class="ot">&lt;-</span> <span class="fu">import_fisheye</span>(<span class="at">filename =</span> <span class="st">"/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Draft_hemisphere/images/11_0.JPG"</span>,</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ph11_0 <span class="ot">&lt;-</span> <span class="fu">import_fisheye</span>(<span class="at">filename =</span> <span class="st">"/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Post_hemispheR/images/11_0.JPG"</span>,</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">circular =</span> <span class="cn">TRUE</span>, <span class="at">display =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>It is a circular fisheye, where xc, yc and radius are 2456, 1632, 1630</code></pre>
@@ -286,7 +292,7 @@ Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package f
 </figure>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ph23_3 <span class="ot">&lt;-</span> <span class="fu">import_fisheye</span>(<span class="at">filename =</span> <span class="st">"/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Draft_hemisphere/images/23_3.JPG"</span>,</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ph23_3 <span class="ot">&lt;-</span> <span class="fu">import_fisheye</span>(<span class="at">filename =</span> <span class="st">"/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Post_hemispheR/images/23_3.JPG"</span>,</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">circular =</span> <span class="cn">TRUE</span>, <span class="at">display =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>It is a circular fisheye, where xc, yc and radius are 2456, 1632, 1630</code></pre>
@@ -391,43 +397,43 @@ Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package f
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">10_0</td>
-<td style="text-align: right;">0.1746233</td>
-<td style="text-align: right;">0.1486632</td>
+<td style="text-align: right;">0.1785791</td>
+<td style="text-align: right;">0.1515206</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: left;">DALTON</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">11_0</td>
-<td style="text-align: right;">0.2435451</td>
-<td style="text-align: right;">0.1958474</td>
+<td style="text-align: right;">0.2489218</td>
+<td style="text-align: right;">0.1993094</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: left;">DALTON</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">12_1</td>
-<td style="text-align: right;">1.1441331</td>
-<td style="text-align: right;">0.5336110</td>
+<td style="text-align: right;">1.3648933</td>
+<td style="text-align: right;">0.5771479</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">DALTON</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">15_3</td>
-<td style="text-align: right;">0.7507232</td>
-<td style="text-align: right;">0.4288075</td>
+<td style="text-align: right;">0.8467842</td>
+<td style="text-align: right;">0.4585182</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: left;">DALTON</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">16_2</td>
-<td style="text-align: right;">1.4706656</td>
-<td style="text-align: right;">0.5952508</td>
+<td style="text-align: right;">0.7529837</td>
+<td style="text-align: right;">0.4295440</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: left;">DALTON</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">17_3</td>
-<td style="text-align: right;">0.7460729</td>
-<td style="text-align: right;">0.4272862</td>
+<td style="text-align: right;">1.7729908</td>
+<td style="text-align: right;">0.6393785</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: left;">STEESE</td>
 </tr>
@@ -448,13 +454,13 @@ Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package f
 <p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>So, much more sky exposed in burned and reburned plots compared to our mature ones (with the caveat that we didn’t take pictures in the mature steese sites). On average, more sky is exposed in the Dalton sites, but the trends are roughly the same.</p>
+<p>So, much more sky exposed in burned and reburned plots compared to our mature ones (with the caveat that we didn’t take pictures in the mature steese sites). On average, more sky is exposed in the Steese sites, but the trends are roughly the same.</p>
 </section>
 <section id="whats-the-relationship-between-exposed-sky-and-tree-density" class="level1">
 <h1>What’s the relationship between exposed sky and tree density?</h1>
 <p>Presumably the mechanism for that is tree density, but now we can check the relationship between the two. I’ll load and process our density data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>density <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Draft_hemisphere/data/density.csv"</span>)</span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>density <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Post_hemispheR/data/density.csv"</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>density_count <span class="ot">&lt;-</span> density <span class="sc">%&gt;%</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SITE, TREAT, PLOT) <span class="sc">%&gt;%</span></span>
@@ -466,11 +472,19 @@ Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package f
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> count_ha <span class="sc">/</span> <span class="dv">10000</span>, <span class="at">y =</span> percentSky<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">+</span> </span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> <span class="fu">as.factor</span>(treat), <span class="at">col =</span> <span class="fu">as.factor</span>(treat)), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Density (Tree per m2)"</span>, <span class="at">y =</span> <span class="st">"% sky"</span>) <span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>, </span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#d73027"</span>, <span class="st">"#d9ef8b"</span>,<span class="st">"#91cf60"</span>,<span class="st">"#1a9850"</span>)) <span class="sc">+</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>,</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">17</span>, <span class="dv">19</span>, <span class="dv">3</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">col =</span> <span class="fu">as.factor</span>(treat), </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fill =</span> <span class="fu">as.factor</span>(treat)), </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span> , <span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Density (Tree per m2)"</span>, <span class="at">y =</span> <span class="st">"% sky"</span>) <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>, </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#d73027"</span>, <span class="st">"#d9ef8b"</span>,<span class="st">"#91cf60"</span>,<span class="st">"#1a9850"</span>)) <span class="sc">+</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">17</span>, <span class="dv">19</span>, <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>,</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#d73027"</span>, <span class="st">"#d9ef8b"</span>,<span class="st">"#91cf60"</span>,<span class="st">"#1a9850"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/density plot-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -481,31 +495,39 @@ Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package f
 <h1>What’s the relationship between canopy openness and solar irradiance?</h1>
 <p>I’ve also used solar irradiance<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> before as a proxy for light availability. How similar are those metrics?</p>
 <div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;essentially the strength of the sun in a given location, measured in watts per square meter. For our analysis, we’ve calculated it in arcGIS using the solar radiation toolset which takes x and y coordinates, slope and aspect and averages incoming solar radiation across a year</p></li></div><div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>solar <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Draft_hemisphere/data/site_attrib.csv"</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>solar <span class="ot">&lt;-</span> solar <span class="sc">%&gt;%</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">plot =</span> PLOT, <span class="at">site =</span> SITE, <span class="at">treat =</span> TREAT, <span class="at">solar =</span> SOLAR) <span class="sc">%&gt;%</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(site, plot, treat, solar))</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">left_join</span>(results, solar, <span class="at">by =</span> <span class="fu">join_by</span>(site, plot, treat))</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> solar, <span class="at">y =</span> percentSky<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">+</span> </span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> <span class="fu">as.factor</span>(treat), <span class="at">col =</span> <span class="fu">as.factor</span>(treat)), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Solar irradiance"</span>, <span class="at">y =</span> <span class="st">"% sky"</span>) <span class="sc">+</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>, </span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#d73027"</span>, <span class="st">"#d9ef8b"</span>,<span class="st">"#91cf60"</span>,<span class="st">"#1a9850"</span>)) <span class="sc">+</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>,</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">17</span>, <span class="dv">19</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>solar <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Post_hemispheR/data/site_attrib.csv"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>solar <span class="ot">&lt;-</span> solar <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">plot =</span> PLOT, <span class="at">site =</span> SITE, <span class="at">treat =</span> TREAT, <span class="at">solar =</span> SOLAR) <span class="sc">%&gt;%</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(site, plot, treat, solar))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">left_join</span>(results, solar, <span class="at">by =</span> <span class="fu">join_by</span>(site, plot, treat))</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> solar, <span class="at">y =</span> percentSky<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">+</span> </span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> <span class="fu">as.factor</span>(treat), <span class="at">col =</span> <span class="fu">as.factor</span>(treat)), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">col =</span> <span class="fu">as.factor</span>(treat), </span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fill =</span> <span class="fu">as.factor</span>(treat)), </span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span> , <span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Solar irradiance"</span>, <span class="at">y =</span> <span class="st">"% sky"</span>) <span class="sc">+</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>, </span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#d73027"</span>, <span class="st">"#d9ef8b"</span>,<span class="st">"#91cf60"</span>,<span class="st">"#1a9850"</span>)) <span class="sc">+</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>,</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">17</span>, <span class="dv">19</span>, <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>, </span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#d73027"</span>, <span class="st">"#d9ef8b"</span>,<span class="st">"#91cf60"</span>,<span class="st">"#1a9850"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/solar irradiance-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(results<span class="sc">$</span>percentSky, results<span class="sc">$</span>solar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(results<span class="sc">$</span>percentSky, results<span class="sc">$</span>solar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.03694908</code></pre>
+<pre><code>[1] 0.2904864</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(results<span class="sc">$</span>solar, results<span class="sc">$</span>ratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(results<span class="sc">$</span>solar, results<span class="sc">$</span>ratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.1430488</code></pre>
+<pre><code>[1] 0.1626447</code></pre>
 </div>
 </div>
 <p>This, and the correlation coefficients seem to show that solar irradiance and the percent of sky visible from the photos aren’t really equivalent - said another way, they aren’t interchangeable as proxies of light availability. We’ve been using just solar irradiance in our analysis, and it doesn’t seem to have an impact on understory species communities - given the difference between the two, perhaps exposed sky will. Stay tuned!</p>
@@ -521,7 +543,7 @@ Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package f
 <section id="session-info" class="level2">
 <h2 class="anchored" data-anchor-id="session-info">Session Info</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.4.1 (2024-06-14)
 Platform: aarch64-apple-darwin20
@@ -551,23 +573,24 @@ loaded via a namespace (and not attached):
  [4] htmlwidgets_1.6.4    lattice_0.22-6       tzdb_0.4.0          
  [7] vctrs_0.6.5          tools_4.4.1          generics_0.1.3      
 [10] proxy_0.4-27         fansi_1.0.6          pkgconfig_2.0.3     
-[13] KernSmooth_2.23-24   checkmate_2.3.2      lifecycle_1.0.4     
-[16] farver_2.1.2         compiler_4.4.1       munsell_0.5.1       
-[19] ijtiff_2.3.4         dismo_1.3-14         codetools_0.2-20    
-[22] htmltools_0.5.8.1    class_7.3-22         yaml_2.3.8          
-[25] pillar_1.9.0         classInt_0.4-10      tidyselect_1.2.1    
-[28] digest_0.6.36        stringi_1.8.4        sf_1.0-16           
-[31] labeling_0.4.3       fastmap_1.2.0        grid_4.4.1          
-[34] colorspace_2.1-0     cli_3.6.3            magrittr_2.0.3      
-[37] utf8_1.2.4           e1071_1.7-14         withr_3.0.0         
-[40] autothresholdr_1.4.2 backports_1.5.0      scales_1.3.0        
-[43] sp_2.1-4             timechange_0.3.0     rmarkdown_2.27      
-[46] hms_1.1.3            evaluate_0.24.0      knitr_1.47          
-[49] viridisLite_0.4.2    rlang_1.1.4          Rcpp_1.0.12         
-[52] zeallot_0.1.0        glue_1.7.0           DBI_1.2.3           
-[55] xml2_1.3.6           strex_2.0.0          svglite_2.1.3       
-[58] rstudioapi_0.16.0    jsonlite_1.8.8       R6_2.5.1            
-[61] systemfonts_1.1.0    units_0.8-5         </code></pre>
+[13] Matrix_1.7-0         KernSmooth_2.23-24   checkmate_2.3.2     
+[16] lifecycle_1.0.4      farver_2.1.2         compiler_4.4.1      
+[19] munsell_0.5.1        ijtiff_2.3.4         dismo_1.3-14        
+[22] codetools_0.2-20     htmltools_0.5.8.1    class_7.3-22        
+[25] yaml_2.3.8           pillar_1.9.0         classInt_0.4-10     
+[28] nlme_3.1-165         tidyselect_1.2.1     digest_0.6.36       
+[31] stringi_1.8.4        sf_1.0-16            splines_4.4.1       
+[34] labeling_0.4.3       fastmap_1.2.0        grid_4.4.1          
+[37] colorspace_2.1-0     cli_3.6.3            magrittr_2.0.3      
+[40] utf8_1.2.4           e1071_1.7-14         withr_3.0.0         
+[43] autothresholdr_1.4.2 backports_1.5.0      scales_1.3.0        
+[46] sp_2.1-4             timechange_0.3.0     rmarkdown_2.27      
+[49] hms_1.1.3            evaluate_0.24.0      knitr_1.47          
+[52] viridisLite_0.4.2    mgcv_1.9-1           rlang_1.1.4         
+[55] Rcpp_1.0.12          zeallot_0.1.0        glue_1.7.0          
+[58] DBI_1.2.3            xml2_1.3.6           strex_2.0.0         
+[61] svglite_2.1.3        rstudioapi_0.16.0    jsonlite_1.8.8      
+[64] R6_2.5.1             systemfonts_1.1.0    units_0.8-5         </code></pre>
 </div>
 </div>
 

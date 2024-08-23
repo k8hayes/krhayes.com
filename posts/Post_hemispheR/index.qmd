@@ -1,6 +1,6 @@
 ---
 title: Calculating light availability from fisheye photos
-Description: How to use the package hemispheR
+description: How to use the package hemispheR
 subtitle: Ft. pretty pictures
 date: 2024-08-19
 categories: [Spatial Data Analysis, Workflow]
@@ -33,7 +33,7 @@ library(tidyverse)
 library(cowplot)
 theme_set(theme_cowplot())
 
-results <- read.csv("/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Draft_hemisphere/data/canopyOpen.csv")
+results <- read.csv("/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Post_hemispheR/data/canopyOpen.csv")
 
 results <- results %>%
   select(!Photo.ID)
@@ -47,7 +47,7 @@ I'll start by importing one of our canopy photos. Here's the image:
 *import_fisheye()* imports the photo as a raster, defining the edges of the picture.
 
 ```{r importing 11_0}
-ph11_0 <- import_fisheye(filename = "/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Draft_hemisphere/images/11_0.JPG",
+ph11_0 <- import_fisheye(filename = "/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Post_hemispheR/images/11_0.JPG",
                        circular = TRUE, display = TRUE)
 ```
 
@@ -76,7 +76,7 @@ Now, I'll compare that to a picture from one of our thrice-burned plots. Again, 
 ![obviously more open right off the bat](images/23_3.JPG)
 
 ```{r 23_3 import}
-ph23_3 <- import_fisheye(filename = "/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Draft_hemisphere/images/23_3.JPG",
+ph23_3 <- import_fisheye(filename = "/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Post_hemispheR/images/23_3.JPG",
                        circular = TRUE, display = TRUE)
 ```
 
@@ -175,7 +175,7 @@ ggplot(results, aes(x = as.factor(treat),
   labs(x = "Number of Fires", y = "Percent Sky %")
 ```
 
-So, much more sky exposed in burned and reburned plots compared to our mature ones (with the caveat that we didn't take pictures in the mature steese sites). On average, more sky is exposed in the Dalton sites, but the trends are roughly the same.
+So, much more sky exposed in burned and reburned plots compared to our mature ones (with the caveat that we didn't take pictures in the mature steese sites). On average, more sky is exposed in the Steese sites, but the trends are roughly the same.
 
 # What's the relationship between exposed sky and tree density?
 
@@ -183,7 +183,7 @@ Presumably the mechanism for that is tree density, but now we can check the rela
 
 ```{r tree density}
 #| output: false
-density <- read.csv("/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Draft_hemisphere/data/density.csv")
+density <- read.csv("/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Post_hemispheR/data/density.csv")
 
 density_count <- density %>%
   group_by(SITE, TREAT, PLOT) %>%
@@ -196,11 +196,16 @@ results <- left_join(results, density_count, by = join_by(site, plot, treat))
 ```{r density plot}
 ggplot(results, aes(x = count_ha / 10000, y = percentSky*100)) + 
   geom_point(aes(shape = as.factor(treat), col = as.factor(treat)), size = 2) + 
+  geom_smooth(aes(col = as.factor(treat), 
+                  fill = as.factor(treat)), 
+              method = "lm" , alpha = 0.1) +
   labs(x = "Density (Tree per m2)", y = "% sky") +
   scale_color_manual(name = "Number of fires", 
                      values = c("#d73027", "#d9ef8b","#91cf60","#1a9850")) +
   scale_shape_manual(name = "Number of fires",
-                     values = c(15, 17, 19, 3)) 
+                     values = c(15, 17, 19, 3)) +
+  scale_fill_manual(name = "Number of fires",
+                     values = c("#d73027", "#d9ef8b","#91cf60","#1a9850")) 
 ```
 
 So, overall, more exposed sky at lower tree densities. Some exceptions, in the 3x burns
@@ -212,7 +217,7 @@ I've also used solar irradiance[^2] before as a proxy for light availability. Ho
 [^2]: essentially the strength of the sun in a given location, measured in watts per square meter. For our analysis, we've calculated it in arcGIS using the solar radiation toolset which takes x and y coordinates, slope and aspect and averages incoming solar radiation across a year
 
 ```{r solar irradiance}
-solar <- read.csv("/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Draft_hemisphere/data/site_attrib.csv")
+solar <- read.csv("/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Post_hemispheR/data/site_attrib.csv")
 
 solar <- solar %>%
   rename(plot = PLOT, site = SITE, treat = TREAT, solar = SOLAR) %>%
@@ -222,11 +227,16 @@ results <- left_join(results, solar, by = join_by(site, plot, treat))
 
 ggplot(results, aes(x = solar, y = percentSky*100)) + 
   geom_point(aes(shape = as.factor(treat), col = as.factor(treat)), size = 2) + 
+  geom_smooth(aes(col = as.factor(treat), 
+                  fill = as.factor(treat)), 
+              method = "lm" , alpha = 0.1) +
   labs(x = "Solar irradiance", y = "% sky") +
   scale_color_manual(name = "Number of fires", 
                      values = c("#d73027", "#d9ef8b","#91cf60","#1a9850")) +
   scale_shape_manual(name = "Number of fires",
-                     values = c(15, 17, 19, 3))
+                     values = c(15, 17, 19, 3)) +
+  scale_fill_manual(name = "Number of fires", 
+                     values = c("#d73027", "#d9ef8b","#91cf60","#1a9850"))
 
 cor(results$percentSky, results$solar)
 
@@ -235,7 +245,7 @@ cor(results$solar, results$ratio)
 
 This, and the correlation coefficients seem to show that solar irradiance and the percent of sky visible from the photos aren't really equivalent - said another way, they aren't interchangeable as proxies of light availability. We've been using just solar irradiance in our analysis, and it doesn't seem to have an impact on understory species communities - given the difference between the two, perhaps exposed sky will. Stay tuned!
 
-![a very pretty, very open reburned plot](images/reburned stand.JPG)
+![a very pretty, very open reburned plot](images/reburned%20stand.JPG)
 
 # More Resources
 
