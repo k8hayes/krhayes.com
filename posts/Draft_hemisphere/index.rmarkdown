@@ -7,6 +7,7 @@ date-modified: last-modified
 bibliography: references.bib
 ---
 
+
 As part of my PhD trying to capture the impact of reburning on boreal forests, I measured understory plant communities in my study sites. I don't have a background in community ecology, but have been working with a labmate and friend to understand the impact of reburning on the communities we measured. As part of that effort, I've been curious about light availability - the reburned stands I worked in as a PhD became more and more open with more reburning, and presumably that means more light would reach the understory.
 
 In order to capture the light coming through the canopy in these sites, there was a moment in our sampling protocol where we set up a camera with a fisheye lens on a flat surface in the middle of the plot, laid down on our backs trying to hid in the vegetation around us, and looked up at the sky.[^1]
@@ -22,6 +23,7 @@ To convert pictures like these into measurements of the light coming through the
 *hemispheR* was built to help process digital hemispherical photography (DHP) [@hemispheR]. It calculates leaf area index, a ratio of total leaf area of vegetation to the surface area grown, using equations predicting the relationship between the surface area of leaves and the fraction of light they intercept.
 
 While leaf area index is really useful, I'm mostly interested in light availability more broadly - I'm really just looking for the fraction of canopy to open sky. *hemispheR* classifies pixels within an image as either canopy or sky as a step to calculating leaf area index, so it should work great for this.
+
 
 ```{r set up}
 #| output: FALSE
@@ -39,18 +41,22 @@ results <- results %>%
 
 ```
 
+
 I'll start by importing one of our canopy photos. Here's the image:
 
 ![This is a picture from one of our mature plots - note the black spruce all around the edges of the photo.](images/11_0.JPG)
 
 *import_fisheye()* imports the photo as a raster, defining the edges of the picture.
 
+
 ```{r importing 11_0}
 ph11_0 <- import_fisheye(filename = "/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Draft_hemisphere/images/11_0.JPG",
                        circular = TRUE, display = TRUE)
 ```
 
+
 Using *binarize_fisheye()*, I can classify the pixels as either canopy (0) or sky (1).
+
 
 ```{r 11_0 binarize}
 ph11_0bin <- binarize_fisheye(ph11_0)
@@ -58,50 +64,64 @@ ph11_0bin <- binarize_fisheye(ph11_0)
 plot(ph11_0bin)
 ```
 
+
 Then, I'll convert the raster into a data.frame so I can calculate the percent of open sky:
+
 
 ```{r 11_0 data frame}
 ph11_0data <- as.data.frame(ph11_0bin) # 0 is canopy # 1 is sky
 ```
 
+
 What percent is sky?
+
 
 ```{r 11_0 percentSky}
 round(length(which(ph11_0data == 1)) / nrow(ph11_0data) * 100, 2)
 ```
 
+
 Now, I'll compare that to a picture from one of our thrice-burned plots. Again, here's the original image:
 
 ![obviously more open right off the bat](images/23_3.JPG)
+
 
 ```{r 23_3 import}
 ph23_3 <- import_fisheye(filename = "/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Draft_hemisphere/images/23_3.JPG",
                        circular = TRUE, display = TRUE)
 ```
 
+
 The obvious visual differences continue when you convert to a binary:
+
 
 ```{r 23_3 binary}
 ph23_3bin <- binarize_fisheye(ph23_3, display = TRUE)
 ```
 
+
 There's one issue here - it seems like the binary classified the bottom half of the sky incorrectly. How can we fix that?
 
 One option is zones - setting zonal = **TRUE** in *binarize_fisheye()* tells the function to split the image into four zones, calculating each separately. Let's try it:
+
 
 ```{r 23_3 binarize zones}
 ph23_3bin <- binarize_fisheye(ph23_3, zonal = TRUE, display = TRUE)
 
 ```
 
+
 That's a lot better, but still not perfect. Note how there's now 4 different threshold values. Threshold values are set automatically, but you can also set them manually.
+
 
 ```{r 23_3 manual}
 # using the smallest value from the zones above
 ph23_3bin <- binarize_fisheye(ph23_3, manual = 37, display = TRUE)
 ```
 
+
 Now that matches the raw picture. and the percent sky?
+
 
 ```{r 23_3 ratio / percent sky}
 ph23_3data <- as.data.frame(ph23_3bin) # 0 is canopy # 1 is sky
@@ -109,9 +129,11 @@ ph23_3data <- as.data.frame(ph23_3bin) # 0 is canopy # 1 is sky
 round(length(which(ph23_3data == 1)) / nrow(ph23_3data) * 100, 2)
 ```
 
+
 # Automating hemispheR
 
 Now, I'd like to replicate this 50 times, reading in each picture and extracting the ratio of canopy to sky. Here's the code to do so:
+
 
 ```{r loop}
 #| eval: false
@@ -163,9 +185,11 @@ results <- left_join(results, index, by = join_by(plot, treat))
 kable(head(results))
 ```
 
+
 # How does exposed sky differ across reburn?
 
 So, what does that actually look like?
+
 
 ```{r}
 ggplot(results, aes(x = as.factor(treat), 
@@ -174,11 +198,13 @@ ggplot(results, aes(x = as.factor(treat),
   labs(x = "Number of Fires", y = "Percent Sky %")
 ```
 
+
 So, much more sky exposed in burned and reburned plots compared to our mature ones (with the caveat that we didn't take pictures in the mature steese sites). On average, more sky is exposed in the Dalton sites, but the trends are roughly the same.
 
 # What's the relationship between exposed sky and tree density?
 
 Presumably the mechanism for that is tree density, but now we can check the relationship between the two. I'll load and process our density data:
+
 
 ```{r tree density}
 #| output: false
@@ -202,6 +228,7 @@ ggplot(results, aes(x = count_ha / 10000, y = percentSky*100)) +
                      values = c(15, 17, 19, 3)) 
 ```
 
+
 So, overall, more exposed sky at lower tree densities. Some exceptions, in the 3x burns
 
 # What's the relationship between canopy openness and solar irradiance?
@@ -209,6 +236,7 @@ So, overall, more exposed sky at lower tree densities. Some exceptions, in the 3
 I've also used solar irradiance[^2] before as a proxy for light availability. How similar are those metrics?
 
 [^2]: essentially the strength of the sun in a given location, measured in watts per square meter. For our analysis, we've calculated it in arcGIS using the solar radiation toolset which takes x and y coordinates, slope and aspect and averages incoming solar radiation across a year
+
 
 ```{r solar irradiance}
 solar <- read.csv("/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Draft_hemisphere/data/site_attrib.csv")
@@ -232,6 +260,7 @@ cor(results$percentSky, results$solar)
 cor(results$solar, results$ratio)
 ```
 
+
 This, and the correlation coefficients seem to show that solar irradiance and the percent of sky visible from the photos aren't really equivalent - said another way, they aren't interchangeable as proxies of light availability. We've been using just solar irradiance in our analysis, and it doesn't seem to have an impact on understory species communities - given the difference between the two, perhaps exposed sky will. Stay tuned!
 
 ![a very pretty, very open reburned plot](images/reburned stand.JPG)
@@ -240,6 +269,8 @@ This, and the correlation coefficients seem to show that solar irradiance and th
 
 ## Session Info
 
+
 ```{r session info}
 sessionInfo()
 ```
+
