@@ -264,11 +264,9 @@ Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package f
 <p><img src="index_files/figure-html/importing 11_0-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Using <em>binarize_fisheye()</em>, I can classify the pixels as either canopy (0) or sky (1).</p>
+<p>Using <em>binarize_fisheye()</em>, I can classify the pixels as either canopy (black, with a value of 0) or sky (white, 1).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ph11_0bin <span class="ot">&lt;-</span> <span class="fu">binarize_fisheye</span>(ph11_0)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ph11_0bin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ph11_0bin <span class="ot">&lt;-</span> <span class="fu">binarize_fisheye</span>(ph11_0, <span class="at">display =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/11_0 binarize-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -309,7 +307,7 @@ Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package f
 </div>
 </div>
 <p>There’s one issue here - it seems like the binary classified the bottom half of the sky incorrectly. How can we fix that?</p>
-<p>One option is zones - setting zonal = <strong>TRUE</strong> in <em>binarize_fisheye()</em> tells the function to split the image into four zones, calculating each separately. Let’s try it:</p>
+<p>One option is zones: setting zonal = <strong>TRUE</strong> in <em>binarize_fisheye()</em> tells the function to split the image into four zones, calculating each separately. Let’s try it:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ph23_3bin <span class="ot">&lt;-</span> <span class="fu">binarize_fisheye</span>(ph23_3, <span class="at">zonal =</span> <span class="cn">TRUE</span>, <span class="at">display =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -441,10 +439,11 @@ Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package f
 </table>
 </div>
 </div>
+<p>Note: for the sake of the loop, I’m using zonal = TRUE instead of setting the manual limit. I’ve tested out both, and the results don’t differ dramatically. Think I might’ve picked the one example picture from the whole lot where the correction was made best with a manual override.</p>
 </section>
 <section id="how-does-exposed-sky-differ-across-reburn" class="level1">
 <h1>How does exposed sky differ across reburn?</h1>
-<p>So, what does that actually look like?</p>
+<p>So, what are the trends across all 39 pictures?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(treat), </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">y =</span> percentSky<span class="sc">*</span><span class="dv">100</span>, <span class="at">fill =</span> site)) <span class="sc">+</span></span>
@@ -489,7 +488,7 @@ Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package f
 <p><img src="index_files/figure-html/density plot-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>So, overall, more exposed sky at lower tree densities. Some exceptions, in the 3x burns</p>
+<p>So, overall, more exposed sky at lower tree densities. The strength of that relationship differs a bit by fire history, which is interesting, and the 99% confidence intervals are pretty broad - we had fewer sites along the denser edge of that gradient.</p>
 </section>
 <section id="whats-the-relationship-between-canopy-openness-and-solar-irradiance" class="level1 page-columns page-full">
 <h1>What’s the relationship between canopy openness and solar irradiance?</h1>

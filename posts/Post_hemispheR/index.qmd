@@ -51,12 +51,10 @@ ph11_0 <- import_fisheye(filename = "/Users/katherinehayes/Library/CloudStorage/
                        circular = TRUE, display = TRUE)
 ```
 
-Using *binarize_fisheye()*, I can classify the pixels as either canopy (0) or sky (1).
+Using *binarize_fisheye()*, I can classify the pixels as either canopy (black, with a value of 0) or sky (white, 1).
 
 ```{r 11_0 binarize}
-ph11_0bin <- binarize_fisheye(ph11_0)
-
-plot(ph11_0bin)
+ph11_0bin <- binarize_fisheye(ph11_0, display = TRUE)
 ```
 
 Then, I'll convert the raster into a data.frame so I can calculate the percent of open sky:
@@ -88,7 +86,7 @@ ph23_3bin <- binarize_fisheye(ph23_3, display = TRUE)
 
 There's one issue here - it seems like the binary classified the bottom half of the sky incorrectly. How can we fix that?
 
-One option is zones - setting zonal = **TRUE** in *binarize_fisheye()* tells the function to split the image into four zones, calculating each separately. Let's try it:
+One option is zones: setting zonal = **TRUE** in *binarize_fisheye()* tells the function to split the image into four zones, calculating each separately. Let's try it:
 
 ```{r 23_3 binarize zones}
 ph23_3bin <- binarize_fisheye(ph23_3, zonal = TRUE, display = TRUE)
@@ -164,9 +162,11 @@ results <- left_join(results, index, by = join_by(plot, treat))
 kable(head(results))
 ```
 
+Note: for the sake of the loop, I'm using zonal = TRUE instead of setting the manual limit. I've tested out both, and the results don't differ dramatically. Think I might've picked the one example picture from the whole lot where the correction was made best with a manual override.
+
 # How does exposed sky differ across reburn?
 
-So, what does that actually look like?
+So, what are the trends across all 39 pictures?
 
 ```{r}
 ggplot(results, aes(x = as.factor(treat), 
@@ -208,7 +208,7 @@ ggplot(results, aes(x = count_ha / 10000, y = percentSky*100)) +
                      values = c("#d73027", "#d9ef8b","#91cf60","#1a9850")) 
 ```
 
-So, overall, more exposed sky at lower tree densities. Some exceptions, in the 3x burns
+So, overall, more exposed sky at lower tree densities. The strength of that relationship differs a bit by fire history, which is interesting, and the 99% confidence intervals are pretty broad - we had fewer sites along the denser edge of that gradient.
 
 # What's the relationship between canopy openness and solar irradiance?
 
