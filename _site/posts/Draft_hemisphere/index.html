@@ -186,7 +186,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">August 21, 2024</p>
+        <p class="date-modified">August 23, 2024</p>
       </div>
     </div>
       
@@ -202,9 +202,9 @@ div.csl-indent {
   <ul>
   <li><a href="#introduction-to-hemispher" id="toc-introduction-to-hemispher" class="nav-link active" data-scroll-target="#introduction-to-hemispher">Introduction to hemispheR</a></li>
   <li><a href="#automating-hemispher" id="toc-automating-hemispher" class="nav-link" data-scroll-target="#automating-hemispher">Automating hemispheR</a></li>
-  <li><a href="#how-does-canopy-openness-differ-across-reburn" id="toc-how-does-canopy-openness-differ-across-reburn" class="nav-link" data-scroll-target="#how-does-canopy-openness-differ-across-reburn">How does canopy openness differ across reburn?</a></li>
-  <li><a href="#whats-the-relationship-between-canopy-openess-and-tree-density" id="toc-whats-the-relationship-between-canopy-openess-and-tree-density" class="nav-link" data-scroll-target="#whats-the-relationship-between-canopy-openess-and-tree-density">What’s the relationship between canopy openess and tree density?</a></li>
-  <li><a href="#whats-the-relationship-between-canopy-openess-and-solar-irradiance" id="toc-whats-the-relationship-between-canopy-openess-and-solar-irradiance" class="nav-link" data-scroll-target="#whats-the-relationship-between-canopy-openess-and-solar-irradiance">What’s the relationship between canopy openess and solar irradiance?</a></li>
+  <li><a href="#how-does-exposed-sky-differ-across-reburn" id="toc-how-does-exposed-sky-differ-across-reburn" class="nav-link" data-scroll-target="#how-does-exposed-sky-differ-across-reburn">How does exposed sky differ across reburn?</a></li>
+  <li><a href="#whats-the-relationship-between-exposed-sky-and-tree-density" id="toc-whats-the-relationship-between-exposed-sky-and-tree-density" class="nav-link" data-scroll-target="#whats-the-relationship-between-exposed-sky-and-tree-density">What’s the relationship between exposed sky and tree density?</a></li>
+  <li><a href="#whats-the-relationship-between-canopy-openness-and-solar-irradiance" id="toc-whats-the-relationship-between-canopy-openness-and-solar-irradiance" class="nav-link" data-scroll-target="#whats-the-relationship-between-canopy-openness-and-solar-irradiance">What’s the relationship between canopy openness and solar irradiance?</a></li>
   <li><a href="#more-resources" id="toc-more-resources" class="nav-link" data-scroll-target="#more-resources">More Resources</a>
   <ul class="collapse">
   <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session Info</a></li>
@@ -222,163 +222,161 @@ div.csl-indent {
 
 
 
-<p>As part of my PhD trying to capture the impact of reburning on boreal forests, I measured understory plant communities in my study sites. I don’t have a background in community ecology, but have been working with a labmate and friend to understand the impact of reburning on the communities we measured. As part of that effort, I’ve been curious about light availability - the reburned stands I worked in as a PhD became more and more open with more reburning, and presumably that increase in the availability of light would help certain members of the understory.</p>
-<p>[insert photos from stands here]</p>
-<p>In order to capture the light coming through the canopy in these sites, there was a moment in our sampling protocol where we set up a camera with a fisheye lens on a flat surface in the middle of the plot, laid down on our backs trying to hid in the vegetation around us<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and looked up at the sky. My favorite part of sampling, for the record.</p>
-<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;We weren’t always able to sneak out of the frame successfully…</p></li><div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<p>As part of my PhD trying to capture the impact of reburning on boreal forests, I measured understory plant communities in my study sites. I don’t have a background in community ecology, but have been working with a labmate and friend to understand the impact of reburning on the communities we measured. As part of that effort, I’ve been curious about light availability - the reburned stands I worked in as a PhD became more and more open with more reburning, and presumably that means more light would reach the understory.</p>
+<p>In order to capture the light coming through the canopy in these sites, there was a moment in our sampling protocol where we set up a camera with a fisheye lens on a flat surface in the middle of the plot, laid down on our backs trying to hid in the vegetation around us, and looked up at the sky.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;My favorite part of sampling, for the record.</p></li></div><div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="images/outtake.JPG" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">We weren’t always able to sneak out of the frame successfully, peep my trusty field hat at the top</figcaption>
 </figure>
-</div></div>
-<p>To convert pictures like these into measurements of the light coming through the canopy, I’ve been exploring how to use the <span class="citation" data-cites="hemispheR">(<a href="#ref-hemispheR" role="doc-biblioref">Chianucci and Macek 2023</a>)</span> package in R.</p>
+</div>
+<p>To convert pictures like these into measurements of the light coming through the canopy, I’ve been exploring how to use the <em>hemispheR</em> package in R.</p>
 <section id="introduction-to-hemispher" class="level1 page-columns page-full">
 <h1>Introduction to hemispheR</h1>
-<p><span class="citation" data-cites="hemispheR">(<a href="#ref-hemispheR" role="doc-biblioref">Chianucci and Macek 2023</a>)</span> was built to help process digital hemispherical photography (DHP). It calculates leaf area index, a ratio of total leaf area of vegetation to the surface area grown, using equations predicting the relationship between the surface area of leaves and the fraction of light they intercept.</p>
+<p><em>hemispheR</em> was built to help process digital hemispherical photography (DHP) <span class="citation" data-cites="hemispheR">(<a href="#ref-hemispheR" role="doc-biblioref">Chianucci and Macek 2023</a>)</span>. It calculates leaf area index, a ratio of total leaf area of vegetation to the surface area grown, using equations predicting the relationship between the surface area of leaves and the fraction of light they intercept.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-hemispheR" class="csl-entry" role="listitem">
 Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package for Fisheye Canopy Image Analysis.”</span> <a href="https://doi.org/10.1016/j.agrformet.2023.109470">https://doi.org/10.1016/j.agrformet.2023.109470</a>.
-</div></div><p>While leaf area index is really useful, I’m mostly interested in light availability more broadly - I’m really just looking for the fraction of canopy to open sky. <span class="citation" data-cites="hemispheR">(<a href="#ref-hemispheR" role="doc-biblioref">Chianucci and Macek 2023</a>)</span> classifies pixels within an image as either canopy or sky as a step to calculating leaf area index, so it should work great for this.</p>
+</div></div><p>While leaf area index is really useful, I’m mostly interested in light availability more broadly - I’m really just looking for the fraction of canopy to open sky. <em>hemispheR</em> classifies pixels within an image as either canopy or sky as a step to calculating leaf area index, so it should work great for this.</p>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: terra</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>terra 1.7.78</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ tidyr::extract()    masks terra::extract()
-✖ dplyr::filter()     masks stats::filter()
-✖ dplyr::group_rows() masks kableExtra::group_rows()
-✖ dplyr::lag()        masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
 
-Attaching package: 'cowplot'
-
-
-The following object is masked from 'package:lubridate':
-
-    stamp</code></pre>
 </div>
+<p>I’ll start by importing one of our canopy photos. Here’s the image:</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/11_0.JPG" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">This is a picture from one of our mature plots - note the black spruce all around the edges of the photo.</figcaption>
+</figure>
 </div>
-<p>I’ll start by importing one of our canopy photos.</p>
+<p><em>import_fisheye()</em> imports the photo as a raster, defining the edges of the picture.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ph11_0 <span class="ot">&lt;-</span> <span class="fu">import_fisheye</span>(<span class="at">filename =</span> <span class="st">"images/11_0.JPG"</span>,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">circular =</span> <span class="cn">TRUE</span>, <span class="at">display =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ph11_0 <span class="ot">&lt;-</span> <span class="fu">import_fisheye</span>(<span class="at">filename =</span> <span class="st">"/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Draft_hemisphere/images/11_0.JPG"</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">circular =</span> <span class="cn">TRUE</span>, <span class="at">display =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>It is a circular fisheye, where xc, yc and radius are 2456, 1632, 1630</code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/importing 11_0-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ph11_0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/importing 11_0-2.png" class="img-fluid" width="672"></p>
 </div>
-</div>
-<p>This is a picture from one of our mature plots - note the black spruce all around the edges of the photo.</p>
-<p>Using the binarize_fisheye() function, I can classify the pixels as either canopy (0) or sky (1).</p>
+<p>Using <em>binarize_fisheye()</em>, I can classify the pixels as either canopy (0) or sky (1).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ph11_0_bin <span class="ot">&lt;-</span> <span class="fu">binarize_fisheye</span>(ph11_0, <span class="at">display =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ph11_0bin <span class="ot">&lt;-</span> <span class="fu">binarize_fisheye</span>(ph11_0)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ph11_0bin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/11_0 binarize-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ph11_0_bin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/11_0 binarize-2.png" class="img-fluid" width="672"></p>
 </div>
-</div>
-<p>Then, I’ll convert the raster into a data.frame so I can calculate the ratio of canopy to sky:</p>
+<p>Then, I’ll convert the raster into a data.frame so I can calculate the percent of open sky:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ph11_0_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(ph11_0_bin) <span class="co"># 0 is canopy # 1 is sky</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ratio of canopy to sky</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(ph11_0_data <span class="sc">==</span> <span class="dv">0</span>)) <span class="sc">/</span> <span class="fu">length</span>(<span class="fu">which</span>(ph11_0_data <span class="sc">==</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ph11_0data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(ph11_0bin) <span class="co"># 0 is canopy # 1 is sky</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What percent is sky?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">length</span>(<span class="fu">which</span>(ph11_0data <span class="sc">==</span> <span class="dv">1</span>)) <span class="sc">/</span> <span class="fu">nrow</span>(ph11_0data) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.106016</code></pre>
+<pre><code>[1] 19.58</code></pre>
 </div>
 </div>
-<p>Or, said another way, the fraction of sky:</p>
+<p>Now, I’ll compare that to a picture from one of our thrice-burned plots. Again, here’s the original image:</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/23_3.JPG" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">obviously more open right off the bat</figcaption>
+</figure>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(ph11_0_data <span class="sc">==</span> <span class="dv">0</span>)) <span class="sc">/</span> <span class="fu">nrow</span>(ph11_0_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8041526</code></pre>
-</div>
-</div>
-<p>Now, I’ll compare that to a picture from one of our thrice-burned plots:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ph23_3 <span class="ot">&lt;-</span> <span class="fu">import_fisheye</span>(<span class="at">filename =</span> <span class="st">"images/23_3.JPG"</span>,</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">circular =</span> <span class="cn">TRUE</span>, <span class="at">display =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ph23_3 <span class="ot">&lt;-</span> <span class="fu">import_fisheye</span>(<span class="at">filename =</span> <span class="st">"/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Draft_hemisphere/images/23_3.JPG"</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">circular =</span> <span class="cn">TRUE</span>, <span class="at">display =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>It is a circular fisheye, where xc, yc and radius are 2456, 1632, 1630</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/23_3 binarize-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ph23_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/23_3 binarize-2.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/23_3 import-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Different ratios:</p>
+<p>The obvious visual differences continue when you convert to a binary:</p>
 <div class="cell">
-
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ph23_3bin <span class="ot">&lt;-</span> <span class="fu">binarize_fisheye</span>(ph23_3, <span class="at">display =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/23_3 binary-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>There’s one issue here - it seems like the binary classified the bottom half of the sky incorrectly. How can we fix that?</p>
+<p>One option is zones - setting zonal = <strong>TRUE</strong> in <em>binarize_fisheye()</em> tells the function to split the image into four zones, calculating each separately. Let’s try it:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ph23_3bin <span class="ot">&lt;-</span> <span class="fu">binarize_fisheye</span>(ph23_3, <span class="at">zonal =</span> <span class="cn">TRUE</span>, <span class="at">display =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/23_3 binarize zones-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>That’s a lot better, but still not perfect. Note how there’s now 4 different threshold values. Threshold values are set automatically, but you can also set them manually.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using the smallest value from the zones above</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ph23_3bin <span class="ot">&lt;-</span> <span class="fu">binarize_fisheye</span>(ph23_3, <span class="at">manual =</span> <span class="dv">37</span>, <span class="at">display =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/23_3 manual-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Now that matches the raw picture. and the percent sky?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ph23_3data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(ph23_3bin) <span class="co"># 0 is canopy # 1 is sky</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">length</span>(<span class="fu">which</span>(ph23_3data <span class="sc">==</span> <span class="dv">1</span>)) <span class="sc">/</span> <span class="fu">nrow</span>(ph23_3data) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 83.3</code></pre>
+</div>
 </div>
 </section>
 <section id="automating-hemispher" class="level1">
 <h1>Automating hemispheR</h1>
 <p>Now, I’d like to replicate this 50 times, reading in each picture and extracting the ratio of canopy to sky. Here’s the code to do so:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the path to your folder containing JPG files</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>folder_path <span class="ot">&lt;-</span> <span class="st">"data/canopy pictures/"</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># List all JPG files in the folder</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>file_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> folder_path, <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.JPG$"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize an empty data frame to store results</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot =</span> <span class="fu">character</span>(),</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ratio =</span> <span class="fu">integer</span>(),</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">percentSky =</span> <span class="fu">integer</span>(),</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (file_path <span class="cf">in</span> file_list) {</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  photo <span class="ot">&lt;-</span> hemispheR<span class="sc">::</span><span class="fu">import_fisheye</span>(<span class="at">filename =</span> file_path,</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">circular =</span> <span class="cn">TRUE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  photo_bin <span class="ot">&lt;-</span> <span class="fu">binarize_fisheye</span>(photo)</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  photoData <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(photo_bin)</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  ratio <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">which</span>(photoData <span class="sc">==</span> <span class="dv">1</span>)) <span class="sc">/</span> <span class="fu">length</span>(<span class="fu">which</span>(photoData <span class="sc">==</span> <span class="dv">0</span>))</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  percentSky <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">which</span>(photoData <span class="sc">==</span> <span class="dv">1</span>)) <span class="sc">/</span> <span class="fu">nrow</span>(photoData)</span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Append the results to the data frame</span></span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">rbind</span>(results, <span class="fu">data.frame</span>(</span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot =</span> file_path,</span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">ratio =</span> ratio,</span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentSky =</span> percentSky,</span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> results <span class="sc">%&gt;%</span></span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plot =</span> <span class="fu">sub</span>(<span class="st">".JPG"</span>, <span class="st">""</span>, <span class="fu">sub</span>(<span class="st">".*//"</span>, <span class="st">""</span>, results<span class="sc">$</span>plot)),</span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>         <span class="at">treat =</span> <span class="fu">as.numeric</span>(<span class="fu">sub</span>(<span class="st">".*_"</span>, <span class="st">""</span>, plot)))</span>
-<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">left_join</span>(results, index, <span class="at">by =</span> <span class="fu">join_by</span>(plot, treat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the path to your folder containing JPG files</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>folder_path <span class="ot">&lt;-</span> <span class="st">"data/canopy pictures/"</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># List all JPG files in the folder</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>file_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> folder_path, <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.JPG$"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize an empty data frame to store results</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot =</span> <span class="fu">character</span>(),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ratio =</span> <span class="fu">integer</span>(),</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">percentSky =</span> <span class="fu">integer</span>(),</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (file_path <span class="cf">in</span> file_list) {</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  photo <span class="ot">&lt;-</span> hemispheR<span class="sc">::</span><span class="fu">import_fisheye</span>(<span class="at">filename =</span> file_path,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">circular =</span> <span class="cn">TRUE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  photo_bin <span class="ot">&lt;-</span> <span class="fu">binarize_fisheye</span>(photo, <span class="at">zonal =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  photoData <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(photo_bin)</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  ratio <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">which</span>(photoData <span class="sc">==</span> <span class="dv">1</span>)) <span class="sc">/</span> <span class="fu">length</span>(<span class="fu">which</span>(photoData <span class="sc">==</span> <span class="dv">0</span>))</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  percentSky <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">which</span>(photoData <span class="sc">==</span> <span class="dv">1</span>)) <span class="sc">/</span> <span class="fu">nrow</span>(photoData)</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Append the results to the data frame</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">rbind</span>(results, <span class="fu">data.frame</span>(</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot =</span> file_path,</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">ratio =</span> ratio,</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentSky =</span> percentSky,</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> results <span class="sc">%&gt;%</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plot =</span> <span class="fu">sub</span>(<span class="st">".JPG"</span>, <span class="st">""</span>, <span class="fu">sub</span>(<span class="st">".*//"</span>, <span class="st">""</span>, results<span class="sc">$</span>plot)),</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>         <span class="at">treat =</span> <span class="fu">as.numeric</span>(<span class="fu">sub</span>(<span class="st">".*_"</span>, <span class="st">""</span>, plot)))</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">left_join</span>(results, index, <span class="at">by =</span> <span class="fu">join_by</span>(plot, treat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(results))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <thead>
@@ -388,7 +386,6 @@ The following object is masked from 'package:lubridate':
 <th style="text-align: right;">percentSky</th>
 <th style="text-align: right;">treat</th>
 <th style="text-align: left;">site</th>
-<th style="text-align: right;">Photo.ID</th>
 </tr>
 </thead>
 <tbody>
@@ -398,7 +395,6 @@ The following object is masked from 'package:lubridate':
 <td style="text-align: right;">0.1486632</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1445</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">11_0</td>
@@ -406,7 +402,6 @@ The following object is masked from 'package:lubridate':
 <td style="text-align: right;">0.1958474</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1435</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">12_1</td>
@@ -414,7 +409,6 @@ The following object is masked from 'package:lubridate':
 <td style="text-align: right;">0.5336110</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1410</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">15_3</td>
@@ -422,7 +416,6 @@ The following object is masked from 'package:lubridate':
 <td style="text-align: right;">0.4288075</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1399</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">16_2</td>
@@ -430,7 +423,6 @@ The following object is masked from 'package:lubridate':
 <td style="text-align: right;">0.5952508</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1453</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">17_3</td>
@@ -438,308 +430,88 @@ The following object is masked from 'package:lubridate':
 <td style="text-align: right;">0.4272862</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1505</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">18_1</td>
-<td style="text-align: right;">0.5084734</td>
-<td style="text-align: right;">0.3370781</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1516</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">19_2</td>
-<td style="text-align: right;">0.4659223</td>
-<td style="text-align: right;">0.3178356</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1528</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">2_3</td>
-<td style="text-align: right;">0.5401879</td>
-<td style="text-align: right;">0.3507286</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1519</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">22_3</td>
-<td style="text-align: right;">0.6296953</td>
-<td style="text-align: right;">0.3863884</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1504</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">23_3</td>
-<td style="text-align: right;">0.5919714</td>
-<td style="text-align: right;">0.3718480</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1518</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">24_3</td>
-<td style="text-align: right;">1.0248911</td>
-<td style="text-align: right;">0.5061463</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1511</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">25_3</td>
-<td style="text-align: right;">0.6134905</td>
-<td style="text-align: right;">0.3802257</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1507</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">26_2</td>
-<td style="text-align: right;">1.2169560</td>
-<td style="text-align: right;">0.5489311</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1512</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">27_2</td>
-<td style="text-align: right;">1.8369597</td>
-<td style="text-align: right;">0.6475100</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1522</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">28_1</td>
-<td style="text-align: right;">2.7322672</td>
-<td style="text-align: right;">0.7320663</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1529</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">29_1</td>
-<td style="text-align: right;">0.6071337</td>
-<td style="text-align: right;">0.3777742</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1517</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">3_2</td>
-<td style="text-align: right;">0.4905932</td>
-<td style="text-align: right;">0.3291261</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1524</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">33_1</td>
-<td style="text-align: right;">0.8058943</td>
-<td style="text-align: right;">0.4462577</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1513</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">34_2</td>
-<td style="text-align: right;">0.7007807</td>
-<td style="text-align: right;">0.4120347</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1503</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">35_3</td>
-<td style="text-align: right;">1.4096601</td>
-<td style="text-align: right;">0.5850037</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1509</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">36_1</td>
-<td style="text-align: right;">0.8700637</td>
-<td style="text-align: right;">0.4652588</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1520</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">37_3</td>
-<td style="text-align: right;">0.4515839</td>
-<td style="text-align: right;">0.3110974</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1395</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">4_2</td>
-<td style="text-align: right;">0.4909976</td>
-<td style="text-align: right;">0.3293081</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">STEESE</td>
-<td style="text-align: right;">1523</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">40_2</td>
-<td style="text-align: right;">0.7864964</td>
-<td style="text-align: right;">0.4402452</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1480</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">41_1</td>
-<td style="text-align: right;">2.6747496</td>
-<td style="text-align: right;">0.7278726</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1446</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">42_1</td>
-<td style="text-align: right;">2.1638783</td>
-<td style="text-align: right;">0.6839322</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1501</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">44_0</td>
-<td style="text-align: right;">0.1648066</td>
-<td style="text-align: right;">0.1414884</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1450</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">47_2</td>
-<td style="text-align: right;">0.7421887</td>
-<td style="text-align: right;">0.4260094</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1394</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">48_1</td>
-<td style="text-align: right;">2.6706692</td>
-<td style="text-align: right;">0.7275701</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1448</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">50_1</td>
-<td style="text-align: right;">0.7569991</td>
-<td style="text-align: right;">0.4308478</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1417</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">52_1</td>
-<td style="text-align: right;">0.3861226</td>
-<td style="text-align: right;">0.2785631</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1428</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">54_3</td>
-<td style="text-align: right;">0.6794471</td>
-<td style="text-align: right;">0.4045659</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1403</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">55_3</td>
-<td style="text-align: right;">1.2984896</td>
-<td style="text-align: right;">0.5649317</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1401</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">58_0</td>
-<td style="text-align: right;">0.2065476</td>
-<td style="text-align: right;">0.1711889</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1443</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">64_1</td>
-<td style="text-align: right;">1.1790658</td>
-<td style="text-align: right;">0.5410878</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1418</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">65_1</td>
-<td style="text-align: right;">1.0632665</td>
-<td style="text-align: right;">0.5153316</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1424</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">7_3</td>
-<td style="text-align: right;">0.9310793</td>
-<td style="text-align: right;">0.4821549</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1409</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">8_2</td>
-<td style="text-align: right;">0.4157489</td>
-<td style="text-align: right;">0.2936601</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">DALTON</td>
-<td style="text-align: right;">1473</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </section>
-<section id="how-does-canopy-openness-differ-across-reburn" class="level1">
-<h1>How does canopy openness differ across reburn?</h1>
+<section id="how-does-exposed-sky-differ-across-reburn" class="level1">
+<h1>How does exposed sky differ across reburn?</h1>
+<p>So, what does that actually look like?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(treat), </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">y =</span> percentSky<span class="sc">*</span><span class="dv">100</span>, <span class="at">fill =</span> site)) <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of Fires"</span>, <span class="at">y =</span> <span class="st">"Percent Sky %"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(treat), </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">y =</span> percentSky<span class="sc">*</span><span class="dv">100</span>, <span class="at">fill =</span> site)) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of Fires"</span>, <span class="at">y =</span> <span class="st">"Percent Sky %"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>So, much more sky exposed in burned and reburned plots compared to our mature ones (with the caveat that we didn’t take pictures in the mature steese sites). On average, more sky is exposed in the Dalton sites, but the trends are roughly the same.</p>
 </section>
-<section id="whats-the-relationship-between-canopy-openess-and-tree-density" class="level1">
-<h1>What’s the relationship between canopy openess and tree density?</h1>
+<section id="whats-the-relationship-between-exposed-sky-and-tree-density" class="level1">
+<h1>What’s the relationship between exposed sky and tree density?</h1>
+<p>Presumably the mechanism for that is tree density, but now we can check the relationship between the two. I’ll load and process our density data:</p>
 <div class="cell">
-
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'SITE', 'TREAT'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> count_ha <span class="sc">/</span> <span class="dv">10000</span>, <span class="at">y =</span> percentSky<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">+</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> <span class="fu">as.factor</span>(treat), <span class="at">col =</span> <span class="fu">as.factor</span>(treat)), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Density (Tree per m2)"</span>, <span class="at">y =</span> <span class="st">"% sky"</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>, </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#d73027"</span>, <span class="st">"#d9ef8b"</span>,<span class="st">"#91cf60"</span>,<span class="st">"#1a9850"</span>)) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">17</span>, <span class="dv">19</span>, <span class="dv">3</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/density plot-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 </section>
-<section id="whats-the-relationship-between-canopy-openess-and-solar-irradiance" class="level1">
-<h1>What’s the relationship between canopy openess and solar irradiance?</h1>
-<p>I’ve also used solar irradiance before as a proxy for light availability. How similar are those metrics?</p>
-<div class="cell">
-
+<section id="whats-the-relationship-between-canopy-openness-and-solar-irradiance" class="level1 page-columns page-full">
+<h1>What’s the relationship between canopy openness and solar irradiance?</h1>
+<p>I’ve also used solar irradiance<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> before as a proxy for light availability. How similar are those metrics?</p>
+<div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;essentially the strength of the sun in a given location, measured in watts per square meter. For our analysis, we’ve calculated it in arcGIS using the solar radiation toolset which takes x and y coordinates, slope and aspect and averages incoming solar radiation across a year</p></li></div><div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>solar <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Draft_hemisphere/data/site_attrib.csv"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>solar <span class="ot">&lt;-</span> solar <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">plot =</span> PLOT, <span class="at">site =</span> SITE, <span class="at">treat =</span> TREAT, <span class="at">solar =</span> SOLAR) <span class="sc">%&gt;%</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(site, plot, treat, solar))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">left_join</span>(results, solar, <span class="at">by =</span> <span class="fu">join_by</span>(site, plot, treat))</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> solar, <span class="at">y =</span> percentSky<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">+</span> </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> <span class="fu">as.factor</span>(treat), <span class="at">col =</span> <span class="fu">as.factor</span>(treat)), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Solar irradiance"</span>, <span class="at">y =</span> <span class="st">"% sky"</span>) <span class="sc">+</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>, </span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#d73027"</span>, <span class="st">"#d9ef8b"</span>,<span class="st">"#91cf60"</span>,<span class="st">"#1a9850"</span>)) <span class="sc">+</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>,</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">17</span>, <span class="dv">19</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/solar irradiance-1.png" class="img-fluid" width="672"></p>
 </div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(results<span class="sc">$</span>percentSky, results<span class="sc">$</span>solar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.03694908</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(results<span class="sc">$</span>solar, results<span class="sc">$</span>ratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.1430488</code></pre>
+</div>
+</div>
+<p>This, and the correlation coefficients seem to show that solar irradiance and the percent of sky visible from the photos aren’t really equivalent - said another way, they aren’t interchangeable as proxies of light availability. We’ve been using just solar irradiance in our analysis, and it doesn’t seem to have an impact on understory species communities - given the difference between the two, perhaps exposed sky will. Stay tuned!</p>
 </section>
 <section id="more-resources" class="level1">
 <h1>More Resources</h1>
 <section id="session-info" class="level2">
 <h2 class="anchored" data-anchor-id="session-info">Session Info</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.4.1 (2024-06-14)
 Platform: aarch64-apple-darwin20
