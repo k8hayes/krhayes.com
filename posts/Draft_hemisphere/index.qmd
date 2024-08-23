@@ -1,6 +1,7 @@
 ---
 title: Calculating light availability from fisheye photos
-subtitle: How to use the package hemispheR
+Description: How to use the package hemispheR
+subtitle: Ft. pretty pictures
 date: 2024-08-19
 categories: [Spatial Data Analysis, Workflow]
 date-modified: last-modified

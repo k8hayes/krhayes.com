@@ -164,7 +164,7 @@ div.csl-indent {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Calculating light availability from fisheye photos</h1>
-            <p class="subtitle lead">How to use the package hemispheR</p>
+            <p class="subtitle lead">Ft. pretty pictures</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Spatial Data Analysis</div>
                 <div class="quarto-category">Workflow</div>
@@ -454,10 +454,14 @@ Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package f
 <h1>What’s the relationship between exposed sky and tree density?</h1>
 <p>Presumably the mechanism for that is tree density, but now we can check the relationship between the two. I’ll load and process our density data:</p>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'SITE', 'TREAT'. You can override using the
-`.groups` argument.</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>density <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"/Users/katherinehayes/Library/CloudStorage/GoogleDrive-k8rhayes@gmail.com/My Drive/Work/Website/krhayes.com/posts/Draft_hemisphere/data/density.csv"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>density_count <span class="ot">&lt;-</span> density <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SITE, TREAT, PLOT) <span class="sc">%&gt;%</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count_ha =</span> <span class="fu">sum</span>(TREE_COUNT_HA)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">plot =</span> PLOT, <span class="at">site =</span> SITE, <span class="at">treat =</span> TREAT)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">left_join</span>(results, density_count, <span class="at">by =</span> <span class="fu">join_by</span>(site, plot, treat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> count_ha <span class="sc">/</span> <span class="dv">10000</span>, <span class="at">y =</span> percentSky<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">+</span> </span>
@@ -471,6 +475,7 @@ Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package f
 <p><img src="index_files/figure-html/density plot-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>So, overall, more exposed sky at lower tree densities. Some exceptions, in the 3x burns</p>
 </section>
 <section id="whats-the-relationship-between-canopy-openness-and-solar-irradiance" class="level1 page-columns page-full">
 <h1>What’s the relationship between canopy openness and solar irradiance?</h1>
@@ -484,14 +489,13 @@ Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package f
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">left_join</span>(results, solar, <span class="at">by =</span> <span class="fu">join_by</span>(site, plot, treat))</span>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> solar, <span class="at">y =</span> percentSky<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">+</span> </span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> <span class="fu">as.factor</span>(treat), <span class="at">col =</span> <span class="fu">as.factor</span>(treat)), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Solar irradiance"</span>, <span class="at">y =</span> <span class="st">"% sky"</span>) <span class="sc">+</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>, </span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#d73027"</span>, <span class="st">"#d9ef8b"</span>,<span class="st">"#91cf60"</span>,<span class="st">"#1a9850"</span>)) <span class="sc">+</span></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>,</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">17</span>, <span class="dv">19</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> solar, <span class="at">y =</span> percentSky<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">+</span> </span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> <span class="fu">as.factor</span>(treat), <span class="at">col =</span> <span class="fu">as.factor</span>(treat)), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Solar irradiance"</span>, <span class="at">y =</span> <span class="st">"% sky"</span>) <span class="sc">+</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>, </span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#d73027"</span>, <span class="st">"#d9ef8b"</span>,<span class="st">"#91cf60"</span>,<span class="st">"#1a9850"</span>)) <span class="sc">+</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">name =</span> <span class="st">"Number of fires"</span>,</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">17</span>, <span class="dv">19</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/solar irradiance-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -505,6 +509,12 @@ Chianucci, Francesco, and Martin Macek. 2023. <span>“hemispheR: An r Package f
 </div>
 </div>
 <p>This, and the correlation coefficients seem to show that solar irradiance and the percent of sky visible from the photos aren’t really equivalent - said another way, they aren’t interchangeable as proxies of light availability. We’ve been using just solar irradiance in our analysis, and it doesn’t seem to have an impact on understory species communities - given the difference between the two, perhaps exposed sky will. Stay tuned!</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/reburned stand.JPG" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">a very pretty, very open reburned plot</figcaption>
+</figure>
+</div>
 </section>
 <section id="more-resources" class="level1">
 <h1>More Resources</h1>
