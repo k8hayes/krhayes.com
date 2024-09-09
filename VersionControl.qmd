@@ -1,0 +1,42 @@
+---
+title: introduction to version control
+subtitle: by a version control novice
+author: Kate Hayes
+format: revealjs
+---
+
+# the carrots of version control
+
+-   no more infinite file names
+
+-   complete record of every change you make
+
+-   automatic back up of your work
+
+-   work across home computer and terminator
+
+# the stick of version control
+
+-   it's hard
+
+-   git is not that intuitive
+
+# the glazed, fancy carrot of version control
+
+- host your website
+
+# how to version control
+- probably github
+
+# interfacing with github
+- can do:
+    - through command line
+    - using Rstudio / VScode
+    - can do using 
+
+# a hypothetical workflow (k8's workflow)
+- 
+
+# More resources
+
+-   [A Guide to Reproducible Code in Ecology and Evolution](https://www.britishecologicalsociety.org/wp-content/uploads/2017/12/guide-to-reproducible-code.pdf)
