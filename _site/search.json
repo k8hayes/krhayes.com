@@ -229,5 +229,19 @@
     "title": "Working with iLand Output",
     "section": "",
     "text": "Benchmarking Reburning in iLand\n\n\nPart One in a Series on iLand benchmarking\n\n\nUsing terra to quantify overlaps in fire perimeter rasters\n\n\n\n\n\n\nMay 28, 2024\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "VersionControl.html",
+    "href": "VersionControl.html",
+    "title": "introduction to version control",
+    "section": "",
+    "text": "no more infinite file names\ncomplete record of every change you make\nautomatic back up of your work\nwork across home computer and terminator"
+  },
+  {
+    "objectID": "VersionControl.html#a-hypothetical-workflow-k8s-workflow",
+    "href": "VersionControl.html#a-hypothetical-workflow-k8s-workflow",
+    "title": "introduction to version control",
+    "section": "# a hypothetical workflow (k8’s workflow)",
+    "text": "# a hypothetical workflow (k8’s workflow)"
   }
 ]

@@ -16,7 +16,7 @@ As part of my [NSF Postdoctoral Fellowship](https://www.nsf.gov/awardsearch/show
 
 BITE (full name: *BIotic disTurbance Engine*) is a module built by the very smart Juha Honkankiemi (LUKE) and Werner Rammer (Technical University of Munich) to simulate a whole world of biotic disturbances [@honkaniemi2021].
 
-The term "biotic disturbances" is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi-driven pathogens like aspen running canker are biotic disturbances. Called "agents" for short, each of these types of disturbances occur in very different numbers across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don't get into your firewood).
+The term "biotic disturbances" is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi-driven pathogens like aspen running canker are biotic disturbances. Called "agents" for short, each of these types of disturbances occur in very different ways across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don't get into your firewood).
 
 While a landscape model might be able to easily represent an individual mastodon roaming across a landscape, modeling each individual fungi spore across a landscape is absolutely not possible computationally. To deal with this, BITE represents agents in units of biomass. Kilograms of mastodon move across cells within the model, uprooting kilograms of trees and consuming kilograms of spruce needles before falling into kilograms of tar pits[^2].
 
@@ -31,9 +31,11 @@ Answering both is complicated.
 
 # How many moose are there?
 
-Well, total? 2.2 million moose, according to [@moll2022]. Apparently those 2.2 million are split pretty evenly between North America and Eurasia.
+Well, total?
 
-### *Where do we get those numbers on moose density?*
+Apparantly, 2.2 million moose, split evenly between North America and Eurasia [@moll2022].
+
+### *Where do we get those numbers?*
 
 It's hard to count moose. Logistically, financially, ecologically[^3].
 
@@ -51,9 +53,9 @@ To adequately count moose, you need to count moose over a large area, which is e
 
 Aerial surveys are the most common method - counting moose in a known area from a helicopter or a plane. This doesn't account for the moose not spotted (an issue in wildlife ecology often referred to as "sightability"), but it still remains more cost-effective than methods like pellet surveys or camera trapping, which face the same sightability issue but typically require more resources.
 
-An aside - climate change may make those aerial surveys more difficult. \[snow\]
-
-See \[\@reinking2022\] for more on the important relationship between wildlife and snow and also the incredible phrasing of "snow professionals" and "snow science community"[^5].
+::: callout-note
+An aside - climate change may make those aerial surveys more difficult. Later snowfall in the fall makes it more difficult to pick out brown moose against brown mud [@brinkman2023]. See [@reinking2022] for more on the important relationship between wildlife and snow and also the incredible phrasing of "snow professionals" and "snow science community"[^5].
+:::
 
 [^5]: I love my job
 
@@ -61,11 +63,13 @@ You can also count moose using harvest data - hunters are required to provide da
 
 [^6]: not everyone reports
 
-## Okay, but K8, how many moose?
+## Okay, but k8, how many moose?
 
-According to Alaska Fish and Game, there are an estimated 175,000 moose in Alaska. Those 175,000 are spread out in densities anywhere from 1 to 150 moose per 30 square miles[^7]. That's over the entire state however, including tundra where moose can be quite scarce.
+According to Alaska Fish and Game, there are an estimated 175,000 moose in Alaska.
 
-[^7]: that's 0.003 -5 moose per square mile for those curious
+Those 175,000 are spread out in densities anywhere from 1 to 150 moose per 30 square miles[^7]. That's over the entire state however, including tundra where moose can be quite scarce.
+
+[^7]: that's 0.003 -5 moose per square mile
 
 Within the Interior,
 
