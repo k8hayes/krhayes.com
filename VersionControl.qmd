@@ -5,6 +5,11 @@ author: Kate Hayes
 format: revealjs
 ---
 
+# What is github?
+
+-   Github is a **version control system**
+    -   originally built to help groups of developers work collaboratively on big software projects
+
 # the carrots of version control
 
 -   no more infinite file names
@@ -17,7 +22,7 @@ format: revealjs
 
 # 
 
-![](images/Screenshot 2024-09-12 at 9.54.08 AM-3.png)
+![](images/test.png)
 
 # the glazed, fancy carrot of version control
 
@@ -28,19 +33,23 @@ format: revealjs
 # the stick of version control
 
 -   initial investment required
-
-<!-- -->
-
 -   git is not that intuitive
 
 # 
 
 ![](images/1699565200-screen-shot-2023-08-16-at-11-08-59-pm.webp)
 
-# Github lore
+# Some definitions
 
--   Github is a **version control system**
-    -   originally built to help groups of developers work collaboratively on big software projects
+-   **Git** = software that records changes to a set of files
+
+-   **Github** = hosting service, git-aware home for repositories
+
+-   **Github Desktop** = app that interfaces with Github (not required but can be helpful)
+
+-   **Repository / repo** = set of files
+
+    -   \^ highly suggest 1 per project
 
 # Github lore
 
@@ -60,18 +69,6 @@ format: revealjs
 -   while not originally developed for data science, great for the collection of files that make up a project
 
     -   data, figures, code, etc
-
-# Some definitions
-
--   **Git** = software that records changes to a set of files
-
--   **Github** = hosting service, git-aware home for repositories
-
--   **Github Desktop** = app that interfaces with Github (not required but can be helpful)
-
--   **Repository / repo** = set of files
-
-    -   \^ highly suggest 1 per project
 
 # interfacing with github
 
