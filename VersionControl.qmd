@@ -15,28 +15,103 @@ format: revealjs
 
 -   work across home computer and terminator
 
-# the stick of version control
+# 
 
--   it's hard
-
--   git is not that intuitive
+![](images/Screenshot 2024-09-12 at 9.54.08 AM-3.png)
 
 # the glazed, fancy carrot of version control
 
-- host your website
+-   makes data and code more available
+-   develop packages
+-   host websites
 
-# how to version control
-- probably github
+# the stick of version control
+
+-   initial investment required
+
+<!-- -->
+
+-   git is not that intuitive
+
+# 
+
+![](images/1699565200-screen-shot-2023-08-16-at-11-08-59-pm.webp)
+
+# Github lore
+
+-   Github is a **version control system**
+    -   originally built to help groups of developers work collaboratively on big software projects
+
+# Github lore
+
+-   **Git** built out of spite in 5 days
+-   by Linus Torvald, after his free license to BitKeeper (alternative) was revoked
+
+<div>
+
+> "Git, to some degree, was designed on the principle that everything you ever do on a daily basis should take less than a second"
+
+</div>
+
+# What does github do?
+
+-   manage the evolution of a set of files (called a **repository**) in a sane, highly structured way
+
+-   while not originally developed for data science, great for the collection of files that make up a project
+
+    -   data, figures, code, etc
+
+# Some definitions
+
+-   **Git** = software that records changes to a set of files
+
+-   **Github** = hosting service, git-aware home for repositories
+
+-   **Github Desktop** = app that interfaces with Github (not required but can be helpful)
+
+-   **Repository / repo** = set of files
+
+    -   \^ highly suggest 1 per project
 
 # interfacing with github
-- can do:
-    - through command line
-    - using Rstudio / VScode
-    - can do using 
 
-# a hypothetical workflow (k8's workflow)
-- 
+-   can do:
+    -   through command line
+    -   apps like **RStudio**, **VScode**, **Github Desktop**
+
+# how does github change your workflow?
+
+-   instead of saving a new version with initials / dates, make a **commit**
+
+    -   takes snapshot of all the files in the entire project
+
+# Comitting changes
+
+-   committing gives you the opportunity to describe your changes
+
+# then what?
+
+-   **Push** commits to github periodically to keep everything in sync
+
+-   **Pull** updates from github to receive commits made elsewhere
+
+    -   (github will require you to pull before you can push)
+
+# Cut down on angst
+
+-   probably don't bother working in the command line
+
+-   write descriptive commits
+
+-   push / pull regularly
+
+-   no one is giving out git style points - if you're stuck, you don't get extra credit for getting unstuck elegantly
+
+-   you can ignore local files within a repository (and you'll need to if they're too large to add to github)
 
 # More resources
 
 -   [A Guide to Reproducible Code in Ecology and Evolution](https://www.britishecologicalsociety.org/wp-content/uploads/2017/12/guide-to-reproducible-code.pdf)
+-   [Excuse me, do you have a moment to talk about version control?](https://peerj.com/preprints/3159.pdf)
+-   [Happy Git and Github for the useR](https://happygitwithr.com/)
+-   [Git was built in 5 days](https://graphite.dev/blog/understanding-git)

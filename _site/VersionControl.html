@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.288">
 
   <meta name="author" content="Kate Hayes">
-  <title>Katherine Hayes - Why you should be using version control</title>
+  <title>Katherine Hayes - introduction to version control</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -326,7 +326,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Why you should be using version control</h1>
+  <h1 class="title">introduction to version control</h1>
   <p class="subtitle">by a version control novice</p>
 
 <div class="quarto-title-authors">
@@ -348,25 +348,69 @@ Kate Hayes
 </ul>
 </section>
 
-<section id="the-stick-of-version-control" class="title-slide slide level1 center">
-<h1>the stick of version control</h1>
-<ul>
-<li><p>it’s hard</p></li>
-<li><p>git is not that intuitive</p></li>
-</ul>
-</section>
-
 <section id="the-glazed-fancy-carrot-of-version-control" class="title-slide slide level1 center">
 <h1>the glazed, fancy carrot of version control</h1>
 <ul>
-<li>host your website</li>
+<li>makes data and code more available</li>
+<li>develop packages</li>
+<li>host websites</li>
 </ul>
 </section>
 
-<section id="how-to-version-control" class="title-slide slide level1 center">
-<h1>how to version control</h1>
+<section id="the-stick-of-version-control" class="title-slide slide level1 center">
+<h1>the stick of version control</h1>
 <ul>
-<li>probably github</li>
+<li>initial investment required</li>
+</ul>
+<!-- -->
+<ul>
+<li>git is not that intuitive</li>
+</ul>
+</section>
+
+<section id="section" class="title-slide slide level1 center">
+<h1></h1>
+
+<img data-src="images/1699565200-screen-shot-2023-08-16-at-11-08-59-pm.webp" class="r-stretch"></section>
+
+<section id="github-lore" class="title-slide slide level1 center">
+<h1>Github lore</h1>
+<ul>
+<li>Github is a <strong>version control system</strong>
+<ul>
+<li>originally built to help groups of developers work collaboratively on big software projects</li>
+</ul></li>
+</ul>
+</section>
+
+<section id="github-lore-1" class="title-slide slide level1 center">
+<h1>Github lore</h1>
+<ul>
+<li><strong>Git</strong> built out of spite in 5 days (licensing dispute)</li>
+</ul>
+</section>
+
+<section id="what-does-github-do" class="title-slide slide level1 center">
+<h1>What does github do?</h1>
+<ul>
+<li><p>manage the evolution of a set of files (called a <strong>repository</strong>) in a sane, highly structured way</p></li>
+<li><p>while not originally developed for data science, great for the collection of files that make up a project</p>
+<ul>
+<li>data, figures, code, etc</li>
+</ul></li>
+</ul>
+</section>
+
+<section id="some-definitions" class="title-slide slide level1 center">
+<h1>Some definitions</h1>
+<ul>
+<li><p><strong>Git</strong> = software that records changes to a set of files</p></li>
+<li><p><strong>Github</strong> = hosting service, git-aware home for repositories</p></li>
+<li><p><strong>Github Desktop</strong> = app that interfaces with Github (not required but can be helpful)</p></li>
+<li><p><strong>Repository / repo</strong> = set of files</p>
+<ul>
+<li>^ highly suggest 1 per project</li>
+</ul></li>
 </ul>
 </section>
 
@@ -376,9 +420,47 @@ Kate Hayes
 <li>can do:
 <ul>
 <li>through command line</li>
-<li>using Rstudio / VScode</li>
-<li>can do using</li>
+<li>apps like <strong>RStudio</strong>, <strong>VScode</strong>, <strong>Github Desktop</strong></li>
 </ul></li>
+</ul>
+</section>
+
+<section id="how-does-github-change-your-workflow" class="title-slide slide level1 center">
+<h1>how does github change your workflow?</h1>
+<ul>
+<li><p>instead of saving a new version with initials / dates, make a <strong>commit</strong></p>
+<ul>
+<li>takes snapshot of all the files in the entire project</li>
+</ul></li>
+</ul>
+</section>
+
+<section id="comitting-changes" class="title-slide slide level1 center">
+<h1>Comitting changes</h1>
+<ul>
+<li>committing gives you the opportunity to describe your changes</li>
+</ul>
+</section>
+
+<section id="then-what" class="title-slide slide level1 center">
+<h1>then what?</h1>
+<ul>
+<li><p><strong>Push</strong> commits to github periodically to keep everything in sync</p></li>
+<li><p><strong>Pull</strong> updates from github to receive commits made elsewhere</p>
+<ul>
+<li>(github will require you to pull before you can push)</li>
+</ul></li>
+</ul>
+</section>
+
+<section id="cut-down-on-angst" class="title-slide slide level1 center">
+<h1>Cut down on angst</h1>
+<ul>
+<li><p>probably don’t bother working in the command line</p></li>
+<li><p>write descriptive commits</p></li>
+<li><p>push / pull regularly</p></li>
+<li><p>no one is giving out git style points - if you’re stuck, you don’t get extra credit for getting unstuck elegantly</p></li>
+<li><p>you can ignore local files within a repository (and you’ll need to if they’re too large to add to github)</p></li>
 </ul>
 </section>
 
@@ -386,6 +468,9 @@ Kate Hayes
 <h1>More resources</h1>
 <ul>
 <li><a href="https://www.britishecologicalsociety.org/wp-content/uploads/2017/12/guide-to-reproducible-code.pdf">A Guide to Reproducible Code in Ecology and Evolution</a></li>
+<li><a href="https://peerj.com/preprints/3159.pdf">Excuse me, do you have a moment to talk about version control?</a></li>
+<li><a href="https://happygitwithr.com/">Happy Git and Github for the useR</a></li>
+<li><a href="https://graphite.dev/blog/understanding-git">Git was built in 5 days</a></li>
 </ul>
 
 <div class="footer footer-default">
