@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-07-04">
+<meta name="dcterms.date" content="2024-09-23">
 
 <title>Katherine Hayes - How much does a moose weigh?</title>
 <style>
@@ -180,14 +180,14 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">July 4, 2024</p>
+        <p class="date">September 23, 2024</p>
       </div>
     </div>
     
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">September 9, 2024</p>
+        <p class="date-modified">September 23, 2024</p>
       </div>
     </div>
       
@@ -203,8 +203,8 @@ div.csl-indent {
   <ul>
   <li><a href="#how-many-moose-are-there" id="toc-how-many-moose-are-there" class="nav-link active" data-scroll-target="#how-many-moose-are-there">How many moose are there?</a>
   <ul class="collapse">
-  <li><a href="#where-do-we-get-those-numbers-on-moose-density" id="toc-where-do-we-get-those-numbers-on-moose-density" class="nav-link" data-scroll-target="#where-do-we-get-those-numbers-on-moose-density"><em>Where do we get those numbers on moose density?</em></a></li>
-  <li><a href="#okay-but-k8-how-many-moose" id="toc-okay-but-k8-how-many-moose" class="nav-link" data-scroll-target="#okay-but-k8-how-many-moose">Okay, but K8, how many moose?</a></li>
+  <li><a href="#where-do-we-get-those-numbers" id="toc-where-do-we-get-those-numbers" class="nav-link" data-scroll-target="#where-do-we-get-those-numbers"><em>Where do we get those numbers?</em></a></li>
+  <li><a href="#okay-but-k8-how-many-moose" id="toc-okay-but-k8-how-many-moose" class="nav-link" data-scroll-target="#okay-but-k8-how-many-moose">Okay, but k8, how many moose?</a></li>
   </ul></li>
   <li><a href="#what-do-moose-weigh" id="toc-what-do-moose-weigh" class="nav-link" data-scroll-target="#what-do-moose-weigh">What do moose weigh?</a>
   <ul class="collapse">
@@ -234,7 +234,7 @@ div.csl-indent {
 <div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Reader, I would love</p></li><div id="ref-honkaniemi2021" class="csl-entry" role="listitem">
 Honkaniemi, Juha, Werner Rammer, and Rupert Seidl. 2021. <span>“From Mycelia to Mastodons <span></span> A General Approach for Simulating Biotic Disturbances in Forest Ecosystems.”</span> <em>Environmental Modelling &amp; Software</em> 138 (April): 104977. <a href="https://doi.org/10.1016/j.envsoft.2021.104977">https://doi.org/10.1016/j.envsoft.2021.104977</a>.
 </div></div><p>BITE (full name: <em>BIotic disTurbance Engine</em>) is a module built by the very smart Juha Honkankiemi (LUKE) and Werner Rammer (Technical University of Munich) to simulate a whole world of biotic disturbances <span class="citation" data-cites="honkaniemi2021">(<a href="#ref-honkaniemi2021" role="doc-biblioref">Honkaniemi, Rammer, and Seidl 2021</a>)</span>.</p>
-<p>The term “biotic disturbances” is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi-driven pathogens like aspen running canker are biotic disturbances. Called “agents” for short, each of these types of disturbances occur in very different numbers across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don’t get into your firewood).</p>
+<p>The term “biotic disturbances” is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi-driven pathogens like aspen running canker are biotic disturbances. Called “agents” for short, each of these types of disturbances occur in very different ways across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don’t get into your firewood).</p>
 <p>While a landscape model might be able to easily represent an individual mastodon roaming across a landscape, modeling each individual fungi spore across a landscape is absolutely not possible computationally. To deal with this, BITE represents agents in units of biomass. Kilograms of mastodon move across cells within the model, uprooting kilograms of trees and consuming kilograms of spruce needles before falling into kilograms of tar pits<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;(technically no, though I’m sure you could overthink it and implement it as a bit)</p></li></div><p>This means you have two key decisions to make when starting to parameterize a new agent:</p>
 <ol type="1">
@@ -244,11 +244,12 @@ Honkaniemi, Juha, Werner Rammer, and Rupert Seidl. 2021. <span>“From Mycelia t
 <p>Answering both is complicated.</p>
 <section id="how-many-moose-are-there" class="level1 page-columns page-full">
 <h1>How many moose are there?</h1>
-<p>Well, total? 2.2 million moose, according to <span class="citation" data-cites="moll2022">(<a href="#ref-moll2022" role="doc-biblioref">Moll et al. 2022</a>)</span>. Apparently those 2.2 million are split pretty evenly between North America and Eurasia.</p>
+<p>Well, total?</p>
+<p>Apparantly, 2.2 million moose, split evenly between North America and Eurasia <span class="citation" data-cites="moll2022">(<a href="#ref-moll2022" role="doc-biblioref">Moll et al. 2022</a>)</span>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-moll2022" class="csl-entry" role="listitem">
 Moll, Remington J., Mairi K. P. Poisson, David R. Heit, Henry Jones, Peter J. Pekins, and Lee Kantar. 2022. <span>“A Review of Methods to Estimate and Monitor Moose Density and Abundance.”</span> <em>Alces: A Journal Devoted to the Biology and Management of Moose</em> 58: 31–49. <a href="https://alcesjournal.org/index.php/alces/article/view/1881">https://alcesjournal.org/index.php/alces/article/view/1881</a>.
-</div></div><section id="where-do-we-get-those-numbers-on-moose-density" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="where-do-we-get-those-numbers-on-moose-density"><em>Where do we get those numbers on moose density?</em></h3>
+</div></div><section id="where-do-we-get-those-numbers" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="where-do-we-get-those-numbers"><em>Where do we get those numbers?</em></h3>
 <p>It’s hard to count moose. Logistically, financially, ecologically<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 <div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;maybe emotionally?</p></li><li id="fn4"><p><sup>4</sup>&nbsp;(except for this one pictured below, who was chomping on willow in the literal driveway to Denali National Park)</p></li></div><p>Moose behavior itself makes it hard to count moose - moose use dense forest cover, they tend to avoid areas where humans are active<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, and they’re most active at dusk and dawn.</p>
 
@@ -259,14 +260,30 @@ Moll, Remington J., Mairi K. P. Poisson, David R. Heit, Henry Jones, Peter J. Pe
 </div></div><p>More importantly, they’re highly mobile - a single moose can move up to 65 miles in a day.</p>
 <p>To adequately count moose, you need to count moose over a large area, which is expensive.</p>
 <p>Aerial surveys are the most common method - counting moose in a known area from a helicopter or a plane. This doesn’t account for the moose not spotted (an issue in wildlife ecology often referred to as “sightability”), but it still remains more cost-effective than methods like pellet surveys or camera trapping, which face the same sightability issue but typically require more resources.</p>
-<p>An aside - climate change may make those aerial surveys more difficult. [snow]</p>
-<p>See [@reinking2022] for more on the important relationship between wildlife and snow and also the incredible phrasing of “snow professionals” and “snow science community”<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
-<div class="no-row-height column-margin column-container"><li id="fn5"><p><sup>5</sup>&nbsp;I love my job</p></li><li id="fn6"><p><sup>6</sup>&nbsp;not everyone reports</p></li></div><p>You can also count moose using harvest data - hunters are required to provide data on the number of moose they harvest, and while that data certainly has some limitations<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>, it does give us a good sense year to year for the density of moose across the state.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An aside - climate change may make those aerial surveys more difficult. Later snowfall in the fall makes it more difficult to pick out brown moose against brown mud <span class="citation" data-cites="brinkman2023">(<a href="#ref-brinkman2023" role="doc-biblioref">Brinkman et al. 2023</a>)</span>. See <span class="citation" data-cites="reinking2022">(<a href="#ref-reinking2022" role="doc-biblioref">Reinking et al. 2022</a>)</span> for more on the important relationship between wildlife and snow and also the incredible phrasing of “snow professionals” and “snow science community”<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><li id="fn5"><p><sup>5</sup>&nbsp;I love my job</p></li></div><div class="no-row-height column-margin column-container"><div id="ref-reinking2022" class="csl-entry" role="listitem">
+Reinking, Adele K., Stine Højlund Pedersen, Kelly Elder, Natalie T. Boelman, Thomas W. Glass, Brendan A. Oates, Scott Bergen, et al. 2022. <span>“Collaborative Wildlife<span></span>snow Science: Integrating Wildlife and Snow Expertise to Improve Research and Management.”</span> <em>Ecosphere</em> 13 (6): e4094. <a href="https://doi.org/10.1002/ecs2.4094">https://doi.org/10.1002/ecs2.4094</a>.
+</div></div><div class="no-row-height column-margin column-container"><div id="ref-brinkman2023" class="csl-entry" role="listitem">
+Brinkman, Todd Jared, Kalin Seaton, Adele Reinking, Glen E. Liston, Laura Prugh, Callum Cunningham, and Natalie Boelman. 2023. <span>“Changing Snow Conditions Are Hindering Wildlife Monitoring and Management”</span> 2023 (December): B32C–01. <a href="https://ui.adsabs.harvard.edu/abs/2023AGUFM.B32C..01B">https://ui.adsabs.harvard.edu/abs/2023AGUFM.B32C..01B</a>.
+</div><li id="fn6"><p><sup>6</sup>&nbsp;not everyone reports</p></li></div><p>You can also count moose using harvest data - hunters are required to provide data on the number of moose they harvest, and while that data certainly has some limitations<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>, it does give us a good sense year to year for the density of moose across the state.</p>
 </section>
 <section id="okay-but-k8-how-many-moose" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="okay-but-k8-how-many-moose">Okay, but K8, how many moose?</h2>
-<p>According to Alaska Fish and Game, there are an estimated 175,000 moose in Alaska. Those 175,000 are spread out in densities anywhere from 1 to 150 moose per 30 square miles<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. That’s over the entire state however, including tundra where moose can be quite scarce.</p>
-<div class="no-row-height column-margin column-container"><li id="fn7"><p><sup>7</sup>&nbsp;that’s 0.003 -5 moose per square mile for those curious</p></li></div><p>Within the Interior,</p>
+<h2 class="anchored" data-anchor-id="okay-but-k8-how-many-moose">Okay, but k8, how many moose?</h2>
+<p>According to Alaska Fish and Game, there are an estimated 175,000 moose in Alaska.</p>
+<p>Those 175,000 are spread out in densities anywhere from 1 to 150 moose per 30 square miles<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. That’s over the entire state however, including tundra where moose can be quite scarce.</p>
+<div class="no-row-height column-margin column-container"><li id="fn7"><p><sup>7</sup>&nbsp;that’s 0.003 -5 moose per square mile</p></li></div><p>Within the Interior,</p>
 <p>All to say, we can say with some (some!) certainty that there are somewhere between XX and XX moose in Interior Alaska, about XX per acre.</p>
 <p>The landscape I’m modeling contains the <a href="https://www.lter.uaf.edu/research/study-sites-cpcrw">Caribou Poker Creek Research Watershed</a>, which falls within Game Unit 20A of the Alaska Dept. of Fish and Game. According to their report from XX, there were XX moose in XX year, ## male and ## female.</p>
 <p>objective: 10-15,000 moose across population (adopted 2016)</p>

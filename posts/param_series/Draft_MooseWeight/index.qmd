@@ -1,7 +1,7 @@
 ---
 title: How much does a moose weigh?
 subtitle: The rabbit holes of model parameterization
-date: 2024-07-4
+date: 2024-09-23
 categories: [Model Parameterization, iLand, BITE]
 date-modified: last-modified
 bibliography: references.bib
@@ -24,8 +24,8 @@ While a landscape model might be able to easily represent an individual mastodon
 
 This means you have two key decisions to make when starting to parameterize a new agent:
 
-1.  How many are there?
-2.  What do they weigh?
+1.  *How many are there?*
+2.  *What do they weigh?*
 
 Answering both is complicated.
 
@@ -35,7 +35,7 @@ Well, total?
 
 Apparantly, 2.2 million moose, split evenly between North America and Eurasia [@moll2022].
 
-### *Where do we get those numbers?*
+### Where do we get those numbers?
 
 It's hard to count moose. Logistically, financially, ecologically[^3].
 
@@ -71,13 +71,20 @@ Those 175,000 are spread out in densities anywhere from 1 to 150 moose per 30 sq
 
 [^7]: that's 0.003 -5 moose per square mile
 
-Within the Interior,
+| Region                       | Game Unit | Population  | Density (moose per mi2) | Report                                                                                                                            |
+|----------|----------|----------|----------|----------------------------------|
+| Upper Tanana and White River | 12        | 5,467-7,657 | 0.9 - 1.28              | [2015 - 2020](https://www.adfg.alaska.gov/static/research/wildlife/speciesmanagementreports/pdfs/moose_2015_2025_smrp_gmu_12.pdf) |
+| Kuskokwim River              | 19        | 1,353       | 0.04                    | [2010 - 2015](https://www.adfg.alaska.gov/static/research/wildlife/speciesmanagementreports/pdfs/moose_2015_2020_smr_gmu_19.pdf)  |
+| Fairbanks                    | 20        |             |                         |                                                                                                                                   |
+|                              |           |             |                         |                                                                                                                                   |
 
 All to say, we can say with some (some!) certainty that there are somewhere between XX and XX moose in Interior Alaska, about XX per acre.
 
-The landscape I'm modeling contains the [Caribou Poker Creek Research Watershed](https://www.lter.uaf.edu/research/study-sites-cpcrw), which falls within Game Unit 20A of the Alaska Dept. of Fish and Game. According to their report from XX, there were XX moose in XX year, \## male and \## female.
+The landscape I'm modeling contains the [Caribou Poker Creek Research Watershed](https://www.lter.uaf.edu/research/study-sites-cpcrw), which falls within Game Unit 20A of the Alaska Dept. of Fish and Game.
 
-objective: 10-15,000 moose across population (adopted 2016)
+![Game Management Units across Alaska, source: Alaska Department of Fish and Game](gameunits.jpg)
+
+According to their most recent report, they counted 1,395 moose in 2019, 79% of which were adults. Correcting for sightability, they estimate the total population is between 9,581 and 13,959 moose across 20A, or **2.3 moose per square mile.**
 
 That brings us to the second question.
 
@@ -114,6 +121,11 @@ I'll start by assuming an average calf weighs XX kilograms (or XX pounds), a cow
 # More information
 
 ## References
+
+---
+nocite: |
+    @*
+---
 
 ## Session Info
 
