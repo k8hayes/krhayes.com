@@ -1,0 +1,44 @@
+---
+title: Mapping Alaska National Wildlife Refuges
+subtitle: New Post Subtitle
+description: New Post Description
+date: today
+categories: [Spatial Data Analysis]
+date-modified: last-modified
+draft: true
+---
+
+```{r}
+library(tidyverse)
+library(terra)
+library(tidyterra)
+library(cowplot)
+theme_set(theme_cowplot())
+```
+
+```{r}
+alaska = vect("GIS/AK state boundary/Shape/GU_StateOrTerritory.shp")
+
+ggplot() +
+  geom_spatvector(data = alaska) +
+  theme_minimal()
+```
+
+I'll trim down the Alaska boundary using the crop() function in terra:
+
+```{r}
+# determine the extent of the spatial vector
+as.vector(ext(alaska))
+```
+
+```{r}
+# crop the spatial vector
+alaska = crop(alaska, c(-179.23109, -100, 
+                        51.175096, 71.43979))
+```
+
+```{r}
+ggplot() +
+  geom_spatvector(data = alaska) +
+  theme_minimal()
+```
