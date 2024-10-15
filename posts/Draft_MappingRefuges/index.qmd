@@ -1,44 +1,96 @@
 ---
-title: Mapping Alaska National Wildlife Refuges
-subtitle: New Post Subtitle
+title: How much of Alaska is a National Wildlife Refuge?
+subtitle: Mapping in terra
 description: New Post Description
-date: today
+date: 2024-10-14
 categories: [Spatial Data Analysis]
 date-modified: last-modified
 draft: true
 ---
 
+We're starting a new project to map risk of carbon loss and help land managers make decisions about carbon management in National Wildlife Refuges in Alaska.
+
+While Alaska is home to just 16 of the 570 refuges spread across the United States, according to the [Friends of Alaskan Wildlife Refuge System](https://alaskarefugefriends.org/category/call-to-action/), those 16 make up nearly 85% of the refuge system's 95 million acres, clocking in at a cool 80 million acres of land.
+
+But how much is that?
+
 ```{r}
 library(tidyverse)
 library(terra)
 library(tidyterra)
-library(cowplot)
-theme_set(theme_cowplot())
 ```
 
+I'm loading a shapefile of the boundary of Alaska, originally sourced from a USGS dataset and reprojected to Alaska Albers.
+
 ```{r}
-alaska = vect("GIS/AK state boundary/Shape/GU_StateOrTerritory.shp")
+alaska = vect("/data/AK state boundary/AK_boundary.shp")
+crs(alaska)
 
 ggplot() +
   geom_spatvector(data = alaska) +
   theme_minimal()
 ```
 
-I'll trim down the Alaska boundary using the crop() function in terra:
+But, I don't need all of the distinctions. I can use the aggregate() function in terra to lose the detail.
 
 ```{r}
-# determine the extent of the spatial vector
-as.vector(ext(alaska))
+alaska = terra::aggregate(alaska, by = "state_name")
+
+ggplot() +
+  geom_spatvector(data = alaska, fill = "grey", alpha = 0.75)+
+  theme_minimal()
+```
+
+Now I can bring in the shapefile that includes National Wildlife Refuges:
+
+```{r}
+refuge = vect("GIS/refuge/Boundaries_Refuge_trim.shp")
+crs(refuge) # check that it has the same projection
+
+ggplot() +
+  geom_spatvector(data = refuge)+
+  theme_minimal()
 ```
 
 ```{r}
-# crop the spatial vector
-alaska = crop(alaska, c(-179.23109, -100, 
-                        51.175096, 71.43979))
+refuge <- terra::aggregate(refuge, by = "NWRNAME")
 ```
+
+I also want to use the full names for refuges, not the acroynms. Here's an ifelse chain to rename them.
+
+```{r}
+refuge = refuge %>%
+  mutate(Name = ifelse(NWRNAME == "akm", "Alaska Maritime",
+                     ifelse(NWRNAME == "akp", "Alaska Peninusula",
+                          ifelse(NWRNAME == "arc", "Arctic",
+                               ifelse(NWRNAME == "bch", "Bercharof",
+                                    ifelse(NWRNAME == "inn", "Innoko",
+                                         ifelse(NWRNAME == "izm", "Izembek",
+                ifelse(NWRNAME == "kan", "Kanuti",
+                      ifelse(NWRNAME == "kdk", "Kodiak",
+                          ifelse(NWRNAME == "kna", "Kenai",
+                                ifelse(NWRNAME == "kuk", "Koyukuk",
+                                      ifelse(NWRNAME == "now", "Nowitna",
+                ifelse(NWRNAME == "swk", "Selawik",
+                     ifelse(NWRNAME == "tet", "Tetlin",
+                          ifelse(NWRNAME == "tgk", "Togiak",
+                               ifelse(NWRNAME == "ykd", "Yukon Delta","Yukon Flats"))))))))))))))))
+
+```
+
+Now I can go ahead and plot them both:
 
 ```{r}
 ggplot() +
-  geom_spatvector(data = alaska) +
-  theme_minimal()
+  geom_spatvector(data = alaska, fill = "grey", alpha = 0.75, color = NA)+
+  theme_minimal() + 
+  geom_spatvector(data = refuge, aes(fill = Name), 
+                  color = NA, alpha = 0.9) + 
+  scale_fill_manual(
+    values = c("#fbe183", "#f4c40f", "#fe9b00", "#d8443c", "#9b3441",
+               "#de597c", "#e87b89", "#e6a2a6", "#aa7aa1", "#9f5691",
+               "#633372", "#1f6e9c", "#abd9e9", "#2b9b81", "#92c051", "#1b7837")) +  
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        legend.position = "none")
 ```
