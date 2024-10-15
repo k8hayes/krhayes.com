@@ -1,0 +1,94 @@
+<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
+<qgis version="3.32.3-Lima">
+  <identifier>Boundaries_Refuge</identifier>
+  <parentidentifier></parentidentifier>
+  <language>ENG</language>
+  <type>dataset</type>
+  <title>Alaska National Wildlife Refuge Boundaries</title>
+  <abstract>The Alaska National Interest Lands Conservation Act of December 2, 1980 (Public Law 96-487) established sixteen National Wildlife Refuges within the state of Alaska, USA. The external boundaries of these Refuges were defined in the Federal Register on February 24, 1983 in Part 3, Department of the Interior, Fish and Wildlife Service, National Wildlife Refuges in Alaska, Description of Boundaries, pages 7890-7936. These external boundaries, as depicted in this data layer, encompass Federal, State of Alaska, and private lands and waters.
+The external Refuge boundaries shown here were digitized by, and are actively maintained by, the USFWS Alaska Region Division of Realty. As such, this data layer is the authoritative source for the boundaries of the National Wildlife Refuges in Alaska. 
+These boundaries were digitized using the following data sources:
+Federal Register legal descriptions (February 24, 1983)
+U.S. Geological Survey 1:63,360 topographic maps (produced from aerial photos taken in the 1950s and 1960s)
+ESRI World Imagery (compiled from satellite imagery obtained from ~2010 to the current date)
+The boundaries were first digitized in the mid-1990s by cross-referencing Federal Register legal descriptions to the USGS topographic maps. Digitizing was done on-screen at a zoomed-in scale of ~1:10,000 or larger. As high-resolution satellite imagery (ESRI World Imagery) has become available, the Division of Realty has been updating the 1:63,360 topographic map-based boundaries to conform to the more current satellite imagery. This work is ongoing and is not yet complete for all sixteen Refuges.
+Boundary Modifications/Improvements
+May, 2019: Adjusted the Arctic Ocean coastal boundary of Arctic NWR to match 30-meter resolution IFSAR data that was provided to FWS by BLM. The exact source date of the IFSAR data is not known, but it was acquired sometime during 2019.
+April, 2020: Adjusted the coastal portion of the Becharof NWR boundary to match the coastline as shown in the ESRI World Imagery.
+June 28, 2022: Adjusted the western section of the Tetlin NWR boundary to conform to the eastern boundary of the Tetlin Indian Reservation as shown by the Bureau of Land Management's survey of USS 2547.
+April 25, 2024: Adjusted a portion of the shared Izembek/Alaska Peninsula refuge boundary on the west side of Cold Bay, and northwest of the village of Cold Bay, to coincide with the boundary of Air Navigation Site 176 as constructed by using the National Geodetic Survey's 1976 adjusted NAD27 coordinates for the original COW 1923 benchmark.
+May 16, 2024: Adjusted the boundary of the Alaska Maritime NWR - Womens Bay Unit to conform to the Bureau of Land Management's survey of USS 2539, and to follow the approximate lime of mean high tide as shown in ESRI's World Imagery dataset.
+
+This data layer displays the external boundaries of the sixteen National Wildlife Refuges in the state of Alaska, USA, as defined by the Alaska National Interest Lands Conservation Act of 1980, and as codified in the Federal Register of February 24, 1983.
+
+REQUIRED: A brief narrative summary of the data set.
+
+REQUIRED: A summary of the intentions with which the data set was developed.</abstract>
+  <keywords vocabulary="Search keys">
+    <keyword>USFWS</keyword>
+    <keyword>FWS</keyword>
+    <keyword>U. S. Fish and Wildlife Service</keyword>
+    <keyword>Alaska</keyword>
+    <keyword>Region 7</keyword>
+    <keyword>national wildlife refuge</keyword>
+    <keyword>boundary</keyword>
+    <keyword>ANILCA</keyword>
+    <keyword>Alaska National Interest Lands Conservation Act</keyword>
+    <keyword>conservation system</keyword>
+  </keywords>
+  <keywords vocabulary="gmd:topicCategory">
+    <keyword>REQUIRED: Common-use word or phrase used to describe the subject of the data set.</keyword>
+  </keywords>
+  <contact>
+    <contactAddress>
+      <type></type>
+      <address>USFWS, Division of Realty, 1011 E. Tudor Road</address>
+      <city>Anchorage</city>
+      <administrativearea>Alaska</administrativearea>
+      <postalcode>99503</postalcode>
+      <country>us</country>
+    </contactAddress>
+    <name>Scott McGee</name>
+    <organization>U.S. Fish &amp; Wildlife Service</organization>
+    <position>Cartographer</position>
+    <voice>(907) 786-3440</voice>
+    <fax></fax>
+    <email>scott_mcgee@fws.gov</email>
+    <role></role>
+  </contact>
+  <links>
+    <link type="ArcSDE Connection" description="" format="" size="" mimeType="" name="SDE Feature Class" url="Server=ifw7sdeiso; Service=5163; Database=refstat; User=KIM; Version=KIM.Kim"/>
+  </links>
+  <history>These refuge boundaries were digitized from the USGS 1:63,360 quads: Alaska Peninsula Arctic Becharof Innoko Izembek Kanuti Kenai Koyukuk Nowitna Selawik Tetlin Togiak Yukon Delta Yukon Flats These refuge boundaries have been updated using the NHD data: Alaska Maritime Kodiak</history>
+  <dates/>
+  <fees></fees>
+  <constraints type="Limitations of use">The United States Fish and Wildlife Service (Service) shall not be held liable for improper or incorrect use of the data described and/or contained herein. While the Service makes every reasonable effort to ensure the accuracy and completeness of data provided for distribution, it may not have the necessary accuracy or completeness required for every possible intended use. The Service recommends that data users consult the associated metadata record to understand the quality and possible limitations of the data. The Service creates metadata records in accordance with the standards endorsed by the Federal Geographic Data Committee.
+As a result of the above considerations, the Service gives no warranty, expressed or implied, as to the accuracy, reliability, or completeness of the data. It is the responsibility of the data user to use the data in a manner consistent with the limitations of geospatial data in general and these data in particular. Although these data have been processed successfully on a computer system at the Service, no warranty, expressed or implied, is made regarding the utility of the data on another system or for general or scientific purposes, nor shall the act of distribution constitute any such warranty. This applies to the use of the data both alone and in aggregate with other data and information.
+</constraints>
+  <constraints type="Access">REQUIRED: Restrictions and legal prerequisites for accessing the data set.</constraints>
+  <rights>U.S. Fish &amp; Wildlife Service, Region 7 (Alaska) Division of Realty, Anchorage, Alaska, USA.</rights>
+  <rights>REQUIRED: Restrictions and legal prerequisites for using the data set after access is granted.</rights>
+  <encoding></encoding>
+  <crs>
+    <spatialrefsys nativeFormat="Wkt">
+      <wkt>PROJCRS["NAD83 / Alaska Albers",BASEGEOGCRS["NAD83",DATUM["North American Datum 1983",ELLIPSOID["GRS 1980",6378137,298.257222101,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4269]],CONVERSION["Alaska Albers (meters)",METHOD["Albers Equal Area",ID["EPSG",9822]],PARAMETER["Latitude of false origin",50,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8821]],PARAMETER["Longitude of false origin",-154,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8822]],PARAMETER["Latitude of 1st standard parallel",55,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8823]],PARAMETER["Latitude of 2nd standard parallel",65,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8824]],PARAMETER["Easting at false origin",0,LENGTHUNIT["metre",1],ID["EPSG",8826]],PARAMETER["Northing at false origin",0,LENGTHUNIT["metre",1],ID["EPSG",8827]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Topographic mapping (small scale)."],AREA["United States (USA) - Alaska."],BBOX[51.3,172.42,71.4,-129.99]],ID["EPSG",3338]]</wkt>
+      <proj4>+proj=aea +lat_0=50 +lon_0=-154 +lat_1=55 +lat_2=65 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs</proj4>
+      <srsid>1296</srsid>
+      <srid>3338</srid>
+      <authid>EPSG:3338</authid>
+      <description>NAD83 / Alaska Albers</description>
+      <projectionacronym>aea</projectionacronym>
+      <ellipsoidacronym>EPSG:7019</ellipsoidacronym>
+      <geographicflag>false</geographicflag>
+    </spatialrefsys>
+  </crs>
+  <extent>
+    <spatial maxz="0" crs="EPSG:3338" miny="411044.83000000001629815" minz="0" dimensions="2" minx="-2169803.74000000022351742" maxx="1299165.75" maxy="6981347.61000000033527613"/>
+    <temporal>
+      <period>
+        <start></start>
+        <end></end>
+      </period>
+    </temporal>
+  </extent>
+</qgis>
