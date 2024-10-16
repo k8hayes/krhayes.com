@@ -1,6 +1,6 @@
 ---
 title: "Katherine Hayes"
-subtitle: "Ecosystem Ecologist"
+subtitle: "Climate Change Ecologist"
 about:
   template: trestles
   image: profile.jpg
@@ -15,7 +15,7 @@ about:
 
 # Hi! I'm Kate
 
-I'm a landscape and ecosystem ecologist and currently an NSF Postdoctoral Scientist at the [Cary Institute of Ecosystem Studies](https://www.caryinstitute.org/science/our-scientists/dr-katherine-hayes). I work in the intersection of paleoecology, landscape and disturbance ecology, studying how ecosystems change over time and space.
+I'm an ecosystem ecologist and currently an NSF Postdoctoral Scientist at the [Cary Institute of Ecosystem Studies](https://www.caryinstitute.org/science/our-scientists/dr-katherine-hayes). I work in the intersection of paleoecology, landscape and disturbance ecology, studying how ecosystems change over time and space.
 
 I'm interested in how changing disturbance regimes alter ecosystems and how we can make science more open and accessible.
 
