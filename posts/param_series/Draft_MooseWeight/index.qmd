@@ -72,7 +72,7 @@ Those 175,000 are spread out in densities anywhere from 1 to 150 moose per 30 sq
 [^7]: that's 0.003 -5 moose per square mile
 
 | Region                       | Game Unit | Population  | Density (moose per mi2) | Report                                                                                                                            |
-|----------|----------|----------|----------|----------------------------------|
+|------------------------------|-----------|-------------|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
 | Upper Tanana and White River | 12        | 5,467-7,657 | 0.9 - 1.28              | [2015 - 2020](https://www.adfg.alaska.gov/static/research/wildlife/speciesmanagementreports/pdfs/moose_2015_2025_smrp_gmu_12.pdf) |
 | Kuskokwim River              | 19        | 1,353       | 0.04                    | [2010 - 2015](https://www.adfg.alaska.gov/static/research/wildlife/speciesmanagementreports/pdfs/moose_2015_2020_smr_gmu_19.pdf)  |
 | Fairbanks                    | 20        |             |                         |                                                                                                                                   |
