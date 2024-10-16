@@ -23,7 +23,7 @@ library(tidyterra)
 I'm loading a shapefile of the boundary of Alaska, originally sourced from a USGS dataset and reprojected to Alaska Albers.
 
 ```{r}
-alaska = vect("/data/AK state boundary/AK_boundary.shp")
+alaska = vect("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Draft_MappingRefuges/data/AK state boundary/AK_boundary.shp")
 crs(alaska)
 
 ggplot() +
@@ -44,16 +44,22 @@ ggplot() +
 Now I can bring in the shapefile that includes National Wildlife Refuges:
 
 ```{r}
-refuge = vect("GIS/refuge/Boundaries_Refuge_trim.shp")
+refuge = vect("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Draft_MappingRefuges/data/refuge/Boundaries_Refuge.shp")
 crs(refuge) # check that it has the same projection
 
 ggplot() +
-  geom_spatvector(data = refuge)+
+  geom_spatvector(data = refuge) +
   theme_minimal()
 ```
 
+Similar to the state shapefile, I can aggregate so each refuge is represented by a single polygon:
+
 ```{r}
 refuge <- terra::aggregate(refuge, by = "NWRNAME")
+
+ggplot() +
+  geom_spatvector(data = refuge) +
+  theme_minimal()
 ```
 
 I also want to use the full names for refuges, not the acroynms. Here's an ifelse chain to rename them.
@@ -83,6 +89,27 @@ Now I can go ahead and plot them both:
 ```{r}
 ggplot() +
   geom_spatvector(data = alaska, fill = "grey", alpha = 0.75, color = NA)+
+  theme_minimal() + 
+  geom_spatvector(data = refuge, aes(fill = Name), 
+                  color = NA, alpha = 0.9) + 
+  scale_fill_manual(
+    values = c("#fbe183", "#f4c40f", "#fe9b00", "#d8443c", "#9b3441",
+               "#de597c", "#e87b89", "#e6a2a6", "#aa7aa1", "#9f5691",
+               "#633372", "#1f6e9c", "#abd9e9", "#2b9b81", "#92c051", "#1b7837")) +  
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        legend.position = "none")
+```
+
+```{r}
+alaska_hires = vect("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Draft_MappingRefuges/data/AK state boundary/AK_hires.shp")
+
+crs(alaska_hires)
+```
+
+```{r}
+ggplot() +
+  geom_spatvector(data = alaska_hires, fill = "grey", alpha = 0.75, color = NA)+
   theme_minimal() + 
   geom_spatvector(data = refuge, aes(fill = Name), 
                   color = NA, alpha = 0.9) + 
