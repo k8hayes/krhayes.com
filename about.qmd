@@ -8,7 +8,7 @@ title-block-banner: about_header.jpg
 title-block-banner-color: white
 ---
 
-I'm an ecosystem ecologist and currently a [NSF Postdoctoral Fellow](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2219248&HistoricalAwards=false) in the [Forest Futures Lab](http://forestfutureslab.org/) at the [Cary Institute of Ecosystem Studies](http://caryinstitute.org). I work in the intersection of paleoecology, landscape ecology and disturbance ecology, using field, lab, and modeling tools to study how ecosystems change over space and time.
+I'm a climate change ecologist and currently a [NSF Postdoctoral Fellow](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2219248&HistoricalAwards=false) in the [Forest Futures Lab](http://forestfutureslab.org/) at the [Cary Institute of Ecosystem Studies](http://caryinstitute.org). I work in the intersection of paleoecology, landscape ecology and disturbance ecology, using field, lab, and modeling tools to study how ecosystems change over space and time.
 
 ::: column-margin
 ![Comic by the lovely and incomparable [Sophie Lucido Johnson](https://www.sophielucidojohnson.com/) and [Sammi Skolmoski](https://sammiskolmoski.com/index.html/)](unprecedented.jpg)
