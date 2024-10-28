@@ -1,23 +1,23 @@
 ---
 title: How much of Alaska is a National Wildlife Refuge?
 subtitle: Mapping in terra
-description: New Post Description
+description: Ft. pretty maps
 date: 2024-10-14
 categories: [Spatial Data Analysis]
 date-modified: last-modified
-draft: true
 ---
 
-We're starting a new project to map risk of carbon loss and help land managers make decisions about carbon management in National Wildlife Refuges in Alaska.
+We're starting a new project to map carbon vulnerability and help land managers make decisions about carbon management in National Wildlife Refuges in Alaska.
 
 While Alaska is home to just 16 of the 570 refuges spread across the United States, according to the [Friends of Alaskan Wildlife Refuge System](https://alaskarefugefriends.org/category/call-to-action/), those 16 make up nearly 85% of the refuge system's 95 million acres, clocking in at a cool 80 million acres of land.
 
-But how much is that?
+But, Alaska is big. How much of the 80 million acres is NWR?
 
 ```{r}
 library(tidyverse)
 library(terra)
 library(tidyterra)
+library(kableExtra)
 ```
 
 I'm loading a shapefile of the boundary of Alaska, originally sourced from a USGS dataset and reprojected to Alaska Albers.
@@ -41,14 +41,17 @@ ggplot() +
   theme_minimal()
 ```
 
-Now I can bring in the shapefile that includes National Wildlife Refuges:
+Now I can bring in the NWR shapefile:
 
 ```{r}
 refuge = vect("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Draft_MappingRefuges/data/refuge/Boundaries_Refuge.shp")
 crs(refuge) # check that it has the same projection
 
+terra::nrow(refuge)
+
 ggplot() +
-  geom_spatvector(data = refuge) +
+  geom_spatvector(data = refuge,
+                  aes(fill = NWRNAME, color = NWRNAME)) +
   theme_minimal()
 ```
 
@@ -57,17 +60,22 @@ Similar to the state shapefile, I can aggregate so each refuge is represented by
 ```{r}
 refuge <- terra::aggregate(refuge, by = "NWRNAME")
 
+terra::nrow(refuge)
+
 ggplot() +
-  geom_spatvector(data = refuge) +
+  geom_spatvector(data = refuge,
+                  aes(fill = NWRNAME, color = NWRNAME)) +
   theme_minimal()
 ```
 
-I also want to use the full names for refuges, not the acroynms. Here's an ifelse chain to rename them.
+(The difference is internal, but 5445 polygons down to 16 makes the object a bit easier to handle).
+
+I also want to use the full names for refuges, not the acronyms. Here's an ifelse chain to rename them.
 
 ```{r}
 refuge = refuge %>%
   mutate(Name = ifelse(NWRNAME == "akm", "Alaska Maritime",
-                     ifelse(NWRNAME == "akp", "Alaska Peninusula",
+                     ifelse(NWRNAME == "akp", "Alaska Peninsula",
                           ifelse(NWRNAME == "arc", "Arctic",
                                ifelse(NWRNAME == "bch", "Bercharof",
                                     ifelse(NWRNAME == "inn", "Innoko",
@@ -84,7 +92,7 @@ refuge = refuge %>%
 
 ```
 
-Now I can go ahead and plot them both:
+Now I can go ahead and plot the NWR against the AK boundary:
 
 ```{r}
 ggplot() +
@@ -95,16 +103,15 @@ ggplot() +
   scale_fill_manual(
     values = c("#fbe183", "#f4c40f", "#fe9b00", "#d8443c", "#9b3441",
                "#de597c", "#e87b89", "#e6a2a6", "#aa7aa1", "#9f5691",
-               "#633372", "#1f6e9c", "#abd9e9", "#2b9b81", "#92c051", "#1b7837")) +  
-  theme(axis.text.x = element_blank(),
-        axis.text.y = element_blank(),
-        legend.position = "none")
+               "#633372", "#1f6e9c", "#abd9e9", "#2b9b81", "#92c051", "#1b7837")) 
 ```
+
+A few things: one, the map of Alaska isn't terribly high-resolution - note the difference in coastline between the Alaska shapefile and the Alaska Peninsula NWR. I found a higher-resolution shapefile from the Alaska Department of Natural Resources, linked [here](https://gis.data.alaska.gov/datasets/SOA-DNR::alaska-coastline/explore?layer=0). Let's see if it makes a difference:
 
 ```{r}
 alaska_hires = vect("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Draft_MappingRefuges/data/AK state boundary/AK_hires.shp")
 
-crs(alaska_hires)
+crs(alaska_hires) = crs(refuge)
 ```
 
 ```{r}
@@ -116,8 +123,42 @@ ggplot() +
   scale_fill_manual(
     values = c("#fbe183", "#f4c40f", "#fe9b00", "#d8443c", "#9b3441",
                "#de597c", "#e87b89", "#e6a2a6", "#aa7aa1", "#9f5691",
-               "#633372", "#1f6e9c", "#abd9e9", "#2b9b81", "#92c051", "#1b7837")) +  
-  theme(axis.text.x = element_blank(),
-        axis.text.y = element_blank(),
-        legend.position = "none")
+               "#633372", "#1f6e9c", "#abd9e9", "#2b9b81", "#92c051", "#1b7837")) 
+```
+
+Now, we can use the expanse() function in terra to calculate the area covered by polygons. I'll start by testing it with the refuge shapefile. Here's the raw output:
+
+```{r}
+round(expanse(refuge, unit = "ha", transform = FALSE)*2.471)
+```
+
+(nice that it calculates for each NWR) - and here's a pretty table:
+
+```{r}
+nwr_names = c("Alaska Maritime", "Alaska Peninsula","Arctic",
+               "Bercharof", "Innoko","Izembek","Kanuti","Kodiak",
+               "Kenai","Koyukuk","Nowitna","Selawik","Tetlin","Togiak",
+               "Yukon Delta","Yukon Flats")
+
+refuge_acre = data.frame(NWR = nwr_names,
+                         acres = round(expanse(refuge,
+                                 unit = "ha", transform = FALSE) * 
+                                   2.471))
+
+kable(refuge_acre)
+```
+
+Some of the numbers are a bit different than what I found online: the Yukon Flats [Wikipedia](https://en.wikipedia.org/wiki/Yukon_Flats_National_Wildlife_Refuge) puts it at 8.6 million acres, while the [US Fish and Wildlife website](https://www.fws.gov/refuge/yukon-flats/about-us) says it's 11.1 million acres. There's similar discrepancies with the Togiak - wikipedia says 4.1 million acres, Fish and Wildlife [doesn't specify](https://www.fws.gov/refuge/togiak/about-us) but [other travel sites](https://www.travelalaska.com/destinations/parks-public-lands/togiak-national-wildlife-refuge) says the 4.7 million acre number the shapefile shows.
+
+So, what is that combined?
+
+```{r}
+sum(round(expanse(refuge, unit = "ha", transform = FALSE)*2.471))
+```
+
+92 million acres - definitely larger than the website's 80 million acre sum.
+
+```{r}
+round(sum(round(expanse(refuge, unit = "ha", transform = FALSE)*2.471)) / 
+sum(round(expanse(alaska_hires, unit = "ha", transform = FALSE)*2.471)) * 100)
 ```
