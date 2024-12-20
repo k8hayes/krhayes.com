@@ -1,0 +1,250 @@
+---
+title: Do starting points matter?
+subtitle: New Post Subtitle
+description: New Post Description
+date: today
+categories: []
+date-modified: last-modified
+draft: true
+---
+
+# Set up
+
+## packages
+
+```{r}
+#| label: setup
+#| warning: false
+#| echo: false
+library(tidyverse)
+library(terra)
+library(cowplot)
+theme_set(theme_cowplot())
+```
+
+# load results from run
+## All stands
+```{r}
+hare0 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_hare_postfire_pima0.txt", header = T, sep = ",")
+
+moose0 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_moose_postfire_pima0.txt",  header = T,sep = ",")
+
+nomoosehare0 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_nomoosehare_postfire_pima0.txt",  header = T,sep = ",")
+
+moosehare0 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_moosehare_postfire_pima0.txt", header = T, sep = ",")
+
+
+hare0 = hare0 %>%
+  mutate(Scenario = "Hare",
+         filter = "All stands")
+
+moose0 = moose0 %>%
+  mutate(Scenario = "Moose",
+         filter = "All stands")
+
+moosehare0 = moosehare0 %>%
+  mutate(Scenario = "Moose & Hare", filter = "All stands")
+
+nomoosehare0 = nomoosehare0 %>%
+  mutate(Scenario = "No Browsing",filter = "All stands")
+
+
+data0 = bind_rows(hare0, moose0, moosehare0, nomoosehare0)
+
+summary(data0)
+
+```
+
+## more than half black spruce
+```{r}
+hare5 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_hare_postfire_pima5.txt", header = T, sep = ",")
+
+moose5 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_moose_postfire_pima5.txt",  header = T,sep = ",")
+
+nomoosehare5 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_nomoosehare_postfire_pima5.txt",  header = T,sep = ",")
+
+moosehare5 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_moosehare_postfire_pima5.txt", header = T, sep = ",")
+
+
+hare5 = hare5 %>%
+  mutate(Scenario = "Hare",filter = "Stands > 50% black spruce prefire")
+
+moose5 = moose5 %>%
+  mutate(Scenario = "Moose", filter = "Stands > 50% black spruce prefire")
+
+moosehare5 = moosehare5 %>%
+  mutate(Scenario = "Moose & Hare", filter = "Stands > 50% black spruce prefire")
+
+nomoosehare5 = nomoosehare5 %>%
+  mutate(Scenario = "No Browsing", filter = "Stands > 50% black spruce prefire")
+
+
+data5 = bind_rows(hare5, moose5, moosehare5, nomoosehare5)
+
+summary(data5)
+
+```
+
+## more than 90% black spruce
+```{r}
+hare1 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_hare_postfire_pima1.txt", header = T, sep = ",")
+
+moose1 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_moose_postfire_pima1.txt",  header = T,sep = ",")
+
+nomoosehare1 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_nomoosehare_postfire_pima1.txt",  header = T,sep = ",")
+
+moosehare1 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_moosehare_postfire_pima1.txt", header = T, sep = ",")
+
+
+hare1 = hare1 %>%
+  mutate(Scenario = "Hare", filter = "Stands > 90% black spruce prefire")
+
+moose1 = moose1 %>%
+  mutate(Scenario = "Moose", filter = "Stands > 90% black spruce prefire")
+
+moosehare1 = moosehare1 %>%
+  mutate(Scenario = "Moose & Hare", filter = "Stands > 90% black spruce prefire")
+
+nomoosehare1 = nomoosehare1 %>%
+  mutate(Scenario = "No Browsing", filter = "Stands > 90% black spruce prefire")
+
+
+data1 = bind_rows(hare1, moose1, moosehare1, nomoosehare1)
+
+summary(data1)
+
+```
+
+## merge all
+```{r}
+data = bind_rows(data0, data1, data5)
+
+summary(data)
+
+data$filter = factor(data$filter, levels = c("All stands", "Stands > 50% black spruce prefire", "Stands > 90% black spruce prefire"))
+
+```
+# Plot
+
+## birch
+
+```{r}
+data %>%
+  filter(species == "Bene") %>%
+  filter(Scenario != "Hare") %>%
+  filter(Scenario != "Moose") %>%
+  ggplot() +
+  geom_line(aes(x = TSF, y = height, color = Scenario)) + 
+  xlim(c(0,50)) + 
+  geom_ribbon(aes(x = TSF, ymin = low, 
+                    ymax = high, fill = Scenario),
+              alpha = 0.3) +
+   labs(x = "Time since fire (years)", y = "Av. Height (m)",
+         title ="Birch") +
+    scale_fill_manual(values = c("#a6611a", "#018571")) + scale_color_manual(values = c("#a6611a", "#018571")) + 
+  facet_wrap(~filter)
+
+data %>%
+  filter(species == "Bene") %>%
+  ggplot() +
+  geom_line(aes(x = TSF, y = height, color = Scenario)) + 
+  xlim(c(0,50)) + 
+  geom_ribbon(aes(x = TSF, ymin = low, 
+                    ymax = high, fill = Scenario),
+              alpha = 0.3) +
+   labs(x = "Time since fire (years)", y = "Av. Height (m)",
+         title ="Birch") + 
+  facet_wrap(~filter)
+
+
+```
+
+## aspen
+
+```{r}
+data %>%
+  filter(TSF >2) %>%
+  filter(species == "Potr") %>%
+    filter(Scenario != "Hare") %>%
+  filter(Scenario != "Moose") %>%
+  ggplot() +
+  geom_line(aes(x = TSF, y = height, col = Scenario)) + 
+  xlim(c(0,50)) + 
+  geom_ribbon(aes(x = TSF, ymin = low, 
+                    ymax = high, fill = Scenario),
+              alpha = 0.3) + 
+  scale_color_manual(values = c("#a6611a", "#018571")) + 
+  geom_hline(yintercept = 0, linetype = "dashed") + 
+    labs(x = "Time since fire (years)", y = "Av. Height (m)",
+         title ="Aspen") + 
+  scale_fill_manual(values = c("#a6611a", "#018571")) +
+  facet_wrap(~filter)
+
+data %>%
+  filter(species == "Potr") %>%
+  ggplot() +
+  geom_line(aes(x = TSF, y = height, color = Scenario)) + 
+  xlim(c(0,50)) + 
+  geom_ribbon(aes(x = TSF, ymin = low, 
+                    ymax = high, fill = Scenario),
+              alpha = 0.3) +
+   labs(x = "Time since fire (years)", y = "Av. Height (m)",
+         title ="Aspen") + 
+  facet_wrap(~filter)
+
+```
+
+## spruce
+
+```{r}
+data %>%
+  filter(species == "Pima") %>%
+  filter(Scenario != "Hare") %>%
+  filter(Scenario != "Moose") %>%
+    filter(TSF >2) %>%
+  ggplot() +
+  geom_line(aes(x = TSF, y = height, col = Scenario)) + 
+  xlim(c(0,50)) + 
+  geom_ribbon(aes(x = TSF, ymin = low, 
+                    ymax = high, fill = Scenario),
+              alpha = 0.3) +
+    scale_color_manual(values = c("#a6611a", "#018571")) + 
+  geom_hline(yintercept = 0, linetype = "dashed") + 
+    labs(x = "Time since fire (years)", y = "Av. Height (m)",
+         title ="Spruce") + 
+  scale_fill_manual(values = c("#a6611a", "#018571")) +
+  facet_wrap(~filter)
+
+data %>%
+  filter(species == "Pima") %>%
+  ggplot() +
+  geom_line(aes(x = TSF, y = height, color = Scenario)) + 
+  xlim(c(0,50)) + 
+  geom_ribbon(aes(x = TSF, ymin = low, 
+                    ymax = high, fill = Scenario),
+              alpha = 0.3) +
+   labs(x = "Time since fire (years)", y = "Av. Height (m)",
+         title ="Black Spruce") + 
+  facet_wrap(~filter)
+
+```
+
+# save plots
+
+```{r}
+ggsave2(plot = bene,
+        filename = "AgeGrowth_Birch.png",
+        path = "//HANSENWS1/Kate/MooseHare/figures/ageGrowth/",
+        width = 6, height = 5, units = "in")
+
+ggsave2(plot = potr,
+        filename = "AgeGrowth_Potr.png",
+        path = "//HANSENWS1/Kate/MooseHare/figures/ageGrowth/",
+        width = 6, height = 5, units = "in")
+ggsave2(plot = pima,
+        filename = "AgeGrowth_Pima.png",
+        path = "//HANSENWS1/Kate/MooseHare/figures/ageGrowth/",
+        width = 6, height = 5, units = "in")
+
+
+```
