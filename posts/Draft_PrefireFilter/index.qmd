@@ -1,16 +1,70 @@
 ---
 title: Do starting points matter?
-subtitle: New Post Subtitle
-description: New Post Description
+subtitle: Sensitivity test of pre-fire stand composition
 date: today
 categories: []
 date-modified: last-modified
 draft: true
+format:
+  html:
+    embed-resources: true
 ---
 
-# Set up
+To compare my model output to exclosure data, I'd like to find data on the relationship between age and growth in stands that burned at high-severity.
 
-## packages
+Using iLand output like *fraction of crownkill* and *basal area consumed* didn't work well for this question, since they both aggregate to the scale of the resource unit, and I kept ending up with trees that slipped through and weren't killed in the fire, complicating the age-growth relationships. Instead, I've figured out how to take the stand output and look at the years before and after fire to find the resource unit IDs, and then I pull out the stand and sapling data for just those resource units.
+
+I'm currently filtering by the following conditions:
+
+-   experienced 1 fire (and only 1 fire) in the 100 year simulation
+
+-   contained stands and saplings in the resource unit in the year before the fire (TSF = -1)
+
+-   had no trees or saplings in the year of the fire (TSF = 0)
+
+-   had no trees or saplings in the year following the fire (TSF = 1)
+
+In practice it looks something like this:
+
+::: column-margin
+Here's part\* of the code I'm using to filter the output:
+:::
+
+```{r}
+#| eval: false
+ prefireStand <- stand %>%
+    filter(TSF == -1 & # only TSF from year b4 fire
+             count_ha > 0 & NPPabove_kg > 0 & # only rids with biomass b4 fire
+             cohort_count_ha > 0 & cohort_basal_area > 0) %>%
+    distinct(rid, .keep_all = TRUE) # find unique rids
+  
+  postfireStand <- stand %>%
+    filter(TSF == 1 & count_ha == 0 & height_avg_m == 0 & NPPabove_kg == 0) %>%
+    distinct(rid, .keep_all = TRUE)
+  
+  fireStand = stand %>%
+    filter(TSF == 0 & count_ha == 0 & height_avg_m == 0 & NPPabove_kg == 0) %>%
+    distinct(rid, .keep_all = TRUE)
+  
+  RID = postfireStand %>%
+    filter(rid %in% prefireStand$rid, rid %in% fireStand$rid) %>%
+    pull(rid) %>%
+    unique()
+  
+  stand = stand %>%
+    filter(rid %in% RID,
+           cohort_id %in% postfireStand$cohort_id,
+           TSF > 0,
+           count_ha > 0) %>%
+    select(c(year, ru, rid, species, count_ha,
+             height_avg_m, dbh_avg_cm, basal_area_m2, TSF))
+```
+
+::: column-margin
+\*Not included is the code that finds stands that burned once and only once, that's a bit lengthy and I'm confident it's working the way I want
+:::
+
+Following that, I wanted to test out how much the prefire stand composition matters for the age growth relationships of different species.
 
 ```{r}
 #| label: setup
@@ -22,113 +76,35 @@ library(cowplot)
 theme_set(theme_cowplot())
 ```
 
-# load results from run
-## All stands
 ```{r}
-hare0 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_hare_postfire_pima0.txt", header = T, sep = ",")
-
-moose0 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_moose_postfire_pima0.txt",  header = T,sep = ",")
-
-nomoosehare0 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_nomoosehare_postfire_pima0.txt",  header = T,sep = ",")
-
-moosehare0 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_moosehare_postfire_pima0.txt", header = T, sep = ",")
-
-
-hare0 = hare0 %>%
-  mutate(Scenario = "Hare",
-         filter = "All stands")
-
-moose0 = moose0 %>%
-  mutate(Scenario = "Moose",
-         filter = "All stands")
-
-moosehare0 = moosehare0 %>%
-  mutate(Scenario = "Moose & Hare", filter = "All stands")
-
-nomoosehare0 = nomoosehare0 %>%
-  mutate(Scenario = "No Browsing",filter = "All stands")
-
-
-data0 = bind_rows(hare0, moose0, moosehare0, nomoosehare0)
-
-summary(data0)
-
+#| label: load data
+#| warning: false
+#| echo: false
+data = read.csv("data/ageGrowth_sensitivity.csv")
 ```
 
-## more than half black spruce
-```{r}
-hare5 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_hare_postfire_pima5.txt", header = T, sep = ",")
+# Sensitivity test
 
-moose5 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_moose_postfire_pima5.txt",  header = T,sep = ",")
+I'm using 3 approaches:
 
-nomoosehare5 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_nomoosehare_postfire_pima5.txt",  header = T,sep = ",")
+1.  Not filtering by pre-fire composition at all
 
-moosehare5 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_moosehare_postfire_pima5.txt", header = T, sep = ",")
+2.  Selecting just the stands with a spruce importance value of 0.5 or more
 
+3.  Selecting just the stands with a spruce importance value of 0.9 or more
 
-hare5 = hare5 %>%
-  mutate(Scenario = "Hare",filter = "Stands > 50% black spruce prefire")
+::: column-margin
+I tried a spruce importance value of 1, but in many of the replicates there weren't any stands that met that criteria at all.
+:::
 
-moose5 = moose5 %>%
-  mutate(Scenario = "Moose", filter = "Stands > 50% black spruce prefire")
+# How much does prefire stand composition matter?
 
-moosehare5 = moosehare5 %>%
-  mutate(Scenario = "Moose & Hare", filter = "Stands > 50% black spruce prefire")
-
-nomoosehare5 = nomoosehare5 %>%
-  mutate(Scenario = "No Browsing", filter = "Stands > 50% black spruce prefire")
-
-
-data5 = bind_rows(hare5, moose5, moosehare5, nomoosehare5)
-
-summary(data5)
-
-```
-
-## more than 90% black spruce
-```{r}
-hare1 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_hare_postfire_pima1.txt", header = T, sep = ",")
-
-moose1 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_moose_postfire_pima1.txt",  header = T,sep = ",")
-
-nomoosehare1 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_nomoosehare_postfire_pima1.txt",  header = T,sep = ",")
-
-moosehare1 = read.table(file = "//HANSENWS1/Kate/MooseHare/data/output/CPCRW_moosehare_postfire_pima1.txt", header = T, sep = ",")
-
-
-hare1 = hare1 %>%
-  mutate(Scenario = "Hare", filter = "Stands > 90% black spruce prefire")
-
-moose1 = moose1 %>%
-  mutate(Scenario = "Moose", filter = "Stands > 90% black spruce prefire")
-
-moosehare1 = moosehare1 %>%
-  mutate(Scenario = "Moose & Hare", filter = "Stands > 90% black spruce prefire")
-
-nomoosehare1 = nomoosehare1 %>%
-  mutate(Scenario = "No Browsing", filter = "Stands > 90% black spruce prefire")
-
-
-data1 = bind_rows(hare1, moose1, moosehare1, nomoosehare1)
-
-summary(data1)
-
-```
-
-## merge all
-```{r}
-data = bind_rows(data0, data1, data5)
-
-summary(data)
-
-data$filter = factor(data$filter, levels = c("All stands", "Stands > 50% black spruce prefire", "Stands > 90% black spruce prefire"))
-
-```
-# Plot
-
-## birch
+All of the following is from runs of moose, hare, moose + hare and no moose/hare under historic climate, using the POLE-FM parameters and replicated 10x.
 
 ```{r}
+#| label: plot birch
+#| warning: false
+#| echo: false
 data %>%
   filter(species == "Bene") %>%
   filter(Scenario != "Hare") %>%
@@ -139,33 +115,22 @@ data %>%
   geom_ribbon(aes(x = TSF, ymin = low, 
                     ymax = high, fill = Scenario),
               alpha = 0.3) +
-   labs(x = "Time since fire (years)", y = "Av. Height (m)",
-         title ="Birch") +
-    scale_fill_manual(values = c("#a6611a", "#018571")) + scale_color_manual(values = c("#a6611a", "#018571")) + 
-  facet_wrap(~filter)
-
-data %>%
-  filter(species == "Bene") %>%
-  ggplot() +
-  geom_line(aes(x = TSF, y = height, color = Scenario)) + 
-  xlim(c(0,50)) + 
-  geom_ribbon(aes(x = TSF, ymin = low, 
-                    ymax = high, fill = Scenario),
-              alpha = 0.3) +
-   labs(x = "Time since fire (years)", y = "Av. Height (m)",
+   labs(x = " ", y = "Av. Height (m)",
          title ="Birch") + 
+  scale_color_manual(values = c("#a6611a", "#018571")) +
+  scale_fill_manual(values = c("#a6611a", "#018571")) +
   facet_wrap(~filter)
-
-
 ```
 
-## aspen
+Looks like birch doesn't persist in the later decades after fire in the stands that were mature black spruce prior to burning without herbivores. that seems counter-intuitive to me?
 
 ```{r}
+#| label: plot aspen
+#| warning: false
+#| echo: false
 data %>%
-  filter(TSF >2) %>%
   filter(species == "Potr") %>%
-    filter(Scenario != "Hare") %>%
+  filter(Scenario != "Hare") %>%
   filter(Scenario != "Moose") %>%
   ggplot() +
   geom_line(aes(x = TSF, y = height, col = Scenario)) + 
@@ -174,34 +139,23 @@ data %>%
                     ymax = high, fill = Scenario),
               alpha = 0.3) + 
   scale_color_manual(values = c("#a6611a", "#018571")) + 
-  geom_hline(yintercept = 0, linetype = "dashed") + 
-    labs(x = "Time since fire (years)", y = "Av. Height (m)",
-         title ="Aspen") + 
   scale_fill_manual(values = c("#a6611a", "#018571")) +
-  facet_wrap(~filter)
-
-data %>%
-  filter(species == "Potr") %>%
-  ggplot() +
-  geom_line(aes(x = TSF, y = height, color = Scenario)) + 
-  xlim(c(0,50)) + 
-  geom_ribbon(aes(x = TSF, ymin = low, 
-                    ymax = high, fill = Scenario),
-              alpha = 0.3) +
-   labs(x = "Time since fire (years)", y = "Av. Height (m)",
+  geom_hline(yintercept = 0, linetype = "dashed") + 
+    labs(x = " ", y = "Av. Height (m)",
          title ="Aspen") + 
   facet_wrap(~filter)
-
 ```
 
-## spruce
+Aspen ends up much taller following fire in spruce stands, and it's taller in the scenarios with browsing, which again, seems like the opposite of what I'd expect
 
 ```{r}
+#| label: plot spruce
+#| warning: false
+#| echo: false
 data %>%
   filter(species == "Pima") %>%
   filter(Scenario != "Hare") %>%
   filter(Scenario != "Moose") %>%
-    filter(TSF >2) %>%
   ggplot() +
   geom_line(aes(x = TSF, y = height, col = Scenario)) + 
   xlim(c(0,50)) + 
@@ -215,8 +169,83 @@ data %>%
   scale_fill_manual(values = c("#a6611a", "#018571")) +
   facet_wrap(~filter)
 
+```
+
+This looks like there's some spruce that slipped through the filters - I don't fully understand how spruce could have a height of 0 in TSF = 0 and TSF = 1, but appear at 4 meters in TSF = 2.
+
+I'll clip for now:
+
+```{r}
+#| label: plot spruce TSF2
+#| warning: false
 data %>%
   filter(species == "Pima") %>%
+  filter(Scenario != "Hare") %>%
+  filter(Scenario != "Moose") %>%
+  filter(TSF > 2) %>%
+  ggplot() +
+  geom_line(aes(x = TSF, y = height, col = Scenario)) + 
+  xlim(c(0,50)) + 
+  geom_ribbon(aes(x = TSF, ymin = low, 
+                    ymax = high, fill = Scenario),
+              alpha = 0.3) +
+    scale_color_manual(values = c("#a6611a", "#018571")) + 
+  geom_hline(yintercept = 0, linetype = "dashed") + 
+    labs(x = "Time since fire (years)", y = "Av. Height (m)",
+         title ="Spruce") + 
+  scale_fill_manual(values = c("#a6611a", "#018571")) +
+  facet_wrap(~filter)
+
+```
+
+Okay, so pre-fire stand conditions don't matter much for spruce growth - makes sense, since it's set up to grow steady/incrementally. But somehow it's slightly taller in the scenario without browsing, even though neither herbivore actually browse black spruce. This is making me think I need to chat with Juha/Kati.
+
+# Does the herbivore matter?
+
+Here's the same data but now broken out by herbivore:
+
+```{r}
+#| label: plot all birch
+#| warning: false
+#| echo: false
+data %>%
+  filter(species == "Bene") %>%
+  ggplot() +
+  geom_line(aes(x = TSF, y = height, color = Scenario)) + 
+  xlim(c(0,50)) + 
+  geom_ribbon(aes(x = TSF, ymin = low, 
+                    ymax = high, fill = Scenario),
+              alpha = 0.3) +
+   labs(x = "Time since fire (years)", y = "Av. Height (m)",
+         title ="Birch") + 
+  facet_wrap(~filter)
+```
+
+```{r}
+#| label: plot all aspen
+#| warning: false
+#| echo: false
+data %>%
+  filter(species == "Potr") %>%
+  ggplot() +
+  geom_line(aes(x = TSF, y = height, color = Scenario)) + 
+  xlim(c(0,50)) + 
+  geom_ribbon(aes(x = TSF, ymin = low, 
+                    ymax = high, fill = Scenario),
+              alpha = 0.3) +
+   labs(x = "Time since fire (years)", y = "Av. Height (m)",
+         title ="Aspen") + 
+  facet_wrap(~filter)
+
+```
+
+```{r}
+#| label: plot all spruce
+#| warning: false
+#| echo: false
+data %>%
+  filter(species == "Pima") %>%
+  filter(TSF >2) %>%
   ggplot() +
   geom_line(aes(x = TSF, y = height, color = Scenario)) + 
   xlim(c(0,50)) + 
@@ -226,25 +255,6 @@ data %>%
    labs(x = "Time since fire (years)", y = "Av. Height (m)",
          title ="Black Spruce") + 
   facet_wrap(~filter)
-
 ```
 
-# save plots
-
-```{r}
-ggsave2(plot = bene,
-        filename = "AgeGrowth_Birch.png",
-        path = "//HANSENWS1/Kate/MooseHare/figures/ageGrowth/",
-        width = 6, height = 5, units = "in")
-
-ggsave2(plot = potr,
-        filename = "AgeGrowth_Potr.png",
-        path = "//HANSENWS1/Kate/MooseHare/figures/ageGrowth/",
-        width = 6, height = 5, units = "in")
-ggsave2(plot = pima,
-        filename = "AgeGrowth_Pima.png",
-        path = "//HANSENWS1/Kate/MooseHare/figures/ageGrowth/",
-        width = 6, height = 5, units = "in")
-
-
-```
+Overall, similar broad trends. Herbivore guild doesn't differ too much in their impacts - the biggest thing I can pick out is that aspen is taller earlier when browsed by hare and not moose. Makes sense.
