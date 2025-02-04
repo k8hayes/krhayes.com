@@ -24,7 +24,7 @@ here::i_am("index.qmd")
 here("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Draft_Discogs/index.qmd")
 ```
 
-One of our family hobbies is collecting vinyl - my dad, sister and I share a Discogs(link) account, so that we can see each other's collections. It's fun to watch the value change over time, and can be a nice way to make sure you aren't overpaying in some trendy new record store.
+One of our family hobbies is collecting vinyl - my dad, sister and I share a [Discogs](https://www.discogs.com/) account, so that we can see each other's collections. It's fun to watch the value change over time, and can be a nice way to make sure you aren't overpaying in some trendy new record store.
 
 I was inspired by blogs like XX and [this one](https://www.alexrabin.com/about/record-collection) which visualize their collection in interesting ways.
 
@@ -34,7 +34,7 @@ Discogs has two ways to download data:
 
 ## Data Export
 
-You can download a Data Export of your collection directly from the Discogs website by visiting the Dashboard of your account. This will include:
+You can download a Data Export of your collection directly from the website by visiting the Dashboard of your account. This will include:
 
 ```{r default export}
 #| tbl-cap-location: margin
@@ -54,6 +54,8 @@ The second way to access data from Discogs is by connecting via an API -
 
 This lets you access Artists, Releases, manage . Plus, it's more dynamic .
 
+Not all data available on the site is available by API - Price history per release and the stats page are the big ones.
+
 # API basics for someone who hasn't worked with them before
 
 Quick and dirty API definition- API, or Application Programming Interface is a way for two or more computer programs to communicate with one another.
@@ -64,9 +66,7 @@ To connect to the Discogs API, go to Discogs Developer settings once logged in. 
 
 ## Rate Limits
 
-Discogs has a rate limit of 60 per minute (for authenticated requests). This means the API tracks the requests over a moving average over a 60 second window which resets if no requests are made in 60 seconds. This means we'll need to throttle our requests
-
-Not all data available on the site is available by API - Price history per release and the stats page are the big ones.
+Discogs has a rate limit of 60 per minute (for authenticated requests). This means the API tracks the requests over a moving average over a 60 second window which resets if no requests are made in 60 seconds. This means we'll need to throttle our requests.
 
 With your token in hand, you can use the **httr2** package [@httr2] to call the API with your username.
 
@@ -127,14 +127,16 @@ if (collec_url$status_code == 200){
 }
 ```
 
-Knowing what you can collect requires understanding what's actually available. **collecdata** is a list of 1588 elements, each element representing a vinyl in the collection. Within each element are additional lists of data. **basic_information** contains
+Knowing what you can collect requires understanding what's actually available. **collecdata** is a list of 1633 elements[^1], each element representing a vinyl in the collection. Within each element are additional lists of data. **basic_information** contains
+
+[^1]: at the time of writing
 
 ```{r}
 collecdata[[1]]
 ```
 
 ```{r}
-collection <- lapply(collecdata, function(obj){
+collection = lapply(collecdata, function(obj){
   data.frame(release_id = obj$basic_information$id %||% NA,
              label = obj$basic_information$labels[[1]]$name %||% NA,
              year = obj$basic_information$year %||% NA,
@@ -144,21 +146,23 @@ collection <- lapply(collecdata, function(obj){
              artist_resource_url = obj$basic_information$artists[[1]]$resource_url %||% NA, 
              format = obj$basic_information$formats[[1]]$name %||% NA,
              genre = obj$basic_information$genres[[1]] %||% NA,
-             genre2 = obj$basic_information$genres[[2]] %||% NA,
-             style1 = obj$basic_information$styles[[1]] %||% NA,
-             style2 = obj$basic_information$styles[[2]] %||% NA,
-             style3 = obj$basic_information$styles[[3]] %||% NA,
+             folder = obj$folder_id %||% NA,
+             genre2 = ifelse(length(obj$basic_information$genres) ==2, obj$basic_information$genres[[2]], NA),
+             style1 = ifelse(length(obj$basic_information$styles) ==1, obj$basic_information$styles[[1]], NA),
+             #style2 = obj$basic_information$styles[[2]] %||% NA,
+             #style3 = obj$basic_information$styles[[3]] %||% NA,
              date_added = obj$date_added %||% NA,
-             resource_url = obj$basic_information$resource_url %||% NA)
+             resource_url = obj$basic_information$resource_url %||% NA,
+             media_quality = obj$notes[[1]]$value %||% NA)
 }) %>% do.call(rbind, .) %>% 
   unique()
 
 knitr::kable(head(collection))
 ```
 
-# Visualizing
+Once I've accessed the data from our own collection, I have a dataset that lets me visualize the collection in different ways. Some of my favorites include:
 
-```{r most frequeny genres}
+```{r most frequent genres}
 ggplot(as.data.frame(head(sort(table(collection$genre), decreasing = TRUE), 10)),
        aes(x = reorder(Var1, Freq), y = Freq)) + 
   geom_bar(stat = "identity", fill = "#B79477") + 
