@@ -5,7 +5,6 @@ date: 2024-09-23
 categories: [Model Parameterization, iLand, BITE]
 date-modified: last-modified
 bibliography: references.bib
-draft: true
 ---
 
 *AKA - a field ecologist discovers how heartbreaking it is to bury the enormity of work required to parameterize and benchmark a model into the supplement section of a paper*
@@ -70,15 +69,6 @@ According to Alaska Fish and Game, there are an estimated 175,000 moose in Alask
 Those 175,000 are spread out in densities anywhere from 1 to 150 moose per 30 square miles[^7]. That's over the entire state however, including tundra where moose can be quite scarce.
 
 [^7]: that's 0.003 -5 moose per square mile
-
-| Region                       | Game Unit | Population  | Density (moose per mi2) | Report                                                                                                                            |
-|----------|----------|----------|----------|----------------------------------|
-| Upper Tanana and White River | 12        | 5,467-7,657 | 0.9 - 1.28              | [2015 - 2020](https://www.adfg.alaska.gov/static/research/wildlife/speciesmanagementreports/pdfs/moose_2015_2025_smrp_gmu_12.pdf) |
-| Kuskokwim River              | 19        | 1,353       | 0.04                    | [2010 - 2015](https://www.adfg.alaska.gov/static/research/wildlife/speciesmanagementreports/pdfs/moose_2015_2020_smr_gmu_19.pdf)  |
-| Fairbanks                    | 20        |             |                         |                                                                                                                                   |
-|                              |           |             |                         |                                                                                                                                   |
-
-All to say, we can say with some (some!) certainty that there are somewhere between XX and XX moose in Interior Alaska, about XX per acre.
 
 The landscape I'm modeling contains the [Caribou Poker Creek Research Watershed](https://www.lter.uaf.edu/research/study-sites-cpcrw), which falls within Game Unit 20A of the Alaska Dept. of Fish and Game.
 

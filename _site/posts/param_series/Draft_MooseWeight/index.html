@@ -191,7 +191,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">October 29, 2024</p>
+        <p class="date-modified">February 4, 2025</p>
       </div>
     </div>
       
@@ -207,7 +207,7 @@ div.csl-indent {
   <ul>
   <li><a href="#how-many-moose-are-there" id="toc-how-many-moose-are-there" class="nav-link active" data-scroll-target="#how-many-moose-are-there">How many moose are there?</a>
   <ul class="collapse">
-  <li><a href="#where-do-we-get-those-numbers" id="toc-where-do-we-get-those-numbers" class="nav-link" data-scroll-target="#where-do-we-get-those-numbers"><em>Where do we get those numbers?</em></a></li>
+  <li><a href="#where-do-we-get-those-numbers" id="toc-where-do-we-get-those-numbers" class="nav-link" data-scroll-target="#where-do-we-get-those-numbers">Where do we get those numbers?</a></li>
   <li><a href="#okay-but-k8-how-many-moose" id="toc-okay-but-k8-how-many-moose" class="nav-link" data-scroll-target="#okay-but-k8-how-many-moose">Okay, but k8, how many moose?</a></li>
   </ul></li>
   <li><a href="#what-do-moose-weigh" id="toc-what-do-moose-weigh" class="nav-link" data-scroll-target="#what-do-moose-weigh">What do moose weigh?</a>
@@ -217,7 +217,6 @@ div.csl-indent {
   </ul></li>
   <li><a href="#more-information" id="toc-more-information" class="nav-link" data-scroll-target="#more-information">More information</a>
   <ul class="collapse">
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session Info</a></li>
   </ul></li>
   </ul>
@@ -242,8 +241,8 @@ Honkaniemi, Juha, Werner Rammer, and Rupert Seidl. 2021. <span>“From Mycelia t
 <p>While a landscape model might be able to easily represent an individual mastodon roaming across a landscape, modeling each individual fungi spore across a landscape is absolutely not possible computationally. To deal with this, BITE represents agents in units of biomass. Kilograms of mastodon move across cells within the model, uprooting kilograms of trees and consuming kilograms of spruce needles before falling into kilograms of tar pits<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;(technically no, though I’m sure you could overthink it and implement it as a bit)</p></li></div><p>This means you have two key decisions to make when starting to parameterize a new agent:</p>
 <ol type="1">
-<li>How many are there?</li>
-<li>What do they weigh?</li>
+<li><em>How many are there?</em></li>
+<li><em>What do they weigh?</em></li>
 </ol>
 <p>Answering both is complicated.</p>
 <section id="how-many-moose-are-there" class="level1 page-columns page-full">
@@ -253,7 +252,7 @@ Honkaniemi, Juha, Werner Rammer, and Rupert Seidl. 2021. <span>“From Mycelia t
 <div class="no-row-height column-margin column-container"><div id="ref-moll2022" class="csl-entry" role="listitem">
 Moll, Remington J., Mairi K. P. Poisson, David R. Heit, Henry Jones, Peter J. Pekins, and Lee Kantar. 2022. <span>“A Review of Methods to Estimate and Monitor Moose Density and Abundance.”</span> <em>Alces: A Journal Devoted to the Biology and Management of Moose</em> 58: 31–49. <a href="https://alcesjournal.org/index.php/alces/article/view/1881">https://alcesjournal.org/index.php/alces/article/view/1881</a>.
 </div></div><section id="where-do-we-get-those-numbers" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="where-do-we-get-those-numbers"><em>Where do we get those numbers?</em></h3>
+<h3 class="anchored" data-anchor-id="where-do-we-get-those-numbers">Where do we get those numbers?</h3>
 <p>It’s hard to count moose. Logistically, financially, ecologically<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 <div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;maybe emotionally?</p></li><li id="fn4"><p><sup>4</sup>&nbsp;(except for this one pictured below, who was chomping on willow in the literal driveway to Denali National Park)</p></li></div><p>Moose behavior itself makes it hard to count moose - moose use dense forest cover, they tend to avoid areas where humans are active<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, and they’re most active at dusk and dawn.</p>
 
@@ -287,10 +286,55 @@ Brinkman, Todd Jared, Kalin Seaton, Adele Reinking, Glen E. Liston, Laura Prugh,
 <h2 class="anchored" data-anchor-id="okay-but-k8-how-many-moose">Okay, but k8, how many moose?</h2>
 <p>According to Alaska Fish and Game, there are an estimated 175,000 moose in Alaska.</p>
 <p>Those 175,000 are spread out in densities anywhere from 1 to 150 moose per 30 square miles<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. That’s over the entire state however, including tundra where moose can be quite scarce.</p>
-<div class="no-row-height column-margin column-container"><li id="fn7"><p><sup>7</sup>&nbsp;that’s 0.003 -5 moose per square mile</p></li></div><p>Within the Interior,</p>
-<p>All to say, we can say with some (some!) certainty that there are somewhere between XX and XX moose in Interior Alaska, about XX per acre.</p>
-<p>The landscape I’m modeling contains the <a href="https://www.lter.uaf.edu/research/study-sites-cpcrw">Caribou Poker Creek Research Watershed</a>, which falls within Game Unit 20A of the Alaska Dept. of Fish and Game. According to their report from XX, there were XX moose in XX year, ## male and ## female.</p>
-<p>objective: 10-15,000 moose across population (adopted 2016)</p>
+<div class="no-row-height column-margin column-container"><li id="fn7"><p><sup>7</sup>&nbsp;that’s 0.003 -5 moose per square mile</p></li></div><table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Game Unit</th>
+<th>Population</th>
+<th>Density (moose per mi2)</th>
+<th>Report</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>12</td>
+<td>5,467-7,657</td>
+<td>0.9 - 1.28</td>
+<td><a href="https://www.adfg.alaska.gov/static/research/wildlife/speciesmanagementreports/pdfs/moose_2015_2025_smrp_gmu_12.pdf">2015 - 2020</a></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>19</td>
+<td>1,353</td>
+<td>0.04</td>
+<td><a href="https://www.adfg.alaska.gov/static/research/wildlife/speciesmanagementreports/pdfs/moose_2015_2020_smr_gmu_19.pdf">2010 - 2015</a></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>20</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The landscape I’m modeling contains the <a href="https://www.lter.uaf.edu/research/study-sites-cpcrw">Caribou Poker Creek Research Watershed</a>, which falls within Game Unit 20A of the Alaska Dept. of Fish and Game.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="gameunits.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">Game Management Units across Alaska, source: Alaska Department of Fish and Game</figcaption>
+</figure>
+</div>
+<p>According to their most recent report, they counted 1,395 moose in 2019, 79% of which were adults. Correcting for sightability, they estimate the total population is between 9,581 and 13,959 moose across 20A, or <strong>2.3 moose per square mile.</strong></p>
 <p>That brings us to the second question.</p>
 </section>
 </section>
@@ -301,28 +345,28 @@ Brinkman, Todd Jared, Kalin Seaton, Adele Reinking, Glen E. Liston, Laura Prugh,
 Pastor, John, Robert J. Naiman, Bradley Dewey, and Pamela McInnes. 1988. <span>“Moose, Microbes, and the Boreal Forest.”</span> <em>BioScience</em> 38 (11): 770–77. <a href="https://doi.org/10.2307/1310786">https://doi.org/10.2307/1310786</a>.
 </div></div><section id="what-do-moose-weigh-in-alaska" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="what-do-moose-weigh-in-alaska">What do moose weigh in Alaska?</h2>
-<p>Googling <em>how much does a moose weigh alaska</em> leads to a page from the Alaska Department of Fish and Game that gives moose an average weight of 550 kilograms. They cite Bishop 1988, who puts bull moose between 540 - 680 kilograms and cows between 360 - 590 kg in Alaska.</p>
-<p>Why the difference between male and female?</p>
-<p>Bull moose are on average much larger than cows (CITE).</p>
-<p>Obviously body mass also varies across a season<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>, across age, or depending on predator pressure. But this is the point at which I get to pull the time-honored card of <em>not in the scope of the research,</em> and move on. Maybe, if moose appear to have a critical role mitigating the impact of fire on Alaskan forests, someone will give me funding to build a more complicated model of moose population dynamics, maybe one that incorporates twinning rates and body mass<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>.</p>
-<div class="no-row-height column-margin column-container"><li id="fn9"><p><sup>9</sup>&nbsp;moose often put on weight in the summer, reaching “peak body mass” in the fall in preparation for the long winter (Mautz 1978, Adamczewski et al.&nbsp;1987, Schwartz et al.&nbsp;1987)</p></li><li id="fn10"><p><sup>10</sup>&nbsp;this is how manifestation works, right?</p></li></div><p>The number of calves they produce depends in turn on the conditions that year - was there enough food? was it warm enough?</p>
-<p>So, if moose weight depends on the gender ratio across the population, what’s the gender ratio of the moose population in Alaska? Surprisingly, we have a good grasp of this - hunting targets male moose, so populations are maintained at a level of &gt;25 bulls per 100 cows (after hunting).</p>
+<p>Googling <em>how much does a moose weigh alaska</em> leads to a page from the Alaska Department of Fish and Game that gives moose an average weight of 550 kilograms. They cite <span class="citation" data-cites="bishop1988">(<a href="#ref-bishop1988" role="doc-biblioref">Bishop 1988</a>)</span>, who puts bull moose between 540 - 680 kilograms and cows between 360 - 590 kg in Alaska.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-bishop1988" class="csl-entry" role="listitem">
+Bishop, Richard H. 1988. <span>“The Moose in Alaska.”</span> In, 494–512. Elsevier. <a href="https://linkinghub.elsevier.com/retrieve/pii/B978012041001950025X">https://linkinghub.elsevier.com/retrieve/pii/B978012041001950025X</a>.
+</div><li id="fn9"><p><sup>9</sup>&nbsp;moose often put on weight in the summer, reaching “peak body mass” in the fall in preparation for the long winter (Mautz 1978, Adamczewski et al.&nbsp;1987, Schwartz et al.&nbsp;1987)</p></li><li id="fn10"><p><sup>10</sup>&nbsp;this is how manifestation works, right?</p></li></div><p>Obviously body mass also varies across a season<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>, across age, or depending on predator pressure. But this is the point at which I get to pull the time-honored card of <em>not in the scope of the research,</em> and move on. Maybe, if moose appear to have a critical role mitigating the impact of fire on Alaskan forests, someone will give me funding to build a more complicated model of moose population dynamics, maybe one that incorporates twinning rates and body mass<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>.</p>
+<p>The number of calves they produce depends in turn on the conditions that year - was there enough food? was it warm enough?</p>
+<p>So, if moose weight depends on the gender ratio across the population, <em>what’s the gender ratio of the moose population in Alaska</em>? Surprisingly, we have a good grasp of this - hunting targets male moose, so populations are maintained at a level of &gt;25 bulls per 100 cows (after hunting).</p>
 </section>
 <section id="what-do-moose-weigh-in-the-model" class="level2">
 <h2 class="anchored" data-anchor-id="what-do-moose-weigh-in-the-model">What do moose weigh in the model?</h2>
 <p>But, the model needs a single number. And iLand doesn’t represent seasons. Nor population demographics (at least not yet). So, to <del>maintain my sanity</del> <em>make some simplifying assumptions</em>, I’ll take a weighted average.</p>
-<p>I’ll start by assuming an average calf weighs XX kilograms (or XX pounds), a cow weighs XX kg (XX pounds) and a bull weighs XX kg (XX pounds). Assuming a ratio of XX calves to XX adults, and 25 bulls:100 cows, I can take a weighted average. That gets us to XX moose.</p>
+<p>I’ll start by assuming an average calf weighs XX kilograms, a cow weighs 447.5 kg and a bull weighs 683.5 kg. Assuming 20% of the populations are calves, and there’s a 3:10 ratio of cows to bulls within adults, I can take a weighted average.</p>
+<p>If, according to Fish and Game, there are 2.3 moose per square mile in Game Unit 20A, that means there are XX moose in my 60,000 acre model landscape.</p>
+<p>So, in the BITE script for moose, I now have a line that looks like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>initialAgentBiomass<span class="op">:</span> <span class="fl">5.95</span> <span class="op">*</span> <span class="dv">465</span> <span class="co">// initial agent biomass in each cell calculated assuming moose density to be 0.95 animals per 1 km2 (152 per 1000) * average mass of 465 kg (estimated) per animal  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="more-information" class="level1">
 <h1>More information</h1>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-</section>
 <section id="session-info" class="level2">
 <h2 class="anchored" data-anchor-id="session-info">Session Info</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.4.1 (2024-06-14)
 Platform: aarch64-apple-darwin20
@@ -344,8 +388,8 @@ attached base packages:
 loaded via a namespace (and not attached):
  [1] htmlwidgets_1.6.4 compiler_4.4.1    fastmap_1.2.0     cli_3.6.3        
  [5] tools_4.4.1       htmltools_0.5.8.1 yaml_2.3.10       rmarkdown_2.28   
- [9] knitr_1.48        jsonlite_1.8.8    xfun_0.47         digest_0.6.37    
-[13] rlang_1.1.4       evaluate_0.24.0  </code></pre>
+ [9] knitr_1.48        jsonlite_1.8.9    xfun_0.47         digest_0.6.37    
+[13] rlang_1.1.4       evaluate_1.0.0   </code></pre>
 </div>
 </div>
 
