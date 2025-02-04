@@ -11,8 +11,6 @@ website:
         file: blog.qmd
       - text: "CV"
         file: cv.pdf
-      - text: "AGU Poster"
-        file: AGU_poster.pdf
     
 format:
   html:
