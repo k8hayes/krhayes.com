@@ -71,7 +71,8 @@ open smb://10.60.2.10/FF_Lab/personal_storage/kate_storage/GIS/
 
 We'll start with loading in the DNBR raster from the Dall City fire - this fire burned 530,717 acres in 2004.
 
-```{r Yukon - Dall City}
+```{r}
+#| label: Yukon Dall City
 DallCity <- rast("/Volumes/GIS/site selection 2024/targetMTBS/Yukon/DallCity_2004/ak6628114999320040706_20010623_20050720_dnbr6.tif")
     
 plot(DallCity, main = "Original")

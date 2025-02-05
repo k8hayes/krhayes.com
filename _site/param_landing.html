@@ -76,9 +76,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: [{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: [],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -131,10 +131,6 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./cv.pdf" rel="" target="">
  <span class="menu-text">CV</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./AGU_poster.pdf" rel="" target="">
- <span class="menu-text">AGU Poster</span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
@@ -175,7 +171,31 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-
+<div class="quarto-post image-right" data-index="0" data-categories="Model Parameterization,iLand,BITE" data-listing-date-sort="1727067600000" data-listing-file-modified-sort="1738701906550" data-listing-date-modified-sort="1738701906000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1219">
+<div class="thumbnail">
+<p><a href="./posts/param_series/Draft_MooseWeight/index.html"> <p class="card-img-top"><img src="posts/param_series/Draft_MooseWeight/images/moose.JPG"  class="thumbnail-image card-img"/></p> </a></p>
+</div>
+<div class="body">
+<a href="./posts/param_series/Draft_MooseWeight/index.html">
+<h3 class="no-anchor listing-title">
+How much does a moose weigh?
+</h3>
+<div class="listing-subtitle">
+The rabbit holes of model parameterization
+</div>
+<div class="listing-description">
+<em>AKA - a field ecologist discovers how heartbreaking it is to bury the enormity of work required to parameterize and benchmark a model into the supplement section of a paper</em>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/param_series/Draft_MooseWeight/index.html">
+<div class="listing-date">
+Sep 23, 2024
+</div>
+</a>
+</div>
+</div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items
