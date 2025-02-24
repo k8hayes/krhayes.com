@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.288">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2024-05-28">
 <meta name="description" content="Using terra to quantify overlaps in fire perimeter rasters">
 
-<title>Katherine Hayes - Benchmarking Reburning in iLand</title>
+<title>Benchmarking Reburning in iLand – Katherine Hayes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -60,6 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -90,22 +91,23 @@ div.csl-indent {
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-50f0e86957463372b17f1dd0b860f020.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -114,6 +116,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -129,8 +132,8 @@ div.csl-indent {
 <body class="floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../../index.html">
@@ -138,26 +141,26 @@ div.csl-indent {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../about.html" rel="" target="">
- <span class="menu-text">About Me</span></a>
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">About Me</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../blog.html" rel="" target="">
- <span class="menu-text">Blog</span></a>
+    <a class="nav-link" href="../../../blog.html"> 
+<span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../cv.pdf" rel="" target="">
- <span class="menu-text">CV</span></a>
+    <a class="nav-link" href="../../../cv.pdf"> 
+<span class="menu-text">CV</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -204,7 +207,7 @@ div.csl-indent {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Contents</h2>
    
@@ -228,9 +231,9 @@ div.csl-indent {
   </ul>
 </nav>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
@@ -238,15 +241,7 @@ div.csl-indent {
 
 
 
-<div class="cell">
 
-</div>
-<div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
 <section id="what-are-the-patterns-of-reburning-in-iland" class="level1">
 <h1>What are the patterns of reburning in iLand?</h1>
 <p>As part of my <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2219248&amp;HistoricalAwards=false">NSF Postdoc fellowship</a>, I’ve been working on modeling herbivores in <a href="https://iland-model.org/iLand+Hub">iLand</a> using the biotic disturbance model <a href="https://iland-model.org/bite/#/">BITE</a>. In particular, I want to understand if biotic disturbances generally (and herbivores specifically) can interact with fire such that they modify forest composition or forest carbon at a landscape scale.</p>
@@ -781,29 +776,37 @@ div.csl-indent {
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      fire<span class="sc">$</span>prop.dens.killed[fire<span class="sc">$</span>n_trees <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>However, there’s one challenge with this. Here’s the percent of stems killed across fires:</p>
-<div class="cell page-columns page-full">
+<div class="cell page-columns page-full" data-cap-location="margin">
 <div class="cell-output-display page-columns page-full">
-<div id="fig-stems-killed" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="index_files/figure-html/fig-stems-killed-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;1: Percent of stems killed across fires</figcaption>
+<div id="fig-stems-killed" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-stems-killed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-stems-killed-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-stems-killed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Percent of stems killed across fires
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>And here’s the percent basal area killed across all fires:</p>
-<div class="cell page-columns page-full">
+<div class="cell page-columns page-full" data-cap-location="margin">
 <div class="cell-output-display page-columns page-full">
-<div id="fig-ba-killed" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="index_files/figure-html/fig-ba-killed-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;2: Percent basal area killed across fires</figcaption>
+<div id="fig-ba-killed" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-ba-killed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-ba-killed-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-ba-killed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Percent basal area killed across fires
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>You’ll notice neither metric shows values that are completely equal to 100%. At first this seems like a problem, right?<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;none of our fires were stand-replacing??</p></li></div><p>This is an important nuance of the iLand fire output - <strong>n_trees_killed</strong> and <strong>basalArea_died</strong> are aggregated across the entire fire. Cells within the fire may have experienced full canopy mortality, but since we’re working with averages, it’ll be very very rare (if not impossible) for a stand to have 100% of stems killed across the entire fire.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;none of our fires were stand-replacing??</p></div></div><p>This is an important nuance of the iLand fire output - <strong>n_trees_killed</strong> and <strong>basalArea_died</strong> are aggregated across the entire fire. Cells within the fire may have experienced full canopy mortality, but since we’re working with averages, it’ll be very very rare (if not impossible) for a stand to have 100% of stems killed across the entire fire.</p>
 </section>
 <section id="saving-additional-fire-output" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="saving-additional-fire-output">Saving additional fire output</h2>
@@ -819,12 +822,12 @@ div.csl-indent {
 <li><strong>nFire</strong>: cumulative count of fire events on a resource unit<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
 <li><strong>lastFireYear</strong>: simulation year of the last fire event on a RU</li>
 </ul>
-<div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;Breaking the forth wall: discovered this output while putting together this quarto document. In future runs, I’ll turn this on and avoid some of the steps described later in the document to filter out reburns</p></li><li id="fn3"><p><sup>3</sup>&nbsp;Note that this is trees killed within burned resource units, not saplings. It still works for our purposes for a few reasons:</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Breaking the forth wall: discovered this output while putting together this quarto document. In future runs, I’ll turn this on and avoid some of the steps described later in the document to filter out reburns</p></div><div id="fn3"><p><sup>3</sup>&nbsp;Note that this is trees killed within burned resource units, not saplings. It still works for our purposes for a few reasons:</p>
 <ol type="1">
 <li>The likelihood that saplings survive in a burned resource unit where all trees are killed seems low (but I can go ahead and check later on)</li>
 <li>Since I’m interested in height-growth relationships, I’ll be filtering out saplings with ages older than the time since fire for the resource unit, so I should catch any that slip through (again, even if they do)</li>
 </ol>
-</li></div><p>For this analysis, I’ll stick to <strong>diedStemsFrac</strong> - the number of trees killed within a resource unit<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. First, you need to add a function into your iLand model to tell it to save the extra output.</p>
+</div></div><p>For this analysis, I’ll stick to <strong>diedStemsFrac</strong> - the number of trees killed within a resource unit<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. First, you need to add a function into your iLand model to tell it to save the extra output.</p>
 <p>The code to do so is the following:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">afterFireProcessing</span>() {</span>
@@ -836,7 +839,7 @@ div.csl-indent {
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Add this in to a javascript file within the <strong>Scripts</strong> folder in your iLand folder ecosystem, and enable &lt;management&gt; under &lt;/model&gt; in your project file. Now, if you set up a <strong>“dead”</strong> folder in your output, a raster of values of stems killed will save after each fire.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
-<div class="no-row-height column-margin column-container"><li id="fn4"><p><sup>4</sup>&nbsp;To track other items from the list of variables above, call a new Fire.grid() within the afterFireProcessing function and give it a unique save destination</p></li></div><p>In order to filter our sapling output by the cells that experienced canopy-replacing fire, I can filter not only by the rasters (the footprint of the fire), but by the value of <strong>diedStemsFraction</strong> variable within each raster pixel (which represent resource units in the iLand landscape).</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;To track other items from the list of variables above, call a new Fire.grid() within the afterFireProcessing function and give it a unique save destination</p></div></div><p>In order to filter our sapling output by the cells that experienced canopy-replacing fire, I can filter not only by the rasters (the footprint of the fire), but by the value of <strong>diedStemsFraction</strong> variable within each raster pixel (which represent resource units in the iLand landscape).</p>
 <p>The function <strong>rast()</strong> from the <em>terra</em> package <span class="citation" data-cites="terra">(<a href="#ref-terra" role="doc-biblioref">Hijmans 2023</a>)</span> creates a <strong>SpatRaster</strong> object, a object type in R that can represent multi-layer or multi-variable raster data. Here, the object <strong>fire_maps</strong> is a three-dimensional raster - the first two dimensions are the x and y axis of our iLand landscape and the third dimension is 27 layers of fire perimeters (one for each fire within the simulation). Each pixel within that raster represents an individual resource unit from the iLand landscape and contains a value from 0 -1, representing <strong>diedStemsFrac.</strong></p>
 <div class="no-row-height column-margin column-container"><div id="ref-terra" class="csl-entry" role="listitem">
 Hijmans, Robert J. 2023. <span>“Terra: Spatial Data Analysis.”</span> <a href="https://CRAN.R-project.org/package=terra">https://CRAN.R-project.org/package=terra</a>.
@@ -1100,18 +1103,22 @@ max values  :      1,       1,       1,       1,       1,       1, ... </code></
 </div>
 </div>
 <p>I can call on each of those 27 layers to examine the fire perimeters one by one. For example, this is the fire perimeter from the first fire in the simulation:</p>
-<div class="cell page-columns page-full">
+<div class="cell page-columns page-full" data-cap-location="margin">
 <div class="cell-output-display page-columns page-full">
-<div id="fig-fireEx1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="index_files/figure-html/fig-fireEx1-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;3: Fire Perimeter of first fire in spin-up simulation. The color gradient represents diedStemsFrac as a value from 0 to 1.</figcaption>
+<div id="fig-fireEx1" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-fireEx1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-fireEx1-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-fireEx1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Fire Perimeter of first fire in spin-up simulation. The color gradient represents diedStemsFrac as a value from 0 to 1.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>I’ll use these rasters to determine which resource units experienced stand-replacing fire<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, and use those resource unit IDs to filter the sapling and tree data.</p>
-<div class="no-row-height column-margin column-container"><li id="fn5"><p><sup>5</sup>&nbsp;Which I can now define more specifically as <strong>diedStemFrac</strong> = 1</p></li></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;Which I can now define more specifically as <strong>diedStemFrac</strong> = 1</p></div></div><div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1124,7 +1131,7 @@ Note
 <p>An aside: this run is a spin-up simulation - I ran iLand, initializing forests from an empty landscape<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> in year 0, and simulated forest growth and fire over 300 years. This seems to be the sweet spot for simulation runs - at year 300, it’s a landscape full of a mix of mature, regenerating and recently burned stands, just as we’d observe in real life. Since fires that occur early in the spin-up inherently burn young stands, it’s not terribly representative of the relationship between height and age in regrowth that I want to eventually compare to the herbivore-impacted relationship. So, I’ll filter to just the last 100 years of the simulation.</p>
 </div>
 </div>
-<div class="no-row-height column-margin column-container"><li id="fn6"><p><sup>6</sup>&nbsp;An aside to the aside (meta!!) - it’s an empty landscape in the sense that there are no trees in year 0, but I do initialize using a soil organic layer that varies heterogeneously across the landscape. This isn’t just to represent real life for real life’s sake - initializing from truly empty (truly bare ground) causes totally different patterns of forests. As has been shown in decades of work in Alaska by Jill Johnstone and others, soil organic layer filters forest community composition in really critical ways, allowing spruce to outcompete species like birch and aspen which can’t persist in thick soil or moss layers for as long.</p></li></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;An aside to the aside (meta!!) - it’s an empty landscape in the sense that there are no trees in year 0, but I do initialize using a soil organic layer that varies heterogeneously across the landscape. This isn’t just to represent real life for real life’s sake - initializing from truly empty (truly bare ground) causes totally different patterns of forests. As has been shown in decades of work in Alaska by Jill Johnstone and others, soil organic layer filters forest community composition in really critical ways, allowing spruce to outcompete species like birch and aspen which can’t persist in thick soil or moss layers for as long.</p></div></div><div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1156,9 +1163,9 @@ Note
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>you can take the girl out of the Reburn PhD, but you can’t take the Reburn PhD out of the girl</p>
-</div><li id="fn7"><p><sup>7</sup>&nbsp;what makes it narrow is the historic fire return interval for this system was somewhere between 100-300 years <span class="citation" data-cites="kelly2013">(<a href="#ref-kelly2013" role="doc-biblioref">Kelly et al. 2013</a>)</span></p><div id="ref-kelly2013" class="csl-entry" role="listitem">
+</div><div id="fn7"><p><sup>7</sup>&nbsp;what makes it narrow is the historic fire return interval for this system was somewhere between 100-300 years <span class="citation" data-cites="kelly2013">(<a href="#ref-kelly2013" role="doc-biblioref">Kelly et al. 2013</a>)</span></p><div id="ref-kelly2013" class="csl-entry" role="listitem">
 Kelly, Ryan, Melissa L. Chipman, Philip E. Higuera, Ivanka Stefanova, Linda B. Brubaker, and Feng Sheng Hu. 2013. <span>“Recent Burning of Boreal Forests Exceeds Fire Regime Limits of the Past 10,000 Years.”</span> <em>Proceedings of the National Academy of Sciences</em> 110 (32): 13055–60. <a href="https://doi.org/10.1073/pnas.1305069110">https://doi.org/10.1073/pnas.1305069110</a>.
-</div></li></div><p>Even within the relatively narrow window of 100 years<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, reburning occurs within the model! Here’s the footprint of all fires in the last 100 years of the spin up - you can see there’s some considerable overlap, or reburning.</p>
+</div></div></div><p>Even within the relatively narrow window of 100 years<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, reburning occurs within the model! Here’s the footprint of all fires in the last 100 years of the spin up - you can see there’s some considerable overlap, or reburning.</p>
 <div class="cell page-columns page-full">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># setting background to NA to make transparent</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  fire_mapsNA <span class="ot">&lt;-</span> <span class="fu">subst</span>(fire_maps100, <span class="dv">0</span>, <span class="cn">NA</span>) <span class="co"># need to do this anyways but now it'll let us stack</span></span>
@@ -1173,10 +1180,14 @@ Kelly, Ryan, Melissa L. Chipman, Philip E. Higuera, Ivanka Stefanova, Linda B. B
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[[<span class="dv">8</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsNA[[<span class="dv">9</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-fire_overlap" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="index_files/figure-html/fig-fire_overlap-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;4: All fire perimeters from the last 100 years of the spin-up simulation.</figcaption>
+<div id="fig-fire_overlap" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-fire_overlap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-fire_overlap-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-fire_overlap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: All fire perimeters from the last 100 years of the spin-up simulation.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -1184,26 +1195,30 @@ Kelly, Ryan, Melissa L. Chipman, Philip E. Higuera, Ivanka Stefanova, Linda B. B
 <section id="determining-overlap-between-rasters-using-the-terra-package" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="determining-overlap-between-rasters-using-the-terra-package">Determining overlap between rasters using the <em>terra</em> package</h2>
 <p>Since for this analysis I’m interested in the relationship between height and age, I’ll need to filter out stands that burned shortly<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> after preceding fires - a disturbance pattern which would definitely impact age-height relationships. I’ll need to figure out where the overlaps actually occur, so I can exclude the corresponding resource units from the sapling and tree data later. I’ll do this process in two ways: 1) by looking at the physical overlap between the entirety of the fire perimeters, 2) by looking only at the overlap between high severity fires.</p>
-<div class="no-row-height column-margin column-container"><li id="fn8"><p><sup>8</sup>&nbsp;Typically, “short-interval” fire in the boreal is defined as 50 years or less between fires <span class="citation" data-cites="buma2022">(<a href="#ref-buma2022" role="doc-biblioref">Buma et al. 2022</a>)</span>. Since I’m looking across a window of 100 years, I’m assuming everything that reburns in that 100 years is “short-interval” - I haven’t looked to see if there’s resource units that burn in year 1 and reburn in year 99, and maybe I’ll do that down the line, but right now I don’t want to bother.</p><div id="ref-buma2022" class="csl-entry" role="listitem">
+<div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>&nbsp;Typically, “short-interval” fire in the boreal is defined as 50 years or less between fires <span class="citation" data-cites="buma2022">(<a href="#ref-buma2022" role="doc-biblioref">Buma et al. 2022</a>)</span>. Since I’m looking across a window of 100 years, I’m assuming everything that reburns in that 100 years is “short-interval” - I haven’t looked to see if there’s resource units that burn in year 1 and reburn in year 99, and maybe I’ll do that down the line, but right now I don’t want to bother.</p><div id="ref-buma2022" class="csl-entry" role="listitem">
 Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires Increasing in the Alaskan Boreal Forest as Fire Self-Regulation Decays Across Forest Types.”</span> <em>Scientific Reports</em> 12 (1): 4901. <a href="https://doi.org/10.1038/s41598-022-08912-8">https://doi.org/10.1038/s41598-022-08912-8</a>.
-</div></li></div><p>The <strong>intersect()</strong> function in <em>terra</em> is useful for checking overlap, but only takes two rasters at a time:</p>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>overlap <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">intersect</span>(fire_mapsNA[[<span class="dv">1</span>]],</span>
+</div></div></div><p>The <strong>intersect()</strong> function in <em>terra</em> is useful for checking overlap, but only takes two rasters at a time:</p>
+<div class="cell page-columns page-full" data-cap-location="margin">
+<div class="sourceCode cell-code" id="cb14" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>overlap <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">intersect</span>(fire_mapsNA[[<span class="dv">1</span>]],</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                            fire_mapsNA[[<span class="dv">2</span>]])</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(overlap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-cap-margin" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="index_files/figure-html/fig-cap-margin-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;5: Overlap between first two fires</figcaption>
+<div id="fig-cap-margin" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-cap-margin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-cap-margin-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-cap-margin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Overlap between first two fires
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Turns out, the best way I’ve found to quickly check which rasters overlap actually involves <em>terra</em>’s <strong>mosaic()</strong> function:</p>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split all the layers into a list</span></span>
+<div class="cell page-columns page-full" data-cap-location="margin">
+<div class="sourceCode cell-code" id="cb15" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split all the layers into a list</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>mapList <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">split</span>(fire_mapsNA, <span class="dv">1</span><span class="sc">:</span><span class="fu">nlyr</span>(fire_mapsNA))</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># turn list into SpatRaster Collection</span></span>
@@ -1213,10 +1228,14 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>reburn <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">mosaic</span>(mapSPC, <span class="at">fun =</span> <span class="st">"sum"</span>) <span class="co"># can apply a number of functions (mean, etc)</span></span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(reburn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-mosaic" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="index_files/figure-html/fig-mosaic-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;6: Using mosaic() to collapse layers</figcaption>
+<div id="fig-mosaic" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-mosaic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-mosaic-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-mosaic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Using mosaic() to collapse layers
+</figcaption>
 </figure>
 </div>
 </div>
@@ -1228,8 +1247,8 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># setting all values to 1 regardless of diedStemFrac</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>perim <span class="ot">&lt;-</span> <span class="fu">subst</span>(perim, <span class="cn">TRUE</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>) <span class="co"># everything else NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split all the layers into a list</span></span>
+<div class="cell page-columns page-full" data-cap-location="margin">
+<div class="sourceCode cell-code" id="cb17" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split all the layers into a list</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>perimList <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">split</span>(perim, <span class="dv">1</span><span class="sc">:</span><span class="fu">nlyr</span>(perim))</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># turn list into SpatRaster Collection</span></span>
@@ -1239,10 +1258,14 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>nFire <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">mosaic</span>(perimSPC, <span class="at">fun =</span> <span class="st">"sum"</span>)</span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nFire)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-reburnhist" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="index_files/figure-html/fig-reburnhist-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;7: Reburn history</figcaption>
+<div id="fig-reburnhist" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-reburnhist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-reburnhist-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-reburnhist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Reburn history
+</figcaption>
 </figure>
 </div>
 </div>
@@ -1254,14 +1277,18 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 <p>A few more exploratory tangential questions since we’re here:</p>
 <section id="how-much-of-the-landscape-burned-once" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="how-much-of-the-landscape-burned-once">How much of the landscape burned once?</h5>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>nfire1 <span class="ot">&lt;-</span> <span class="fu">subst</span>(nFire, <span class="dv">1</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
+<div class="cell page-columns page-full" data-cap-location="margin">
+<div class="sourceCode cell-code" id="cb18" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>nfire1 <span class="ot">&lt;-</span> <span class="fu">subst</span>(nFire, <span class="dv">1</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nfire1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-1xperim" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="index_files/figure-html/fig-1xperim-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;8: 1x fire perimeters</figcaption>
+<div id="fig-1xperim" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-1xperim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-1xperim-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-1xperim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: 1x fire perimeters
+</figcaption>
 </figure>
 </div>
 </div>
@@ -1287,14 +1314,18 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 </section>
 <section id="how-much-burned-twice" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="how-much-burned-twice">How much burned twice?</h5>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>nfire2 <span class="ot">&lt;-</span> <span class="fu">subst</span>(nFire, <span class="dv">2</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
+<div class="cell page-columns page-full" data-cap-location="margin">
+<div class="sourceCode cell-code" id="cb23" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>nfire2 <span class="ot">&lt;-</span> <span class="fu">subst</span>(nFire, <span class="dv">2</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nfire2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-2xperim" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="index_files/figure-html/fig-2xperim-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;9: 2x fire perimeters</figcaption>
+<div id="fig-2xperim" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-2xperim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-2xperim-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-2xperim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: 2x fire perimeters
+</figcaption>
 </figure>
 </div>
 </div>
@@ -1312,14 +1343,18 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 </section>
 <section id="how-much-burned-three-times" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="how-much-burned-three-times">How much burned three times?</h5>
-<div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>nfire3 <span class="ot">&lt;-</span> <span class="fu">subst</span>(nFire, <span class="dv">3</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
+<div class="cell page-columns page-full" data-cap-location="margin">
+<div class="sourceCode cell-code" id="cb26" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>nfire3 <span class="ot">&lt;-</span> <span class="fu">subst</span>(nFire, <span class="dv">3</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nfire3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-3xperim" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="index_files/figure-html/fig-3xperim-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;10: 3x fire perimeters</figcaption>
+<div id="fig-3xperim" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-3xperim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-3xperim-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-3xperim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: 3x fire perimeters
+</figcaption>
 </figure>
 </div>
 </div>
@@ -1344,11 +1379,12 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 <li>We used a threshold of 2 to categorize MTBS maps of burn severity into “burned” and “unburned” classifications. I don’t remember if we tested the sensitivity of our analysis to that threshold - I’m super curious how those percentages would change if we filtered to just the cells marked as high severity by MTBS.</li>
 <li>I don’t remember off the top of my head how we dealt with Ecoregion / what Ecoregion CPCRW would fall into.</li>
 </ul>
-<div class="cell page-columns page-full">
-<div class="cell-output-display page-columns page-full">
-<div id="tbl-MTBS-reburns" class="anchored page-columns page-full">
-<table data-quarto-postprocess="true" class="table table-sm table-striped small">
-
+<div class="cell page-columns page-full" data-tbl-cap-location="margin">
+<div id="tbl-MTBS-reburns" class="cell quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-tbl-cap-location="margin">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-MTBS-reburns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Ecoregion</th>
@@ -1403,20 +1439,23 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 </tr>
 </tbody>
 </table>
-<div class="quarto-table-caption margin-caption">Table&nbsp;1: Reburn Frequency of MTBS data from 1984 - 2016, across ecoregion (Buma et al.</div></div>
 
 
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-MTBS-reburns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Reburn Frequency of MTBS data from 1984 - 2016, across ecoregion (Buma et al.&nbsp;
+</figcaption>
+</figure>
 </div>
 </div>
 <p>Again, the reburn frequency in the 100 year interval of iLand is the following:</p>
-<div class="cell">
-
-</div>
-<div class="cell page-columns page-full">
-<div class="cell-output-display page-columns page-full">
-<div id="tbl-iLand-reburns" class="anchored page-columns page-full">
-<table class="table table-sm table-striped small">
-
+<div class="cell page-columns page-full" data-tbl-cap-location="margin">
+<div id="tbl-iLand-reburns" class="cell quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-tbl-cap-location="margin">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-iLand-reburns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
 <colgroup>
 <col style="width: 14%">
 <col style="width: 21%">
@@ -1443,7 +1482,12 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 </tr>
 </tbody>
 </table>
-<div class="quarto-table-caption margin-caption">Table&nbsp;2: iLand Reburn Frequency</div></div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-iLand-reburns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: iLand Reburn Frequency
+</figcaption>
+</figure>
 </div>
 </div>
 <p>So, lower percentages than in the MTBS data.</p>
@@ -1458,8 +1502,8 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 <section id="what-about-fire-severity" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="what-about-fire-severity">What about fire severity?</h2>
 <p>Now, I can introduce one more layer: in theory, we<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> often expect reburns (or fires that burn into existing fire perimeters) to occur at diminishing severity. Depending on the window between fires, fuel availability may limit combustion in reburns. Based on that logic, are there overlaps between stands that burned at high severity?</p>
-<div class="no-row-height column-margin column-container"><li id="fn9"><p><sup>9</sup>&nbsp;we, the royal fire ecologists</p></li></div><div class="cell page-columns page-full">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter to just stands with high severity</span></span>
+<div class="no-row-height column-margin column-container"><div id="fn9"><p><sup>9</sup>&nbsp;we, the royal fire ecologists</p></div></div><div class="cell page-columns page-full" data-cap-location="margin">
+<div class="sourceCode cell-code" id="cb29" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter to just stands with high severity</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># cells with diedStemsFrac = 1</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  fire_mapsHS <span class="ot">&lt;-</span> <span class="fu">subst</span>(fire_maps100, <span class="dv">1</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -1473,10 +1517,14 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 <span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="dv">8</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(fire_mapsHS[[<span class="dv">9</span>]], <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-HS" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="index_files/figure-html/fig-HS-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;11: High severity fires</figcaption>
+<div id="fig-HS" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-HS-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-HS-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-HS-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: High severity fires
+</figcaption>
 </figure>
 </div>
 </div>
@@ -1493,10 +1541,14 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>nFireHS <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">mosaic</span>(hsSPC, <span class="at">fun =</span> <span class="st">"sum"</span>)</span>
 <span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nFireHS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-reburnHS-count" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="index_files/figure-html/fig-reburnHS-count-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;12: Times each resource unit has burned at high severity</figcaption>
+<div id="fig-reburnHS-count" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-reburnHS-count-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-reburnHS-count-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-reburnHS-count-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: Times each resource unit has burned at high severity
+</figcaption>
 </figure>
 </div>
 </div>
@@ -1506,10 +1558,14 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>nfireHS2 <span class="ot">&lt;-</span> <span class="fu">subst</span>(nFireHS, <span class="dv">2</span>, <span class="dv">1</span>, <span class="at">others =</span> <span class="cn">NA</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nfireHS2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-reburnHS1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="index_files/figure-html/fig-reburnHS1-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;13: Resource Units that burned twice, each time high severity</figcaption>
+<div id="fig-reburnHS1" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-reburnHS1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-reburnHS1-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-reburnHS1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13: Resource Units that burned twice, each time high severity
+</figcaption>
 </figure>
 </div>
 </div>
@@ -1535,7 +1591,11 @@ Buma, B., K. Hayes, S. Weiss, and M. Lucash. 2022. <span>“Short-Interval Fires
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>nfireHS2poly <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">as.polygons</span>(nfireHS2)</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nfireHS2poly)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/interval between HS reburn-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/interval between HS reburn-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fire_mapsHS2 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(fire_maps100, nfireHS2poly)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fire_mapsHS2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1751,18 +1811,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1794,7 +1843,45 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1829,7 +1916,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1844,15 +1935,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
         }
         return container.innerHTML
       } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -1861,7 +1965,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -1903,6 +2014,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -1974,6 +2108,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
