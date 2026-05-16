@@ -8,3 +8,6 @@ Thumbs.db
 blogdown
 /.quarto/
 .DS_Store 2
+.positai
+
+**/*.quarto_ipynb

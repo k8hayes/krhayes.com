@@ -5,6 +5,7 @@ date: 2024-09-23
 categories: [Model Parameterization, iLand, BITE]
 date-modified: last-modified
 bibliography: references.bib
+draft: true
 ---
 
 *AKA - a field ecologist discovers how heartbreaking it is to bury the enormity of work required to parameterize and benchmark a model into the supplement section of a paper*
