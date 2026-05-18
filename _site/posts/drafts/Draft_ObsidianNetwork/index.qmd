@@ -1,0 +1,28 @@
+---
+title: "Using Obsidian to track professional networks"
+subtitle: "New Post Subtitle"
+date: today
+categories: [Workflow]
+date-modified: last-modified
+draft: true
+---
+
+# 
+
+## Quick intro to Obsidian
+
+## Basic Structure
+
+I use categories for *People,* *Events*, *Projects*, and *Organizations*
+
+## Adding someone to the network
+
+Start by creating a new file. Then, you can use the button on the far left to insert a template - pick the one you want, and it should populate automatically. Then you can start filling out any of the relevant boxes - what's their email, where are they based? etc
+
+### Using Templates
+
+By adding files to your Template folder in Obsidian, you can populate 
+
+## Automating with Hazel
+
+## More resources

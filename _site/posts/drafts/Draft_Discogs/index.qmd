@@ -1,0 +1,238 @@
+---
+title: "Building a Discogs Visualization"
+subtitle: "Using APIs to collect data"
+date: "2024-04-21"
+categories: [Data Visualization]
+date-modified: last-modified
+draft: true
+bibliography: references.bib
+---
+
+```{r set up}
+#| echo: false
+#| warning: false
+#| output: false
+library(httr2)
+library(gt)
+library(tidyverse)
+library(discogger)
+library(cowplot)
+library(here)
+theme_set(theme_cowplot())
+`%||%` <- function(a,b) if(is.null(a)) b else a
+here::i_am("index.qmd")
+here("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Draft_Discogs/index.qmd")
+```
+
+One of our family hobbies is collecting vinyl - my dad, sister and I share a [Discogs](https://www.discogs.com/) account, so that we can see each other's collections. It's fun to watch the value change over time, and can be a nice way to make sure you aren't overpaying in some trendy new record store.
+
+I was inspired by blogs like XX and [this one](https://www.alexrabin.com/about/record-collection) which visualize their collection in interesting ways.
+
+# Discogs Data
+
+Discogs has two ways to download data:
+
+## Data Export
+
+You can download a Data Export of your collection directly from the website by visiting the Dashboard of your account. This will include:
+
+```{r default export}
+#| tbl-cap-location: margin
+#| tbl-cap: Data Export from Discogs
+#| echo: false
+#| tbl-column: body
+DataExport <- read.csv("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Draft_Discogs/files/ndhayes-collection-20230610-1224.csv")
+
+knitr::kable(head(DataExport))
+```
+
+This is .. fine?? The albums are there, as well as information like *Release year*, the date they were added to the collection, who they belong to, etc. But, there's no information on genre. And, it's static - you have to go into Discogs and redownload new exports every so often if you want it to reflect your current collections.
+
+## Discogs API
+
+The second way to access data from Discogs is by connecting via an API -
+
+This lets you access Artists, Releases, manage . Plus, it's more dynamic .
+
+Not all data available on the site is available by API - Price history per release and the stats page are the big ones.
+
+# API basics for someone who hasn't worked with them before
+
+Quick and dirty API definition- API, or Application Programming Interface is a way for two or more computer programs to communicate with one another.
+
+# Connecting to the Discogs API
+
+To connect to the Discogs API, go to Discogs Developer settings once logged in. From there, you create a new application and generate a user token.
+
+## Rate Limits
+
+Discogs has a rate limit of 60 per minute (for authenticated requests). This means the API tracks the requests over a moving average over a 60 second window which resets if no requests are made in 60 seconds. This means we'll need to throttle our requests.
+
+With your token in hand, you can use the **httr2** package [@httr2] to call the API with your username.
+
+```{r token}
+#| echo: false
+token <- "LObJXzujvgrNCikIIlcFJoibfbSYznjUijDsYQoo"
+```
+
+```{r authenticate}
+user <- "ndhayes"
+content = httr::GET(paste0("https://api.discogs.com/users/", user, "/collection/folders/0?&token=", token))
+# the output above is in JSON, so use the following to input it as a list
+content <- rjson::fromJSON(rawToChar(content$content))
+
+
+content2 = httr::GET(paste0("https://api.discogs.com/users/",
+                            user,
+                            "/collection/folders?&token=", token))
+test = httr::GET(paste0("https://api.discogs.com/users/",
+                            user,
+                            "/collection/folders?&token=", token))
+test$cookies
+```
+
+This brings in all the information about a given profile. **\$count** here is the number of albums in the collection, currently:
+
+```{r n of albums}
+content$count
+```
+
+(Keep in mind this is three people's collections).
+
+Now, we want to use this access to collect and create a dataframe with all the items in the collection.
+
+```{r create data frame of collection}
+collec_url <- httr::GET(paste0("https://api.discogs.com/users/",
+                               user, "/collection/folders/",
+                               content[1]$id, "/releases?page=1&amp;per_page=100&token=",
+                               token))
+```
+
+```{r loop}
+if (collec_url$status_code == 200){
+  collec <- rjson::fromJSON(rawToChar(collec_url$content))
+  
+  collecdata <- collec$releases
+  
+  if(!is.null(collec$pagination$urls$`next`)){
+    repeat{
+      url <- httr::GET(collec$pagination$urls$`next`)
+      collec <- rjson::fromJSON(rawToChar(url$content))
+      collecdata <- c(collecdata, collec$releases)
+      if(is.null(collec$pagination$urls$`next`)){
+        break
+      }
+    }
+  }
+}
+```
+
+Knowing what you can collect requires understanding what's actually available. **collecdata** is a list of 1633 elements[^1], each element representing a vinyl in the collection. Within each element are additional lists of data. **basic_information** contains
+
+[^1]: at the time of writing
+
+```{r}
+collecdata[[1]]
+```
+
+```{r}
+collection = lapply(collecdata, function(obj){
+  data.frame(release_id = obj$basic_information$id %||% NA,
+             label = obj$basic_information$labels[[1]]$name %||% NA,
+             year = obj$basic_information$year %||% NA,
+             title = obj$basic_information$title %||% NA, 
+             artist_name = obj$basic_information$artists[[1]]$name %||% NA,
+             artist_id = obj$basic_information$artists[[1]]$id %||% NA,
+             artist_resource_url = obj$basic_information$artists[[1]]$resource_url %||% NA, 
+             format = obj$basic_information$formats[[1]]$name %||% NA,
+             genre = obj$basic_information$genres[[1]] %||% NA,
+             folder = obj$folder_id %||% NA,
+             genre2 = ifelse(length(obj$basic_information$genres) ==2, obj$basic_information$genres[[2]], NA),
+             style1 = ifelse(length(obj$basic_information$styles) ==1, obj$basic_information$styles[[1]], NA),
+             #style2 = obj$basic_information$styles[[2]] %||% NA,
+             #style3 = obj$basic_information$styles[[3]] %||% NA,
+             date_added = obj$date_added %||% NA,
+             resource_url = obj$basic_information$resource_url %||% NA,
+             media_quality = obj$notes[[1]]$value %||% NA)
+}) %>% do.call(rbind, .) %>% 
+  unique()
+
+knitr::kable(head(collection))
+```
+
+Once I've accessed the data from our own collection, I have a dataset that lets me visualize the collection in different ways. Some of my favorites include:
+
+```{r most frequent genres}
+ggplot(as.data.frame(head(sort(table(collection$genre), decreasing = TRUE), 10)),
+       aes(x = reorder(Var1, Freq), y = Freq)) + 
+  geom_bar(stat = "identity", fill = "#B79477") + 
+  coord_flip() + 
+  xlab("Genre") +
+  ylab("Frequency") +
+  ggtitle("Most Frequent Genres")
+```
+
+```{r most frequent artists}
+ggplot(as.data.frame(head(sort(table(collection$artist_name), decreasing = TRUE), 10)), aes(x = reorder(Var1, Freq), y = Freq)) + 
+  geom_bar(stat = "identity", fill = "#B79477") + 
+  coord_flip() + 
+  xlab("Artists") +
+  ylab("Frequency") +
+  ggtitle("Most Frequent Artists")
+```
+
+```{r release date}
+ggplot(dplyr::filter(collection, year != 0), aes(x = year)) + 
+  geom_bar(stat = "count", fill = "#B79477") + 
+  xlab("Year") +
+  ylab("Frequency") +
+  ggtitle("Release Date")
+```
+
+We also want information about price. The following uses release_id as an index to collect information from each.
+
+```{r}
+collection_2 <- lapply(as.list(collection$release_id), function(obj){
+  url <- httr::GET(paste0("https://api.discogs.com/releases/", obj))
+  url <- rjson::fromJSON(rawToChar(url$content))
+  data.frame(release_id = obj, 
+             label = url$label[[1]]$name %||% NA,
+             year = url$year %||% NA, 
+             title = url$title %||% NA, 
+             artist_name = url$artist[[1]]$name %||% NA, 
+             styles = url$styles[[1]] %||% NA,
+             genre = url$genre[[1]] %||% NA,
+             average_note = url$community$rating$average %||% NA, 
+             votes = url$community$rating$count %||% NA, 
+             want = url$community$want %||% NA, 
+             have = url$community$have %||% NA, 
+             lowest_price = url$lowest_price %||% NA, 
+             country = url$country %||% NA)
+   Sys.sleep(3)
+}) %>% do.call(rbind, .) %>% 
+  unique()
+
+knitr::kable(head(collection))
+```
+
+```{r}
+ggplot(dplyr::filter(collection_2, year != 0), aes(x = lowest_price)) + 
+  geom_bar(stat = "count", fill = "#B79477") + 
+  xlab("Lowest price") +
+  ylab("Frequency") +
+  ggtitle("Release Date")
+```
+
+# More resources:
+
+additional resources:
+
+https://www.alexrabin.com/blog/discogs-api-tutorial
+
+https://github.com/jdmar3/20240322-dataverse-api-short-course/blob/main/basics.md
+
+## Session info
+
+```{r session info}
+sessionInfo()
+```

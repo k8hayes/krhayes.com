@@ -1,0 +1,61 @@
+---
+title: Who owns Alaska?
+subtitle: How to use plotly to make interactive maps
+description: (mostly the federal government)
+date: today
+categories: [Spatial Data Analysis, Workflow]
+date-modified: last-modified
+draft: true
+---
+
+I'm using data from the Alaska Department of Natural Resources on land ownership
+
+```{r}
+library(plotly)
+library(terra)
+library(tidyverse)
+library(tidyterra)
+```
+
+```{r}
+#| eval: false
+land = vect("/Volumes/FF_Lab/project_data/na_boreal/gis/land ownership/")
+
+
+head(land)
+terra::nrow(land)
+
+ggplot() +
+  geom_spatvector(data = land, aes(fill = MLGNDRF,
+                                   col = MLGNDRF)) +
+  theme_minimal()
+```
+
+```{r}
+#| eval: false
+land2 = land %>%
+  mutate(Status = ifelse(MLGNDRF == "Major Military",
+                         "Military",
+                         ifelse(MLGNDRF)) %>%
+  mutate(Ownership = ifelse())
+  select(Status, Shape_Leng, Shape_Area)
+
+land2 = terra::aggregate(land, by = "AGENCY_NAM")
+terra::nrow(land2)
+
+ggplot() +
+  geom_spatvector(data = land2, aes(fill = AGENCY_NAM)) +
+  theme_minimal()
+
+
+```
+
+I can aggregate amongst parcels,
+
+# More Resources
+
+## Session Info
+
+```{r session info}
+sessionInfo()
+```

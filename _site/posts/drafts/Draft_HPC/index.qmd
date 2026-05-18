@@ -1,0 +1,106 @@
+---
+title: The Basics of High Performance Computing in Ecology
+subtitle: HPC not for dummies, but for ecologists who just haven't been exposed to it yet
+description: New Post Description
+date: today
+categories: [workflow]
+date-modified: last-modified
+draft: true
+bibliography: references.bib
+---
+
+# Defining some key ideas
+
+High performance computing is the ability to process data and perform complex calculations at high speed. This is often achieved via super computers, which contain thousands of compute notes
+
+## What is a cluster?
+
+a large computer composed of a collection of many smaller separate servers (computers) called nodes
+
+## What is a node?
+
+## distinct servers, connected to one another with a fast interconnect so data can be passed between them very quickly
+
+## What is a core?
+
+## What is CPU?
+
+Central Processing Unit - primary component of a computer, acts as a "control center"
+
+## What is Derecho?
+
+NCAR-Wyoming Supercomputing Center
+
+All located in cheyenne not Boulder, began in 2012
+
+home to NWSC-3 Derecho Super computer
+
+cheyenne just retired, 4032 nodes
+
+derecho has more nodes but also more cores per node
+
+3.5x performance compared to cheyenne
+
+Derecho has different types of nodes
+
+\- CPU-only Compute Nodes (2488 total, 318,464 total cores)
+
+\- GPU Compute nodes (82 total)
+
+\- Login nodes (8 total)
+
+## What is Casper?
+
+casper = data and viusualization system
+
+more heterogeneous node structure - not all have same tech on each node
+
+## Key Differences between Casper and Derecho:
+
+Derecho - run many ilands all at once
+
+casper - can run on smaller nodes all at once
+
+need to clarify which node you want to request
+
+Think of derecho as something you use for big climate models
+
+if you compile something on derecho, it may not compile on casper and vice versa
+
+## How do you access Derecho / Casper?
+
+Submitting a Derecho allocation
+
+small and large allocations
+
+will it matter that I'm not at a university
+
+sign in with hayesk\@ucar.edu
+
+need to submit ticket with help desk if you need to reset password \[still need to reset mine\]
+
+SAM = Systems accounting Manager
+
+\- user settings
+
+\- tells you use history
+
+can change default shell
+
+software tools on CISL for use inside HPC environment
+
+\- compilers (intel)
+
+\- 10 libraries (NetCDF, PNetCDF, HDF5
+
+analysis (r, python, julia)
+
+etc
+
+need to know:
+
+\- how many nodes am i going to use
+
+Some of my favorite resources on Ecological coding
+
+-   [@wilson2014]

@@ -1,0 +1,558 @@
+---
+title: Benchmarking Reburning in iLand
+description: Using terra to quantify overlaps in fire perimeter rasters
+subtitle: Part One in a Series on iLand benchmarking
+date: 2024-05-28
+categories: [Spatial Data Analysis, iLand, Benchmarking]
+date-modified: last-modified
+bibliography: references.bib
+---
+
+```{r setup}
+#| warning: false
+#| echo: false
+library(tidyverse)
+library(terra)
+library(cowplot)
+library(kableExtra)
+theme_set(theme_cowplot())
+```
+
+```{bash}
+#| echo: false
+open smb://10.60.2.10/FF_Lab/personal_storage/kate_storage/
+```
+
+```{r load workspace}
+#| warning: false
+#| echo: false
+load("/Volumes/kate_storage/Files4Website/iLandReburn/iLandReburn.RData")
+
+fire_maps = terra::rast("/Volumes/kate_storage/Files4Website/iLandReburn/fire_maps.tif")
+
+env.grid = terra:: rast("/Volumes/kate_storage/Files4Website/iLandReburn/env.grid.tif")
+```
+
+# What are the patterns of reburning in iLand?
+
+As part of my [NSF Postdoc fellowship](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2219248&HistoricalAwards=false), I've been working on modeling herbivores in [iLand](https://iland-model.org/iLand+Hub) using the biotic disturbance model [BITE](https://iland-model.org/bite/#/). In particular, I want to understand if biotic disturbances generally (and herbivores specifically) can interact with fire such that they modify forest composition or forest carbon at a landscape scale.
+
+The following analysis started as an aside: I wanted to filter my simulation results to find modeled stands regenerating after fire so that I could compare age-growth relationships to those found in exclosure and other empirical studies of herbivory.
+
+# Fire output in iLand
+
+## Determining which fires in iLand were stand-replacing
+
+First, I need to determine which fires in my iLand run were "stand-replacing" -
+
+The fire output in iLand produces a table of each fire, shown below.
+
+```{r loading in fire}
+#| echo: false
+ knitr::kable(fire)
+```
+
+There's two ways to represent fire severity using this output: the **proportion of trees killed** within each fire, and the **proportion of basal area killed**. Those two metrics are distinct in slight yet important ways - a fire might kill all trees in a young stand but if the trees themselves were small, the impact on basal area won't be terribly large. Or, a fire might kill only the largest/oldest individuals in a stand, thus impacting carbon greatly in a way that wouldn't show up using just **proportion of trees killed**. Here, since we're interested in how forests are regenerating, I'll focus on instances where fires killed all trees, but I'll show both for the sake of it.
+
+```{r proportion killed}
+# drop the fire years where there was no burn
+  fire <- fire[fire$area_m2 > 0,] # no fire years with no burn
+  length(unique(fire$fireId)) # how many fires occurred across the simulation?
+```
+
+```{r setting density / ba killed}
+  fire <- fire %>% 
+    mutate( # how many trees were killed?
+              prop.dens.killed = n_trees_died / n_trees, 
+            # what basal area was killed?
+              prop.ba.killed = basalArea_died / basalArea_total) 
+      
+      fire$prop.ba.killed[fire$basalArea_total == 0] <- 0 # set to 0
+      fire$prop.dens.killed[fire$n_trees == 0] <- 0
+```
+
+However, there's one challenge with this. Here's the percent of stems killed across fires:
+
+```{r hist of prop dens killed}
+#| label: fig-stems-killed
+#| fig-cap: "Percent of stems killed across fires"
+#| cap-location: margin
+#| warning: false
+#| echo: false
+hist(fire$prop.dens.killed * 100,
+     breaks = seq(0, 100, 5),
+     main = paste0("Stems killed in fires. Mean: ", 
+              round((mean(fire$prop.dens.killed)*100.0), 1), "%"),
+     xlab = "Percent of stems killed")
+```
+
+And here's the percent basal area killed across all fires:
+
+```{r hist of basal killed}
+#| label: fig-ba-killed
+#| fig-cap: "Percent basal area killed across fires"
+#| cap-location: margin
+#| warning: false
+#| echo: false
+hist(fire$prop.ba.killed * 100,
+     breaks = seq(0, 100, 5),
+     main = paste0("Basal area killed in fires. Mean: ",
+                   round((mean(fire$prop.ba.killed)*100.0), 1), "%"),
+     xlab = "Percent of basal area killed")
+```
+
+You'll notice neither metric shows values that are completely equal to 100%. At first this seems like a problem, right?[^1]
+
+[^1]: none of our fires were stand-replacing??
+
+This is an important nuance of the iLand fire output - **n_trees_killed** and **basalArea_died** are aggregated across the entire fire. Cells within the fire may have experienced full canopy mortality, but since we're working with averages, it'll be very very rare (if not impossible) for a stand to have 100% of stems killed across the entire fire.
+
+## Saving additional fire output
+
+I'll need more detail, and thankfully there's a fun way to solve this - by adding a javascript file to the **scripts** folder, you can add code that tells iLand to save raster files of the perimeter of each fire with additional information. Some options of things to turn on include:
+
+-   **crownKill**: fraction of the crown killed within a burned resource unit (see [wildfire](https://iland-model.org/wildfire "fire disturbance modeling") ).
+-   **diedStemsFrac**: fraction of killed trees within a burned resource unit
+-   **diedBasalArea**: basal area (sum over resource units) of burnt trees.
+-   **KBDI**: Keetch Byram Drought Index (see [wildfire](https://iland-model.org/wildfire "fire disturbance modeling") ).
+-   **baseIgnition**: base probability of an annual fire ignition event for a cell on RU level (depending on fire-return-interval and average fire size)
+-   **fuel**: burned fuel (forest floor + dwd) kg/ha
+-   **combustibleFuel**: "available combustible fuel (current KBDI, forest floor + dwd) kg/ha
+-   **nFire**: cumulative count of fire events on a resource unit[^2]
+-   **lastFireYear**: simulation year of the last fire event on a RU
+
+[^2]: Breaking the forth wall: discovered this output while putting together this quarto document. In future runs, I'll turn this on and avoid some of the steps described later in the document to filter out reburns
+
+For this analysis, I'll stick to **diedStemsFrac** - the number of trees killed within a resource unit[^3]. First, you need to add a function into your iLand model to tell it to save the extra output.
+
+[^3]: Note that this is trees killed within burned resource units, not saplings. It still works for our purposes for a few reasons:
+
+    1.  The likelihood that saplings survive in a burned resource unit where all trees are killed seems low (but I can go ahead and check later on)
+    2.  Since I'm interested in height-growth relationships, I'll be filtering out saplings with ages older than the time since fire for the resource unit, so I should catch any that slip through (again, even if they do)
+
+The code to do so is the following:
+
+```{js saving fire output }
+#| eval: false
+function afterFireProcessing() {
+   var praefix = Globals.year;
+   var pid= Fire.id;
+   // save the form of the fire in ESRI raster format
+   // save a file for each fire
+   Fire.grid("diedStemsFrac").save('output/dead/dead_'+ pid +'.txt')
+}
+```
+
+Add this in to a javascript file within the **Scripts** folder in your iLand folder ecosystem, and enable \<management\> under \</model\> in your project file. Now, if you set up a **"dead"** folder in your output, a raster of values of stems killed will save after each fire.[^4]
+
+[^4]: To track other items from the list of variables above, call a new Fire.grid() within the afterFireProcessing function and give it a unique save destination
+
+In order to filter our sapling output by the cells that experienced canopy-replacing fire, I can filter not only by the rasters (the footprint of the fire), but by the value of **diedStemsFraction** variable within each raster pixel (which represent resource units in the iLand landscape).
+
+The function **rast()** from the *terra* package [@terra] creates a **SpatRaster** object, a object type in R that can represent multi-layer or multi-variable raster data. Here, the object **fire_maps** is a three-dimensional raster - the first two dimensions are the x and y axis of our iLand landscape and the third dimension is 27 layers of fire perimeters (one for each fire within the simulation). Each pixel within that raster represents an individual resource unit from the iLand landscape and contains a value from 0 -1, representing **diedStemsFrac.**
+
+```{r printing fire_maps}
+fire_maps 
+
+nlyr(fire_maps) # 27 layers, one for each fire
+
+knitr::kable(head(values(fire_maps)))
+```
+
+I can call on each of those 27 layers to examine the fire perimeters one by one. For example, this is the fire perimeter from the first fire in the simulation:
+
+```{r plotting fire_maps}
+#| label: fig-fireEx1
+#| fig-cap: "Fire Perimeter of first fire in spin-up simulation. The color gradient represents diedStemsFrac as a value from 0 to 1."
+#| cap-location: margin
+#| echo: false
+plot(fire_maps[["dead_1"]])
+```
+
+I'll use these rasters to determine which resource units experienced stand-replacing fire[^5], and use those resource unit IDs to filter the sapling and tree data.
+
+[^5]: Which I can now define more specifically as **diedStemFrac** = 1
+
+::: callout-note
+An aside: this run is a spin-up simulation - I ran iLand, initializing forests from an empty landscape[^6] in year 0, and simulated forest growth and fire over 300 years. This seems to be the sweet spot for simulation runs - at year 300, it's a landscape full of a mix of mature, regenerating and recently burned stands, just as we'd observe in real life. Since fires that occur early in the spin-up inherently burn young stands, it's not terribly representative of the relationship between height and age in regrowth that I want to eventually compare to the herbivore-impacted relationship. So, I'll filter to just the last 100 years of the simulation.
+:::
+
+[^6]: An aside to the aside (meta!!) - it's an empty landscape in the sense that there are no trees in year 0, but I do initialize using a soil organic layer that varies heterogeneously across the landscape. This isn't just to represent real life for real life's sake - initializing from truly empty (truly bare ground) causes totally different patterns of forests. As has been shown in decades of work in Alaska by Jill Johnstone and others, soil organic layer filters forest community composition in really critical ways, allowing spruce to outcompete species like birch and aspen which can't persist in thick soil or moss layers for as long.
+
+::: callout-note
+Question: what determines the initial heterogeneity in the SOL when initiating from bare ground using the permafrost module? (technically it's the moss layer heterogeneity in year 0 that introduces the SOL heterogeneity in year 1 - where do those initial values come from?)
+:::
+
+```{r filter to last 100}
+  # filtering to last 100 years of fire
+  fire100 <- fire %>%
+    filter(year >200)
+  length(unique(fire100$fireId)) # How many fires in the last 100 years?
+  
+  # dropping layers from fire raster
+  fire_maps100 <- subset(fire_maps, 
+                         paste0("dead_", fire100$fireId))
+```
+
+# A quick (haha) aside: Reburns
+
+::: column-margin
+you can take the girl out of the Reburn PhD, but you can't take the Reburn PhD out of the girl
+:::
+
+Even within the relatively narrow window of 100 years[^7], reburning occurs within the model! Here's the footprint of all fires in the last 100 years of the spin up - you can see there's some considerable overlap, or reburning.
+
+[^7]: what makes it narrow is the historic fire return interval for this system was somewhere between 100-300 years [@kelly2013]
+
+```{r plotting all fire_maps}
+#| label: fig-fire_overlap
+#| fig-cap: "All fire perimeters from the last 100 years of the spin-up simulation."
+  # setting background to NA to make transparent
+  fire_mapsNA <- subst(fire_maps100, 0, NA) # need to do this anyways but now it'll let us stack
+  
+  plot(fire_mapsNA[[1]])
+  plot(fire_mapsNA[[2]], add = TRUE, legend = FALSE)
+  plot(fire_mapsNA[[3]], add = TRUE, legend = FALSE)
+  plot(fire_mapsNA[[4]], add = TRUE, legend = FALSE)
+  plot(fire_mapsNA[[5]], add = TRUE, legend = FALSE)
+  plot(fire_mapsNA[[6]], add = TRUE, legend = FALSE)
+  plot(fire_mapsNA[[7]], add = TRUE, legend = FALSE)
+  plot(fire_mapsNA[[8]], add = TRUE, legend = FALSE)
+  plot(fire_mapsNA[[9]], add = TRUE, legend = FALSE)
+```
+
+## Determining overlap between rasters using the *terra* package
+
+Since for this analysis I'm interested in the relationship between height and age, I'll need to filter out stands that burned shortly[^8] after preceding fires - a disturbance pattern which would definitely impact age-height relationships. I'll need to figure out where the overlaps actually occur, so I can exclude the corresponding resource units from the sapling and tree data later. I'll do this process in two ways: 1) by looking at the physical overlap between the entirety of the fire perimeters, 2) by looking only at the overlap between high severity fires.
+
+[^8]: Typically, "short-interval" fire in the boreal is defined as 50 years or less between fires [@buma2022]. Since I'm looking across a window of 100 years, I'm assuming everything that reburns in that 100 years is "short-interval" - I haven't looked to see if there's resource units that burn in year 1 and reburn in year 99, and maybe I'll do that down the line, but right now I don't want to bother.
+
+The **intersect()** function in *terra* is useful for checking overlap, but only takes two rasters at a time:
+
+```{r intersect terra}
+#| label: fig-cap-margin
+#| fig-cap: "Overlap between first two fires"
+#| cap-location: margin
+overlap <- terra::intersect(fire_mapsNA[[1]],
+                            fire_mapsNA[[2]])
+
+plot(overlap)
+```
+
+Turns out, the best way I've found to quickly check which rasters overlap actually involves *terra*'s **mosaic()** function:
+
+```{r mosaic}
+#| label: fig-mosaic
+#| fig-cap: "Using mosaic() to collapse layers"
+#| cap-location: margin
+#| warning: false
+# split all the layers into a list
+mapList <- terra::split(fire_mapsNA, 1:nlyr(fire_mapsNA))
+
+# turn list into SpatRaster Collection
+mapSPC <- terra::sprc(mapList) 
+
+# merge values across layers
+reburn <- terra::mosaic(mapSPC, fun = "sum") # can apply a number of functions (mean, etc)
+plot(reburn)
+```
+
+Yay!! Okay!! Now, if I set all the values of the layers to 1, I'll end up with a raster of number of fires.
+
+```{r setting values to 1}
+#| warning: false
+perim <- fire_maps100 > 0 # exclude unburned values
+
+# setting all values to 1 regardless of diedStemFrac
+perim <- subst(perim, TRUE, 1, others = NA) # everything else NA
+```
+
+```{r overlapping fire perim}
+#| label: fig-reburnhist
+#| fig-cap: "Reburn history"
+#| cap-location: margin
+#| warning: false
+# split all the layers into a list
+perimList <- terra::split(perim, 1:nlyr(perim))
+
+# turn list into SpatRaster Collection
+perimSPC <- terra::sprc(perimList) 
+
+# merge values across layers
+nFire <- terra::mosaic(perimSPC, fun = "sum")
+plot(nFire)
+```
+
+yay!! Now I can filter by the value of **nFire** to get the specific resource units that burned and eventually exclude them for the analysis.
+
+## iLand Reburn trends
+
+A few more exploratory tangential questions since we're here:
+
+##### How much of the landscape burned once?
+
+```{r once burned plot}
+#| label: fig-1xperim
+#| fig-cap: "1x fire perimeters"
+#| cap-location: margin
+#| warning: false
+nfire1 <- subst(nFire, 1, 1, others = NA)
+plot(nfire1)
+```
+
+```{r once burned statistics }
+#| warning: false
+
+# what RID burned once?
+nfire1rid <- as.data.frame(mask(env.grid, nfire1))
+
+# how many unique resource units are there?
+domain <- ncell(env.grid) # dimensions are 239 by 255 
+
+# how many resource units burned once?
+length(unique(nfire1rid$env.grid)) 
+
+# so, what %?
+round((length(unique(nfire1rid$env.grid)) / domain) *100, 1)
+```
+
+##### How much burned twice?
+
+```{r twice burned plot}
+#| label: fig-2xperim
+#| fig-cap: "2x fire perimeters"
+#| cap-location: margin
+#| warning: false
+nfire2 <- subst(nFire, 2, 1, others = NA)
+plot(nfire2)
+```
+
+```{r twice burned stats}
+#| warning: false
+# what RID burned twice?
+nfire2rid <- as.data.frame(mask(env.grid, nfire2))
+
+# so, what %?
+round((length(unique(nfire2rid$env.grid)) / domain) *100, 1)
+```
+
+##### How much burned three times?
+
+```{r thrice burned plots}
+#| label: fig-3xperim
+#| fig-cap: "3x fire perimeters"
+#| cap-location: margin
+#| warning: false
+nfire3 <- subst(nFire, 3, 1, others = NA)
+plot(nfire3)
+```
+
+```{r thrice burned stats}
+#| warning: false
+# what RID burned thrice?
+nfire3rid <- as.data.frame(mask(env.grid, nfire3))
+
+# so, what %?
+round((length(unique(nfire3rid$env.grid)) / domain) *100, 1)
+```
+
+### How does reburning in iLand compare to reburning in MTBS?
+
+How does that compare to what we see in the real life frequency of reburning? As part of my work with reburns during my PhD, I worked on a paper with Brian Buma, Melissa Lucash and Shelby Weiss where we looked at trends in reburning across Alaska using the Monitoring Trends in Burn Severity database (MTBS) [@buma2022].
+
+A few important differences to cover up front:
+
+-   [MTBS](https://www.mtbs.gov/) data for Alaska covers 1984 to 2016 - so, the data captures a 32 year window instead of a 100 year one.
+-   We used a threshold of 2 to categorize MTBS maps of burn severity into "burned" and "unburned" classifications. I don't remember if we tested the sensitivity of our analysis to that threshold - I'm super curious how those percentages would change if we filtered to just the cells marked as high severity by MTBS.
+-   I don't remember off the top of my head how we dealt with Ecoregion / what Ecoregion CPCRW would fall into.
+
+```{r SciReports fire %}
+#| echo: false
+#| label: tbl-MTBS-reburns
+#| tbl-cap:  "Reburn Frequency of MTBS data from 1984 - 2016, across ecoregion (Buma et al. "
+#| tbl-cap-location: margin
+
+knitr::kable(BumaReburn,
+             col.names = c("Ecoregion", "% Burned Total",
+                           "% Burned Once", "% Burned Twice", 
+                           "% Burned Thrice")) %>%
+  row_spec(6, bold = TRUE)
+```
+
+Again, the reburn frequency in the 100 year interval of iLand is the following:
+
+```{r making reburn frequency table for iland}
+#| echo: false
+iLandReburn <- data.frame(matrix(nrow = 1, ncol =5))
+colnames(iLandReburn) <- c("Ecoregion", "% Burned Total",
+                           "% Burned Once", "% Burned Twice", 
+                           "% Burned Thrice")
+
+iLandReburn$Ecoregion <- "iLand"
+iLandReburn$`% Burned Total` <- sum(round((sum(length(unique(nfire1rid$env.grid)),
+              length(unique(nfire2rid$env.grid)),
+              length(unique(nfire3rid$env.grid))) / domain)*100,1))
+  
+iLandReburn$`% Burned Once` <- round((length(unique(nfire1rid$env.grid)) / domain) *100, 1)
+iLandReburn$`% Burned Twice` <- round((length(unique(nfire2rid$env.grid)) / domain) *100, 1)
+iLandReburn$`% Burned Thrice`<- round((length(unique(nfire3rid$env.grid)) / domain) *100, 1)
+```
+
+```{r iland reburn table}
+#| label: tbl-iLand-reburns
+#| tbl-cap:  "iLand Reburn Frequency "
+#| tbl-cap-location: margin
+#| echo: false
+knitr::kable(iLandReburn)
+```
+
+So, lower percentages than in the MTBS data.
+
+An obviously incomplete spitball list of reasons reburning could be lower in iLand:
+
+-   **iLand is super stochastic?** - runs vary from simulation to simulation. I can try replicating this simulation a few hundred times and averaging fire frequency across them all to see if the distribution of reburning becomes more similar to what we observe in MTBS
+
+-   **Uncertainty in MTBS?**
+
+-   **Mechanisms that drive fire in iLand underestimate reburning?**
+
+## What about fire severity?
+
+Now, I can introduce one more layer: in theory, we[^9] often expect reburns (or fires that burn into existing fire perimeters) to occur at diminishing severity. Depending on the window between fires, fuel availability may limit combustion in reburns. Based on that logic, are there overlaps between stands that burned at high severity?
+
+[^9]: we, the royal fire ecologists
+
+```{r plotting just high severity}
+#| label: fig-HS
+#| fig-cap: "High severity fires"
+#| cap-location: margin
+#| warning: false
+# filter to just stands with high severity
+  # cells with diedStemsFrac = 1
+  fire_mapsHS <- subst(fire_maps100, 1, 1, others = NA)
+  
+  plot(fire_mapsHS[[1]])
+  plot(fire_mapsHS[[2]], add = TRUE, legend = FALSE)
+  plot(fire_mapsHS[[3]], add = TRUE, legend = FALSE)
+  plot(fire_mapsHS[[4]], add = TRUE, legend = FALSE)
+  plot(fire_mapsHS[[5]], add = TRUE, legend = FALSE)
+  plot(fire_mapsHS[[6]], add = TRUE, legend = FALSE)
+  plot(fire_mapsHS[[7]], add = TRUE, legend = FALSE)
+  plot(fire_mapsHS[[8]], add = TRUE, legend = FALSE)
+  plot(fire_mapsHS[[9]], add = TRUE, legend = FALSE)
+```
+
+Obviously less area there. Is there any overlap?
+
+```{r hs reburns}
+#| fig-cap-location: margin
+#| label: fig-reburnHS-count
+#| fig-cap: Times each resource unit has burned at high severity
+# split all the layers into a list
+hsList <- terra::split(fire_mapsHS, 1:nlyr(fire_mapsHS))
+
+# turn list into SpatRaster Collection
+hsSPC <- terra::sprc(hsList) 
+
+# merge values across layers
+nFireHS <- terra::mosaic(hsSPC, fun = "sum")
+plot(nFireHS)
+```
+
+Okay. Pretty sparse, but technically there's still resource units that burned completely both times.
+
+```{r reburned HS plot}
+#| warning: false
+#| fig-cap: Resource Units that burned twice, each time high severity
+#| fig-cap-location: margin
+#| label: fig-reburnHS1
+nfireHS2 <- subst(nFireHS, 2, 1, others = NA)
+plot(nfireHS2)
+```
+
+```{r reburn HS stats}
+#| warning: false
+# what RID burned twice at HS?
+nfireHS2rid <- as.data.frame(mask(env.grid, nfireHS2))
+
+# how many resource units?
+length(unique(nfireHS2rid$env.grid))
+
+# so, what %?
+(length(unique(nfireHS2rid$env.grid)) / domain) *100
+```
+
+I'm curious about the years that burned twice at high severity. What's the interval between them?
+
+To get back to years, I'll have to use the list of RIDs to find *fireID* in the **fire_maps** object, and then use *fireID* to look in the original fire output from iLand. Essentially, retracing our steps. I'll start by converting the object containing resource units that burned twice at high severity (**nfireHS2**) back to a polygon, so I can use *terra*'s **extract()** function to pull information from fire_maps.
+
+```{r interval between HS reburn}
+nfireHS2poly <- terra::as.polygons(nfireHS2)
+plot(nfireHS2poly)
+
+fire_mapsHS2 <- terra::extract(fire_maps100, nfireHS2poly)
+head(fire_mapsHS2)
+
+# drop ID column
+fire_mapsHS2 <- fire_mapsHS2 %>%
+  select(!ID) %>%
+  select(where(~ any(. != 0)))
+
+knitr::kable(fire_mapsHS2)
+# 18 reburned 19
+# 18 reburned 20
+# 23 reburned 27
+# 25 reburned 27
+
+fireHS2 <-  fire %>%
+  select(c(year, fireId)) %>%
+  filter(fireId %in% as.numeric(str_sub(colnames(fire_mapsHS2), -2))) 
+
+fireHS2
+
+```
+
+Now, I want to use the row id numbers from the **fire_mapsHS** object to filter out rows in the **sapling** and **stand** output that burned at high severity. The following code loops through each of the fire maps, extracting the resource unit ID numbers, the fire ID and the fire year (which come from the default fire output) and compiling into a dataframe, **fireID**. What fraction of the landscape burned at high severity? (ie, how many resource units?)
+
+```{r extracting fire }
+#| warning: false
+fireID <- data.frame()
+
+for (i in 1:nrow(fire100)) {
+  
+  # Skip fires that burned nothing
+  if (fire100$area_m2[i] > 0) {
+  
+    mask <- fire_mapsHS[[paste0("dead_", fire100$fireId[i])]]
+    
+    # Use the mask to extract the rids for burned grids
+    burned_rids <- as.data.frame(mask(env.grid, mask))
+    burned_rids= burned_rids%>%filter(!is.na(env.grid))
+    burned_rids$year=fire100$year[i]
+    burned_rids$fireID = fire100$fireId[i]
+  }
+  
+  fireID = rbind(fireID, burned_rids)
+}
+
+fireID = fireID %>% rename("rid" = env.grid, "fire.year" = year)
+```
+
+```{r what fraction HS}
+# how many unique resource units are there?
+domain <- ncell(env.grid) # dimensions are 239 by 255 
+
+# how many resource units burned at HS?
+length(unique(fireID$rid)) 
+
+# so, what %?
+(length(unique(fireID$rid)) / domain) *100
+```
+
+So, only about 1% of the landscape burned at high severity across the 100 year simulation window. (Though, technically that would be an underestimate since it doesn't take into account the resource units that reburned).
+
+# Session Info
+
+```{r session info}
+sessionInfo()
+```

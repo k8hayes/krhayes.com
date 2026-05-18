@@ -1,0 +1,122 @@
+---
+title: How much does a moose weigh?
+subtitle: The rabbit holes of model parameterization
+date: 2024-09-23
+categories: [Model Parameterization, iLand, BITE]
+date-modified: last-modified
+bibliography: references.bib
+draft: true
+---
+
+*AKA - a field ecologist discovers how heartbreaking it is to bury the enormity of work required to parameterize and benchmark a model into the supplement section of a paper*
+
+As part of my [NSF Postdoctoral Fellowship](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2219248&HistoricalAwards=false) exploring interactions between fire and biotic disturbances in Interior Alaska, I've been parameterizing moose and hare for the model [iLand](https://iland-model.org/iLand+Hub) using the biotic disturbance model [BITE](https://iland-model.org/bite/#/). This has lead to some interesting conversations over the last few months - several unsuspecting new introductions at conferences have stared at me, slightly blankly, before asking "so, there are tiny moose in your model?"[^1]
+
+[^1]: Reader, I would love
+
+BITE (full name: *BIotic disTurbance Engine*) is a module built by the very smart Juha Honkankiemi (LUKE) and Werner Rammer (Technical University of Munich) to simulate a whole world of biotic disturbances [@honkaniemi2021].
+
+The term "biotic disturbances" is itself, a catchall - megafauna like moose or mastodons are biotic disturbances, insects like aspen leaf miner or emerald ash borer are biotic disturbances, fungi-driven pathogens like aspen running canker are biotic disturbances. Called "agents" for short, each of these types of disturbances occur in very different ways across very different scales - if we assume that mastodons behaved similarly to modern elephants, they might have traveled up to 35 miles within a day, while emerald ash borer are creeping across the United States at a pace of a half a mile a year (assuming they don't get into your firewood).
+
+While a landscape model might be able to easily represent an individual mastodon roaming across a landscape, modeling each individual fungi spore across a landscape is absolutely not possible computationally. To deal with this, BITE represents agents in units of biomass. Kilograms of mastodon move across cells within the model, uprooting kilograms of trees and consuming kilograms of spruce needles before falling into kilograms of tar pits[^2].
+
+[^2]: (technically no, though I'm sure you could overthink it and implement it as a bit)
+
+This means you have two key decisions to make when starting to parameterize a new agent:
+
+1.  *How many are there?*
+2.  *What do they weigh?*
+
+Answering both is complicated.
+
+# How many moose are there?
+
+Well, total?
+
+Apparantly, 2.2 million moose, split evenly between North America and Eurasia [@moll2022].
+
+### Where do we get those numbers?
+
+It's hard to count moose. Logistically, financially, ecologically[^3].
+
+[^3]: maybe emotionally?
+
+Moose behavior itself makes it hard to count moose - moose use dense forest cover, they tend to avoid areas where humans are active[^4], and they're most active at dusk and dawn.
+
+[^4]: (except for this one pictured below, who was chomping on willow in the literal driveway to Denali National Park)
+
+![](images/moose.JPG){.column-margin}
+
+More importantly, they're highly mobile - a single moose can move up to 65 miles in a day.
+
+To adequately count moose, you need to count moose over a large area, which is expensive.
+
+Aerial surveys are the most common method - counting moose in a known area from a helicopter or a plane. This doesn't account for the moose not spotted (an issue in wildlife ecology often referred to as "sightability"), but it still remains more cost-effective than methods like pellet surveys or camera trapping, which face the same sightability issue but typically require more resources.
+
+::: callout-note
+An aside - climate change may make those aerial surveys more difficult. Later snowfall in the fall makes it more difficult to pick out brown moose against brown mud [@brinkman2023]. See [@reinking2022] for more on the important relationship between wildlife and snow and also the incredible phrasing of "snow professionals" and "snow science community"[^5].
+:::
+
+[^5]: I love my job
+
+You can also count moose using harvest data - hunters are required to provide data on the number of moose they harvest, and while that data certainly has some limitations[^6], it does give us a good sense year to year for the density of moose across the state.
+
+[^6]: not everyone reports
+
+## Okay, but k8, how many moose?
+
+According to Alaska Fish and Game, there are an estimated 175,000 moose in Alaska.
+
+Those 175,000 are spread out in densities anywhere from 1 to 150 moose per 30 square miles[^7]. That's over the entire state however, including tundra where moose can be quite scarce.
+
+[^7]: that's 0.003 -5 moose per square mile
+
+The landscape I'm modeling contains the [Caribou Poker Creek Research Watershed](https://www.lter.uaf.edu/research/study-sites-cpcrw), which falls within Game Unit 20A of the Alaska Dept. of Fish and Game.
+
+![Game Management Units across Alaska, source: Alaska Department of Fish and Game](gameunits.jpg)
+
+According to their most recent report, they counted 1,395 moose in 2019, 79% of which were adults. Correcting for sightability, they estimate the total population is between 9,581 and 13,959 moose across 20A, or **2.3 moose per square mile.**
+
+That brings us to the second question.
+
+# What do moose weigh?
+
+Well, I started with the obvious route but googling *how much does a moose weigh* doesn't get you very far. It does tell you however, that moose are generally largest in Alaska[^8], and smaller further south [@pastor1988].
+
+[^8]: cue the obligatory "everything's bigger up here"
+
+## What do moose weigh in Alaska?
+
+Googling *how much does a moose weigh alaska* leads to a page from the Alaska Department of Fish and Game that gives moose an average weight of 550 kilograms. They cite [@bishop1988], who puts bull moose between 540 - 680 kilograms and cows between 360 - 590 kg in Alaska.
+
+Obviously body mass also varies across a season[^9], across age, or depending on predator pressure. But this is the point at which I get to pull the time-honored card of *not in the scope of the research,* and move on. Maybe, if moose appear to have a critical role mitigating the impact of fire on Alaskan forests, someone will give me funding to build a more complicated model of moose population dynamics, maybe one that incorporates twinning rates and body mass[^10].
+
+[^9]: moose often put on weight in the summer, reaching "peak body mass" in the fall in preparation for the long winter (Mautz 1978, Adamczewski et al. 1987, Schwartz et al. 1987)
+
+[^10]: this is how manifestation works, right?
+
+The number of calves they produce depends in turn on the conditions that year - was there enough food? was it warm enough?
+
+So, if moose weight depends on the gender ratio across the population, *what's the gender ratio of the moose population in Alaska*? Surprisingly, we have a good grasp of this - hunting targets male moose, so populations are maintained at a level of \>25 bulls per 100 cows (after hunting).
+
+## What do moose weigh in the model?
+
+But, the model needs a single number. And iLand doesn't represent seasons. Nor population demographics (at least not yet). So, to ~~maintain my sanity~~ *make some simplifying assumptions*, I'll take a weighted average.
+
+I'll start by assuming an average calf weighs XX kilograms, a cow weighs 447.5 kg and a bull weighs 683.5 kg. Assuming 20% of the populations are calves, and there's a 3:10 ratio of cows to bulls within adults, I can take a weighted average.
+
+If, according to Fish and Game, there are 2.3 moose per square mile in Game Unit 20A, that means there are XX moose in my 60,000 acre model landscape.
+
+So, in the BITE script for moose, I now have a line that looks like this:
+
+``` javascript
+initialAgentBiomass: 5.95 * 465 // initial agent biomass in each cell calculated assuming moose density to be 0.95 animals per 1 km2 (152 per 1000) * average mass of 465 kg (estimated) per animal  
+```
+
+# More information
+
+## Session Info
+
+```{r session info}
+sessionInfo()
+```

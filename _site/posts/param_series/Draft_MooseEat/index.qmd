@@ -1,0 +1,53 @@
+---
+title: "How much do moose eat?"
+subtitle: "Part 3 in a series on Model Parameterization"
+date: today
+categories: [Model Parameterization, iLand, BITE]
+date-modified: last-modified
+draft: true
+bibliography: references.bib
+---
+
+# How much do moose eat?
+
+Most of our studies on moose browsing come from wildlife ecology studies
+
+[@renecker1985] tracked two free-range moose cows to study their voluntary intake over two years. The authors use two methods for estimating dry matter consumption: the ratio technique (fecal excretion vs the indigestibility of the diet) and the bite-count approach (measuring bite rate, simulated bite size and total foraging time). Summer consumption was 129 grams per kg of body weightˆ0.75 (per month I think), mid-winter dropped to 38 grams / kg BMˆ0.75 (again, per month?).
+
+Table of moose intake results
+
+```         
+- penned Alaska moose (Schwartz et al. 1981)
+
+- penned and wild younger moose on Isle Royale (Miquelle 1979)
+```
+
+[@renecker1985] - Summer consumption was 129 grams per kg of body weightˆ0.75 (per month I think), mid-winter dropped to 38 grams / kg BMˆ0.75 (again, per month?).
+
+\- average daily consumption in mid-july = 9,938 (SD 836) grams
+
+\- net energy requirement for maintaining free-range \[\[moose\]\] cows = 399 KJ / kg of BMˆ
+
+[@mcart2009]
+
+\## Takeaways
+
+\- summer dietary nitrogen availability is a nutrient constraint on moose
+
+\- Denali cows were simulated to gain 4-6% of body mass across the summer
+
+\- moose reach peak body mass in fall (Mautz 1978, Adamczewski et al. 1987, Schwartz et al. 1987)
+
+```         
+- reproductive success linked to august body mass (Cameron et al. 1993, Schwartz and Hundertmark 1993, Cameron and Ver Hoef 1994, Barrett 1982)
+```
+
+# More resources
+
+## References
+
+## Session Info
+
+```{r session info}
+sessionInfo()
+```

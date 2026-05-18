@@ -82,9 +82,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: [{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-filename','listing-file-modified',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: [],
+      searchColumns: ["listing-filename","listing-file-modified"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -205,7 +205,51 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1758910510874">
+<div class="body">
 
+</div>
+<div class="metadata">
+<a href="./posts\param_series\Draft_MooseEat\index.qmd" class="no-external">
+<div class="metadata-value listing-filename">
+index.qmd
+</div>
+<div class="metadata-value listing-file-modified">
+9/26/25, 10:15:10 AM
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1758910510875">
+<div class="body">
+
+</div>
+<div class="metadata">
+<a href="./posts\param_series\Draft_MoosePref\index.qmd" class="no-external">
+<div class="metadata-value listing-filename">
+index.qmd
+</div>
+<div class="metadata-value listing-file-modified">
+9/26/25, 10:15:10 AM
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1778970766755">
+<div class="body">
+
+</div>
+<div class="metadata">
+<a href="./posts\param_series\Draft_MooseWeight\index.qmd" class="no-external">
+<div class="metadata-value listing-filename">
+index.qmd
+</div>
+<div class="metadata-value listing-file-modified">
+5/16/26, 2:32:46 PM
+</div>
+</a>
+</div>
+</div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
 </div></main> <!-- /main -->

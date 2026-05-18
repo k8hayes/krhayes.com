@@ -1,37 +1,19 @@
 [
   {
-    "listing": "/param_landing.html",
-    "items": []
+    "listing": "/blog.html",
+    "items": [
+      "/posts/Post_temperaturequilt/index.html",
+      "/posts/Post_MappingRefuges/index.html",
+      "/posts/Post_hemispheR/index.html",
+      "/posts/Post_MTBS/index.html"
+    ]
   },
   {
     "listing": "/iLand_landing.html",
-    "items": [
-      "/posts/iLand_series/Draft_iLandFireOutput/index.html"
-    ]
+    "items": []
   },
   {
-    "listing": "/blog.html",
-    "items": [
-      "/posts/Draft_HPC/index.html",
-      "/posts/Draft_ObsidianNetwork/index.html",
-      "/posts/Draft_PrefireFilter/index.html",
-      "/posts/Draft_WhoOwnsAK/index.html",
-      "/posts/Draft_YukonDeltaPaleo/index.html",
-      "/posts/Draft_temperaturequilt/index.html",
-      "/posts/NewPostTemplate/index.html",
-      "/posts/iLand_series/Draft_iLandWorkflow/index.html",
-      "/posts/param_series/Draft_MooseEat/index.html",
-      "/posts/param_series/Draft_MoosePref/index.html",
-      "/posts/Post_MappingRefuges/index.html",
-      "/posts/param_series/Draft_MooseWeight/index.html",
-      "/posts/Post_hemispheR/index.html",
-      "/posts/iLand_series/Draft_iLandFireOutput/index.html",
-      "/posts/Draft_AKDataGlossary/index.html",
-      "/posts/Draft_Discogs/index.html",
-      "/posts/Post_MTBS/index.html",
-      "/posts/Draft_ResearchWorkflow/index.html",
-      "/posts/Draft_WebsiteBuild/index.html",
-      "/posts/iLand_series/Draft_AgeGrowthRelationships/index.html"
-    ]
+    "listing": "/param_landing.html",
+    "items": []
   }
 ]

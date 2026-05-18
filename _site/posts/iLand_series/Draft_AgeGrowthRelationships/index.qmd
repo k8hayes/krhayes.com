@@ -1,0 +1,16 @@
+---
+title: "New Post Title"
+subtitle: "New Post Subtitle"
+date: "2024-04-15"
+categories: [Workflow]
+date-modified: last-modified
+format:
+  html:
+    toc: true
+    toc-location: left
+    grid:
+      margin-width: 350px
+reference-location: margin
+citation-location: margin
+draft: true
+---

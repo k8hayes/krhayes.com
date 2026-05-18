@@ -1,0 +1,68 @@
+---
+title: "What do moose eat?"
+subtitle: "Part 2 in a series on Model Parameterization"
+date: today
+categories: [Model Parameterization, iLand, BITE]
+date-modified: last-modified
+draft: true
+bibliography: references.bib
+---
+
+If you're just joining us in this ~~increasingly elaborate cry for help~~ *series of blog posts describing my process parameterizing moose*, welcome. As part of my [NSF Postdoctoral Fellowship](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2219248&HistoricalAwards=false), I'm using the landscape model [iLand](https://iland-model.org/iLand+Hub) and the biotic disturbance model [BITE](https://iland-model.org/bite/#/) to examine how herbivores might mediate the effects of fire in Alaskan Forests. Part one (linked here) covered my sidequest to determine what to set as the average weight of moose in the model, as derailed by immediately realizing it was a much longer question.
+
+Here, we'll cover an additional suspiciously-simple question: **what do moose eat?**
+
+## How BITE represents foraging
+
+To capture herbivore impacts in iLand, we need to give them some forage preferences in BITE. BITE, designed to represent many different types of biotic disturbances, is pretty flexible with input. The following is the main information we'll need to provide:
+
+-   What are the basic characteristics of hosts?
+    -   Which species, trees vs saplings, any filters on height/density/etc?
+-   What do agents target?
+    -   Do they target specific compartments of the tree? options: foliage, stem, branch, root
+    -   Do they have preferences?
+    -   What fraction of trees / saplings die?
+
+# What do moose eat?
+
+The short answer is mostly willow, birch and aspen [@seaton2011].
+
+The longer answer[^1] is **it depends**.
+
+[^1]: you knew this was coming, there wouldn't be a blog post if there wasn't one
+
+It depends on a few factors:
+
+## Moose diet depends on the season
+
+Moose prefer high forage quality (ie, very digestible) in summer months and avoid lignified stems until after leaf fall in autumn (Renecker and Hudson 1986, Renecker and Hudson 1988, Schwatz et al. 1984).
+
+Specifically, birch leaves are considered important summer forage (Mathisen et al. 2017). Most browsing occurs in winter (Mathisen et al. 2017), when moose target willow [@seaton2011] and sometimes birch (Bryant & Kuropat 1980).
+
+## Moose diet depends on the quantity and quality of forage
+
+Moose browse selectively, particularly if forage quality and quantity is high (Vivas and Saether 1987, Saether and Anderson 1990). Thus, moose very rarely eat spruce (Shipley et al. 1998, Bergström and Hjeljord 1987). In a study of moose browse in early postfire stands, Maccracken and Viereck 1990 found that moose browsed willow the most, followed by birch then aspen.
+
+Moose seem to prefer stems and plants with more biomass (Bergstrom and Dannell 1987, Edenius 1993), maybe because of efficiency of feeding. Moose require a minimum of 6.8 percent crude protein content in their diet (Schwartz et al. 1987). Under the plant vigor hypothesis (Price 1991), they also may prefer faster growing trees - those tend to have larger and more nutritious shoots (Dannell and Huss-Dannell 1985)
+
+> In Alaska, moose avoid thinleaf alder (Alnus tenuifolia) and prefer to browse on willow (Salix spp: Wolf & Zasada 1979; McAvinchey, 1991) - [@suominen1999]
+
+### Moose diet may depend on burn history
+
+So, how do you set moose preferences in a landscape model that doesn't include seasons, forage quality or forage quantity? (not even really a rhetorical question, if you have suggestions, please email!!)
+
+This has been my approach: have moose target primarily aspen and birch.
+
+## The Willow Question
+
+Right now, willow is not parameter in iLand. Species parameterization for trees can be an undertaking, and it's an active conflict / bit in our lab wherein some of us think it makes sense to parameterize willow, and some of us do not.
+
+# More resources
+
+## References
+
+## Session Info
+
+```{r session info}
+sessionInfo()
+```

@@ -1,0 +1,35 @@
+---
+title: "An incomplete glossary of Alaska Data Products"
+subtitle: "New Post Subtitle"
+date: "2024-04-21"
+date-modified: last-modified
+categories: [Alaska, Spatial Data Analysis]
+draft: true
+embed-resources: true
+---
+
+I put this together for my own reference, to avoid the inevitable alphabet soup with an extra sprinkle of: "does that extend to alaska again??". Obviously not exhaustive.
+
+## Fire
+
+#### Monitoring Trends in Burn Severity (MTBS)
+
+MTBS data consists of burn severity and extent information on large fires[^1] across the US from 1984 to the present. Both burn severity and fire extent are derived from Landsat or Sentinel-2 data at a spatial resolution of 30 meters and a temporal resolution of 16 days or so - images are constructed pre- and post-fire to compare Normalized Burn Ratio (NBR) or Differenced Normalized Burn Ratio (dNBR). From there, MTBS depicts severity as a gradient of vegetation response from low (not much vegetation response) to high (potentially complete combustion of vegetation)[^2].
+
+[^1]: defined here as 1,000 acres or bigger in the Western US
+
+[^2]: with additional categories for unburned, increased greenness or outliers caused by clouds, shadows, water bodies, etc
+
+Alaska Large Fire
+
+The new one
+
+LANDFIRE
+
+## Vegetation
+
+## Climate
+
+DAYMET
+
+no PRISM data for AK
