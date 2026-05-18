@@ -1,7 +1,7 @@
 ---
 title: Making a temperature quilt in R
 subtitle: The business of avoiding making business cards
-description: New Post Description
+description: Ft. fake quilts
 date: 2026-05-18
 categories: []
 date-modified: last-modified
@@ -15,7 +15,7 @@ In my free time, I'm a very amateur fiber arts nerd. Even calling it "fiber arts
 
 So, I landed on a quilt theme. But making tiny even triangles in powerpoint seemed fussy, and I wanted the colors to be random but somehow still cohesive.
 
-From there it was a hop and a skip over to temperature quilts - a craft tradition where each day (or month) of the year gets a color based on the temperature, and you knit or sew them together into a record of the year's weather. Instead of yarn, I'd use ggplot.
+From there it was a hop and a skip over to temperature quilts - a craft tradition where each day (or month) of the year gets a color based on the temperature, and you knit or sew them together into a record of the year's weather. Instead of fabric, I'd use ggplot.
 
 ```{r}
 #| echo: false
@@ -56,14 +56,13 @@ I downloaded 5 years of temperature from the General Mitchell Airport weather st
 
 mke = read.csv(paste0(dataloc, "/mke_climate.csv"))
 
-knitr::kable(head(mke))
+knitr::kable((mke))
 
 ```
 
 Each row in the raw data is a single day. I want one value per month per year, so I'll summarize down to monthly minimums and maximums. The data includes a partial year (1999), which I'll drop so each row in the quilt represents a complete year.
 
 ```{r climate format}
-#| echo: false
 #| warning: false
 #| output: false
 
@@ -78,7 +77,7 @@ mke_sum <- mke %>%
             max = max(TMAX),
             .groups = "drop")
 
-knitr::kable(head(mke_sum))
+knitr::kable((mke_sum))
 ```
 
 # Building the geometry
