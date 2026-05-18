@@ -1,0 +1,33 @@
+$inputPdf = "C:\Users\khayes23\Documents\Research\R00 Admin\R030 Website\krhayes.com\posts\Draft_temperaturequilt\data\business_card.pdf"
+
+$outputJpg = "C:\Users\khayes23\Documents\Research\R00 Admin\R030 Website\krhayes.com\posts\Draft_temperaturequilt\data\card1.jpg"
+
+$gs = "C:\Program Files\gs\gs10.07.0\bin\gswin64c.exe"
+
+& $gs `
+   -dNOPAUSE `
+   -dBATCH `
+   -dFirstPage=1 `
+   -dLastPage=1 `
+   -sDEVICE=jpeg `
+   -dJPEGQ=100 `
+   -r600 `
+   "-sOutputFile=$outputJpg" `
+   $inputPdf
+
+   $inputPdf = "C:\Users\khayes23\Documents\Research\R00 Admin\R030 Website\krhayes.com\posts\Draft_temperaturequilt\data\business_card.pdf"
+
+$outputJpg = "C:\Users\khayes23\Documents\Research\R00 Admin\R030 Website\krhayes.com\posts\Draft_temperaturequilt\data\card2.jpg"
+
+$gs = "C:\Program Files\gs\gs10.07.0\bin\gswin64c.exe"
+
+& $gs `
+   -dNOPAUSE `
+   -dBATCH `
+   -dFirstPage=2 `
+   -dLastPage=2 `
+   -sDEVICE=jpeg `
+   -dJPEGQ=100 `
+   -r600 `
+   "-sOutputFile=$outputJpg" `
+   $inputPdf

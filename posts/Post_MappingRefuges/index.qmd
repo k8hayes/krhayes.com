@@ -199,4 +199,3 @@ sum(round(expanse(alaska_hires, unit = "ha", transform = FALSE)*2.471)) * 100
 ```
 
 So, 25%. Considering the size of the state, that's a tremendous amount of landscape.
-
