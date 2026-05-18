@@ -179,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">September 26, 2025</p>
+        <p class="date-modified">May 18, 2026</p>
       </div>
     </div>
       
@@ -213,14 +213,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>I’m loading a shapefile of the boundary of Alaska, originally sourced from a USGS dataset and reprojected to Alaska Albers in QGIS.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>alaska <span class="ot">=</span> <span class="fu">vect</span>(<span class="st">"/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Post_MappingRefuges/data/AK_boundary.shp"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(alaska)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "PROJCRS[\"NAD83 / Alaska Albers\",\n    BASEGEOGCRS[\"NAD83\",\n        DATUM[\"North American Datum 1983\",\n            ELLIPSOID[\"GRS 1980\",6378137,298.257222101,\n                LENGTHUNIT[\"metre\",1]]],\n        PRIMEM[\"Greenwich\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        ID[\"EPSG\",4269]],\n    CONVERSION[\"Alaska Albers (meters)\",\n        METHOD[\"Albers Equal Area\",\n            ID[\"EPSG\",9822]],\n        PARAMETER[\"Latitude of false origin\",50,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8821]],\n        PARAMETER[\"Longitude of false origin\",-154,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8822]],\n        PARAMETER[\"Latitude of 1st standard parallel\",55,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8823]],\n        PARAMETER[\"Latitude of 2nd standard parallel\",65,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8824]],\n        PARAMETER[\"Easting at false origin\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8826]],\n        PARAMETER[\"Northing at false origin\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8827]]],\n    CS[Cartesian,2],\n        AXIS[\"easting (X)\",east,\n            ORDER[1],\n            LENGTHUNIT[\"metre\",1]],\n        AXIS[\"northing (Y)\",north,\n            ORDER[2],\n            LENGTHUNIT[\"metre\",1]],\n    USAGE[\n        SCOPE[\"Topographic mapping (small scale).\"],\n        AREA[\"United States (USA) - Alaska.\"],\n        BBOX[51.3,172.42,71.4,-129.99]],\n    ID[\"EPSG\",3338]]"</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> alaska) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>alaska <span class="ot">=</span> <span class="fu">vect</span>(<span class="fu">paste0</span>(dataloc, <span class="st">"/data/AK_boundary.shp"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> alaska) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -231,15 +228,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>But, I don’t need all of the jurisdictional distinctions. I can use the <em>aggregate()</em> function in <strong>terra</strong> to lose the detail.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>alaska <span class="ot">=</span> terra<span class="sc">::</span><span class="fu">aggregate</span>(alaska, <span class="at">by =</span> <span class="st">"state_name"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> alaska, <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> <span class="fl">0.75</span>)<span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>alaska <span class="ot">=</span> terra<span class="sc">::</span><span class="fu">aggregate</span>(alaska, <span class="at">by =</span> <span class="st">"state_name"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> alaska, <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> <span class="fl">0.75</span>, <span class="at">col =</span> <span class="st">"grey"</span>)<span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -247,13 +244,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>So minimal! So elegant!</p>
 <p>Now I can bring in the National Wildlife Refuge shapefile:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>refuge <span class="ot">=</span> <span class="fu">vect</span>(<span class="st">"/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Post_MappingRefuges/data/Boundaries_Refuge.shp"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(refuge) <span class="ot">=</span> <span class="fu">crs</span>(alaska) <span class="co"># check that it has the same projection</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> refuge,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">aes</span>(<span class="at">fill =</span> NWRNAME, <span class="at">color =</span> NWRNAME)) <span class="sc">+</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>refuge <span class="ot">=</span> <span class="fu">vect</span>(<span class="fu">paste0</span>(dataloc, <span class="st">"/data/Boundaries_Refuge.shp"</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(refuge) <span class="ot">=</span> <span class="fu">crs</span>(alaska) <span class="co"># check that it has the same projection</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> alaska, <span class="at">fill =</span> <span class="st">"grey"</span>,<span class="at">col =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> refuge,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">aes</span>(<span class="at">fill =</span> NWRNAME, <span class="at">color =</span> NWRNAME)) <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What’s hard to tell from the plot above, is that the <strong>refuge</strong> spatial vector is made up of a ton of polygons.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">nrow</span>(refuge)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5445</code></pre>
+</div>
+</div>
+<p>Similar to the state shapefile, I can aggregate so each refuge is represented by a single polygon:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>refuge <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">aggregate</span>(refuge, <span class="at">by =</span> <span class="st">"NWRNAME"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">nrow</span>(refuge)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> alaska, <span class="at">fill =</span> <span class="st">"grey"</span>,<span class="at">col =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> <span class="fl">0.75</span>)<span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> refuge,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">aes</span>(<span class="at">fill =</span> NWRNAME, <span class="at">color =</span> NWRNAME)) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -262,57 +288,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>What’s hard to tell from the plot above, is that the <strong>refuge</strong> spatial vector is made up of a ton of polygons.</p>
+<p>(The difference is again, mostly internal, but 5445 polygons down to 16 makes the object a bit easier to handle).</p>
+<p>I also want to use the full names for refuges, not the acronyms. Here’s an ifelse chain to rename them.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">nrow</span>(refuge)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5445</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>refuge <span class="ot">=</span> refuge <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Name =</span> <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"akm"</span>, <span class="st">"Alaska Maritime"</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"akp"</span>, <span class="st">"Alaska Peninsula"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"arc"</span>, <span class="st">"Arctic"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"bch"</span>, <span class="st">"Bercharof"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"inn"</span>, <span class="st">"Innoko"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                                         <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"izm"</span>, <span class="st">"Izembek"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"kan"</span>, <span class="st">"Kanuti"</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"kdk"</span>, <span class="st">"Kodiak"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"kna"</span>, <span class="st">"Kenai"</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"kuk"</span>, <span class="st">"Koyukuk"</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                                      <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"now"</span>, <span class="st">"Nowitna"</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>                <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"swk"</span>, <span class="st">"Selawik"</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"tet"</span>, <span class="st">"Tetlin"</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"tgk"</span>, <span class="st">"Togiak"</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"ykd"</span>, <span class="st">"Yukon Delta"</span>,<span class="st">"Yukon Flats"</span>))))))))))))))))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-<p>Similar to the state shapefile, I can aggregate so each refuge is represented by a single polygon:</p>
+<p>Now I can go ahead and plot the NWR against the AK boundary:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>refuge <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">aggregate</span>(refuge, <span class="at">by =</span> <span class="st">"NWRNAME"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">nrow</span>(refuge)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 16</code></pre>
-</div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> refuge,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">aes</span>(<span class="at">fill =</span> NWRNAME, <span class="at">color =</span> NWRNAME)) <span class="sc">+</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> alaska, <span class="at">fill =</span> <span class="st">"grey"</span>,<span class="at">col =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> refuge, <span class="fu">aes</span>(<span class="at">fill =</span> Name), </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span> </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#fbe183"</span>, <span class="st">"#f4c40f"</span>, <span class="st">"#fe9b00"</span>, <span class="st">"#d8443c"</span>, <span class="st">"#9b3441"</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>               <span class="st">"#de597c"</span>, <span class="st">"#e87b89"</span>, <span class="st">"#e6a2a6"</span>, <span class="st">"#aa7aa1"</span>, <span class="st">"#9f5691"</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>               <span class="st">"#633372"</span>, <span class="st">"#1f6e9c"</span>, <span class="st">"#abd9e9"</span>, <span class="st">"#2b9b81"</span>, <span class="st">"#92c051"</span>, <span class="st">"#1b7837"</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>(The difference is again, mostly internal, but 5445 polygons down to 16 makes the object a bit easier to handle).</p>
-<p>I also want to use the full names for refuges, not the acronyms. Here’s an ifelse chain to rename them.</p>
+<p>A few things: one, the map of Alaska isn’t terribly high-resolution - note the difference in coastline between the Alaska shapefile and the Alaska Peninsula NWR. I found a higher-resolution shapefile from the Alaska Department of Natural Resources, linked <a href="https://gis.data.alaska.gov/datasets/SOA-DNR::alaska-coastline/explore?layer=0">here</a>. Let’s see if it makes a difference:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>refuge <span class="ot">=</span> refuge <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Name =</span> <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"akm"</span>, <span class="st">"Alaska Maritime"</span>,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"akp"</span>, <span class="st">"Alaska Peninsula"</span>,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"arc"</span>, <span class="st">"Arctic"</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"bch"</span>, <span class="st">"Bercharof"</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"inn"</span>, <span class="st">"Innoko"</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                                         <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"izm"</span>, <span class="st">"Izembek"</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"kan"</span>, <span class="st">"Kanuti"</span>,</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"kdk"</span>, <span class="st">"Kodiak"</span>,</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"kna"</span>, <span class="st">"Kenai"</span>,</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"kuk"</span>, <span class="st">"Koyukuk"</span>,</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                                      <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"now"</span>, <span class="st">"Nowitna"</span>,</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"swk"</span>, <span class="st">"Selawik"</span>,</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"tet"</span>, <span class="st">"Tetlin"</span>,</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"tgk"</span>, <span class="st">"Togiak"</span>,</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">ifelse</span>(NWRNAME <span class="sc">==</span> <span class="st">"ykd"</span>, <span class="st">"Yukon Delta"</span>,<span class="st">"Yukon Flats"</span>))))))))))))))))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>alaska_hires <span class="ot">=</span> <span class="fu">vect</span>(<span class="fu">paste0</span>(dataloc, <span class="st">"/data/AK_hires.shp"</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(alaska_hires) <span class="ot">=</span> <span class="fu">crs</span>(refuge)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Now I can go ahead and plot the NWR against the AK boundary:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> alaska, <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> <span class="fl">0.75</span>, <span class="at">color =</span> <span class="cn">NA</span>)<span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> alaska_hires, <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> <span class="fl">0.75</span>, <span class="at">color =</span> <span class="cn">NA</span>)<span class="sc">+</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> refuge, <span class="fu">aes</span>(<span class="at">fill =</span> Name), </span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span> </span>
@@ -323,31 +346,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>A few things: one, the map of Alaska isn’t terribly high-resolution - note the difference in coastline between the Alaska shapefile and the Alaska Peninsula NWR. I found a higher-resolution shapefile from the Alaska Department of Natural Resources, linked <a href="https://gis.data.alaska.gov/datasets/SOA-DNR::alaska-coastline/explore?layer=0">here</a>. Let’s see if it makes a difference:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>alaska_hires <span class="ot">=</span> <span class="fu">vect</span>(<span class="st">"/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Post_MappingRefuges/data/AK_hires.shp"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(alaska_hires) <span class="ot">=</span> <span class="fu">crs</span>(refuge)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> alaska_hires, <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> <span class="fl">0.75</span>, <span class="at">color =</span> <span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spatvector</span>(<span class="at">data =</span> refuge, <span class="fu">aes</span>(<span class="at">fill =</span> Name), </span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span> </span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#fbe183"</span>, <span class="st">"#f4c40f"</span>, <span class="st">"#fe9b00"</span>, <span class="st">"#d8443c"</span>, <span class="st">"#9b3441"</span>,</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>               <span class="st">"#de597c"</span>, <span class="st">"#e87b89"</span>, <span class="st">"#e6a2a6"</span>, <span class="st">"#aa7aa1"</span>, <span class="st">"#9f5691"</span>,</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>               <span class="st">"#633372"</span>, <span class="st">"#1f6e9c"</span>, <span class="st">"#abd9e9"</span>, <span class="st">"#2b9b81"</span>, <span class="st">"#92c051"</span>, <span class="st">"#1b7837"</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -355,7 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Much better!!</p>
 <p>Now, we can use the <em>expanse()</em> function in <strong>terra</strong> to calculate the area covered by polygons. I’ll start by testing it with the refuge shapefile. Here’s the raw output:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">expanse</span>(refuge, <span class="at">unit =</span> <span class="st">"ha"</span>, <span class="at">transform =</span> <span class="cn">FALSE</span>) <span class="sc">*</span> <span class="fl">2.471</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">expanse</span>(refuge, <span class="at">unit =</span> <span class="st">"ha"</span>, <span class="at">transform =</span> <span class="cn">FALSE</span>) <span class="sc">*</span> <span class="fl">2.471</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  5759488  4918089 19848447  1457981  4566151   417387  1636779  1721743
  [9]  1985975  4498293  2056418  3220065   931457  4712266 24071626 11176296</code></pre>
@@ -363,17 +362,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>(nice that it calculates for each NWR) - and here’s a pretty table:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>nwr_names <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Alaska Maritime"</span>, <span class="st">"Alaska Peninsula"</span>,<span class="st">"Arctic"</span>,</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Bercharof"</span>, <span class="st">"Innoko"</span>,<span class="st">"Izembek"</span>,<span class="st">"Kanuti"</span>,<span class="st">"Kodiak"</span>,</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Kenai"</span>,<span class="st">"Koyukuk"</span>,<span class="st">"Nowitna"</span>,<span class="st">"Selawik"</span>,<span class="st">"Tetlin"</span>,<span class="st">"Togiak"</span>,</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Yukon Delta"</span>,<span class="st">"Yukon Flats"</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>refuge_acre <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">NWR =</span> nwr_names,</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">acres =</span> <span class="fu">round</span>(<span class="fu">expanse</span>(refuge,</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">unit =</span> <span class="st">"ha"</span>, <span class="at">transform =</span> <span class="cn">FALSE</span>) <span class="sc">*</span> </span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="fl">2.471</span>))</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(refuge_acre)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>nwr_names <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Alaska Maritime"</span>, <span class="st">"Alaska Peninsula"</span>,<span class="st">"Arctic"</span>,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Bercharof"</span>, <span class="st">"Innoko"</span>,<span class="st">"Izembek"</span>,<span class="st">"Kanuti"</span>,<span class="st">"Kodiak"</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Kenai"</span>,<span class="st">"Koyukuk"</span>,<span class="st">"Nowitna"</span>,<span class="st">"Selawik"</span>,<span class="st">"Tetlin"</span>,<span class="st">"Togiak"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Yukon Delta"</span>,<span class="st">"Yukon Flats"</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>refuge_acre <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">NWR =</span> nwr_names,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">acres =</span> <span class="fu">round</span>(<span class="fu">expanse</span>(refuge,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">unit =</span> <span class="st">"ha"</span>, <span class="at">transform =</span> <span class="cn">FALSE</span>) <span class="sc">*</span> </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="fl">2.471</span>))</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(refuge_acre)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <thead>
@@ -455,7 +454,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>My best working guess is the distinction between NWR and Wildnerness - the NWR shapefile may include areas of Wildnerness.</p>
 <p>So, what is that combined?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">round</span>(<span class="fu">expanse</span>(refuge, <span class="at">unit =</span> <span class="st">"ha"</span>, <span class="at">transform =</span> <span class="cn">FALSE</span>)<span class="sc">*</span><span class="fl">2.471</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">round</span>(<span class="fu">expanse</span>(refuge, <span class="at">unit =</span> <span class="st">"ha"</span>, <span class="at">transform =</span> <span class="cn">FALSE</span>)<span class="sc">*</span><span class="fl">2.471</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 92978461</code></pre>
 </div>
@@ -463,8 +462,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>92 million acres - definitely larger than the website’s 80 million acre sum. Again, makes it seem like there’s wilderness areas within the shapefile.</p>
 <p>Working with this file for now, how much of the State of Alaska is NWR?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">round</span>(<span class="fu">expanse</span>(refuge, <span class="at">unit =</span> <span class="st">"ha"</span>, <span class="at">transform =</span> <span class="cn">FALSE</span>)<span class="sc">*</span><span class="fl">2.471</span>)) <span class="sc">/</span> </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">round</span>(<span class="fu">expanse</span>(alaska_hires, <span class="at">unit =</span> <span class="st">"ha"</span>, <span class="at">transform =</span> <span class="cn">FALSE</span>)<span class="sc">*</span><span class="fl">2.471</span>)) <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">round</span>(<span class="fu">expanse</span>(refuge, <span class="at">unit =</span> <span class="st">"ha"</span>, <span class="at">transform =</span> <span class="cn">FALSE</span>)<span class="sc">*</span><span class="fl">2.471</span>)) <span class="sc">/</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">round</span>(<span class="fu">expanse</span>(alaska_hires, <span class="at">unit =</span> <span class="st">"ha"</span>, <span class="at">transform =</span> <span class="cn">FALSE</span>)<span class="sc">*</span><span class="fl">2.471</span>)) <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 24.92743</code></pre>
 </div>

@@ -5,6 +5,8 @@ description: Ft. pretty maps
 date: 2024-10-14
 categories: [Spatial Data Analysis]
 date-modified: last-modified
+params:
+  user: KateWork
 ---
 
 We're starting a [new project](https://www.caryinstitute.org/news-insights/press-release/new-project-will-inform-firefighting-efforts-maximize-carbon-storage) to map carbon vulnerability and help land managers make decisions about carbon management in National Wildlife Refuges in Alaska.
@@ -12,6 +14,22 @@ We're starting a [new project](https://www.caryinstitute.org/news-insights/press
 While Alaska is home to just 16 of the 570 refuges spread across the United States, according to the [Friends of Alaskan Wildlife Refuge System](https://alaskarefugefriends.org/category/call-to-action/), those 16 make up nearly 85% of the refuge system's 95 million acres, clocking in at a cool 80 million acres of land.
 
 But, Alaska is big. How much of the 80 million acres is NWR?
+
+```{r}
+#| label: locate
+#| output: false
+#| echo: false
+
+if(params$user %in% 'KateWork'){
+  # set directory
+  
+  knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
+  
+  # set input
+  dataloc = 'C:/Users/khayes23/Documents/Research/R00 Admin/R030 Website/krhayes.com/posts/Post_MappingRefuges'
+  
+}
+```
 
 ```{r}
 #| label: packages
@@ -26,8 +44,7 @@ I'm loading a shapefile of the boundary of Alaska, originally sourced from a USG
 
 ```{r}
 #| label: alaska shapefile
-alaska = vect("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Post_MappingRefuges/data/AK_boundary.shp")
-crs(alaska)
+alaska = vect(paste0(dataloc, "/data/AK_boundary.shp"))
 
 ggplot() +
   geom_spatvector(data = alaska) +
@@ -40,7 +57,7 @@ But, I don't need all of the jurisdictional distinctions. I can use the *aggrega
 alaska = terra::aggregate(alaska, by = "state_name")
 
 ggplot() +
-  geom_spatvector(data = alaska, fill = "grey", alpha = 0.75)+
+  geom_spatvector(data = alaska, fill = "grey", alpha = 0.75, col = "grey")+
   theme_minimal()
 ```
 
@@ -49,10 +66,11 @@ So minimal! So elegant!
 Now I can bring in the National Wildlife Refuge shapefile:
 
 ```{r}
-refuge = vect("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Post_MappingRefuges/data/Boundaries_Refuge.shp")
+refuge = vect(paste0(dataloc, "/data/Boundaries_Refuge.shp"))
 crs(refuge) = crs(alaska) # check that it has the same projection
 
 ggplot() +
+  geom_spatvector(data = alaska, fill = "grey",col = "grey", alpha = 0.75) +
   geom_spatvector(data = refuge,
                   aes(fill = NWRNAME, color = NWRNAME)) +
   theme_minimal()
@@ -71,7 +89,8 @@ refuge <- terra::aggregate(refuge, by = "NWRNAME")
 
 terra::nrow(refuge)
 
-ggplot() +
+ggplot() + 
+  geom_spatvector(data = alaska, fill = "grey",col = "grey", alpha = 0.75)+
   geom_spatvector(data = refuge,
                   aes(fill = NWRNAME, color = NWRNAME)) +
   theme_minimal()
@@ -106,7 +125,7 @@ Now I can go ahead and plot the NWR against the AK boundary:
 
 ```{r}
 ggplot() +
-  geom_spatvector(data = alaska, fill = "grey", alpha = 0.75, color = NA)+
+  geom_spatvector(data = alaska, fill = "grey",col = "grey", alpha = 0.75) +
   theme_minimal() + 
   geom_spatvector(data = refuge, aes(fill = Name), 
                   color = NA, alpha = 0.9) + 
@@ -119,7 +138,7 @@ ggplot() +
 A few things: one, the map of Alaska isn't terribly high-resolution - note the difference in coastline between the Alaska shapefile and the Alaska Peninsula NWR. I found a higher-resolution shapefile from the Alaska Department of Natural Resources, linked [here](https://gis.data.alaska.gov/datasets/SOA-DNR::alaska-coastline/explore?layer=0). Let's see if it makes a difference:
 
 ```{r}
-alaska_hires = vect("/Users/katherinehayes/Google Drive/Work/Website/krhayes.com/posts/Post_MappingRefuges/data/AK_hires.shp")
+alaska_hires = vect(paste0(dataloc, "/data/AK_hires.shp"))
 
 crs(alaska_hires) = crs(refuge)
 ```
@@ -180,3 +199,4 @@ sum(round(expanse(alaska_hires, unit = "ha", transform = FALSE)*2.471)) * 100
 ```
 
 So, 25%. Considering the size of the state, that's a tremendous amount of landscape.
+
