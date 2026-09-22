@@ -11,11 +11,11 @@ params:
 
 I'm making business cards for the first time. It feels odd. To make it feel less odd, I wanted to come up with some sort of fun, colorful graphic to cover one of the sides. But I didn't feel great about any of the stock designs I was seeing, and wanted something that felt more like me.
 
-In my free time, I'm a very amateur fiber arts nerd. Even calling it "fiber arts" gives me away immediately. I used to sew some of my own clothes (mostly during covid), and knit often on zoom calls and in meetings. Technically, I've made a quilt before.
+In my free time, I'm a very amateur fiber arts nerd. Even calling it "fiber arts" makes me cringe. I used to sew some of my own clothes (mostly during covid), and knit often on zoom calls and in meetings. Technically, I've made a quilt before.
 
 So, I landed on a quilt theme. But making tiny even triangles in powerpoint seemed fussy, and I wanted the colors to be random but somehow still cohesive.
 
-From there it was a hop and a skip over to temperature quilts - a craft tradition where each day (or month) of the year gets a color based on the temperature, and you knit or sew them together into a record of the year's weather. Instead of fabric, I'd use ggplot.
+From there it was a hop and a skip over to temperature quilts - a craft tradition where each day (or month) of the year gets a color based on the temperature, and you knit or sew them together into a record of the year's weather.
 
 ```{r}
 #| echo: false
@@ -56,7 +56,7 @@ I downloaded 5 years of temperature from the General Mitchell Airport weather st
 
 mke = read.csv(paste0(dataloc, "/mke_climate.csv"))
 
-knitr::kable((mke))
+knitr::kable((head(mke)))
 
 ```
 
@@ -64,7 +64,6 @@ Each row in the raw data is a single day. I want one value per month per year, s
 
 ```{r climate format}
 #| warning: false
-#| output: false
 
 mke$DATE  <- as.Date(mke$DATE)
 mke$year  <- as.numeric(format(mke$DATE, "%Y"))
@@ -87,7 +86,7 @@ Next was figuring out how to plot right angle triangles. You can do it with geom
 ```{r}
 triangle = data.table(polygon.x = c(2,4,4), polygon.y = c(1,1,3))
 
-ggplot(triangle, aes(x = polygon.x, y = polygon.y)) + geom_polygon()
+ggplot(triangle, aes(x = polygon.x, y = polygon.y)) + geom_polygon(fill = "#f46d43")
 ```
 
 To produce the other side of the triangle, you modify the coordinate for the second corner, like so.
@@ -95,7 +94,7 @@ To produce the other side of the triangle, you modify the coordinate for the sec
 ```{r}
 left.triangle = data.table(polygon.x = c(2,2,4), polygon.y = c(1,3,3))
 
-ggplot(left.triangle, aes(x = polygon.x, y = polygon.y)) + geom_polygon()
+ggplot(left.triangle, aes(x = polygon.x, y = polygon.y)) + geom_polygon( fill = "#313695")
 ```
 
 Putting them together gets you both sections of the quilt block.
@@ -106,7 +105,10 @@ right.triangle = data.table(polygon.x = c(2,4,4), polygon.y = c(1,1,3), triangle
 
 both.triangle = rbind(left.triangle, right.triangle)
 
-ggplot(both.triangle, aes(x = polygon.x, y = polygon.y, group = triangle)) + geom_polygon()
+ggplot(both.triangle) + 
+  geom_polygon(aes(x = polygon.x, y = polygon.y, 
+                   group = triangle, fill = triangle)) + 
+  scale_fill_manual(values = c("#313695","#f46d43"))
 ```
 
 So, I needed 12 months of columns, and decided I had room for 5 years (rows).
@@ -212,16 +214,24 @@ color_extract <- mke_colors %>%
 
 quilt <- merge(all_blocks, color_extract, by = "triangle_id")
 
-ggplot(quilt, aes(x = polygon.x, y = polygon.y,
+quilt_plot = ggplot(quilt, aes(x = polygon.x, y = polygon.y,
                   group = triangle_id, fill = col)) +
   geom_polygon() +
   scale_fill_identity() +
   theme_void() +
   theme(legend.position = "none")
+
+quilt_plot
 ```
 
 yay!!
 
+```{r}
+save_plot("businesscard_quilt.png", quilt_plot, base_height = 3.71, base_aspect_ratio = 2.1) 
+```
+
 I did some edits in powerpoint, and ended up with the following:
 
 ![](data/card1.jpg)
+
+bizness.
