@@ -3,7 +3,7 @@ title: "Katherine Hayes"
 subtitle: "Climate Change Ecologist"
 about:
   template: trestles
-  image: profile.jpg
+  image: profile.JPG
   links:
     - icon: github
       text: Github

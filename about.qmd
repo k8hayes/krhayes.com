@@ -4,7 +4,7 @@ format:
     grid:
       margin-width: 350px
 title: "About Me"
-title-block-banner: about_header.jpg
+title-block-banner: about_header.JPG
 title-block-banner-color: white
 ---
 
