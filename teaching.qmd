@@ -1,0 +1,15 @@
+---
+format:  
+  html:
+    grid:
+      margin-width: 350px
+title: "Teaching"
+title-block-banner: teaching_header.JPG
+title-block-banner-color: white
+---
+
+I currently teach the following courses in the Department of Environmental Science at Western Washington University.
+
+**Landscape Ecology**
+
+**Forest Ecology.** In ESCI 407/507, we

@@ -12,6 +12,8 @@ website:
     right:
       - text: "About Me"
         file: about.qmd
+      - text: "Teaching"
+        file: teaching.qmd
       - text: "Blog"
         file: blog.qmd
       - text: "CV"
